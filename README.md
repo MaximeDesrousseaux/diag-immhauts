@@ -29,18 +29,34 @@ npm run build   # style.css compressé (versionné : le serveur n'a pas besoin d
 npm run watch   # recompile à chaque enregistrement, avec carte de sources
 ```
 
-Architecture (d'après `Audit code SCSS.dc.html`) :
+Architecture : celle de `Audit code SCSS.dc.html` (7-1 allégée), sans échelle ni nommage parallèle.
 
 | Dossier | Contenu |
 |---|---|
-| `scss/abstracts/` | tokens, fonctions (`c()`, `t()`), mixins (`bp()`, survols) |
-| `scss/base/` | polices, custom properties `:root`, reset, typographie |
-| `scss/layout/` | header et nav, pied de page, heros |
-| `scss/composants/` | boutons, popup, bouton d'appel… |
-| `scss/pages/` | ce qui n'existe que sur une page |
+| `scss/abstracts/` | `_tokens` (couleurs, texte, espaces, rayons, 3 élévations), `_functions` (`rem()`, `teinte()`, `c()`), `_mixins` (`bp()`, focus, 6 survols) |
+| `scss/base/` | `_reset` (+ custom properties `:root`), `_typographie` (polices, titres, surtitre), `_utilitaires` |
+| `scss/layout/` | `_entete`, `_pied`, `_hero` |
+| `scss/composants/` | `_bouton`, `_card`, `_pastille`, `_chiffre`, `_etapes`, `_faq`, `_formulaire`, `_etiquette`, `_frise`, `_article` |
+| `scss/pages/` | `_accueil`, `_fiche`, `_simulateur` |
 
-Points de rupture : `@include bp(deplie)` (≤ 900 px), `bp(mobile)` (≤ 640 px),
-`bp(compact)` (≤ 1232 px), `bp(bureau)` (> 900 px).
+- **Nommage** : `c-` pour les composants, `l-` pour les mises en page, en BEM
+  (`.c-card`, `.c-card__titre`, `.c-card--vignette`). États : `is-…`. Réglages globaux : attributs
+  `data-*` sur le `body` (`[data-boutons="arrondi"]`, `[data-decor="grille"]`, `[data-logo]`).
+- **Bascules** : `@include bp(deplie)` (≤ 900 px), `bp(mobile)` (≤ 640 px), et leurs combinaisons
+  `bp(deplie-seul)` / `bp(bureau)`. Les seuils 1232 / 1140 / 1060 px du header compact vivent
+  dans `layout/_entete.scss` seulement (`entete-bp()`).
+- **Échelles**, vérifiées à chaque `npm run build` par `outils/verifier-echelles.mjs` :
+  texte `rem(11 · 12,5 · 14 · 15,5 · 17 · 19 · 22 · 26)` (+ 34 d'affichage, 10 d'accent) ;
+  gouttières (`gap`, `margin`) `4 · 8 · 12 · 16 · 24 · 40 · 56` (+ 72 · 96 dans les `clamp()`) ;
+  rayons `4 · 10 · 16 · 26 · 44` + `999px`. Une valeur volontairement hors échelle porte
+  `// échelle : exception (raison)`.
+
+## JS
+
+JS natif, un fichier par module, dans `assets/js/` : `nav.js` (nav transparente + burger),
+`glide.js` (défilement d'ancre), `commune.js` (« Vérifier ma commune »), `simulateur.js`,
+`popup.js` (demande de rappel). Rien du runtime des maquettes (`support.js`, `DCLogic`) n'est porté ;
+tout le reste est du PHP + CSS.
 
 ## Réglages
 

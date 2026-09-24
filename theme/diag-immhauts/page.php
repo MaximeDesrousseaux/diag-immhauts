@@ -7,7 +7,7 @@
 
 get_header();
 ?>
-<main id="contenu" class="dih-main">
+<main id="contenu" class="l-main">
 	<?php
 	while ( have_posts() ) :
 		the_post();
@@ -15,7 +15,7 @@ get_header();
 
 		if ( '' !== trim( get_the_content() ) ) :
 			?>
-			<div class="dih-texte-long">
+			<div class="c-article">
 				<?php the_content(); ?>
 			</div>
 			<?php

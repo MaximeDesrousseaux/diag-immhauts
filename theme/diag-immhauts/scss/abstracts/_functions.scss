@@ -1,3 +1,6 @@
+// ==========================================================================
+// Fonctions — audit : rem(), teinte(). Plus c(), l'accès aux couleurs.
+// ==========================================================================
 @use 'sass:map';
 @use 'sass:math';
 @use 'sass:list';
@@ -11,10 +14,14 @@
   @return var(--#{$nom});
 }
 
-// Taille de texte en rem, dérivée de la taille de base : t(14) → 0.875rem.
+// Taille de texte en rem, dérivée de la taille de base : rem(14) → 0.875rem.
+// N'accepte que les 8 pas de l'échelle, la taille d'affichage (34) et l'accent (10).
 // Le passage en rem permet au réglage de police (étape 5) de corriger la taille
 // d'une police plus petite en ne changeant qu'une valeur.
-@function t($px) {
+@function rem($px) {
+  @if not list.index(list.join(list.join($echelle-texte, $texte-affichage), $texte-accent), $px) {
+    @error 'Taille hors échelle : #{$px} px. Pas autorisés : #{$echelle-texte} (+ #{$texte-affichage}, #{$texte-accent}).';
+  }
   @return math.div($px, $taille-base) * 1rem;
 }
 

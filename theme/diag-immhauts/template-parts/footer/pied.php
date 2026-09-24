@@ -12,24 +12,24 @@ $dih_lien = function ( $cle, $texte ) {
 };
 $dih_cta = dih_cta_header();
 ?>
-<footer class="dih-pied">
-	<div class="dih-pied-in">
-		<div class="dih-pied-grille">
+<footer class="l-pied">
+	<div class="l-pied__int">
+		<div class="l-pied__grille">
 			<div>
-				<div class="dih-pied-nom"><?php echo esc_html( dih_info( 'nom' ) ); ?></div>
-				<p class="dih-pied-desc"><?php echo esc_html( dih_info( 'description' ) ); ?></p>
-				<a class="dih-cta dih-cta--pied dih-pied-rappel" <?php echo $dih_cta['popup'] ? dih_attr_rappel() : 'href="' . esc_url( dih_url( 'contact', 'devis' ) ) . '"'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-					<span class="dih-cta-t">Demander un rappel</span>
-					<span class="dih-cta-i"><?php echo dih_icone( 'enveloppe', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+				<div class="l-pied__nom"><?php echo esc_html( dih_info( 'nom' ) ); ?></div>
+				<p class="l-pied__desc"><?php echo esc_html( dih_info( 'description' ) ); ?></p>
+				<a class="c-btn c-btn--pied l-pied__rappel" <?php echo $dih_cta['popup'] ? dih_attr_rappel() : 'href="' . esc_url( dih_url( 'contact', 'devis' ) ) . '"'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					<span class="c-btn__texte">Demander un rappel</span>
+					<span class="c-btn__icone"><?php echo dih_icone( 'enveloppe', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 				</a>
-				<a class="dih-cta dih-cta--pied dih-pied-tel" href="tel:<?php echo esc_attr( dih_info( 'telephone_lien' ) ); ?>">
-					<span class="dih-cta-t"><?php echo esc_html( dih_info( 'telephone' ) ); ?></span>
-					<span class="dih-cta-i"><?php echo dih_icone( 'telephone', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+				<a class="c-btn c-btn--pied l-pied__tel" href="tel:<?php echo esc_attr( dih_info( 'telephone_lien' ) ); ?>">
+					<span class="c-btn__texte"><?php echo esc_html( dih_info( 'telephone' ) ); ?></span>
+					<span class="c-btn__icone"><?php echo dih_icone( 'telephone', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 				</a>
 			</div>
 			<div>
-				<div class="dih-pied-h">Les diagnostics</div>
-				<div class="dih-pied-liens">
+				<div class="l-pied__titre">Les diagnostics</div>
+				<div class="l-pied__liens">
 					<?php
 					$dih_lien( 'simulateur', 'De quoi ai-je besoin&nbsp;?' );
 					$dih_lien( 'diagnostics', 'Tous les diagnostics' );
@@ -39,8 +39,8 @@ $dih_cta = dih_cta_header();
 				</div>
 			</div>
 			<div>
-				<div class="dih-pied-h">Le diagnostiqueur</div>
-				<div class="dih-pied-liens">
+				<div class="l-pied__titre">Le diagnostiqueur</div>
+				<div class="l-pied__liens">
 					<?php
 					$dih_lien( 'qui', 'Qui suis-je&nbsp;?' );
 					$dih_lien( 'pros', 'Professionnels' );
@@ -50,13 +50,13 @@ $dih_cta = dih_cta_header();
 				</div>
 			</div>
 			<div>
-				<div class="dih-pied-h">Les communes desservies</div>
-				<p class="dih-pied-communes"><?php echo esc_html( dih_info( 'communes' ) ); ?></p>
+				<div class="l-pied__titre">Les communes desservies</div>
+				<p class="l-pied__communes"><?php echo esc_html( dih_info( 'communes' ) ); ?></p>
 			</div>
 		</div>
-		<div class="dih-pied-bas">
+		<div class="l-pied__bas">
 			<span>© <?php echo esc_html( wp_date( 'Y' ) ); ?> <?php echo esc_html( dih_info( 'nom' ) ); ?> — <?php echo esc_html( dih_info( 'dirigeant' ) ); ?>. Tous droits réservés.</span>
-			<span class="dih-pied-bas-liens">
+			<span class="l-pied__bas-liens">
 				<a href="<?php echo esc_url( dih_url( 'mentions' ) ); ?>">Mentions légales</a>
 				<a href="<?php echo esc_url( dih_url( 'mentions', 'confidentialite' ) ); ?>">Confidentialité</a>
 				<a href="<?php echo esc_url( dih_info( 'avis_google' ) ); ?>" target="_blank" rel="noopener">Google Business</a>

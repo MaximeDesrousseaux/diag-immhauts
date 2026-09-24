@@ -1,11 +1,11 @@
-// Corps de texte des pages simples (complété à l'étape 4 avec Mentions légales).
+// Corps de texte long : pages simples (Mentions légales), articles du journal.
 @use '../abstracts' as *;
 
-.dih-texte-long {
+.c-article {
   max-width: 1000px;
   margin: 0 auto;
   padding: clamp(40px, 6vw, 72px) $gouttiere-page;
-  font-size: t(15.5);
+  font-size: rem(15.5);
   line-height: 1.7;
   color: c(ink);
 

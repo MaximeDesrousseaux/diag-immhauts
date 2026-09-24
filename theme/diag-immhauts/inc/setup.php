@@ -23,18 +23,20 @@ add_action(
 );
 
 /**
- * Classes du body pilotées par les réglages globaux.
+ * Réglages globaux exposés sur le body en attributs data-* (et non en classes :
+ * le nommage des classes reste réservé aux composants c- et mises en page l-).
+ * Le SCSS s'y accroche : [data-boutons="arrondi"], [data-decor="grille"]…
  */
-add_filter(
-	'body_class',
-	function ( $classes ) {
-		$classes[] = 'dih';
-		$classes[] = 'dih-btn-' . dih_option( 'forme_boutons' );
-		$classes[] = 'dih-logo-' . dih_option( 'logo_site' );
-		$classes[] = 'dih-decor-' . dih_option( 'decor_hero' );
-		return $classes;
+function dih_attributs_body() {
+	$attributs = array(
+		'data-boutons' => dih_option( 'forme_boutons' ),
+		'data-logo'    => dih_option( 'logo_site' ),
+		'data-decor'   => dih_option( 'decor_hero' ),
+	);
+	foreach ( $attributs as $nom => $valeur ) {
+		printf( ' %s="%s"', esc_attr( $nom ), esc_attr( $valeur ) );
 	}
-);
+}
 
 /**
  * Allège le <head> : emojis et liens inutiles pour ce site vitrine.

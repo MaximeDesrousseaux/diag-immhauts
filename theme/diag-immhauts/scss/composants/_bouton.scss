@@ -1,11 +1,11 @@
 // ==========================================================================
 // Boutons (README § Boutons).
-// .dih-cta : le libellé (.dih-cta-t) glisse de −15 px au survol et l'icône
-// (.dih-cta-i) entre depuis la droite. Forme : var(--r-btn) (réglage global).
+// .c-btn : le libellé (.c-btn__texte) glisse de −15 px au survol et l'icône
+// (.c-btn__icone) entre depuis la droite. Forme : var(--r-btn) (réglage global).
 // ==========================================================================
 @use '../abstracts' as *;
 
-.dih-cta {
+.c-btn {
   position: relative;
   overflow: hidden;
   display: inline-flex;
@@ -15,13 +15,13 @@
   cursor: pointer;
   @include focus-visible;
 
-  .dih-cta-t,
-  .dih-cta-i {
+  .c-btn__texte,
+  .c-btn__icone {
     will-change: transform;
     backface-visibility: hidden;
   }
 
-  .dih-cta-t {
+  .c-btn__texte {
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -29,7 +29,7 @@
     transition: transform .3s $ease-ressort;
   }
 
-  .dih-cta-i {
+  .c-btn__icone {
     position: absolute;
     top: 50%;
     right: 16px;
@@ -42,31 +42,84 @@
     svg { color: inherit; stroke: currentColor; display: block; }
   }
 
-  &:hover .dih-cta-t { transform: translateX(-15px); }
-  &:hover .dih-cta-i { opacity: 1; transform: translate(0, -50%); }
+  &:hover .c-btn__texte { transform: translateX(-15px); }
+  &:hover .c-btn__icone { opacity: 1; transform: translate(0, -50%); }
 }
 
 // Principal : fond vert, texte vert foncé — y compris au survol (jamais blanc).
-.dih-cta--vert {
+.c-btn--vert {
   background: c(tech);
   color: c(forestDeep);
   font-family: var(--font-titre);
   font-weight: 800;
-  transition: background .2s ease;
-
-  &:hover { background: c(techBright); }
+  @include survol-btn-vert;
 }
 
 // Contour clair sur fond vert (secondaire) : bordure --techBright au survol.
-.dih-cta--contour {
+.c-btn--contour {
   color: #fff;
   font-weight: 600;
   border: 1px solid color-mix(in oklab, #fff 26%, transparent);
-
-  &:hover { border-color: c(techBright); }
+  @include survol-btn-fantome;
 }
 
 @include sans-animation {
-  .dih-cta .dih-cta-t,
-  .dih-cta .dih-cta-i { transition: none; }
+  .c-btn .c-btn__texte,
+  .c-btn .c-btn__icone { transition: none; }
+}
+
+// --- Flèche animée des liens (rebond au survol seulement) ----------------------
+.c-fleche {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+a:hover .c-fleche { animation: dihArrowBounce .7s ease-in-out infinite; }
+
+@keyframes dihArrowBounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+@include sans-animation {
+  a:hover .c-fleche { animation: none; }
+}
+
+// --- Lien fléché (menus, cards) --------------------------------------------------
+.c-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: rem(14);
+  font-weight: 700;
+
+  &--fonce {
+    color: c(forest);
+    &:hover { color: c(tech); }
+  }
+
+  &--vert { color: c(tech); }
+}
+
+// --- Bouton d'appel fixe (déplié et mobile) --------------------------------------
+
+.c-appel-fixe {
+  display: none;
+  position: fixed;
+  right: 16px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+  z-index: 80;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fff;
+  color: c(tech);
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 26px -8px rgba(6, 33, 15, .4);
+
+  @include bp(deplie) { display: flex; }
+  @include focus-visible;
 }

@@ -6,18 +6,40 @@
 // .is-solid (posé par nav.js) = nav blanche. Burger ouvert = .is-solid aussi.
 // ==========================================================================
 @use 'sass:list';
+@use 'sass:map';
 @use '../abstracts' as *;
 
 $tr-nav: $duree-nav $ease-nav;
 
+// Seuils propres à l'en-tête (README § Points de rupture) : ils ne concernent que
+// le header de bureau. Le reste du site n'a que bp(deplie) et bp(mobile).
+$entete-seuils: (
+  compact: 1232px, // logo réduit, gouttière de 14 px, CTA en pastille ronde
+  panneau: 1140px, // grand menu déroulant en une colonne
+  tag: 1060px,     // le sous-titre du logo disparaît
+);
+
+@mixin entete-bp($nom) {
+  @media (max-width: map.get($entete-seuils, $nom)) { @content; }
+}
+
 // Nav blanche : aussi quand la page n'a pas de hero (avant même le JS).
 @mixin nav-blanche {
-  .dih-hdr.is-solid &,
-  body:not(:has(.dih-hero)) .dih-hdr & { @content; }
+  .l-entete.is-solid &,
+  body:not(:has(.l-hero)) .l-entete & { @content; }
+}
+
+// Hauteur du header épinglé, réécrite par nav.js (valeurs de départ mesurées
+// sur la maquette pour éviter tout saut avant l'exécution du JS).
+:root {
+  --nvH: 76px;
+
+  @include entete-bp(compact) { --nvH: 75px; }
+  @include bp(deplie) { --nvH: 91px; }
 }
 
 // --- Conteneur ---------------------------------------------------------------
-.dih-hdr {
+.l-entete {
   position: fixed;
   top: 0;
   left: 0;
@@ -32,7 +54,7 @@ $tr-nav: $duree-nav $ease-nav;
   }
 
   &.is-solid,
-  body:not(:has(.dih-hero)) & {
+  body:not(:has(.l-hero)) & {
     background: #fff;
     border-bottom-color: c(line);
     box-shadow: 0 10px 24px -22px rgba(9, 26, 15, .5);
@@ -40,9 +62,9 @@ $tr-nav: $duree-nav $ease-nav;
 }
 
 // Espaceur dans le flux : réserve la hauteur du header épinglé.
-.dih-hdr-spacer { height: var(--nvH); }
+.l-entete__espaceur { height: var(--nvH); }
 
-.dih-hdr-row {
+.l-entete__barre {
   max-width: $conteneur;
   margin: 0 auto;
   padding: clamp(8px, 1.4vw, 16px) $gouttiere-page;
@@ -60,16 +82,16 @@ $tr-nav: $duree-nav $ease-nav;
 }
 
 // --- Logo --------------------------------------------------------------------
-.dih-hdr-logo {
+.l-entete__logo {
   display: flex;
   align-items: center;
   gap: 12px;
   min-width: 0;
 
-  @include bp(compact) { gap: 8px; }
+  @include entete-bp(compact) { gap: 8px; }
 }
 
-.dih-logo-svg {
+.c-logo__svg {
   display: block;
   flex: none;
   width: 77px;
@@ -82,20 +104,20 @@ $tr-nav: $duree-nav $ease-nav;
 }
 
 // Les deux tracés du logo « toitures » suivent l'encre de la nav (fondu 420 ms).
-.dih-lg-a,
-.dih-lg-b { .is-pret & { transition: fill $tr-nav; } }
+.c-logo__a,
+.c-logo__b { .is-pret & { transition: fill $tr-nav; } }
 
-.dih-lg-a {
+.c-logo__a {
   fill: #fff;
   @include nav-blanche { fill: c(forest); }
 }
 
-.dih-lg-b {
+.c-logo__b {
   fill: c(techBright);
   @include nav-blanche { fill: c(tech); }
 }
 
-.dih-logo-mark {
+.c-logo__marque {
   display: block;
   flex: none;
   width: 51px;
@@ -105,72 +127,72 @@ $tr-nav: $duree-nav $ease-nav;
   @include nav-blanche { color: c(forest); }
 }
 
-.dih-logo-img {
+.c-logo__img {
   display: block;
   flex: none;
   width: auto;
   height: 26px;
-  @include bp(compact) { height: 19px; }
+  @include entete-bp(compact) { height: 19px; }
   @include bp(deplie) { height: 24px; }
 }
 
-.dih-logo-txt {
+.c-logo__texte {
   display: flex;
   flex-direction: column;
   line-height: 1;
   min-width: 0;
 }
 
-.dih-logo-word {
+.c-logo__nom {
   font-family: var(--font-titre);
   font-weight: 800;
-  font-size: t(19);
+  font-size: rem(19);
   letter-spacing: -.03em;
   white-space: nowrap;
   color: #fff;
   .is-pret & { transition: color $tr-nav; }
   @include nav-blanche { color: c(forest); }
 
-  @include bp(compact) { font-size: t(17); }
+  @include entete-bp(compact) { font-size: rem(17); }
 }
 
-.dih-hdr-tag {
-  font-size: t(11);
+.l-entete__soustitre {
+  font-size: rem(11);
   letter-spacing: .09em;
   text-transform: uppercase;
-  margin-top: 3px;
+  margin-top: 4px;
   white-space: nowrap;
   color: #fff;
   .is-pret & { transition: color $tr-nav; }
   @include nav-blanche { color: c(muted); }
 
-  @include bp(tag) { display: none; }
-  @include bp(deplie) { font-size: 10px; } // accent hors échelle (README)
+  @include entete-bp(tag) { display: none; }
+  @include bp(deplie) { font-size: 10px; } // échelle : exception (README : accent de 10 px, sous-titre du logo)
 }
 
 // --- Nav de bureau -------------------------------------------------------------
-.dih-navrow {
+.l-nav {
   display: flex;
   align-items: center;
   gap: $gouttiere-nav;
-  font-size: t(14);
+  font-size: rem(14);
   font-weight: 500;
   white-space: nowrap;
   color: #fff;
   .is-pret & { transition: color $tr-nav; }
   @include nav-blanche { color: c(ink); }
 
-  @include bp(compact) { gap: 14px; }
+  @include entete-bp(compact) { gap: 14px; } // échelle : exception (README : gouttière de nav de 14 px en bureau compact)
   @include bp(deplie) { display: none; }
 }
 
-.dih-nav-dd {
+.l-nav__deroulant {
   position: relative;
   padding: 19px 0; // pont de survol entre l'item et son menu
-  margin: -19px 0;
+  margin: -19px 0; // échelle : exception (compense exactement le rembourrage du pont)
 }
 
-.dih-nav-top {
+.l-nav__item {
   position: relative;
   color: inherit;
 
@@ -184,29 +206,12 @@ $tr-nav: $duree-nav $ease-nav;
   &[data-navtrigger]:is(span) { cursor: pointer; }
 
   // Survol : aucun changement de couleur, seul un filet vert clair glisse dessous.
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-    height: 2px;
-    border-radius: 4px;
-    background: c(tech);
-    transform: scaleX(0);
-    transform-origin: right center;
-    opacity: 0;
-    transition: transform .26s $ease-nav, opacity .26s ease;
-  }
+  @include survol-lien-nav;
 }
 
-a.dih-nav-top:hover::after,
-.dih-nav-dd:hover > .dih-nav-top::after,
-.dih-nav-top:focus-visible::after {
-  transform: scaleX(1);
-  transform-origin: left center;
-  opacity: 1;
-}
+a.l-nav__item:hover,
+.l-nav__deroulant:hover > .l-nav__item,
+.l-nav__item:focus-visible { @include survol-lien-nav-actif; }
 
 // --- Menus déroulants ------------------------------------------------------------
 @keyframes dihUnfold {
@@ -239,7 +244,7 @@ a.dih-nav-top:hover::after,
   > *:nth-child(n + 6) { animation-delay: .25s; }
 }
 
-.dih-navpanel {
+.l-nav__panneau {
   display: none;
   position: absolute;
   top: 100%;
@@ -249,26 +254,26 @@ a.dih-nav-top:hover::after,
   background: #fff;
   border: 1px solid c(line);
   border-radius: 16px;
-  box-shadow: $ombre-panneau;
+  box-shadow: $ombre-3;
   transform-origin: top left;
   animation: dihUnfold .42s $ease-volet both;
   @include cascade;
 }
 
-.dih-nav-dd.is-open > .dih-navpanel-lg,
-.dih-nav-dd:focus-within > .dih-navpanel-lg { display: grid; }
+.l-nav__deroulant.is-open > .l-nav__panneau--large,
+.l-nav__deroulant:focus-within > .l-nav__panneau--large { display: grid; }
 
-.dih-nav-dd.is-open > .dih-navpanel-sm,
-.dih-nav-dd:focus-within > .dih-navpanel-sm { display: flex; }
+.l-nav__deroulant.is-open > .l-nav__panneau--etroit,
+.l-nav__deroulant:focus-within > .l-nav__panneau--etroit { display: flex; }
 
-.dih-navpanel-lg {
+.l-nav__panneau--large {
   width: min(760px, calc(100vw - 48px));
   padding: clamp(16px, 4vw, 24px);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: 40px;
 
   // Sous 1140 px le grand panneau passe en une colonne de 320 px.
-  @include bp(panneau) {
+  @include entete-bp(panneau) {
     width: min(320px, calc(100vw - 32px));
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
@@ -277,45 +282,41 @@ a.dih-nav-top:hover::after,
   }
 }
 
-.dih-navpanel-sm {
+.l-nav__panneau--etroit {
   width: min(300px, calc(100vw - 48px));
   padding: $gouttiere-nav;
   flex-direction: column;
   gap: 2px;
 }
 
-.dih-navpanel-col {
+.l-nav__panneau-col {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.dih-navpanel-h {
-  font-size: t(11);
+.l-nav__panneau-titre {
+  font-size: rem(11);
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: c(subtle);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.dih-navpanel-a {
-  font-size: t(14);
+.l-nav__panneau-lien {
+  font-size: rem(14);
   font-weight: 500;
   color: c(ink);
   padding: 7px 9px;
-  margin-left: -9px;
+  margin-left: -9px; // échelle : exception (README : items des menus à −9 px)
   border-radius: 10px;
-
-  &:is(a):hover {
-    background: c(bg);
-    color: c(forest);
-  }
+  @include survol-item-burger;
 }
 
-.dih-navpanel-pied {
+.l-nav__panneau-pied {
   grid-column: 1 / -1;
-  margin-top: 6px;
+  margin-top: 4px;
   padding-top: 18px;
   border-top: 1px solid c(line);
   display: grid;
@@ -323,23 +324,9 @@ a.dih-nav-top:hover::after,
   gap: 12px;
 }
 
-.dih-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: t(14);
-  font-weight: 700;
-
-  &--fonce {
-    color: c(forest);
-    &:hover { color: c(tech); }
-  }
-
-  &--vert { color: c(tech); }
-}
 
 // --- Téléphone et CTA --------------------------------------------------------------
-.dih-hdr-actions {
+.l-entete__actions {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -347,15 +334,15 @@ a.dih-nav-top:hover::after,
   @include bp(deplie) { display: none; }
 }
 
-.dih-hdr-tel {
+.l-entete__tel {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   line-height: 1.15;
 }
 
-.dih-tel-l {
-  font-size: 10px; // accent hors échelle (« LIGNE DIRECTE »)
+.l-entete__tel-libelle {
+  font-size: 10px; // échelle : exception (README : accent de 10 px, « LIGNE DIRECTE »)
   font-weight: 600;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -365,44 +352,25 @@ a.dih-nav-top:hover::after,
   @include nav-blanche { color: c(muted); }
 }
 
-.dih-tel-n {
+.l-entete__tel-numero {
   font-family: var(--font-titre);
   font-weight: 700;
-  font-size: t(14);
+  font-size: rem(14);
   white-space: nowrap;
   color: #fff;
-  position: relative;
   .is-pret & { transition: color $tr-nav; }
   @include nav-blanche { color: c(forest); }
+  @include survol-lien-nav($duree: .32s, $ease: $ease-volet);
 
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-    height: 2px;
-    border-radius: 4px;
-    background: c(tech);
-    transform: scaleX(0);
-    transform-origin: right center;
-    opacity: 0;
-    transition: transform .32s $ease-volet, opacity .32s ease;
-  }
-
-  .dih-hdr-tel:hover &::after,
-  .dih-hdr-tel:focus-visible &::after {
-    transform: scaleX(1);
-    transform-origin: left center;
-    opacity: 1;
-  }
+  .l-entete__tel:hover &,
+  .l-entete__tel:focus-visible & { @include survol-lien-nav-actif; }
 }
 
-.dih-hdr-cta {
+.l-entete__cta {
   display: inline-flex;
 
-  .dih-cta {
-    font-size: t(14);
+  .c-btn {
+    font-size: rem(14);
     padding: 12px 22px;
     white-space: nowrap;
     // Sur nav transparente : fond blanc, texte vert foncé (y compris au survol).
@@ -412,12 +380,12 @@ a.dih-nav-top:hover::after,
 
     @include nav-blanche {
       background: c(tech);
-      &:hover { background: c(techBright); }
+      @include survol-btn-vert;
     }
   }
 
   // Caché tant que le CTA vert du hero est à l'écran (nav.js).
-  .dih-hdr--cta-cache & .dih-cta {
+  .l-entete--cta-cache & .c-btn {
     opacity: 0;
     transform: translateY(-6px);
     pointer-events: none;
@@ -425,8 +393,8 @@ a.dih-nav-top:hover::after,
 
   // Bureau compact (≤ 1232 px) : pastille ronde de 42 px, icône enveloppe
   // qui « bump » au survol.
-  @include bp(compact) {
-    .dih-cta {
+  @include entete-bp(compact) {
+    .c-btn {
       width: 42px;
       height: 42px;
       padding: 0;
@@ -434,9 +402,9 @@ a.dih-nav-top:hover::after,
       justify-content: center;
     }
 
-    .dih-cta .dih-cta-t { display: none; }
+    .c-btn .c-btn__texte { display: none; }
 
-    .dih-cta .dih-cta-i {
+    .c-btn .c-btn__icone {
       position: static;
       opacity: 1;
       transform: none;
@@ -461,7 +429,7 @@ a.dih-nav-top:hover::after,
       }
     }
 
-    .dih-cta:hover .dih-cta-i::after { animation: dihMailBump .9s cubic-bezier(.45, 0, .25, 1); }
+    .c-btn:hover .c-btn__icone::after { animation: dihMailBump .9s cubic-bezier(.45, 0, .25, 1); }
   }
 }
 
@@ -474,7 +442,7 @@ a.dih-nav-top:hover::after,
 }
 
 // --- Burger (déplié et mobile) ------------------------------------------------------
-.dih-hdr-burger {
+.l-entete__burger {
   display: none;
   flex: none;
   position: relative;
@@ -495,7 +463,7 @@ a.dih-nav-top:hover::after,
   @include focus-visible;
 }
 
-.dih-burg-l {
+.l-entete__trait {
   position: absolute;
   left: 13px;
   top: 22px;
@@ -516,11 +484,11 @@ a.dih-nav-top:hover::after,
 
 }
 
-.is-burger .dih-burg-l--h { transform: translateY(0) rotate(45deg); }
-.is-burger .dih-burg-l--b { transform: translateY(0) rotate(-45deg); }
-.is-burger .dih-burg-l--m { transform: scaleX(.15); opacity: 0; }
+.is-burger .l-entete__trait--h { transform: translateY(0) rotate(45deg); }
+.is-burger .l-entete__trait--b { transform: translateY(0) rotate(-45deg); }
+.is-burger .l-entete__trait--m { transform: scaleX(.15); opacity: 0; }
 
-.dih-burger-panel {
+.l-burger {
   position: absolute;
   top: 100%;
   left: 0;
@@ -533,14 +501,14 @@ a.dih-nav-top:hover::after,
   padding: 14px $gouttiere-page 22px;
   background: #fff;
   border-bottom: 1px solid c(line);
-  box-shadow: $ombre-burger;
+  box-shadow: $ombre-2;
   transform-origin: top center;
   animation: dihUnfold .4s $ease-volet both;
   @include cascade;
 
   &[hidden] { display: none; }
 
-  &.dih-panel-out {
+  &.is-sortie {
     animation: dihFold .3s cubic-bezier(.4, 0, .6, 1) both;
     > * { animation: dihItemOut .2s cubic-bezier(.4, 0, .6, 1) both; animation-delay: 0s; }
   }
@@ -548,8 +516,8 @@ a.dih-nav-top:hover::after,
   @include bp(bureau) { display: none; }
 }
 
-.dih-burger-a {
-  font-size: t(15.5);
+.l-burger__lien {
+  font-size: rem(15.5);
   font-weight: 600;
   color: c(ink);
   padding: 14px 12px;
@@ -558,38 +526,34 @@ a.dih-nav-top:hover::after,
   min-height: 46px;
   display: flex;
   align-items: center;
-
-  &:is(a):hover {
-    background: c(bg);
-    color: c(forest);
-  }
+  @include survol-item-burger;
 }
 
-.dih-burger-h {
-  font-size: t(11);
+.l-burger__titre {
+  font-size: rem(11);
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: c(subtle);
-  margin: 14px 0 4px;
+  margin: 16px 0 4px;
 }
 
-.dih-burger-tel {
-  margin-top: 18px;
+.l-burger__tel {
+  margin-top: 16px;
   background: c(tech);
   color: #fff;
   font-weight: 700;
-  font-size: t(15.5);
+  font-size: rem(15.5);
   padding: 15px;
   border-radius: 10px;
   text-align: center;
 }
 
 @include sans-animation {
-  .dih-navpanel,
-  .dih-navpanel > *,
-  .dih-burger-panel,
-  .dih-burger-panel > *,
-  .dih-burger-panel.dih-panel-out,
-  .dih-burger-panel.dih-panel-out > * { animation: none; }
+  .l-nav__panneau,
+  .l-nav__panneau > *,
+  .l-burger,
+  .l-burger > *,
+  .l-burger.is-sortie,
+  .l-burger.is-sortie > * { animation: none; }
 }

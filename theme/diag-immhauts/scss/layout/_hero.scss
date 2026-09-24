@@ -1,12 +1,12 @@
 // ==========================================================================
 // Heros intérieurs et décor des terrils (README § Décor des heros).
 //
-// Le hero (1re section .dih-hero) remonte sous le header épinglé :
+// Le hero (1re section .l-hero) remonte sous le header épinglé :
 // margin-top −H et padding-top + H, où H = var(--nvH).
 // ==========================================================================
 @use '../abstracts' as *;
 
-.dih-hero {
+.l-hero {
   position: relative;
   overflow: hidden;
   margin-top: calc(-1 * var(--nvH));
@@ -16,7 +16,7 @@
 }
 
 // --- Décor --------------------------------------------------------------------
-.dih-decor {
+.l-hero__decor {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -30,27 +30,27 @@ $terrils-bureau-taille: 1655px auto;
 
 // Bureau : taille et position FIXES (bord gauche de l'image à 637 px à gauche
 // du centre du contenu), fondus latéraux vers #0b381e sur les grands écrans.
-.dih-decor--terrils {
+.l-hero__decor--terrils {
   background-color: $fond-decor;
-  background-image: var(--dih-decor-img);
+  background-image: var(--decor-img);
   background-repeat: no-repeat;
   background-position: $terrils-bureau-pos;
   background-size: $terrils-bureau-taille;
 
   @media (min-width: 1291px) {
-    background-image: linear-gradient(90deg, $fond-decor, $fondu-transparent), var(--dih-decor-img);
+    background-image: linear-gradient(90deg, $fond-decor, $fondu-transparent), var(--decor-img);
     background-position: calc(50% - 577px) 0, $terrils-bureau-pos;
     background-size: 120px 100%, $terrils-bureau-taille;
   }
 
   @media (min-width: 2021px) {
-    background-image: linear-gradient(90deg, $fond-decor, $fondu-transparent), linear-gradient(270deg, $fond-decor, $fondu-transparent), var(--dih-decor-img);
+    background-image: linear-gradient(90deg, $fond-decor, $fondu-transparent), linear-gradient(270deg, $fond-decor, $fondu-transparent), var(--decor-img);
     background-position: calc(50% - 577px) 0, calc(50% + 958px) 0, $terrils-bureau-pos;
     background-size: 120px 100%, 120px 100%, $terrils-bureau-taille;
   }
 
   @include bp(deplie) {
-    background-image: var(--dih-decor-img);
+    background-image: var(--decor-img);
     background-position: 0% 82%;
     background-size: max(130%, 1180px) auto;
   }
@@ -61,13 +61,13 @@ $terrils-bureau-taille: 1655px auto;
   }
 }
 
-.dih-decor-voile {
+.l-hero__voile {
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, teinte(forestDeep, 80%) 0, teinte(forestDeep, 50%) 36%, transparent 60%);
 }
 
-.dih-decor-fondu {
+.l-hero__fondu {
   position: absolute;
   left: 0;
   right: 0;
@@ -77,19 +77,19 @@ $terrils-bureau-taille: 1655px auto;
 }
 
 // Ancien décor (réglage decor_hero: grille) : halo vert.
-.dih-decor--grille {
+.l-hero__decor--grille {
   background: radial-gradient(70% 130% at 88% 0, teinte(tech, 26%), transparent 60%);
 }
 
 // --- Fil d'Ariane ---------------------------------------------------------------
-.dih-ariane {
+.c-ariane {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  font-size: t(14);
+  font-size: rem(14);
   color: c(onDarkMuted);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 
   a:hover { color: #fff; }
 
@@ -99,17 +99,17 @@ $terrils-bureau-taille: 1655px auto;
   }
 }
 
-.dih-ariane-sep { opacity: .5; }
+.c-ariane__sep { opacity: .5; }
 
 // Pages sans pastille au-dessus du titre : en mobile, 40 px sous le fil
 // d'Ariane pour poser l'illustration sur l'herbe (décor terrils seulement).
-.dih-decor-terrils .dih-ariane--espace {
+[data-decor="terrils"] .c-ariane--espace {
   @include bp(mobile) { padding-bottom: 40px; }
 }
 
 // --- Hero des pages de texte (gabarit Mentions légales) --------------------------
-.dih-hero--page {
-  .dih-hero-in {
+.l-hero--page {
+  .l-hero__int {
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
@@ -120,35 +120,35 @@ $terrils-bureau-taille: 1655px auto;
     align-items: center;
   }
 
-  &.dih-hero--illus .dih-hero-in {
+  &.l-hero--illus .l-hero__int {
     grid-template-columns: minmax(0, 1fr) minmax(0, 38%);
     @include bp(mobile) { grid-template-columns: 1fr; }
   }
 
-  .dih-hero-texte { min-width: 0; }
+  .l-hero__texte { min-width: 0; }
 
-  .dih-hero-titre {
-    font-size: clamp(#{t(30)}, 4.4vw, #{t(50)});
+  .l-hero__titre {
+    font-size: clamp(31px, 4.4vw, 50px);
     font-weight: 800;
     color: #fff;
     max-width: 16ch;
   }
 
-  .dih-hero-chapeau {
+  .l-hero__chapeau {
     margin-top: 16px;
-    font-size: t(15.5);
+    font-size: rem(15.5);
     line-height: 1.7;
     color: c(onDarkSoft);
     max-width: 60ch;
   }
 
-  .dih-hero-note {
-    margin-top: 22px;
-    font-size: t(12.5);
+  .l-hero__note {
+    margin-top: 24px;
+    font-size: rem(12.5);
     color: c(onDarkMuted);
   }
 
-  .dih-hero-illus {
+  .l-hero__illus {
     min-width: 0;
     justify-self: end;
     width: 100%;

@@ -1,34 +1,37 @@
+// ==========================================================================
+// Mixins — audit : media, focus, survol de card, cta.
+// ==========================================================================
 @use 'tokens' as *;
 @use 'functions' as *;
 
-// Points de rupture — README : @include bp(deplie) / bp(mobile).
-//   bureau       > 900 px
-//   compact      ≤ 1232 px (bureau compact, 1061–1232)
+// --- Bascules : deux seuils (README : @include bp(deplie) / bp(mobile)) ----------------
 //   deplie       ≤ 900 px (burger ; inclut le mobile)
-//   deplie-seul  641–900 px
 //   mobile       ≤ 640 px
+//   deplie-seul  641–900 px (même paire de seuils)
+//   bureau       > 900 px  (complément de deplie)
 @mixin bp($nom) {
-  @if $nom == bureau {
-    @media (min-width: #{$bp-deplie + 1}) { @content; }
-  } @else if $nom == compact {
-    @media (max-width: $bp-compact) { @content; }
-  } @else if $nom == tag {
-    @media (max-width: $bp-tag) { @content; }
-  } @else if $nom == panneau {
-    @media (max-width: $bp-panneau) { @content; }
-  } @else if $nom == deplie {
+  @if $nom == deplie {
     @media (max-width: $bp-deplie) { @content; }
-  } @else if $nom == deplie-seul {
-    @media (min-width: #{$bp-mobile + 1}) and (max-width: $bp-deplie) { @content; }
   } @else if $nom == mobile {
     @media (max-width: $bp-mobile) { @content; }
+  } @else if $nom == deplie-seul {
+    @media (min-width: #{$bp-mobile + 1}) and (max-width: $bp-deplie) { @content; }
+  } @else if $nom == bureau {
+    @media (min-width: #{$bp-deplie + 1}) { @content; }
   } @else {
-    @error 'Point de rupture inconnu : #{$nom}';
+    @error 'Bascule inconnue : #{$nom}. Seuils : deplie, mobile (+ deplie-seul, bureau).';
   }
 }
 
 @mixin sans-animation {
   @media (prefers-reduced-motion: reduce) { @content; }
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px solid c(tech);
+    outline-offset: 3px;
+  }
 }
 
 // Conteneur standard : 1200 px centrés, gouttière fluide.
@@ -38,9 +41,24 @@
   padding-inline: $gouttiere-page;
 }
 
-// Filet vert clair qui glisse sous un lien au survol (nav, téléphone).
-@mixin filet-survol($decalage: -6px) {
+// Surtitre en petites capitales espacées (sections, panneaux).
+@mixin surtitre($taille: 11) {
+  font-size: rem($taille);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: c(subtle);
+}
+
+// ==========================================================================
+// Survols — 6 comportements réels (audit : « Le survol : 30 → 6 »).
+// ==========================================================================
+
+// 1. Lien de nav : aucun changement de couleur, un filet vert clair glisse dessous.
+//    $declencheur : sélecteur qui déclenche le filet (le lien lui-même par défaut).
+@mixin survol-lien-nav($decalage: -6px, $duree: .26s, $ease: $ease-nav) {
   position: relative;
+
   &::after {
     content: '';
     position: absolute;
@@ -53,38 +71,51 @@
     transform: scaleX(0);
     transform-origin: right center;
     opacity: 0;
-    transition: transform .26s $ease-nav, opacity .26s ease;
+    transition: transform $duree $ease, opacity $duree ease;
   }
-  &:hover::after,
-  &:focus-visible::after {
+}
+
+// État « filet visible » du lien de nav, à poser sur le sélecteur de survol voulu.
+@mixin survol-lien-nav-actif {
+  &::after {
     transform: scaleX(1);
     transform-origin: left center;
     opacity: 1;
   }
 }
 
-// Card cliquable (a.dcard-h uniquement).
-@mixin card-survol {
+// 2. Item de burger (et des menus déroulants) : fond vert pâle, encre forêt.
+@mixin survol-item-burger {
+  &:is(a):hover {
+    background: c(bg);
+    color: c(forest);
+  }
+}
+
+// 3. Card cliquable (jamais sur un bloc sans lien) : légère élévation.
+@mixin survol-card {
   transition: transform .18s ease, box-shadow .18s ease;
-  will-change: transform;
+
   &:hover {
     transform: translateY(-2px);
-    box-shadow: $ombre-card;
+    box-shadow: $ombre-1;
   }
 }
 
-@mixin focus-visible {
-  &:focus-visible {
-    outline: 2px solid c(tech);
-    outline-offset: 3px;
-  }
+// 4. Bouton vert : fond --techBright, le texte reste vert foncé (jamais blanc).
+@mixin survol-btn-vert {
+  transition: background .2s ease;
+  &:hover { background: c(techBright); }
 }
 
-// Titre de surtitre (petites capitales espacées)
-@mixin surtitre($taille: 11) {
-  font-size: t($taille);
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: c(subtle);
+// 5. Bouton fantôme (contour clair sur fond vert) : bordure --techBright.
+@mixin survol-btn-fantome {
+  transition: border-color .2s ease, background .2s ease;
+  &:hover { border-color: c(techBright); }
+}
+
+// 6. Lien de pied de page : passe au vert clair.
+@mixin survol-lien-pied {
+  transition: color .2s ease;
+  &:hover { color: c(techBright); }
 }

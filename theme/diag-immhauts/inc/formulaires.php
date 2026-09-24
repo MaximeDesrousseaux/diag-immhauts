@@ -33,7 +33,7 @@ function dih_formulaire( $cle ) {
 	);
 	$nom  = isset( $noms[ $cle ] ) ? $noms[ $cle ] : $cle;
 	?>
-	<div class="dih-form-slot" data-dih-form="<?php echo esc_attr( $cle ); ?>">
+	<div class="c-formulaire__emplacement" data-dih-form="<?php echo esc_attr( $cle ); ?>">
 		<strong>Formulaire « <?php echo esc_html( $nom ); ?> »</strong>
 		<span>Emplacement réservé à Fluent Forms (à brancher).</span>
 	</div>

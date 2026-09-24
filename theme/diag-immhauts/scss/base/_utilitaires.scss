@@ -1,6 +1,9 @@
 @use '../abstracts' as *;
 
-.dih-conteneur { @include conteneur; }
+.l-conteneur { @include conteneur; }
+
+// « peut-être » toujours insécable (README, contenus arrêtés)
+.l-insecable { white-space: nowrap; }
 
 // Texte réservé aux lecteurs d'écran (classe WordPress standard)
 .screen-reader-text {
@@ -8,7 +11,7 @@
   clip: rect(1px, 1px, 1px, 1px);
   clip-path: inset(50%);
   height: 1px;
-  margin: -1px;
+  margin: -1px; // échelle : exception (classe d'accessibilité standard de WordPress)
   overflow: hidden;
   padding: 0;
   position: absolute !important;
@@ -23,7 +26,7 @@
     clip-path: none;
     color: c(forest);
     display: block;
-    font-size: t(14);
+    font-size: rem(14);
     font-weight: 600;
     height: auto;
     left: 8px;
@@ -32,22 +35,4 @@
     width: auto;
     z-index: 100000;
   }
-}
-
-.dih-arrow {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  will-change: transform;
-}
-
-a:hover .dih-arrow { animation: dihArrowBounce .7s ease-in-out infinite; }
-
-@keyframes dihArrowBounce {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(6px); }
-}
-
-@include sans-animation {
-  a:hover .dih-arrow { animation: none; }
 }

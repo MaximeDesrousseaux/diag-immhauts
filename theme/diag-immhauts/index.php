@@ -20,9 +20,9 @@ if ( is_404() ) {
 	$dih_titre = get_bloginfo( 'name' );
 }
 ?>
-<main id="contenu" class="dih-main">
+<main id="contenu" class="l-main">
 	<?php get_template_part( 'template-parts/hero/page', null, array( 'titre' => $dih_titre ) ); ?>
-	<div class="dih-texte-long">
+	<div class="c-article">
 		<?php
 		if ( is_404() ) :
 			printf( '<p>Cette page n\'existe pas ou plus. <a href="%s">Retour à l\'accueil</a>.</p>', esc_url( dih_url( 'accueil' ) ) );

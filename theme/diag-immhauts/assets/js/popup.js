@@ -15,16 +15,16 @@
 	function ouvrir(lien) {
 		declencheur = lien;
 		popup.hidden = false;
-		document.documentElement.classList.add('dih-popup-ouverte');
+		document.documentElement.classList.add('is-popup-ouverte');
 		// Focus sur le 1er champ du formulaire, sinon sur la boîte elle-même.
-		var champ = boite.querySelector('.dih-popup-form input, .dih-popup-form select, .dih-popup-form textarea');
+		var champ = boite.querySelector('.c-popup__form input, .c-popup__form select, .c-popup__form textarea');
 		(champ || boite).focus({ preventScroll: true });
 	}
 
 	function fermer() {
 		if (popup.hidden) return;
 		popup.hidden = true;
-		document.documentElement.classList.remove('dih-popup-ouverte');
+		document.documentElement.classList.remove('is-popup-ouverte');
 		if (declencheur) declencheur.focus({ preventScroll: true });
 	}
 

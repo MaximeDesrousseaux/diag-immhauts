@@ -13,9 +13,15 @@ License: Propriétaire — tous droits réservés
 // Fichier généré : style.css est COMPILÉ depuis ce fichier (npm run build).
 // Ne pas modifier style.css à la main.
 
+// Architecture : Audit code SCSS (7-1 allégée).
+//   abstracts/  tokens, fonctions, mixins (aucune sortie CSS)
+//   base/       reset + :root, typographie, utilitaires
+//   layout/     l-entete, l-hero, l-pied
+//   composants/ c-btn, c-card, c-formulaire…
+//   pages/      ce qui n'existe que sur une page
+// Nommage : c- pour les composants, l- pour les mises en page (BEM).
+
 // 1. Base
-@use 'base/polices';
-@use 'base/racine';
 @use 'base/reset';
 @use 'base/typographie';
 @use 'base/utilitaires';
@@ -27,7 +33,5 @@ License: Propriétaire — tous droits réservés
 
 // 3. Composants
 @use 'composants/bouton';
-@use 'composants/popup';
 @use 'composants/formulaire';
-@use 'composants/appel-fixe';
-@use 'composants/texte-long';
+@use 'composants/article';

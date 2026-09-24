@@ -1,4 +1,31 @@
+// ==========================================================================
+// Reset + custom properties sur :root.
+// ==========================================================================
 @use '../abstracts' as *;
+
+// Custom properties sur :root — les 14 teintes de la palette + surface.
+:root {
+  @each $nom, $valeur in $couleurs {
+    --#{$nom}: #{$valeur};
+  }
+
+  --font-titre: '#{$police-titre-defaut}', #{$pile-sans};
+  --font-texte: '#{$police-texte-defaut}', #{$pile-sans};
+
+  // Forme des boutons (réglage global forme_boutons) : pilule par défaut.
+  // Maquette : 22 px pour les zones (barre de formulaire) et 12 px pour les boutons
+  // arrondis, ramenés aux pas 26 et 10 de l'échelle des rayons.
+  --r-btn: #{$r-pilule};
+  --r-champ: #{$r-pilule};
+  --r-zone: 26px;
+}
+
+// Réglage « Forme des boutons » : arrondi.
+[data-boutons="arrondi"] {
+  --r-btn: 10px;
+  --r-champ: 10px;
+  --r-zone: 10px;
+}
 
 *,
 *::before,

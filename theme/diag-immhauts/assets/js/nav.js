@@ -2,7 +2,7 @@
  * Header épinglé et nav transparente (README § Header et nav transparente).
  *
  * - Le header est en position: fixed ; sa hauteur est exposée en --nvH sur :root.
- *   Le hero (1re section .dih-hero) remonte dessous : margin-top -H, padding-top + H.
+ *   Le hero (1re section .l-hero) remonte dessous : margin-top -H, padding-top + H.
  * - Nav transparente en haut de page, blanche (.is-solid) au défilement,
  *   PAR ÉVÉNEMENT et non par distance :
  *     bureau : au 2e cran de molette ; déplié et mobile : au 1er cran ou dès scrollY > 0 ;
@@ -21,11 +21,11 @@
 
 	var root = document.documentElement;
 	var mqEtroit = window.matchMedia('(max-width: 900px)');
-	var hero = document.querySelector('.dih-hero');
-	var ctaHero = hero ? hero.querySelector('a.dih-cta') : null;
-	var ctaHdr = hdr.querySelector('.dih-hdr-cta .dih-cta');
+	var hero = document.querySelector('.l-hero');
+	var ctaHero = hero ? hero.querySelector('a.c-btn') : null;
+	var ctaHdr = hdr.querySelector('.l-entete__cta .c-btn');
 	var burger = hdr.querySelector('[data-dih-burger]');
-	var panneau = document.getElementById('dih-burger-panel');
+	var panneau = document.getElementById('menu-burger');
 
 	var solide = false;
 	var crans = 0;
@@ -53,7 +53,7 @@
 
 		if (ctaHdr) {
 			var parti = ctaHero ? ctaHero.getBoundingClientRect().bottom < hauteur + 8 : true;
-			hdr.classList.toggle('dih-hdr--cta-cache', !parti);
+			hdr.classList.toggle('l-entete--cta-cache', !parti);
 		}
 	}
 
@@ -107,7 +107,7 @@
 
 	function ouvrirBurger() {
 		clearTimeout(fermeture);
-		panneau.classList.remove('dih-panel-out');
+		panneau.classList.remove('is-sortie');
 		panneau.hidden = false;
 		burgerOuvert = true;
 		hdr.classList.add('is-burger');
@@ -122,11 +122,11 @@
 		burger.setAttribute('aria-expanded', 'false');
 		var fin = function () {
 			panneau.hidden = true;
-			panneau.classList.remove('dih-panel-out');
+			panneau.classList.remove('is-sortie');
 			peindre();
 		};
 		if (immediat) { fin(); return; }
-		panneau.classList.add('dih-panel-out');
+		panneau.classList.add('is-sortie');
 		fermeture = setTimeout(fin, 300); // durée de dihFold
 	}
 

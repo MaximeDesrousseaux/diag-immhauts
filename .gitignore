@@ -15,3 +15,6 @@ desktop.ini
 
 # Paquets Git de transfert
 *.bundle
+
+# Configuration locale de Claude Code (serveur des maquettes)
+.claude/

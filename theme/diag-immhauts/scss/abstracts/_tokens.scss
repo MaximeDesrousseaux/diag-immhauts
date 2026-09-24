@@ -1,9 +1,11 @@
 // ==========================================================================
-// Tokens — source unique des valeurs du design (README § Design tokens).
-// Les couleurs sont exposées en custom properties sur :root (base/_racine).
+// Tokens — source unique des valeurs du design.
+// Audit code SCSS (« Le socle » et « Les échelles appliquées ») + README § Design tokens.
+// Les couleurs sont exposées en custom properties sur :root (base/_reset).
+// Les échelles sont vérifiées au build : outils/verifier-echelles.mjs.
 // ==========================================================================
 
-// --- Palette (14 teintes + surface) -----------------------------------------
+// --- Couleurs : palette (14 teintes + surface) ---------------------------------------
 $couleurs: (
   'tech':        #7bc62f, // boutons principaux, accents, filets
   'techBright':  #a3e04a, // survol des boutons, accents sur fond foncé
@@ -39,41 +41,45 @@ $dpe-e: #f2b705;
 $dpe-f: #ef7d1b;
 $dpe-g: #e5451f;
 
-// --- Typographie -------------------------------------------------------------
-// Échelle (px) : 11 · 12,5 · 14 · 15,5 · 17 · 19 · 22 · 26 (+ 31 · 34 · 36 · 44).
-// Accents hors échelle autorisés : 10 px et toute borne ≥ 48 px.
-$taille-base: 16; // px — sert à la conversion en rem (fonction t()).
-$echelle-texte: (11, 12.5, 14, 15.5, 17, 19, 22, 26, 31, 34, 36, 44);
+// --- Typographie : 8 pas, en rem ------------------------------------------------------
+// Tailles fixes : rem(11) … rem(26), via la fonction rem() qui refuse tout autre pas.
+// Bornes des clamp() : les 8 pas + 31 · 34 · 36 · 44, ou une borne ≥ 48 px (accents).
+$taille-base: 16; // px — base de la conversion en rem (réglage de police, étape 5)
+$echelle-texte: (11, 12.5, 14, 15.5, 17, 19, 22, 26);
+$texte-affichage: (34);  // une seule taille d'affichage fixe (audit K3)
+$texte-accent: (10);     // sous-titre du logo, « LIGNE DIRECTE » (README)
 
 $police-titre-defaut: 'Manrope';
 $police-texte-defaut: 'Inter';
 $pile-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-// --- Espacements, rayons -----------------------------------------------------
-$espaces: (4, 8, 12, 16, 24, 40, 56); // + 72 · 96 dans les clamp()
+// --- Espaces : 7 pas (+ 72 · 96 dans les clamp()) ---------------------------------------
+// Le 2 px n'est pas un espace mais un décalage de filet (gap des listes de liens).
+$espaces: (4, 8, 12, 16, 24, 40, 56);
+$espaces-fluides: (72, 96);
+
+// --- Rayons : 5 valeurs + pilule ------------------------------------------------------------
 $rayons: (4, 10, 16, 26, 44);
 $r-pilule: 999px;
 
-// Gouttières récurrentes
-$gouttiere-page: clamp(16px, 4vw, 40px);  // marge latérale des conteneurs
+// Gouttières récurrentes (formules clamp() unifiées, K6)
+$gouttiere-page: clamp(16px, 4vw, 40px);   // marge latérale des conteneurs
 $gouttiere-nav:  clamp(16px, 4.2vw, 24px); // réservée à la nav (menus déroulants)
 $conteneur: 1200px;
 
-// --- Points de rupture ---------------------------------------------------------
-$bp-compact:  1232px; // bureau compact : logo réduit, CTA en pastille
-$bp-tag:      1060px; // le sous-titre du logo disparaît
-$bp-panneau:  1140px; // grand menu déroulant en une colonne
-$bp-deplie:   900px;  // burger
-$bp-mobile:   640px;
+// --- Bascules : deux seuils, pas plus -------------------------------------------------------
+$bp-deplie: 900px; // burger, mises en page propres au déplié
+$bp-mobile: 640px; // téléphone
 
-// --- Mouvement ------------------------------------------------------------------
+// --- Élévations : 3 niveaux (audit K7) --------------------------------------------------------
+$ombre-1: 0 16px 26px -20px rgba(18, 48, 36, .4);  // survol des cards cliquables
+$ombre-2: 0 26px 44px -26px rgba(9, 26, 15, .4);   // menu burger
+$ombre-3: 0 34px 64px -30px rgba(9, 26, 15, .45);  // menus déroulants, popup
+// Illustrations de hero : un filtre, pas une élévation de bloc.
+$filtre-illus: drop-shadow(0 26px 44px rgba(6, 33, 15, .45));
+
+// --- Mouvement -----------------------------------------------------------------------------------
 $ease-nav:     cubic-bezier(.4, 0, .2, 1);    // passage transparent → blanc
 $duree-nav:    .42s;
 $ease-ressort: cubic-bezier(.34, 1.2, .4, 1); // animation des CTA
 $ease-volet:   cubic-bezier(.2, .8, .25, 1);  // menus, burger
-
-// --- Ombres ---------------------------------------------------------------------
-$ombre-card:   0 16px 26px -20px rgba(18, 48, 36, .4);
-$ombre-burger: 0 26px 44px -26px rgba(9, 26, 15, .4);
-$ombre-panneau: 0 34px 64px -30px rgba(9, 26, 15, .45);
-$ombre-illus:  drop-shadow(0 26px 44px rgba(6, 33, 15, .45));

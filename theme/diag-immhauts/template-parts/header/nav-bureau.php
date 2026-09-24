@@ -20,7 +20,7 @@ $dih_rubrique = dih_rubrique_courante();
  * @param bool   $trigger  Ouvre un menu déroulant.
  */
 $dih_item = function ( $cle, $texte, $rubrique, $trigger = false ) use ( $dih_rubrique ) {
-	$classes = array( 'dih-nav-top' );
+	$classes = array( 'l-nav__item' );
 	if ( $rubrique === $dih_rubrique ) {
 		$classes[] = 'is-courant';
 	}
@@ -34,18 +34,18 @@ $dih_item = function ( $cle, $texte, $rubrique, $trigger = false ) use ( $dih_ru
 };
 
 $dih_col = function ( $titre, $items ) {
-	echo '<div class="dih-navpanel-col">';
-	echo '<div class="dih-navpanel-h">' . esc_html( $titre ) . '</div>';
+	echo '<div class="l-nav__panneau-col">';
+	echo '<div class="l-nav__panneau-titre">' . esc_html( $titre ) . '</div>';
 	foreach ( $items as $cle => $texte ) {
-		echo dih_lien_nav( $cle, $texte, 'dih-navpanel-a' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo dih_lien_nav( $cle, $texte, 'l-nav__panneau-lien' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	echo '</div>';
 };
 ?>
-<nav class="dih-navrow" aria-label="Navigation principale">
-	<div class="dih-nav-dd" data-dih-dd>
+<nav class="l-nav" aria-label="Navigation principale">
+	<div class="l-nav__deroulant" data-dih-dd>
 		<?php $dih_item( 'diagnostics', 'Nos diagnostics', 'diagnostics', true ); ?>
-		<div class="dih-navpanel dih-navpanel-lg">
+		<div class="l-nav__panneau l-nav__panneau--large">
 			<?php
 			$dih_col(
 				'Pour les particuliers',
@@ -76,19 +76,19 @@ $dih_col = function ( $titre, $items ) {
 				)
 			);
 			?>
-			<div class="dih-navpanel-pied">
-				<a class="dih-link dih-link--fonce" href="<?php echo esc_url( dih_url( 'simulateur' ) ); ?>">De quoi ai-je besoin&nbsp;?<span class="dih-arrow"><?php echo dih_icone( 'fleche', 16, array( 'epaisseur' => 2.6 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></a>
-				<a class="dih-link dih-link--vert" href="<?php echo esc_url( dih_url( 'diagnostics' ) ); ?>">Tous les diagnostics<span class="dih-arrow"><?php echo dih_icone( 'fleche', 17, array( 'epaisseur' => 2.6 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></a>
+			<div class="l-nav__panneau-pied">
+				<a class="c-lien c-lien--fonce" href="<?php echo esc_url( dih_url( 'simulateur' ) ); ?>">De quoi ai-je besoin&nbsp;?<span class="c-fleche"><?php echo dih_icone( 'fleche', 16, array( 'epaisseur' => 2.6 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></a>
+				<a class="c-lien c-lien--vert" href="<?php echo esc_url( dih_url( 'diagnostics' ) ); ?>">Tous les diagnostics<span class="c-fleche"><?php echo dih_icone( 'fleche', 17, array( 'epaisseur' => 2.6 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></a>
 			</div>
 		</div>
 	</div>
-	<div class="dih-nav-dd" data-dih-dd>
+	<div class="l-nav__deroulant" data-dih-dd>
 		<?php $dih_item( 'pros', 'Professionnels', 'pros', true ); ?>
-		<div class="dih-navpanel dih-navpanel-sm">
-			<div class="dih-navpanel-h">Pour les professionnels</div>
+		<div class="l-nav__panneau l-nav__panneau--etroit">
+			<div class="l-nav__panneau-titre">Pour les professionnels</div>
 			<?php
-			echo dih_lien_nav( 'dtg', 'DTG &amp; DPE collectif', 'dih-navpanel-a' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo dih_lien_nav( 'pros', 'Syndics, agences &amp; bailleurs', 'dih-navpanel-a' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo dih_lien_nav( 'dtg', 'DTG &amp; DPE collectif', 'l-nav__panneau-lien' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo dih_lien_nav( 'pros', 'Syndics, agences &amp; bailleurs', 'l-nav__panneau-lien' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
 		</div>
 	</div>
