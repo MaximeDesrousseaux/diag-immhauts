@@ -1,0 +1,21 @@
+/*!
+Theme Name: Diag Imm'Hauts
+Theme URI: https://diagimmhauts.fr/
+Author: Diag Imm'Hauts
+Description: Thème sur mesure de Diag Imm'Hauts, diagnostiqueur immobilier dans le Pas-de-Calais. Thème classique PHP + SCSS, sans constructeur de pages ; le contenu structuré vient du plugin diag-immhauts-core.
+Version: 0.2.0
+Requires at least: 6.4
+Requires PHP: 7.4
+Text Domain: diag-immhauts
+License: Propriétaire — tous droits réservés
+*/
+
+// Fichier généré : style.css est COMPILÉ depuis ce fichier (npm run build).
+// Ne pas modifier style.css à la main.
+
+// 1. Base
+@use 'base/polices';
+@use 'base/racine';
+@use 'base/reset';
+@use 'base/typographie';
+@use 'base/utilitaires';

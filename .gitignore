@@ -1,0 +1,17 @@
+# Dépendances
+node_modules/
+
+# Compilation : style.css est versionné (le thème fonctionne sans Node sur le
+# serveur) ; les cartes de sources du mode watch ne le sont pas.
+*.map
+
+# Système / éditeurs
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.log
+
+# Paquets Git de transfert
+*.bundle

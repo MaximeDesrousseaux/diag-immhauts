@@ -1,0 +1,16 @@
+{
+  "name": "diag-immhauts-theme",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Thème WordPress Diag Imm'Hauts : compilation SCSS (Dart Sass) vers style.css.",
+  "scripts": {
+    "build": "sass scss/main.scss style.css --style=compressed --no-source-map",
+    "watch": "sass scss/main.scss style.css --style=expanded --embed-source-map --watch"
+  },
+  "devDependencies": {
+    "sass": "^1.93.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

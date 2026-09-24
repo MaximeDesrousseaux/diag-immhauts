@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:list';
+@use 'tokens' as *;
+
+// Couleur de la palette sous forme de custom property : c(tech) → var(--tech)
+@function c($nom) {
+  @if not map.has-key($couleurs, $nom) {
+    @error 'Couleur inconnue : #{$nom}. Voir $couleurs dans _tokens.scss.';
+  }
+  @return var(--#{$nom});
+}
+
+// Taille de texte en rem, dérivée de la taille de base : t(14) → 0.875rem.
+// Le passage en rem permet au réglage de police (étape 5) de corriger la taille
+// d'une police plus petite en ne changeant qu'une valeur.
+@function t($px) {
+  @return math.div($px, $taille-base) * 1rem;
+}
+
+// Teinte transparente d'une couleur de la palette (color-mix, comme en maquette)
+@function teinte($nom, $pourcentage) {
+  @return color-mix(in oklab, c($nom) $pourcentage, transparent);
+}

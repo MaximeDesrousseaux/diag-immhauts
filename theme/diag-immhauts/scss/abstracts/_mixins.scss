@@ -1,0 +1,90 @@
+@use 'tokens' as *;
+@use 'functions' as *;
+
+// Points de rupture — README : @include bp(deplie) / bp(mobile).
+//   bureau       > 900 px
+//   compact      ≤ 1232 px (bureau compact, 1061–1232)
+//   deplie       ≤ 900 px (burger ; inclut le mobile)
+//   deplie-seul  641–900 px
+//   mobile       ≤ 640 px
+@mixin bp($nom) {
+  @if $nom == bureau {
+    @media (min-width: #{$bp-deplie + 1}) { @content; }
+  } @else if $nom == compact {
+    @media (max-width: $bp-compact) { @content; }
+  } @else if $nom == tag {
+    @media (max-width: $bp-tag) { @content; }
+  } @else if $nom == panneau {
+    @media (max-width: $bp-panneau) { @content; }
+  } @else if $nom == deplie {
+    @media (max-width: $bp-deplie) { @content; }
+  } @else if $nom == deplie-seul {
+    @media (min-width: #{$bp-mobile + 1}) and (max-width: $bp-deplie) { @content; }
+  } @else if $nom == mobile {
+    @media (max-width: $bp-mobile) { @content; }
+  } @else {
+    @error 'Point de rupture inconnu : #{$nom}';
+  }
+}
+
+@mixin sans-animation {
+  @media (prefers-reduced-motion: reduce) { @content; }
+}
+
+// Conteneur standard : 1200 px centrés, gouttière fluide.
+@mixin conteneur($max: $conteneur) {
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: $gouttiere-page;
+}
+
+// Filet vert clair qui glisse sous un lien au survol (nav, téléphone).
+@mixin filet-survol($decalage: -6px) {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: $decalage;
+    height: 2px;
+    border-radius: 4px;
+    background: c(tech);
+    transform: scaleX(0);
+    transform-origin: right center;
+    opacity: 0;
+    transition: transform .26s $ease-nav, opacity .26s ease;
+  }
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+    opacity: 1;
+  }
+}
+
+// Card cliquable (a.dcard-h uniquement).
+@mixin card-survol {
+  transition: transform .18s ease, box-shadow .18s ease;
+  will-change: transform;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $ombre-card;
+  }
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px solid c(tech);
+    outline-offset: 3px;
+  }
+}
+
+// Titre de surtitre (petites capitales espacées)
+@mixin surtitre($taille: 11) {
+  font-size: t($taille);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: c(subtle);
+}

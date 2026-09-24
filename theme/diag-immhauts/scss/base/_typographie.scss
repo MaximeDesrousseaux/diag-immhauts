@@ -1,0 +1,13 @@
+@use '../abstracts' as *;
+
+h1, h2, h3, h4 {
+  font-family: var(--font-titre);
+  letter-spacing: -.02em;
+  margin: 0;
+  line-height: 1.16;
+}
+
+p { margin: 0; }
+
+// « peut-être » toujours insécable (README, contenus arrêtés)
+.dih-nowrap { white-space: nowrap; }

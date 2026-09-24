@@ -1,0 +1,79 @@
+// ==========================================================================
+// Tokens — source unique des valeurs du design (README § Design tokens).
+// Les couleurs sont exposées en custom properties sur :root (base/_racine).
+// ==========================================================================
+
+// --- Palette (14 teintes + surface) -----------------------------------------
+$couleurs: (
+  'tech':        #7bc62f, // boutons principaux, accents, filets
+  'techBright':  #a3e04a, // survol des boutons, accents sur fond foncé
+  'forest':      #1e5b34, // titres, heros, fond foncé
+  'forestDeep':  #123f24, // texte et icônes des boutons verts, voiles
+  'warm':        #e0a636, // étoiles, alertes
+  'bg':          #f5f8ef, // fond des pages
+  'surface':     #ffffff, // cards
+  'ink':         #17331f, // texte courant
+  'muted':       #5e6d55, // texte secondaire
+  'line':        #e6ebdd, // bordures, filets
+  'onDark':      #eaf3e6, // texte clair sur vert
+  'onDarkSoft':  #d6e6cf, // paragraphes sur vert
+  'onDarkMuted': #a9c2a1, // fil d'Ariane, légendes sur vert
+  'subtle':      #8a9a80, // surtitres sur fond clair
+  'glow':        #f4ffe8, // halos
+);
+
+// Valeurs volontairement hors palette (README) : ne pas en ajouter d'autres.
+$fond-decor:     #0b381e; // fond de secours du décor des heros
+$ombre-fonce:    #0d1f10; // ombres
+$ombre-verte:    #06210f; // ombres portées des illustrations
+$burger-survol:  #c9dbbd; // bordure du burger au survol
+$vert-pale:      #d8ff9f;
+$vert-brume:     #e5f2d4;
+
+// Échelle réglementaire de l'étiquette DPE (A → G), jamais en variable CSS.
+$dpe-a: #2ecc71;
+$dpe-b: #5bd12a;
+$dpe-c: #93d420;
+$dpe-d: #e8d219;
+$dpe-e: #f2b705;
+$dpe-f: #ef7d1b;
+$dpe-g: #e5451f;
+
+// --- Typographie -------------------------------------------------------------
+// Échelle (px) : 11 · 12,5 · 14 · 15,5 · 17 · 19 · 22 · 26 (+ 31 · 34 · 36 · 44).
+// Accents hors échelle autorisés : 10 px et toute borne ≥ 48 px.
+$taille-base: 16; // px — sert à la conversion en rem (fonction t()).
+$echelle-texte: (11, 12.5, 14, 15.5, 17, 19, 22, 26, 31, 34, 36, 44);
+
+$police-titre-defaut: 'Manrope';
+$police-texte-defaut: 'Inter';
+$pile-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+// --- Espacements, rayons -----------------------------------------------------
+$espaces: (4, 8, 12, 16, 24, 40, 56); // + 72 · 96 dans les clamp()
+$rayons: (4, 10, 16, 26, 44);
+$r-pilule: 999px;
+
+// Gouttières récurrentes
+$gouttiere-page: clamp(16px, 4vw, 40px);  // marge latérale des conteneurs
+$gouttiere-nav:  clamp(16px, 4.2vw, 24px); // réservée à la nav (menus déroulants)
+$conteneur: 1200px;
+
+// --- Points de rupture ---------------------------------------------------------
+$bp-compact:  1232px; // bureau compact : logo réduit, CTA en pastille
+$bp-tag:      1060px; // le sous-titre du logo disparaît
+$bp-panneau:  1140px; // grand menu déroulant en une colonne
+$bp-deplie:   900px;  // burger
+$bp-mobile:   640px;
+
+// --- Mouvement ------------------------------------------------------------------
+$ease-nav:     cubic-bezier(.4, 0, .2, 1);    // passage transparent → blanc
+$duree-nav:    .42s;
+$ease-ressort: cubic-bezier(.34, 1.2, .4, 1); // animation des CTA
+$ease-volet:   cubic-bezier(.2, .8, .25, 1);  // menus, burger
+
+// --- Ombres ---------------------------------------------------------------------
+$ombre-card:   0 16px 26px -20px rgba(18, 48, 36, .4);
+$ombre-burger: 0 26px 44px -26px rgba(9, 26, 15, .4);
+$ombre-panneau: 0 34px 64px -30px rgba(9, 26, 15, .45);
+$ombre-illus:  drop-shadow(0 26px 44px rgba(6, 33, 15, .45));

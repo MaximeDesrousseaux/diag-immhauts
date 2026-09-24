@@ -1,0 +1,53 @@
+@use '../abstracts' as *;
+
+.dih-conteneur { @include conteneur; }
+
+// Texte réservé aux lecteurs d'écran (classe WordPress standard)
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+
+  &:focus {
+    background: c(surface);
+    border-radius: 10px;
+    box-shadow: 0 0 0 2px c(tech);
+    clip: auto !important;
+    clip-path: none;
+    color: c(forest);
+    display: block;
+    font-size: t(14);
+    font-weight: 600;
+    height: auto;
+    left: 8px;
+    padding: 12px 16px;
+    top: 8px;
+    width: auto;
+    z-index: 100000;
+  }
+}
+
+.dih-arrow {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+a:hover .dih-arrow { animation: dihArrowBounce .7s ease-in-out infinite; }
+
+@keyframes dihArrowBounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+@include sans-animation {
+  a:hover .dih-arrow { animation: none; }
+}
