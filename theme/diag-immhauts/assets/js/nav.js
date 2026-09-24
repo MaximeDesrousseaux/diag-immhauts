@@ -12,6 +12,10 @@
  *   la nav redevient transparente (aucun événement scroll n'est garanti au retour).
  * - Burger ouvert : nav forcée en blanc. Page sans hero : nav toujours blanche.
  * - Le CTA du header reste caché tant que le CTA vert du hero est visible.
+ * - Accueil sur téléphone (.l-entete--accueil) : le header est la barre du hero.
+ *   Sur les 170 premiers px de défilement, le logo glisse du centre vers la
+ *   gouttière (échelle 1 → 0,68) et le fond blanc apparaît, en continu :
+ *   --p (progression lissée), --tx et --s sont posés à chaque image.
  */
 (function () {
 	'use strict';
@@ -21,6 +25,10 @@
 
 	var root = document.documentElement;
 	var mqEtroit = window.matchMedia('(max-width: 900px)');
+	var mqMobile = window.matchMedia('(max-width: 640px)');
+	var accueil = hdr.classList.contains('l-entete--accueil');
+	var barre = hdr.querySelector('.l-entete__barre');
+	var logo = hdr.querySelector('.l-entete__logo');
 	var hero = document.querySelector('.l-hero');
 	var ctaHero = hero ? hero.querySelector('a.c-btn') : null;
 	var ctaHdr = hdr.querySelector('.l-entete__cta .c-btn');
@@ -35,6 +43,26 @@
 	var hauteur = 0;
 
 	function etroit() { return mqEtroit.matches; }
+	function modeBarre() { return accueil && mqMobile.matches; }
+
+	// Barre du hero de l'accueil (téléphone) : état continu, pas de .is-solid.
+	function peindreBarre() {
+		var p = Math.max(0, Math.min(1, (window.scrollY || 0) / 170));
+		var ease = p * p * (3 - 2 * p);
+		var s = 1 - 0.32 * ease;
+		var cw = barre.getBoundingClientRect().width;
+		var lw = logo.offsetWidth || 1;
+		var tx = 16 - (cw - 52 - lw) / 2 - (lw * (1 - s)) / 2;
+		hdr.style.setProperty('--p', ease.toFixed(3));
+		hdr.style.setProperty('--tx', (tx * ease).toFixed(2) + 'px');
+		hdr.style.setProperty('--s', s.toFixed(3));
+	}
+
+	function effacerBarre() {
+		hdr.style.removeProperty('--p');
+		hdr.style.removeProperty('--tx');
+		hdr.style.removeProperty('--s');
+	}
 
 	function mesurer() {
 		var h = hdr.offsetHeight;
@@ -47,6 +75,11 @@
 	function peindre() {
 		raf = 0;
 		if ((window.scrollY || 0) <= 0) { crans = 0; solide = false; }
+		if (modeBarre()) {
+			peindreBarre();
+			hdr.classList.toggle('is-solid', burgerOuvert);
+			return;
+		}
 		var t = !hero || solide || burgerOuvert;
 		hdr.classList.toggle('is-solid', t);
 		if (solide && !veille) veille = requestAnimationFrame(veiller);
@@ -139,6 +172,11 @@
 		});
 		mqEtroit.addEventListener('change', function () {
 			if (!etroit()) fermerBurger(true);
+		});
+		mqMobile.addEventListener('change', function () {
+			if (!modeBarre()) effacerBarre();
+			mesurer();
+			peindre();
 		});
 	}
 

@@ -67,3 +67,19 @@ add_action(
 	},
 	100
 );
+
+/**
+ * Mentions légales : noindex, follow (README § Pages). Les autres balises SEO
+ * (title, description, og, JSON-LD) arrivent à l'étape 6.
+ */
+add_filter(
+	'wp_robots',
+	function ( $robots ) {
+		if ( 'mentions' === dih_page_courante() ) {
+			unset( $robots['max-image-preview'] );
+			$robots['noindex'] = true;
+			$robots['follow']  = true;
+		}
+		return $robots;
+	}
+);

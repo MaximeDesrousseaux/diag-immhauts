@@ -20,7 +20,7 @@
 <?php wp_body_open(); ?>
 <a class="screen-reader-text" href="#contenu">Aller au contenu</a>
 
-<header class="l-entete" data-dih-hdr>
+<header class="l-entete<?php echo is_front_page() ? ' l-entete--accueil' : ''; ?>" data-dih-hdr>
 	<div class="l-entete__barre">
 		<?php get_template_part( 'template-parts/header/logo' ); ?>
 		<?php get_template_part( 'template-parts/header/nav-bureau' ); ?>

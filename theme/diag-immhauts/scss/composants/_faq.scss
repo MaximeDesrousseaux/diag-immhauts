@@ -1,0 +1,108 @@
+// ==========================================================================
+// FAQ en accordéon (<details>), sans JS.
+// Ouverture en volet (::details-content + interpolate-size) là où le navigateur
+// le permet ; ailleurs, l'accordéon s'ouvre sans animation.
+// ==========================================================================
+@use '../abstracts' as *;
+
+:root { interpolate-size: allow-keywords; }
+
+.c-faq { background: c(surface); }
+
+.c-faq__int {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 84px) $gouttiere-page;
+}
+
+.c-faq__tete {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.c-faq__titre { max-width: none; }
+
+.c-faq__liste {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.c-faq__item {
+  overflow: hidden;
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(surface);
+
+  &::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition: block-size .36s $ease-nav, content-visibility .36s allow-discrete;
+  }
+
+  &[open]::details-content { block-size: auto; }
+}
+
+.c-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(16px, 4.2vw, 24px);
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: rem(17);
+  color: c(forest);
+
+  &::-webkit-details-marker { display: none; }
+  @include focus-visible;
+}
+
+// Signe « + » / « − » dans une pastille carrée
+.c-faq__signe {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: c(bg);
+  color: c(forest);
+  font-size: rem(19);
+  font-weight: 600;
+  line-height: 1;
+
+  &::before { content: '+'; }
+
+  .c-faq__item[open] & {
+    background: c(tech);
+    color: $ombre-verte;
+    &::before { content: '−'; }
+  }
+}
+
+.c-faq__reponse {
+  max-width: 680px;
+  padding: 0 clamp(16px, 4.2vw, 24px) clamp(16px, 4.2vw, 24px);
+  font-size: rem(14);
+  line-height: 1.7;
+  color: c(muted);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .3s ease .04s, transform .3s ease .04s;
+
+  .c-faq__item[open] & {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.c-faq__lien { margin-top: 16px; }
+
+@include sans-animation {
+  .c-faq__item::details-content,
+  .c-faq__reponse { transition: none; }
+}

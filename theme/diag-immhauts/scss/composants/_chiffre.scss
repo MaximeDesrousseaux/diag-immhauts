@@ -1,0 +1,146 @@
+// ==========================================================================
+// Chiffres : bandeau de stats du hero (.c-chiffres), bandeau de confiance
+// (.c-confiance, accueil et Qui suis-je), étoiles de notation (.c-etoiles).
+// ==========================================================================
+@use '../abstracts' as *;
+
+// --- Étoiles -------------------------------------------------------------------
+.c-etoiles {
+  color: c(warm);
+  font-size: rem(19);
+  letter-spacing: 1px;
+
+  &--moyen { font-size: rem(17); }
+  &--petit { font-size: rem(15.5); }
+}
+
+// --- Stats du hero : valeur + légende, séparées par un filet ----------------------
+.c-chiffres {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: clamp(16px, 4vw, 24px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-chiffres__item + .c-chiffres__item {
+  padding-left: clamp(16px, 4vw, 24px);
+  border-left: 1px solid color-mix(in oklab, #fff 14%, transparent);
+}
+
+.c-chiffres__valeur {
+  display: block;
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(22);
+  color: #fff;
+}
+
+.c-chiffres__legende {
+  display: block;
+  margin-top: 4px;
+  font-size: rem(12.5);
+  color: c(onDarkMuted);
+}
+
+// --- Bandeau de confiance -----------------------------------------------------------
+.c-confiance {
+  background: c(surface);
+  border-bottom: 1px solid c(line);
+}
+
+.c-confiance__int {
+  max-width: $conteneur;
+  margin: 0 auto;
+  padding: 26px $gouttiere-page;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+
+  @include bp(deplie) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include bp(mobile) {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  }
+}
+
+.c-confiance__google {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.c-confiance__logo {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  background: center / contain no-repeat;
+}
+
+.c-confiance__note {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.c-confiance__ligne {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.c-confiance__chiffre {
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(26);
+  color: c(forest);
+}
+
+.c-confiance__google .c-confiance__legende { margin-top: 4px; }
+
+.c-confiance__filet {
+  flex: none;
+  width: 1px;
+  height: 38px;
+  background: c(line);
+
+  @include bp(deplie) { display: none; }
+}
+
+.c-confiance__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.25;
+}
+
+.c-confiance__picto {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid c(line);
+  border-radius: 10px;
+  background: c(bg);
+}
+
+.c-confiance__titre {
+  display: block;
+  font-weight: 700;
+  font-size: rem(14);
+  color: c(forest);
+}
+
+.c-confiance__legende {
+  display: block;
+  font-size: rem(12.5);
+  color: c(muted);
+}

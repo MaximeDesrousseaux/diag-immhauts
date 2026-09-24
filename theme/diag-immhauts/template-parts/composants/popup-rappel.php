@@ -11,7 +11,7 @@
 	<div class="c-popup__boite" data-dih-popup-boite tabindex="-1">
 		<div class="c-popup__tete">
 			<div>
-				<div class="c-surtitre"><span aria-hidden="true"></span>Devis gratuit</div>
+				<div class="c-surtitre c-surtitre--petit"><span aria-hidden="true"></span>Devis gratuit</div>
 				<h2 class="c-popup__titre" id="popup-rappel-titre">Rappel sous 24 h</h2>
 			</div>
 			<button type="button" class="c-popup__fermer" data-dih-popup-fermer aria-label="Fermer">×</button>

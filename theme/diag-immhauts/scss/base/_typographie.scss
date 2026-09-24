@@ -40,16 +40,31 @@ p { margin: 0; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: rem(11);
+  font-size: rem(14);
   font-weight: 700;
-  letter-spacing: .1em;
+  letter-spacing: .09em;
   text-transform: uppercase;
   color: c(tech);
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 
   > span {
-    width: 18px;
+    flex: none;
+    width: 22px;
     height: 2px;
-    background: c(tech);
+    background: currentColor;
+  }
+
+  // Sur fond vert foncé
+  &--clair { color: c(techBright); }
+
+  // Titre de section qui suit de près (« Le détail »)
+  &--serre { margin-bottom: 12px; }
+
+  // Petit surtitre des panneaux et de la popup
+  &--petit {
+    font-size: rem(11);
+    letter-spacing: .1em;
+    margin-bottom: 8px;
+    > span { width: 18px; }
   }
 }

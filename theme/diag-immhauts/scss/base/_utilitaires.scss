@@ -36,3 +36,58 @@
     z-index: 100000;
   }
 }
+
+// --- Sections de page -------------------------------------------------------------
+// Conteneur de 1200 px ; chaque page règle ses rembourrages verticaux.
+.l-section { @include conteneur; }
+
+.l-section__tete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: clamp(24px, 3.4vw, 40px);
+}
+
+.l-section__titre {
+  max-width: 560px;
+  font-size: clamp(26px, 2.8vw, 36px);
+  font-weight: 800;
+  color: c(forest);
+}
+
+.l-section__intro {
+  max-width: 340px;
+  font-size: rem(15.5);
+  line-height: 1.6;
+  color: c(muted);
+}
+
+.l-section__pied {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: clamp(24px, 3.4vw, 40px);
+}
+
+// Grille des cards « accueil » : 2 colonnes, 1 sur téléphone
+.l-grille-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 3.6vw, 56px) 24px;
+  align-items: stretch;
+  padding-top: 50px; // place du débord des illustrations
+
+  @include bp(mobile) { grid-template-columns: 1fr; }
+}
+
+// Grille des tuiles de diagnostic : 6, puis 4 colonnes (requête de conteneur,
+// pas de seuil de fenêtre supplémentaire), puis 3 sur téléphone
+.l-grille-tuiles {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+
+  @container section (max-width: 980px) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  @include bp(mobile) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

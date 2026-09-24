@@ -170,6 +170,11 @@ $entete-seuils: (
   @include bp(deplie) { font-size: 10px; } // échelle : exception (README : accent de 10 px, sous-titre du logo)
 }
 
+// Accueil en déplié : le sous-titre revient sous le logo (maquette)
+.l-entete--accueil .l-entete__soustitre {
+  @include bp(deplie) { display: block; }
+}
+
 // --- Nav de bureau -------------------------------------------------------------
 .l-nav {
   display: flex;
@@ -547,6 +552,93 @@ a.l-nav__item:hover,
   padding: 15px;
   border-radius: 10px;
   text-align: center;
+}
+
+// --- Accueil, téléphone : le header devient la barre du hero — VERROUILLÉ ------------
+// Logo centré en grand ; au défilement (170 px), il glisse dans la gouttière à
+// l'échelle 0,68 pendant que le fond blanc et l'encre forêt apparaissent.
+// nav.js pose --p (progression lissée, 0 → 1), --tx (décalage en px) et --s (échelle).
+// Pas de .is-solid ici : l'état est continu, pas binaire. Burger ouvert : --p = 1.
+@include bp(mobile) {
+  $encre: color-mix(in srgb, c(forest) calc(var(--p, 0) * 100%), #fff);
+  $ombre-texte: 0 2px 10px rgba(6, 26, 16, calc(.5 * (1 - var(--p, 0))));
+
+  .l-entete--accueil {
+    background: transparent;
+    border-bottom-color: transparent;
+    box-shadow: none;
+
+    &.is-burger { --p: 1; }
+
+    // Fond blanc qui apparaît avec la progression
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: c(surface);
+      border-bottom: 1px solid c(line);
+      box-shadow: 0 10px 22px -18px rgba(18, 48, 36, .55);
+      opacity: var(--p, 0);
+    }
+
+    .l-entete__barre {
+      position: relative;
+      justify-content: center;
+      min-height: 64px;
+      padding: calc(env(safe-area-inset-top, 0px) + 14px) $gouttiere-page 12px;
+    }
+
+    .l-entete__logo {
+      gap: 8px;
+      margin-right: 52px; // échelle : exception (NOTES : le bloc logo réserve 52 px au burger ; nav.js en dépend)
+      transform-origin: center;
+      transform: translateX(var(--tx, 0px)) scale(var(--s, 1));
+      will-change: transform;
+    }
+
+    .c-logo__svg {
+      width: 64px;
+      height: auto;
+    }
+
+    .c-logo__a { fill: $encre; }
+    .c-logo__b { fill: color-mix(in srgb, c(tech) calc(var(--p, 0) * 100%), c(techBright)); }
+    .c-logo__marque { color: $encre; }
+
+    .c-logo__nom {
+      font-size: rem(22);
+      line-height: 1.05;
+      color: $encre;
+      text-shadow: $ombre-texte;
+    }
+
+    .l-entete__soustitre {
+      display: block;
+      font-size: 10px; // échelle : exception (README : accent de 10 px, sous-titre du logo)
+      font-weight: 600;
+      line-height: 1.2;
+      color: color-mix(in srgb, c(muted) calc(var(--p, 0) * 100%), #fff);
+      opacity: calc(.88 + .12 * var(--p, 0));
+      text-shadow: $ombre-texte;
+    }
+
+    .l-entete__burger {
+      position: absolute;
+      right: clamp(16px, 4vw, 32px);
+      width: 44px;
+      height: 44px;
+      color: $encre;
+      border-color: color-mix(in srgb, c(line) calc(var(--p, 0) * 100%), #fff);
+      background: rgba(255, 255, 255, calc(.08 * (1 - var(--p, 0))));
+    }
+
+    .l-entete__trait {
+      left: 12px;
+      top: 21px;
+      background: currentColor;
+    }
+  }
 }
 
 @include sans-animation {

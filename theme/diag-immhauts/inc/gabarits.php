@@ -108,3 +108,40 @@ function dih_cta_header() {
 
 	return apply_filters( 'dih_cta_header', $cta );
 }
+
+/**
+ * Bouton animé (.c-btn) : le libellé glisse de −15 px au survol, l'icône entre
+ * depuis la droite (README § Boutons).
+ *
+ * @param string $texte   Libellé (HTML autorisé : <span>, &nbsp;).
+ * @param string $attrs   Attributs du lien, déjà échappés (href, data-dih-rappel…).
+ * @param string $icone   Picto de dih_icone().
+ * @param string $classes Classes supplémentaires (c-btn--vert par défaut).
+ * @param string $balise  'a' ou 'button'.
+ * @return string
+ */
+function dih_bouton( $texte, $attrs, $icone = 'fleche-courte', $classes = 'c-btn--vert', $balise = 'a' ) {
+	return sprintf(
+		'<%1$s class="c-btn %2$s" %3$s><span class="c-btn__texte">%4$s</span><span class="c-btn__icone">%5$s</span></%1$s>',
+		'button' === $balise ? 'button' : 'a',
+		esc_attr( $classes ),
+		$attrs,
+		wp_kses( $texte, array( 'span' => array( 'class' => true ) ) ),
+		dih_icone( $icone, 17, array( 'epaisseur' => 2.2 ) )
+	);
+}
+
+/**
+ * Surtitre de section : petites capitales vertes précédées d'un filet.
+ *
+ * @param string $texte   Libellé.
+ * @param string $classes Modificateurs (c-surtitre--clair sur fond foncé…).
+ * @return string
+ */
+function dih_surtitre( $texte, $classes = '' ) {
+	return sprintf(
+		'<div class="c-surtitre %s"><span aria-hidden="true"></span>%s</div>',
+		esc_attr( $classes ),
+		esc_html( $texte )
+	);
+}

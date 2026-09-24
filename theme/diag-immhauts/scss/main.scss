@@ -26,12 +26,19 @@ License: Propriétaire — tous droits réservés
 @use 'base/typographie';
 @use 'base/utilitaires';
 
-// 2. Mise en page
+// 2. Composants (avant les mises en page, qui les ajustent en contexte)
+@use 'composants/bouton';
+@use 'composants/card';
+@use 'composants/pastille';
+@use 'composants/chiffre';
+@use 'composants/faq';
+@use 'composants/formulaire';
+@use 'composants/article';
+
+// 3. Mise en page
 @use 'layout/entete';
 @use 'layout/hero';
 @use 'layout/pied';
 
-// 3. Composants
-@use 'composants/bouton';
-@use 'composants/formulaire';
-@use 'composants/article';
+// 4. Pages
+@use 'pages/accueil';

@@ -33,6 +33,9 @@ add_action(
 			'dih-popup' => 'assets/js/popup.js', // popup « Demande de rappel »
 			'dih-glide' => 'assets/js/glide.js', // défilement d'ancre 1,2 s
 		);
+		if ( is_front_page() ) {
+			$scripts['dih-commune'] = 'assets/js/commune.js'; // « Vérifier ma commune »
+		}
 		foreach ( $scripts as $poignee => $fichier ) {
 			if ( ! file_exists( DIH_DIR . '/' . $fichier ) ) {
 				continue;

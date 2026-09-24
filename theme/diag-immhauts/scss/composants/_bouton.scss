@@ -11,7 +11,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 0;
   border-radius: var(--r-btn);
+  padding: 14px 22px; // taille courante ; --grand et les contextes l'ajustent
+  font-size: rem(14);
+  white-space: nowrap;
   cursor: pointer;
   @include focus-visible;
 
@@ -61,6 +65,34 @@
   font-weight: 600;
   border: 1px solid color-mix(in oklab, #fff 26%, transparent);
   @include survol-btn-fantome;
+}
+
+// Hero de l'accueil : un peu plus serré, ombre portée marquée
+.c-btn--hero {
+  padding: 14px 20px;
+  box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6);
+}
+
+// Verre dépoli sur le décor du hero (secondaire) : bordure --techBright au survol
+.c-btn--verre {
+  padding: 14px 20px;
+  color: #fff;
+  font-weight: 700;
+  border: 1px solid color-mix(in oklab, #fff 32%, transparent);
+  background: teinte(forestDeep, 30%);
+  @include survol-btn-fantome;
+}
+
+.c-btn--ombre { box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6); }
+.c-btn--ombre-douce { box-shadow: 0 10px 22px -12px rgba(18, 48, 36, .45); }
+
+// Grande taille (bloc de rappel)
+.c-btn--grand {
+  font-size: rem(15.5);
+  padding: 16px clamp(16px, 4.2vw, 24px);
+
+  &.c-btn--vert { box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6); }
+  &.c-btn--contour { padding: 16px 28px; }
 }
 
 @include sans-animation {
