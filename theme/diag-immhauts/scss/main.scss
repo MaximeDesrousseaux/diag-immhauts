@@ -19,3 +19,15 @@ License: Propriétaire — tous droits réservés
 @use 'base/reset';
 @use 'base/typographie';
 @use 'base/utilitaires';
+
+// 2. Mise en page
+@use 'layout/entete';
+@use 'layout/hero';
+@use 'layout/pied';
+
+// 3. Composants
+@use 'composants/bouton';
+@use 'composants/popup';
+@use 'composants/formulaire';
+@use 'composants/appel-fixe';
+@use 'composants/texte-long';

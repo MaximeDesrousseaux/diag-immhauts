@@ -1,0 +1,21 @@
+// Corps de texte des pages simples (complété à l'étape 4 avec Mentions légales).
+@use '../abstracts' as *;
+
+.dih-texte-long {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 72px) $gouttiere-page;
+  font-size: t(15.5);
+  line-height: 1.7;
+  color: c(ink);
+
+  > * + * { margin-top: 16px; }
+
+  a {
+    color: c(forest);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    &:hover { color: c(tech); }
+  }
+}

@@ -1,0 +1,594 @@
+// ==========================================================================
+// Header commun aux 22 pages : épinglé, nav transparente → blanche.
+// README § Header (commun aux 22 pages) et nav transparente.
+//
+// État par défaut = transparent (haut de page, texte blanc).
+// .is-solid (posé par nav.js) = nav blanche. Burger ouvert = .is-solid aussi.
+// ==========================================================================
+@use 'sass:list';
+@use '../abstracts' as *;
+
+$tr-nav: $duree-nav $ease-nav;
+
+// Nav blanche : aussi quand la page n'a pas de hero (avant même le JS).
+@mixin nav-blanche {
+  .dih-hdr.is-solid &,
+  body:not(:has(.dih-hero)) .dih-hdr & { @content; }
+}
+
+// --- Conteneur ---------------------------------------------------------------
+.dih-hdr {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: transparent;
+  border-bottom: 1px solid rgba(230, 235, 221, 0);
+  box-shadow: 0 10px 24px -22px rgba(9, 26, 15, 0);
+
+  &.is-pret {
+    transition: background $tr-nav, border-color $tr-nav, box-shadow $tr-nav;
+  }
+
+  &.is-solid,
+  body:not(:has(.dih-hero)) & {
+    background: #fff;
+    border-bottom-color: c(line);
+    box-shadow: 0 10px 24px -22px rgba(9, 26, 15, .5);
+  }
+}
+
+// Espaceur dans le flux : réserve la hauteur du header épinglé.
+.dih-hdr-spacer { height: var(--nvH); }
+
+.dih-hdr-row {
+  max-width: $conteneur;
+  margin: 0 auto;
+  padding: clamp(8px, 1.4vw, 16px) $gouttiere-page;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(12px, 1.6vw, 24px);
+
+  @include bp(deplie) {
+    max-width: none;
+    padding: calc(env(safe-area-inset-top, 0px) + 30px) $gouttiere-page 14px;
+    gap: 12px;
+  }
+}
+
+// --- Logo --------------------------------------------------------------------
+.dih-hdr-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+
+  @include bp(compact) { gap: 8px; }
+}
+
+.dih-logo-svg {
+  display: block;
+  flex: none;
+  width: 77px;
+  height: 22px;
+
+  @include bp(deplie) {
+    width: 70px;
+    height: 20px;
+  }
+}
+
+// Les deux tracés du logo « toitures » suivent l'encre de la nav (fondu 420 ms).
+.dih-lg-a,
+.dih-lg-b { .is-pret & { transition: fill $tr-nav; } }
+
+.dih-lg-a {
+  fill: #fff;
+  @include nav-blanche { fill: c(forest); }
+}
+
+.dih-lg-b {
+  fill: c(techBright);
+  @include nav-blanche { fill: c(tech); }
+}
+
+.dih-logo-mark {
+  display: block;
+  flex: none;
+  width: 51px;
+  height: 28px;
+  color: #fff;
+  .is-pret & { transition: color $tr-nav; }
+  @include nav-blanche { color: c(forest); }
+}
+
+.dih-logo-img {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 26px;
+  @include bp(compact) { height: 19px; }
+  @include bp(deplie) { height: 24px; }
+}
+
+.dih-logo-txt {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  min-width: 0;
+}
+
+.dih-logo-word {
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: t(19);
+  letter-spacing: -.03em;
+  white-space: nowrap;
+  color: #fff;
+  .is-pret & { transition: color $tr-nav; }
+  @include nav-blanche { color: c(forest); }
+
+  @include bp(compact) { font-size: t(17); }
+}
+
+.dih-hdr-tag {
+  font-size: t(11);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  margin-top: 3px;
+  white-space: nowrap;
+  color: #fff;
+  .is-pret & { transition: color $tr-nav; }
+  @include nav-blanche { color: c(muted); }
+
+  @include bp(tag) { display: none; }
+  @include bp(deplie) { font-size: 10px; } // accent hors échelle (README)
+}
+
+// --- Nav de bureau -------------------------------------------------------------
+.dih-navrow {
+  display: flex;
+  align-items: center;
+  gap: $gouttiere-nav;
+  font-size: t(14);
+  font-weight: 500;
+  white-space: nowrap;
+  color: #fff;
+  .is-pret & { transition: color $tr-nav; }
+  @include nav-blanche { color: c(ink); }
+
+  @include bp(compact) { gap: 14px; }
+  @include bp(deplie) { display: none; }
+}
+
+.dih-nav-dd {
+  position: relative;
+  padding: 19px 0; // pont de survol entre l'item et son menu
+  margin: -19px 0;
+}
+
+.dih-nav-top {
+  position: relative;
+  color: inherit;
+
+  // Rubrique en cours : gras ; blanche sur nav transparente, verte sur nav blanche.
+  &.is-courant {
+    font-weight: 600;
+    @include nav-blanche { color: c(tech); }
+  }
+
+  &[data-navtrigger]:is(span) { cursor: pointer; }
+
+  // Survol : aucun changement de couleur, seul un filet vert clair glisse dessous.
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 4px;
+    background: c(tech);
+    transform: scaleX(0);
+    transform-origin: right center;
+    opacity: 0;
+    transition: transform .26s $ease-nav, opacity .26s ease;
+  }
+}
+
+a.dih-nav-top:hover::after,
+.dih-nav-dd:hover > .dih-nav-top::after,
+.dih-nav-top:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+  opacity: 1;
+}
+
+// --- Menus déroulants ------------------------------------------------------------
+@keyframes dihUnfold {
+  from { clip-path: inset(0 0 100% 0); transform: translateY(-8px); opacity: 0; }
+  to { clip-path: inset(0 0 0 0); transform: translateY(0); opacity: 1; }
+}
+
+@keyframes dihItemIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dihFold {
+  from { clip-path: inset(0 0 0 0); transform: translateY(0); opacity: 1; }
+  to { clip-path: inset(0 0 100% 0); transform: translateY(-8px); opacity: 0; }
+}
+
+@keyframes dihItemOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-5px); }
+}
+
+// Items en cascade : 70, 110, 150, 190, 220 ms puis 250 ms.
+@mixin cascade {
+  > * { animation: dihItemIn .34s $ease-volet both; }
+  $delais: (.07s, .11s, .15s, .19s, .22s);
+  @for $i from 1 through 5 {
+    > *:nth-child(#{$i}) { animation-delay: list.nth($delais, $i); }
+  }
+  > *:nth-child(n + 6) { animation-delay: .25s; }
+}
+
+.dih-navpanel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: calc(-1 * #{$gouttiere-nav}); // aligné à gauche sur l'item parent
+  z-index: 60;
+  color: c(ink);
+  background: #fff;
+  border: 1px solid c(line);
+  border-radius: 16px;
+  box-shadow: $ombre-panneau;
+  transform-origin: top left;
+  animation: dihUnfold .42s $ease-volet both;
+  @include cascade;
+}
+
+.dih-nav-dd.is-open > .dih-navpanel-lg,
+.dih-nav-dd:focus-within > .dih-navpanel-lg { display: grid; }
+
+.dih-nav-dd.is-open > .dih-navpanel-sm,
+.dih-nav-dd:focus-within > .dih-navpanel-sm { display: flex; }
+
+.dih-navpanel-lg {
+  width: min(760px, calc(100vw - 48px));
+  padding: clamp(16px, 4vw, 24px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 40px;
+
+  // Sous 1140 px le grand panneau passe en une colonne de 320 px.
+  @include bp(panneau) {
+    width: min(320px, calc(100vw - 32px));
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    max-height: min(70vh, 560px);
+    overflow-y: auto;
+  }
+}
+
+.dih-navpanel-sm {
+  width: min(300px, calc(100vw - 48px));
+  padding: $gouttiere-nav;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dih-navpanel-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dih-navpanel-h {
+  font-size: t(11);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: c(subtle);
+  margin-bottom: 10px;
+}
+
+.dih-navpanel-a {
+  font-size: t(14);
+  font-weight: 500;
+  color: c(ink);
+  padding: 7px 9px;
+  margin-left: -9px;
+  border-radius: 10px;
+
+  &:is(a):hover {
+    background: c(bg);
+    color: c(forest);
+  }
+}
+
+.dih-navpanel-pied {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+  padding-top: 18px;
+  border-top: 1px solid c(line);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+}
+
+.dih-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: t(14);
+  font-weight: 700;
+
+  &--fonce {
+    color: c(forest);
+    &:hover { color: c(tech); }
+  }
+
+  &--vert { color: c(tech); }
+}
+
+// --- Téléphone et CTA --------------------------------------------------------------
+.dih-hdr-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  @include bp(deplie) { display: none; }
+}
+
+.dih-hdr-tel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.15;
+}
+
+.dih-tel-l {
+  font-size: 10px; // accent hors échelle (« LIGNE DIRECTE »)
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, .82);
+  .is-pret & { transition: color $tr-nav; }
+  @include nav-blanche { color: c(muted); }
+}
+
+.dih-tel-n {
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: t(14);
+  white-space: nowrap;
+  color: #fff;
+  position: relative;
+  .is-pret & { transition: color $tr-nav; }
+  @include nav-blanche { color: c(forest); }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 4px;
+    background: c(tech);
+    transform: scaleX(0);
+    transform-origin: right center;
+    opacity: 0;
+    transition: transform .32s $ease-volet, opacity .32s ease;
+  }
+
+  .dih-hdr-tel:hover &::after,
+  .dih-hdr-tel:focus-visible &::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+    opacity: 1;
+  }
+}
+
+.dih-hdr-cta {
+  display: inline-flex;
+
+  .dih-cta {
+    font-size: t(14);
+    padding: 12px 22px;
+    white-space: nowrap;
+    // Sur nav transparente : fond blanc, texte vert foncé (y compris au survol).
+    background: #fff;
+    color: c(forestDeep);
+    transition: opacity .3s ease, transform .3s ease, background $tr-nav, color $tr-nav;
+
+    @include nav-blanche {
+      background: c(tech);
+      &:hover { background: c(techBright); }
+    }
+  }
+
+  // Caché tant que le CTA vert du hero est à l'écran (nav.js).
+  .dih-hdr--cta-cache & .dih-cta {
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+  }
+
+  // Bureau compact (≤ 1232 px) : pastille ronde de 42 px, icône enveloppe
+  // qui « bump » au survol.
+  @include bp(compact) {
+    .dih-cta {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border-radius: $r-pilule;
+      justify-content: center;
+    }
+
+    .dih-cta .dih-cta-t { display: none; }
+
+    .dih-cta .dih-cta-i {
+      position: static;
+      opacity: 1;
+      transform: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+
+      svg { display: none; }
+
+      &::after {
+        content: '';
+        display: block;
+        flex: none;
+        width: 17px;
+        height: 17px;
+        background: currentColor;
+        $enveloppe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='4.5' width='19' height='15' rx='2.5'/%3E%3Cpath d='m3 6.5 9 6 9-6'/%3E%3C/svg%3E");
+        -webkit-mask: $enveloppe center / contain no-repeat;
+        mask: $enveloppe center / contain no-repeat;
+      }
+    }
+
+    .dih-cta:hover .dih-cta-i::after { animation: dihMailBump .9s cubic-bezier(.45, 0, .25, 1); }
+  }
+}
+
+@keyframes dihMailBump {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-4px); }
+  70% { transform: translateY(0); }
+  85% { transform: translateY(-1px); }
+  100% { transform: translateY(0); }
+}
+
+// --- Burger (déplié et mobile) ------------------------------------------------------
+.dih-hdr-burger {
+  display: none;
+  flex: none;
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, .4);
+  background: transparent;
+  .is-pret & { transition: border-color $tr-nav, background $tr-nav; }
+
+  @include nav-blanche {
+    border-color: c(line);
+    background: #fff;
+    &:hover { border-color: $burger-survol; }
+  }
+
+  @include bp(deplie) { display: block; }
+  @include focus-visible;
+}
+
+.dih-burg-l {
+  position: absolute;
+  left: 13px;
+  top: 22px;
+  width: 20px;
+  height: 2px;
+  border-radius: 4px;
+  background: #fff;
+  transition: transform .34s $ease-volet, background $tr-nav;
+  @include nav-blanche { background: c(forest); }
+
+  &--h { transform: translateY(-6.5px) rotate(0deg); }
+  &--b { transform: translateY(6.5px) rotate(0deg); }
+  &--m {
+    transform: scaleX(1);
+    opacity: 1;
+    transition: transform .24s $ease-volet, opacity .18s ease, background $tr-nav;
+  }
+
+}
+
+.is-burger .dih-burg-l--h { transform: translateY(0) rotate(45deg); }
+.is-burger .dih-burg-l--b { transform: translateY(0) rotate(-45deg); }
+.is-burger .dih-burg-l--m { transform: scaleX(.15); opacity: 0; }
+
+.dih-burger-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  max-height: 76vh;
+  overflow-y: auto;
+  padding: 14px $gouttiere-page 22px;
+  background: #fff;
+  border-bottom: 1px solid c(line);
+  box-shadow: $ombre-burger;
+  transform-origin: top center;
+  animation: dihUnfold .4s $ease-volet both;
+  @include cascade;
+
+  &[hidden] { display: none; }
+
+  &.dih-panel-out {
+    animation: dihFold .3s cubic-bezier(.4, 0, .6, 1) both;
+    > * { animation: dihItemOut .2s cubic-bezier(.4, 0, .6, 1) both; animation-delay: 0s; }
+  }
+
+  @include bp(bureau) { display: none; }
+}
+
+.dih-burger-a {
+  font-size: t(15.5);
+  font-weight: 600;
+  color: c(ink);
+  padding: 14px 12px;
+  margin: 0 -12px;
+  border-radius: 10px;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+
+  &:is(a):hover {
+    background: c(bg);
+    color: c(forest);
+  }
+}
+
+.dih-burger-h {
+  font-size: t(11);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: c(subtle);
+  margin: 14px 0 4px;
+}
+
+.dih-burger-tel {
+  margin-top: 18px;
+  background: c(tech);
+  color: #fff;
+  font-weight: 700;
+  font-size: t(15.5);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+@include sans-animation {
+  .dih-navpanel,
+  .dih-navpanel > *,
+  .dih-burger-panel,
+  .dih-burger-panel > *,
+  .dih-burger-panel.dih-panel-out,
+  .dih-burger-panel.dih-panel-out > * { animation: none; }
+}

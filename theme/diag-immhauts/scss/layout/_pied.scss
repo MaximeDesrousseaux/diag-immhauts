@@ -1,0 +1,107 @@
+// Pied de page commun aux 22 pages.
+@use '../abstracts' as *;
+
+.dih-pied {
+  background: c(forestDeep);
+  color: c(onDarkSoft);
+}
+
+.dih-pied-in {
+  max-width: $conteneur;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 64px) $gouttiere-page 32px;
+}
+
+.dih-pied-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: clamp(24px, 3.4vw, 40px);
+}
+
+.dih-pied-nom {
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: t(19);
+  letter-spacing: -.03em;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.dih-pied-desc {
+  font-size: t(14);
+  line-height: 1.7;
+  max-width: 290px;
+  color: c(onDarkMuted);
+}
+
+.dih-cta--pied {
+  margin-top: 20px;
+  color: #fff;
+  font-weight: 700;
+  font-size: t(14);
+  padding: 11px 15px;
+  border: 1px solid color-mix(in oklab, #fff 26%, transparent);
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.dih-cta.dih-pied-rappel {
+  &:hover {
+    border-color: teinte(techBright, 60%);
+    color: c(techBright);
+  }
+  @include bp(mobile) { display: none; }
+}
+
+.dih-cta.dih-pied-tel {
+  display: none;
+  &:hover {
+    border-color: color-mix(in oklab, #fff 55%, transparent);
+    background: color-mix(in oklab, #fff 8%, transparent);
+  }
+  @include bp(mobile) { display: inline-flex; }
+}
+
+.dih-pied-h {
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: t(12.5);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.dih-pied-liens {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: t(14);
+
+  a:hover,
+  .is-courant { color: c(techBright); }
+}
+
+.dih-pied-communes {
+  font-size: t(12.5);
+  line-height: 1.7;
+  color: c(onDarkMuted);
+}
+
+.dih-pied-bas {
+  margin-top: 44px;
+  padding-top: 22px;
+  border-top: 1px solid color-mix(in oklab, #fff 12%, transparent);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: t(12.5);
+  color: c(onDarkMuted);
+}
+
+.dih-pied-bas-liens {
+  display: flex;
+  gap: 16px;
+  a:hover { color: #fff; }
+}

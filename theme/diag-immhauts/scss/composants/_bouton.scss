@@ -1,0 +1,72 @@
+// ==========================================================================
+// Boutons (README § Boutons).
+// .dih-cta : le libellé (.dih-cta-t) glisse de −15 px au survol et l'icône
+// (.dih-cta-i) entre depuis la droite. Forme : var(--r-btn) (réglage global).
+// ==========================================================================
+@use '../abstracts' as *;
+
+.dih-cta {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  @include focus-visible;
+
+  .dih-cta-t,
+  .dih-cta-i {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .dih-cta-t {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 15px;
+    transition: transform .3s $ease-ressort;
+  }
+
+  .dih-cta-i {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    display: flex;
+    opacity: 0;
+    color: inherit;
+    transform: translate(30px, -50%);
+    transition: opacity .22s ease .04s, transform .34s $ease-ressort;
+
+    svg { color: inherit; stroke: currentColor; display: block; }
+  }
+
+  &:hover .dih-cta-t { transform: translateX(-15px); }
+  &:hover .dih-cta-i { opacity: 1; transform: translate(0, -50%); }
+}
+
+// Principal : fond vert, texte vert foncé — y compris au survol (jamais blanc).
+.dih-cta--vert {
+  background: c(tech);
+  color: c(forestDeep);
+  font-family: var(--font-titre);
+  font-weight: 800;
+  transition: background .2s ease;
+
+  &:hover { background: c(techBright); }
+}
+
+// Contour clair sur fond vert (secondaire) : bordure --techBright au survol.
+.dih-cta--contour {
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid color-mix(in oklab, #fff 26%, transparent);
+
+  &:hover { border-color: c(techBright); }
+}
+
+@include sans-animation {
+  .dih-cta .dih-cta-t,
+  .dih-cta .dih-cta-i { transition: none; }
+}
