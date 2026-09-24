@@ -49,6 +49,7 @@
 		if ((window.scrollY || 0) <= 0) { crans = 0; solide = false; }
 		var t = !hero || solide || burgerOuvert;
 		hdr.classList.toggle('is-solid', t);
+		if (solide && !veille) veille = requestAnimationFrame(veiller);
 
 		if (ctaHdr) {
 			var parti = ctaHero ? ctaHero.getBoundingClientRect().bottom < hauteur + 8 : true;
@@ -57,6 +58,16 @@
 	}
 
 	function planifier() { if (!raf) raf = requestAnimationFrame(peindre); }
+
+	// Réconciliation à chaque image tant que la nav est blanche : le retour en haut
+	// ne garantit aucun événement scroll. La boucle s'arrête dès la nav transparente.
+	var veille = 0;
+	function veiller() {
+		veille = 0;
+		if (!solide) return;
+		if ((window.scrollY || 0) <= 0) { fixer(false); return; }
+		veille = requestAnimationFrame(veiller);
+	}
 
 	// Changement d'état : peint SYNCHRONEMENT (rAF en attente annulé).
 	function fixer(v) {

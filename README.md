@@ -47,6 +47,16 @@ Points de rupture : `@include bp(deplie)` (≤ 900 px), `bp(mobile)` (≤ 640 px
 Les gabarits lisent les réglages globaux via `dih_option( 'cle' )` (thème, `inc/options.php`).
 Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa valeur par défaut.
 
+## Arbitrages (écarts entre maquette et README de passation)
+
+| Sujet | Choix retenu |
+|---|---|
+| Header entre 901 et 1060 px | Comme la maquette : téléphone et pastille ronde du CTA restent visibles jusqu'à 901 px |
+| Bouton d'appel fixe (déplié et mobile) | Sans bordure, comme la maquette |
+| Rubrique en cours sur nav blanche | Vert foncé (`--forest`) en gras, pour le contraste (`--tech` sur blanc : 2,3:1) |
+| Fiches diagnostics | Pages WordPress avec le gabarit « Fiche diagnostic » (pas de CPT) |
+| Actualités | Articles WordPress standard (`home.php` / `single.php`) |
+
 ## Dépendances
 
 - **ACF Pro** : blocs éditables et page « Personnalisation ».

@@ -174,10 +174,11 @@ $tr-nav: $duree-nav $ease-nav;
   position: relative;
   color: inherit;
 
-  // Rubrique en cours : gras ; blanche sur nav transparente, verte sur nav blanche.
+  // Rubrique en cours : gras ; blanche sur nav transparente, vert foncé sur nav
+  // blanche (arbitrage : --tech sur blanc n'atteint que 2,3:1 de contraste).
   &.is-courant {
     font-weight: 600;
-    @include nav-blanche { color: c(tech); }
+    @include nav-blanche { color: c(forest); }
   }
 
   &[data-navtrigger]:is(span) { cursor: pointer; }
