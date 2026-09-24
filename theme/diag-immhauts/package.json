@@ -8,7 +8,7 @@
     "watch": "sass scss/main.scss style.css --style=expanded --embed-source-map --watch"
   },
   "devDependencies": {
-    "sass": "^1.93.2"
+    "sass": "1.93.2"
   },
   "engines": {
     "node": ">=18"

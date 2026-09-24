@@ -58,7 +58,9 @@ if (-not $SansBuild) {
   Push-Location (Join-Path $Depot "theme\diag-immhauts")
   try {
     npm install --no-fund --no-audit
+    if ($LASTEXITCODE -ne 0) { throw "npm install a échoué (code $LASTEXITCODE)." }
     npm run build
+    if ($LASTEXITCODE -ne 0) { throw "npm run build a échoué (code $LASTEXITCODE)." }
   } finally {
     Pop-Location
   }
