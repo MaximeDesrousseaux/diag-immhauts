@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#f4f7f1;}
+  *{box-sizing:border-box;}
+  a{color:#1e5b34;text-decoration:underline;text-underline-offset:2px;}
+  a:hover{color:#4f9a45;}
+</style>
+</helmet>
+
+<div style="font-family:'Inter',sans-serif;color:#17331f;background:#f4f7f1;padding:clamp(16px,3vw,44px) clamp(12px,3vw,32px);">
+<div style="max-width:1060px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(20px,2.6vw,34px);">
+
+  <header style="background:#1e5b34;color:#f3f8ef;border-radius:18px;padding:clamp(22px,3vw,38px);display:flex;flex-direction:column;gap:14px;">
+    <span style="font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#a9d9a0;">Audit SEO · diagimmhauts.fr + les 19 pages de la refonte · 16 septembre 2026</span>
+    <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin:0;">Se rendre trouvable<br>dans l'Artois</h1>
+    <p style="margin:0;max-width:660px;font-size:15.5px;line-height:1.6;color:#d6e6cf;">Le site en ligne compte <strong>6 pages</strong> et son titre principal est « Bienvenue chez Diag Imm'Hauts ». La refonte en compte 19, dont 12 fiches de diagnostic : c'est déjà le gros du travail SEO, à condition de migrer proprement. J'ai posé le balisage sur les 19 pages ; le reste est classé par rentabilité.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;">
+      <span style="background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;">19 pages balisées</span>
+      <span style="background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;">7 redirections à écrire</span>
+      <span style="background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;">6 chantiers priorisés</span>
+      <span style="background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;">2 à transmettre à Maxime</span>
+    </div>
+  </header>
+
+  <section style="background:#fff;border:2px solid #dce7d6;border-radius:16px;padding:clamp(18px,2.4vw,30px);">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;margin:0 0 14px;color:#1e5b34;">Ce qui coûte le plus de clients aujourd'hui</h2>
+    <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px;font-size:15px;line-height:1.6;">
+      <li><strong>Une seule page pour tous les diagnostics de vente et de location.</strong> Quelqu'un qui cherche « diagnostic amiante Arras » ou « diagnostic gaz obligatoire » ne trouve pas de page qui répond exactement à sa question — Google n'a rien de précis à classer. La refonte crée ces 12 pages : c'est le gain le plus important du chantier.</li>
+      <li><strong>Le titre de l'accueil ne contient aucune ville ni aucun service.</strong> « Bienvenue chez Diag Imm'Hauts » occupe la place la plus précieuse de la page. Un visiteur de Google ne cherche jamais « bienvenue ».</li>
+      <li><strong>Des adresses en double avec un préfixe <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;">/wp/</code>.</strong> Deux liens de l'accueil pointent vers <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;">/wp/demandez-un-rappel/</code> et <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;">/wp/diagnostics-immobiliers-vente-location/</code> alors que les mêmes pages existent sans ce préfixe. Google voit deux fois le même contenu et hésite sur celle à classer.</li>
+      <li><strong>Aucune page de ville.</strong> Le bloc local de Google (la carte et ses trois fiches) se joue sur la fiche établissement <em>et</em> sur des pages qui parlent vraiment d'Arras, de Lens, de Béthune. Le pied de page actuel empile 28 communes, dont 26 très petites — Ivergny, Sibiville, Humbercourt — mais oublie Béthune, Liévin, Douai et Cambrai, où se trouvent les volumes de recherche.</li>
+      <li><strong>Une faute dans le menu, sur les 6 pages.</strong> « L'actualité du diagnostics immobiliers ». Elle est dans la navigation, donc partout.</li>
+      <li><strong>Aucune donnée structurée.</strong> Rien ne dit à Google que vous êtes une entreprise locale, avec une adresse, des horaires, une note de 5,0 sur 12 avis et une certification. C'est posé sur la refonte.</li>
+    </ol>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <h2 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;margin:0;color:#1e5b34;">Ce que j'ai appliqué</h2>
+      <span style="font-size:13.5px;color:#5c7a63;">Sur les 19 pages de la refonte</span>
+    </div>
+
+    <article style="background:#fff;border:2px solid #dce7d6;border-radius:14px;padding:18px clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1e5b34;">S1</span>
+        <span style="background:#1e5b34;color:#eafbe2;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700;">Appliqué</span>
+        <span style="font-size:13px;color:#5c7a63;">Titres, descriptions, adresses canoniques</span>
+      </div>
+      <p style="margin:0;font-size:15px;line-height:1.6;">Chaque page porte désormais un titre et une description écrits pour la recherche, une adresse canonique, les balises de partage (Facebook, WhatsApp, LinkedIn) et une directive d'indexation. Les mentions légales sont en <em>noindex</em> : elles n'ont rien à gagner dans les résultats et diluent le site.</p>
+      <div style="border-top:1px solid #e4ece0;padding-top:14px;display:grid;grid-template-columns:{{ cols }};gap:12px 22px;font-size:14px;line-height:1.5;">
+        <div><strong style="color:#1e5b34;">Accueil</strong><br><span style="color:#5c7a63;">Diagnostics immobiliers Arras, Lens, Béthune — Diag Imm'Hauts</span></div>
+        <div><strong style="color:#1e5b34;">DPE</strong><br><span style="color:#5c7a63;">DPE à Arras et dans le Pas-de-Calais — validité, réforme 2026, tarif</span></div>
+        <div><strong style="color:#1e5b34;">Amiante</strong><br><span style="color:#5c7a63;">Diagnostic amiante à Arras — obligatoire avant juillet 1997</span></div>
+        <div><strong style="color:#1e5b34;">Simulateur</strong><br><span style="color:#5c7a63;">Quels diagnostics obligatoires pour mon bien ? Simulateur gratuit</span></div>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:#5c7a63;">Le principe est le même sur les 19 : <em>service + ville + ce que la personne veut savoir</em>. Les titres restent sous 60 caractères utiles, les descriptions sous 155, et chacune finit par une raison d'appeler.</p>
+    </article>
+
+    <article style="background:#fff;border:2px solid #dce7d6;border-radius:14px;padding:18px clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1e5b34;">S2</span>
+        <span style="background:#1e5b34;color:#eafbe2;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700;">Appliqué</span>
+        <span style="font-size:13px;color:#5c7a63;">Fiche d'entreprise lisible par Google</span>
+      </div>
+      <p style="margin:0;font-size:15px;line-height:1.6;">L'accueil embarque une carte d'identité structurée : dénomination, adresse du siège, téléphone, e-mail, fondateur, date de création, horaires réels (8 h – 19 h en semaine, 9 h – 13 h le samedi), note de 5,0 sur 12 avis, certification Bureau Veritas et les 12 communes desservies. C'est ce qui alimente l'encadré à droite des résultats et renforce la fiche établissement.</p>
+    </article>
+
+    <article style="background:#fff;border:2px solid #dce7d6;border-radius:14px;padding:18px clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1e5b34;">S3</span>
+        <span style="background:#e8f1e4;color:#255c39;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700;">À faire à la mise en ligne</span>
+        <span style="font-size:13px;color:#5c7a63;">Ce que la maquette ne peut pas porter</span>
+      </div>
+      <p style="margin:0;font-size:15px;line-height:1.6;">Trois éléments dépendent du site réel et devront être posés dans WordPress : le balisage des questions fréquentes (il fait apparaître les questions directement dans les résultats — un gain de visibilité considérable sur les 13 pages qui en ont), le fil d'Ariane structuré, et une image de partage unique au format 1200 × 630. Je fournis le détail au moment de l'intégration.</p>
+    </article>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <h2 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;margin:0;color:#1e5b34;">Le plan de migration</h2>
+      <span style="font-size:13.5px;color:#5c7a63;">À appliquer le jour de la bascule</span>
+    </div>
+
+    <article style="background:#fff;border:2px solid #dce7d6;border-radius:14px;padding:18px clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:14px;">
+      <p style="margin:0;font-size:15px;line-height:1.6;"><strong>Sans redirections, vous repartez de zéro.</strong> Les 6 pages actuelles sont en ligne depuis 2025 et cumulent l'ancienneté acquise par le domaine ; leurs adresses changent toutes. Chaque ancienne adresse doit renvoyer en permanence vers la nouvelle — c'est ce qui transfère l'ancienneté acquise. Les sept redirections du tableau ci-dessous suffisent — deux adresses restent inchangées, une reste à trancher.</p>
+      <div style="display:flex;flex-direction:column;gap:0;border:1px solid #e4ece0;border-radius:12px;overflow:hidden;font-size:13.5px;">
+        <div style="display:grid;grid-template-columns:{{ redirCols }};gap:10px;padding:11px 14px;background:#eef5ea;font-weight:700;color:#1e5b34;">
+          <div>Ancienne adresse</div><div>Nouvelle adresse</div>
+        </div>
+        <sc-for list="{{ redirects }}" as="r" hint-placeholder-count="8">
+          <div style="display:grid;grid-template-columns:{{ redirCols }};gap:10px;padding:11px 14px;border-top:1px solid #f0f4ec;align-items:baseline;">
+            <div style="color:#5c7a63;word-break:break-word;font-family:ui-monospace,monospace;font-size:12.5px;">{{ r.from }}</div>
+            <div style="color:#17331f;word-break:break-word;font-family:ui-monospace,monospace;font-size:12.5px;">{{ r.to }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:#5c7a63;">La page « actualités » est le seul cas à trancher : soit vous la reprenez comme journal (elle sert la réforme DPE 2026 et les échéances de location), soit elle part vers la liste des diagnostics. Mon avis : la garder, c'est le meilleur endroit pour écrire ce que personne d'autre n'écrit dans le secteur.</p>
+    </article>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <h2 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;margin:0;color:#1e5b34;">Les 6 chantiers, par rentabilité</h2>
+      <span style="font-size:13.5px;color:#5c7a63;">Du plus rapide au plus long</span>
+    </div>
+
+    <sc-for list="{{ chantiers }}" as="c" hint-placeholder-count="6">
+      <article style="background:#fff;border:2px solid #dce7d6;border-radius:14px;padding:18px clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
+          <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1e5b34;">{{ c.id }}</span>
+          <span style="background:{{ c.bg }};color:{{ c.fg }};border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700;">{{ c.tag }}</span>
+          <span style="font-size:13px;color:#5c7a63;">{{ c.effort }}</span>
+        </div>
+        <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:18.5px;font-weight:800;line-height:1.25;color:#17331f;">{{ c.titre }}</h3>
+        <p style="margin:0;font-size:15px;line-height:1.65;color:#2c4d38;">{{ c.texte }}</p>
+      </article>
+    </sc-for>
+  </section>
+
+  <section style="background:#1e5b34;color:#f3f8ef;border-radius:18px;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:14px;">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;margin:0;">À demander à Maxime Dillies</h2>
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.6;color:#d6e6cf;">
+      <li>Les <strong>accès à la fiche établissement Google</strong> — ou, à défaut, qu'il applique lui-même P1 : c'est le levier le plus rentable de la liste, et le seul qu'on ne peut pas contourner.</li>
+      <li><strong>L'ouverture de la Search Console</strong> sur le domaine (dix minutes de sa part). Sans elle, les priorités à trois mois se décideront au jugement et non sur ses vraies positions.</li>
+      <li>Le <strong>lien de sa fiche Google</strong>, pour remplacer la page de recherche vers laquelle pointe le pied de page.</li>
+      <li>Son accord sur les <strong>tarifs de départ</strong>&nbsp;: c'est la première question des vendeurs, et aucun de ses confrères de l'Artois n'en affiche.</li>
+      <li>Un ou deux <strong>chantiers récents par ville</strong> (type de bien, année, diagnostics réalisés) — c'est ce qui rendra les cinq pages de ville crédibles plutôt que génériques.</li>
+    </ul>
+    <p style="margin:6px 0 0;font-size:15px;line-height:1.6;">Sans rien attendre de lui, on peut avancer sur P2 à P5&nbsp;: les redirections, les cinq pages de ville et les quatre articles de fond.</p>
+  </section>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: 1200 };
+  componentDidMount() {
+    this.__on = () => this.setState({ w: window.innerWidth });
+    this.__on();
+    window.addEventListener('resize', this.__on);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.__on); }
+  renderVals() {
+    const narrow = this.state.w <= 820;
+    return {
+      cols: narrow ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1fr)',
+      redirCols: narrow ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1fr)',
+      redirects: [
+        { from: '/', to: '/ (inchangée)' },
+        { from: '/diagnostics-immobiliers-vente-location/', to: '/diagnostics-immobiliers/' },
+        { from: '/wp/diagnostics-immobiliers-vente-location/', to: '/diagnostics-immobiliers/' },
+        { from: '/diagnostics-immobiliers-coproprietes-collectivites/', to: '/dtg-dpe-collectif/' },
+        { from: '/audits-energetiques/', to: '/audit-energetique/' },
+        { from: '/max-dillies-diag-imm-hauts/', to: '/maxime-dillies-diagnostiqueur/' },
+        { from: '/demandez-un-rappel/', to: '/contact-devis/' },
+        { from: '/wp/demandez-un-rappel/', to: '/contact-devis/' },
+        { from: '/mentions-legales/', to: '/mentions-legales/ (inchangée)' },
+        { from: '/actualites-diagnostics-immobiliers/', to: 'à trancher (voir ci-dessous)' },
+      ],
+      chantiers: [
+        { id: 'P1', tag: 'À transmettre à Maxime', bg: '#ede9f6', fg: '#4b3a7a', effort: 'Une heure de sa part, effet en quelques jours',
+          titre: 'La fiche établissement Google, complétée à fond',
+          texte: "C'est le levier le plus rentable du métier — dans le bloc local, la fiche pèse plus que le site — et il faut les accès de Maxime : lui seul peut la modifier. À remplir sans rien laisser de vide : les 12 prestations une par une, la zone desservie, les horaires, une dizaine de photos réelles (lui en intervention, le matériel, un rapport), et les questions-réponses. Puis une habitude à installer : demander l'avis à chaque client satisfait, et répondre à chacun. Douze avis, c'est peu pour tenir un bloc local ; trente, c'est solide." },
+        { id: 'P2', tag: 'Priorité', bg: '#fdeceb', fg: '#a3201a', effort: 'Le jour de la bascule',
+          titre: 'Migrer sans perdre les acquis',
+          texte: "Les sept redirections ci-dessus, la suppression des adresses en /wp/, un plan de site soumis à Google, et la faute du menu corrigée. Puis on surveille pendant trois semaines : une baisse passagère est normale, une baisse qui dure signale une redirection manquante." },
+        { id: 'P3', tag: 'Fort potentiel', bg: '#fff4e2', fg: '#8a5000', effort: '5 pages permanentes, une seule fois',
+          titre: 'Cinq pages de ville — hors du menu, atteignables par le pied de page',
+          texte: "Arras, Lens, Béthune, Saint-Pol-sur-Ternoise, Liévin. Elles n'entrent pas dans la navigation : le menu doit rester commercial, et cinq entrées de ville à côté des 12 diagnostics noieraient le visiteur. Google n'en a pas besoin — il lui faut un lien qu'il puisse suivre, pas une entrée de menu. Elles se rattachent donc au bloc « Communes desservies » de l'accueil et à la zone d'intervention du pied de page, où elles sont exactement à leur place pour un visiteur qui cherche sa ville. Une page de ville qui marche ne recopie pas la précédente en changeant le nom : elle parle du bâti local — les corons et l'habitat minier pour Lens et Liévin, le centre ancien d'Arras pour l'amiante et le plomb, les maisons de bourg non raccordées pour l'assainissement —, donne un délai d'intervention depuis Berles-Monchel et cite un chantier récent. Cinq pages honnêtes valent mieux que vingt pages clonées, que Google déclasse. Comptez une demi-journée d'écriture par page." },
+        { id: 'P4', tag: 'Fort potentiel', bg: '#fff4e2', fg: '#8a5000', effort: '4 articles de fond, puis au fil de l\u2019actualité',
+          titre: 'Le journal : répondre aux questions que les vendeurs tapent vraiment',
+          texte: "La page « actualités » existe déjà sur le site : il suffit de la reprendre. Quatre sujets à écrire en premier, et la matière est déjà là : la réforme du DPE 2026 et le gain de classe sans travaux, le calendrier d'interdiction de location, le prix réel d'un pack de diagnostics, la durée de validité de chaque document. Ce sont des articles qui ne périment pas — mieux vaut quatre solides qu'un flux tiède de deux par mois. Ensuite, un article quand l'actualité réglementaire bouge, deux ou trois fois l'an. Écrits comme Maxime l'explique au téléphone ; c'est aussi ce qui fait citer le site par les agences." },
+        { id: 'P5', tag: 'Structurel', bg: '#e8f1e4', fg: '#255c39', effort: 'Quelques appels',
+          titre: 'Être cité par les sites d\u2019ici',
+          texte: "Google juge la crédibilité locale aux citations : annuaires de diagnostiqueurs, chambre de commerce, réseaux d'agences partenaires, sites de notaires, associations de copropriétaires. L'objectif n'est pas le volume mais la cohérence : partout le même nom, la même adresse, le même téléphone que sur la fiche Google. Une adresse divergente coûte plus qu'un lien manquant." },
+        { id: 'P6', tag: 'À transmettre à Maxime', bg: '#ede9f6', fg: '#4b3a7a', effort: 'Dix minutes d\u2019ouverture, puis lecture à 3 mois',
+          titre: 'Ouvrir la Search Console, puis décider sur des chiffres',
+          texte: "C'est gratuit et ça demande les accès du propriétaire du domaine. Sans elle, personne ne sait sur quelles recherches le site apparaît — on avance au jugement. Une fois ouverte, on regarde à trois mois quelles requêtes rapportent des appels et lesquelles font seulement passer : c'est ce qui dira s'il faut une page « prix des diagnostics », une page par type de bien (appartement, maison de corons, immeuble), ou pousser davantage le volet professionnels. À demander en même temps que les accès de la fiche établissement." },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

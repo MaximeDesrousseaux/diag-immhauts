@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#f4f7f1;}
+  *{box-sizing:border-box;}
+  a{color:#1e5b34;text-decoration:underline;text-underline-offset:2px;}
+  a:hover{color:#4f9a45;}
+</style>
+</helmet>
+
+<div style="font-family:'Inter',sans-serif;color:#17331f;background:#f4f7f1;padding:clamp(16px,3vw,44px) clamp(12px,3vw,32px);">
+<div style="max-width:1060px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(20px,2.6vw,34px);">
+
+  <header style="background:#1e5b34;color:#f3f8ef;border-radius:18px;padding:clamp(22px,3vw,38px);display:flex;flex-direction:column;gap:14px;">
+    <span style="font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#a9d9a0;">Audit de code · 22 pages mesurées · remesuré le 18 septembre 2026</span>
+    <h1 style="font-family:'Manrope',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin:0;">Préparer un SCSS<br>qui tient debout</h1>
+    <p style="margin:0;max-width:680px;font-size:15.5px;line-height:1.6;color:#d6e6cf;">Ta question est la bonne&nbsp;: un SCSS n'est utile que s'il décrit un système déjà cohérent. J'ai donc mesuré le code des 22 pages avant de proposer quoi que ce soit — voici ce qu'il y a vraiment dedans, et l'architecture qui en découle.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px;">
+      <span style="background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;">37&nbsp;602 déclarations de style</span>
+      <span style="background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;">777 valeurs déjà alignées</span>
+      <span style="background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;">13 composants à définir</span>
+    </div>
+  </header>
+
+  <section style="background:#fff;border:2px solid #dce7d6;border-radius:16px;padding:clamp(18px,2.4vw,30px);display:flex;flex-direction:column;gap:14px;">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;margin:0;color:#1e5b34;">Mon avis, en bref</h2>
+    <p style="margin:0;font-size:15.5px;line-height:1.7;">Le site est en réalité <strong>très systématique</strong>&nbsp;: un seul motif de card, un seul bouton, une nav et un pied de page identiques partout. Ce qui manque, ce n'est pas la cohérence du design — c'est qu'elle n'est écrite nulle part&nbsp;: chaque valeur est recopiée à la main dans le balisage, donc elle dérive silencieusement.</p>
+    <p style="margin:0;font-size:15.5px;line-height:1.7;">Passer au SCSS est donc surtout un travail de <strong>nommage</strong>&nbsp;: 37&nbsp;602 déclarations se ramènent à une trentaine de décisions. Et la dérive n'est pas théorique — la mesure en a trouvé une, visible à l'œil nu, expliquée juste en dessous.</p>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <h2 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;margin:0;color:#1e5b34;">Ce que la mesure révèle</h2>
+      <span style="font-size:13.5px;color:#5c7a63;">Chiffres relevés dans le code, pas des estimations</span>
+    </div>
+
+    <article style="background:#fff;border:2px solid #cfe2c6;border-radius:14px;padding:18px clamp(16px,2vw,24px);display:flex;flex-direction:column;gap:13px;">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;">
+        <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1e5b34;">K1</span>
+        <span style="background:#1e5b34;color:#eafbe2;border-radius:999px;padding:5px 11px;font-size:12px;font-weight:700;">Corrigé · 777 valeurs alignées</span>
+      </div>
+      <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:19px;font-weight:800;line-height:1.25;">Deux palettes cohabitaient dans le code — une seule était réellement affichée</h3>
+      <p style="margin:0;font-size:15px;line-height:1.7;color:#2c4d38;">Chaque couleur du site s'écrit avec une valeur de secours&nbsp;: <em>utilise la variable, ou à défaut ce code hexadécimal</em>. Sur l'accueil, ces valeurs de secours étaient restées sur une palette abandonnée en début de projet (#59b529 au lieu de #7bc62f). À l'écran, rien ne se voyait — la variable était bien définie, donc le secours ne servait jamais. Mais en traduisant vers le SCSS, c'est le code écrit qui aurait été lu, pas le rendu.</p>
+      <div style="display:grid;grid-template-columns:{{ cols }};gap:12px;">
+        <div style="border:1px solid #cfe2c6;border-radius:12px;padding:14px;background:#f6fbf3;">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1e5b34;margin-bottom:10px;">Palette retenue · désormais partout</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">
+            <div style="display:flex;align-items:center;gap:9px;"><span style="width:20px;height:20px;border-radius:5px;background:#7bc62f;flex:0 0 auto;"></span>#7bc62f <span style="color:#5c7a63;">--tech</span></div>
+            <div style="display:flex;align-items:center;gap:9px;"><span style="width:20px;height:20px;border-radius:5px;background:#a3e04a;flex:0 0 auto;"></span>#a3e04a <span style="color:#5c7a63;">--techBright</span></div>
+            <div style="display:flex;align-items:center;gap:9px;"><span style="width:20px;height:20px;border-radius:5px;background:#1e5b34;flex:0 0 auto;"></span>#1e5b34 <span style="color:#5c7a63;">--forest</span></div>
+            <div style="display:flex;align-items:center;gap:9px;"><span style="width:20px;height:20px;border-radius:5px;background:#123f24;flex:0 0 auto;"></span>#123f24 <span style="color:#5c7a63;">--forestDeep</span></div>
+          </div>
+        </div>
+        <div style="border:1px solid #e4ece0;border-radius:12px;padding:14px;background:#fbfdf9;">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5c7a63;margin-bottom:10px;">Secours périmés · supprimés</div>
+          <div style="display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5c7a63;">
+            <div style="display:flex;align-items:center;gap:9px;"><span style="width:20px;height:20px;border-radius:5px;background:#59b529;flex:0 0 auto;opacity:.45;"></span><s>#59b529</s> <span>254 sur l'accueil</span></div>
+            <div style="display:flex;align-items:center;gap:9px;"><span style="width:20px;height:20px;border-radius:5px;background:#6dcc38;flex:0 0 auto;opacity:.45;"></span><s>#6dcc38</s> <span>et 9 défauts internes</span></div>
+            <div style="display:flex;align-items:center;gap:9px;"><span style="width:20px;height:20px;border-radius:5px;background:#123024;flex:0 0 auto;opacity:.45;"></span><s>#123024</s> <span>514 sur les 20 autres</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="margin:0;font-size:14.5px;line-height:1.7;color:#2c4d38;"><strong>Fait&nbsp;:</strong> 777 valeurs de secours alignées sur la palette retenue, dans les 21 pages. Le vert de référence est <strong>#7bc62f</strong> — il était déjà celui du rendu, et l'échantillonnage des illustrations le confirme (les verts clairs de <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">ill_actus.png</code> tombent sur #90c038 et #a8d848, à côté de #7bc62f et #a3e04a). En SCSS, le problème disparaît de toute façon par construction&nbsp;: une variable, pas de secours possible.</p>
+    </article>
+
+    <div style="display:grid;grid-template-columns:{{ cols }};gap:14px;">
+      <sc-for list="{{ constats }}" as="c" hint-placeholder-count="6">
+        <article style="background:#fff;border:2px solid #dce7d6;border-radius:14px;padding:18px clamp(16px,2vw,22px);display:flex;flex-direction:column;gap:10px;min-width:0;">
+          <div style="display:flex;align-items:baseline;gap:9px;">
+            <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;color:#1e5b34;">{{ c.id }}</span>
+            <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,32px);color:#17331f;letter-spacing:-0.02em;line-height:1;">{{ c.chiffre }}</span>
+          </div>
+          <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:16.5px;font-weight:800;line-height:1.3;">{{ c.titre }}</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.65;color:#5c7a63;">{{ c.texte }}</p>
+          <p style="margin:0;font-size:14.5px;line-height:1.65;color:#1e5b34;font-weight:600;">{{ c.cible }}</p>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;">
+      <h2 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;margin:0;color:#1e5b34;">Le socle&nbsp;: les valeurs qui deviennent des variables</h2>
+    </div>
+    <div style="background:#fff;border:2px solid #dce7d6;border-radius:16px;padding:clamp(18px,2.4vw,28px);display:flex;flex-direction:column;gap:20px;">
+      <sc-for list="{{ tokens }}" as="t" hint-placeholder-count="5">
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
+            <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:17px;font-weight:800;color:#1e5b34;">{{ t.titre }}</h3>
+            <span style="font-size:13px;color:#a3201a;font-weight:600;">{{ t.avant }}</span>
+            <span style="font-size:13px;color:#5c7a63;">→</span>
+            <span style="font-size:13px;color:#1e5b34;font-weight:700;">{{ t.apres }}</span>
+          </div>
+          <pre style="margin:0;background:#f7faf4;border:1px solid #e4ece0;border-radius:11px;padding:14px 16px;overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.75;color:#17331f;">{{ t.code }}</pre>
+          <p style="margin:0;font-size:14.5px;line-height:1.65;color:#5c7a63;">{{ t.note }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;margin:0;color:#1e5b34;">L'arborescence proposée</h2>
+    <div style="display:grid;grid-template-columns:{{ arboCols }};gap:16px;align-items:start;">
+      <pre style="margin:0;background:#123f24;color:#e7f3e1;border-radius:16px;padding:clamp(16px,2.2vw,22px);overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85;min-width:0;">scss/
+├─ abstracts/
+│  ├─ _tokens.scss      couleurs, type, espaces, rayons
+│  ├─ _mixins.scss      media, focus, survol de card, cta
+│  └─ _functions.scss   rem(), teinte()
+├─ base/
+│  ├─ _reset.scss
+│  ├─ _typographie.scss h1…h4, p, listes, liens
+│  └─ _utilitaires.scss .conteneur, .section
+├─ layout/
+│  ├─ _entete.scss      barre + nav + burger
+│  ├─ _pied.scss        4 colonnes + mentions
+│  └─ _hero.scss        3 variantes, pas plus
+├─ composants/
+│  ├─ _bouton.scss      .c-btn + 3 tailles + 2 styles
+│  ├─ _card.scss        .c-card + 4 déclinaisons
+│  ├─ _pastille.scss    .c-pastille
+│  ├─ _chiffre.scss     bandeau de stats
+│  ├─ _etapes.scss      les « 4 étapes »
+│  ├─ _faq.scss         accordéon
+│  ├─ _formulaire.scss  champs, select, popup
+│  ├─ _etiquette.scss   échelle DPE A→G
+│  ├─ _frise.scss       échéances datées
+│  └─ _article.scss     corps de texte long
+└─ pages/
+   ├─ _accueil.scss     ce qui n'existe qu'ici
+   ├─ _fiche.scss       le gabarit des 12 fiches
+   └─ _simulateur.scss  les écrans de questions</pre>
+      <div style="display:flex;flex-direction:column;gap:13px;min-width:0;">
+        <div style="border:2px solid #dce7d6;border-radius:14px;background:#fff;padding:16px 18px;">
+          <h3 style="margin:0 0 7px;font-family:'Manrope',sans-serif;font-size:16px;font-weight:800;color:#1e5b34;">Une seule règle de nommage</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.65;color:#5c7a63;"><code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">.c-card</code>, <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">.c-card__titre</code>, <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">.c-card--vignette</code>. Un préfixe <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">c-</code> pour les composants, <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">l-</code> pour les mises en page&nbsp;: dans un thème WordPress, ça évite les collisions avec le CSS du thème parent.</p>
+        </div>
+        <div style="border:2px solid #dce7d6;border-radius:14px;background:#fff;padding:16px 18px;">
+          <h3 style="margin:0 0 7px;font-family:'Manrope',sans-serif;font-size:16px;font-weight:800;color:#1e5b34;">Deux points de bascule, pas plus</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.65;color:#5c7a63;">Le site n'a que deux seuils&nbsp;: <strong>640&nbsp;px</strong> (téléphone) et <strong>900&nbsp;px</strong> (déplié). Ils sont déjà partout dans le code, appelés 1&nbsp;183 fois. Deux mixins suffisent&nbsp;: <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">@include phone</code> et <code style="background:#f0f4ec;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">@include foldable</code>.</p>
+        </div>
+        <div style="border:2px solid #dce7d6;border-radius:14px;background:#fff;padding:16px 18px;">
+          <h3 style="margin:0 0 7px;font-family:'Manrope',sans-serif;font-size:16px;font-weight:800;color:#1e5b34;">Le survol&nbsp;: 30 → 6</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.65;color:#5c7a63;">30 variantes de survol pour six comportements réels. Le plus fréquent (715 fois&nbsp;!) est l'item de menu du burger. Six mixins couvrent tout&nbsp;: lien de nav, item de burger, card cliquable, bouton vert, bouton fantôme, lien de pied de page.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;margin:0;color:#1e5b34;">À nettoyer avant de migrer</h2>
+    <div style="background:#fff;border:2px solid #dce7d6;border-radius:16px;padding:clamp(18px,2.4vw,28px);display:flex;flex-direction:column;gap:14px;">
+      <sc-for list="{{ nettoyage }}" as="n" hint-placeholder-count="4">
+        <div style="display:flex;gap:13px;align-items:flex-start;border-bottom:1px solid #f0f4ec;padding-bottom:13px;">
+          <span style="flex:0 0 auto;width:26px;height:26px;border-radius:999px;background:#eef5ea;border:1px solid #cfe2c6;color:#1e5b34;font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;">{{ n.num }}</span>
+          <div style="min-width:0;display:flex;flex-direction:column;gap:5px;">
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:9px;">
+              <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:16.5px;font-weight:800;color:#17331f;">{{ n.titre }}</h3>
+              <span style="flex:none;white-space:nowrap;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:{{ n.bg }};border:1px solid {{ n.bd }};color:{{ n.fg }};">{{ n.statut }}</span>
+            </div>
+            <p style="margin:0;font-size:14.5px;line-height:1.65;color:#5c7a63;">{{ n.texte }}</p>
+          </div>
+        </div>
+      </sc-for>
+      <p style="margin:0;font-size:14.5px;line-height:1.65;color:#5c7a63;">Ces cinq passes se font <strong>sur les maquettes</strong>, pas sur le site&nbsp;: elles rendent la traduction en SCSS mécanique au lieu d'être une réinterprétation. C'est là que se joue la propreté du résultat.</p>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px;">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:24px;font-weight:800;margin:0;color:#1e5b34;">Les échelles appliquées</h2>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#5c7a63;max-width:74ch;text-wrap:pretty;">Passes 3 et K6, appliquées aux 22 pages. Chaque valeur relevée a été ramenée au pas le plus proche — valeurs fixes d'abord, puis les bornes des formules fluides. La colonne de droite donne l'écart visuel maximal que cela produit&nbsp;: c'est la seule chose qui a bougé à l'écran.</p>
+
+    <div style="display:grid;grid-template-columns:{{ echCols }};gap:14px;">
+      <sc-for list="{{ echelles }}" as="e" hint-placeholder-count="3">
+        <div style="background:#fff;border:2px solid #dce7d6;border-radius:16px;padding:clamp(16px,2vw,22px);display:flex;flex-direction:column;gap:12px;min-width:0;">
+          <div>
+            <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:17px;font-weight:800;color:#1e5b34;">{{ e.titre }}</h3>
+            <p style="margin:5px 0 0;font-size:13.5px;line-height:1.6;color:#5c7a63;">{{ e.sous }}</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0;">
+            <div style="display:grid;grid-template-columns:1fr auto auto;gap:10px;padding-bottom:7px;border-bottom:1px solid #e6ebdd;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#7b8b72;">
+              <span>Valeurs actuelles</span>
+              <span style="text-align:right;">Pas</span>
+              <span style="text-align:right;">Écart</span>
+            </div>
+            <sc-for list="{{ e.lignes }}" as="l" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid #f0f4ec;">
+                <span style="min-width:0;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5c7a63;overflow-wrap:anywhere;">{{ l.de }}</span>
+                <span style="text-align:right;font-family:'Manrope',sans-serif;font-size:14px;font-weight:800;color:#17331f;white-space:nowrap;">{{ l.vers }}</span>
+                <span style="text-align:right;font-size:12.5px;color:{{ l.ecartFg }};white-space:nowrap;">{{ l.ecart }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#7b8b72;">{{ e.note }}</p>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background:#eef5ea;border:2px solid #cfe2c6;border-radius:16px;padding:clamp(16px,2vw,22px);display:flex;flex-direction:column;gap:9px;">
+      <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:16.5px;font-weight:800;color:#1e5b34;">Et le passage en rem</h3>
+      <p style="margin:0;font-size:14.5px;line-height:1.7;color:#4a6450;max-width:78ch;text-wrap:pretty;">Les huit pas de texte s'écrivent en <code style="background:#fff;padding:1px 5px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12.5px;">rem</code>, dérivés d'une taille de base unique. C'est ce qui rend possible le réglage de police du plugin&nbsp;: Source Sans 3 paraît 11&nbsp;% plus petite qu'Inter, et sa correction se fait alors en changeant <strong>une</strong> valeur au lieu de 2&nbsp;758. Sans cette conversion, le choix de police ne peut pas être proposé au client.</p>
+    </div>
+  </section>
+
+  <section style="background:#1e5b34;color:#f3f8ef;border-radius:18px;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:16px;">
+    <h2 style="font-family:'Manrope',sans-serif;font-size:22px;font-weight:800;margin:0;">Comment je procéderais</h2>
+    <div style="display:grid;grid-template-columns:{{ etapeCols }};gap:14px;">
+      <sc-for list="{{ etapes }}" as="e" hint-placeholder-count="4">
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:7px;min-width:0;">
+          <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;color:#a3e04a;">{{ e.num }}</span>
+          <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:16px;font-weight:800;line-height:1.3;">{{ e.titre }}</h3>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#d6e6cf;">{{ e.texte }}</p>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin:0;font-size:15px;line-height:1.7;">Une précision utile&nbsp;: les maquettes restent en styles écrits dans le balisage — c'est ce qui permet de les modifier en direct comme tu le fais depuis le début. Le SCSS est le <strong>livrable d'intégration</strong>, généré à partir d'elles, pas un remplacement.</p>
+    <div style="border-top:1px solid rgba(255,255,255,.18);padding-top:16px;display:flex;flex-direction:column;gap:9px;">
+      <h3 style="margin:0;font-family:'Manrope',sans-serif;font-size:16.5px;font-weight:800;">Le vert de référence est tranché</h3>
+      <p style="margin:0;font-size:15px;line-height:1.7;color:#d6e6cf;"><strong>#7bc62f</strong>, aligné sur les 21 pages — c'était déjà la couleur affichée, et les illustrations tombent dessus. L'étape&nbsp;1 peut donc démarrer&nbsp;: <code style="background:rgba(255,255,255,.14);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">_tokens.scss</code>, <code style="background:rgba(255,255,255,.14);padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:13px;">_mixins.scss</code>, puis les passes 2 à 4 de nettoyage.</p>
+    </div>
+  </section>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: 1200 };
+  componentDidMount() {
+    this.__on = () => this.setState({ w: window.innerWidth });
+    this.__on();
+    window.addEventListener('resize', this.__on);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.__on); }
+  renderVals() {
+    const narrow = this.state.w <= 860;
+    const V = {
+      cols: narrow ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1fr)',
+      arboCols: narrow ? 'minmax(0,1fr)' : 'max-content minmax(0,1fr)',
+      etapeCols: narrow ? 'minmax(0,1fr)' : 'repeat(4,minmax(0,1fr))',
+      constats: [
+        { id: 'K2', chiffre: '51', titre: 'couleurs écrites en dur', texte: "Pour une palette de 10 couleurs. Neuf de moins qu'au premier relevé, la suite étant des doublons du même vert ou du même gris à un ou deux chiffres près. Les 777 valeurs de secours périmées sont nettoyées (K1).", cible: '→ 10 variables, zéro hex dans le balisage' },
+        { id: 'K3', chiffre: '9', titre: 'tailles de police fixes', texte: "Ramenées de 28 à 9 : les 8 pas de l'échelle, plus une taille d'affichage (34 px, un seul titre). 1 250 valeurs réécrites dans les 22 pages. Restent 34 formules fluides, traitées avec K6.", cible: '→ fait' },
+        { id: 'K4', chiffre: '44', titre: 'signatures de bouton', texte: "Pour un seul bouton vert, décliné 156 fois. Les écarts portent uniquement sur le rembourrage et la taille du texte.", cible: '→ 1 composant, 3 tailles, 2 styles' },
+        { id: 'K5', chiffre: '476 Ko', titre: 'de nav et de pied de page recopiés', texte: "La même barre de navigation est écrite 22 fois (365 Ko), le même pied de page 22 fois (111 Ko). Sur 1,71 Mo de balisage total.", cible: '→ 2 gabarits inclus partout' },
+        { id: 'K6', chiffre: '78', titre: 'formules de taille fluide', texte: "Ramenées de 156 à 78 : bornes sur les échelles (872 réécrites, 10 supprimées), puis vitesses unifiées sur les rembourrages et les gouttières (393 réécrites). Les vitesses des titres restent distinctes — la hiérarchie en dépend.", cible: '→ fait' },
+        { id: 'K7', chiffre: '18', titre: 'ombres portées', texte: "Cinq d'entre elles font 95 % des usages. Les autres sont des variations accidentelles, nées d'un copier-coller.", cible: '→ 3 niveaux d\u2019élévation' },
+      ],
+      tokens: [
+        { titre: 'Couleurs', avant: '60 hex', apres: '10 variables', note: "Une seule source. Les nuances intermédiaires se calculent — plus besoin d'inventer un vert à mi-chemin.",
+          code: `$vert:        #7bc62f;   // à trancher (voir K1)
+$vert-clair:  #a3e04a;
+$foret:       #1e5b34;
+$foret-fonce: #123f24;
+$encre:       #17331f;
+$gris:        #5e6d55;
+$filet:       #e6ebdd;
+$fond:        #f5f8ef;
+$surface:     #ffffff;
+$ambre:       #e0a636;   // alertes réglementaires` },
+        { titre: 'Typographie', avant: '76 tailles', apres: '8 pas', note: "Manrope pour les titres, Inter pour le texte — c'est déjà le cas partout, il suffit de le nommer.",
+          code: `$t-xxl: clamp(30px, 4.4vw, 50px);  // h1 de hero
+$t-xl:  clamp(26px, 2.8vw, 38px);  // h2 de section
+$t-l:   clamp(20px, 2.1vw, 25px);  // h3
+$t-m:   17px;   // chapeau
+$t-base:15.5px; // texte courant
+$t-s:   14px;   // texte secondaire
+$t-xs:  13px;   // légende
+$t-xxs: 11.5px; // surtitre en capitales` },
+        { titre: 'Espaces et rayons', avant: '79 gaps · 29 rayons', apres: '6 + 4', note: "Le rayon 999 px (la pastille) et le rayon de card sont les deux seuls qui portent du sens. Le reste suivait l'humeur.",
+          code: `$e-1: 8px;   $e-2: 12px;  $e-3: 18px;
+$e-4: 26px;  $e-5: 38px;   $e-6: clamp(40px, 6vw, 72px);
+
+$r-s:      10px;   // champs, petits blocs
+$r-card:   18px;   // cards et panneaux
+$r-grand:  22px;   // blocs pleine largeur
+$r-pilule: 999px;  // boutons et pastilles` },
+        { titre: 'Élévations', avant: '17 ombres', apres: '3 niveaux', note: "Le niveau 1 est celui du survol des cards cliquables — la convention déjà en place sur le site.",
+          code: `$ombre-1: 0 16px 26px -20px rgba(18,48,36,.4);
+$ombre-2: 0 26px 44px -26px rgba(9,26,15,.4);
+$ombre-3: 0 34px 64px -30px rgba(9,26,15,.45);` },
+        { titre: 'Bascules', avant: '1 183 appels', apres: '2 mixins', note: "Exactement les deux formats déjà validés dans le projet. Aucun troisième seuil ne s'est avéré nécessaire.",
+          code: `$phone:    640px;
+$foldable: 900px;
+
+@mixin phone    { @media (max-width: #{$phone}) { @content; } }
+@mixin foldable { @media (min-width: #{$phone + 1}) and
+                       (max-width: #{$foldable}) { @content; } }` },
+      ],
+      nettoyage: [
+        // statut → couleurs appliquées plus bas
+        { num: '1', statut: 'Fait', titre: 'Aligner les valeurs de secours sur la palette', texte: "777 secours périmés et 9 défauts internes ramenés à la palette retenue, sur les 21 pages. Le rendu n'a pas bougé d'un pixel — c'est le code écrit qui dit désormais la vérité." },
+        { num: '2', statut: 'Fait', titre: 'Purger les largeurs figées héritées de l\u2019édition directe', texte: "Le premier relevé comptait toutes les dimensions en pixels — 1 769 au total — et concluait trop vite. Le tri par contexte montre que 1 767 sont légitimes : pastilles, filets de 22×2 px, socles d'icônes de 96 px, bouton d'appel de 58 px, décors en position absolue. Seuls 2 cas étaient de vrais artefacts d'édition directe, tous deux sur Mentions légales : un titre et un paragraphe portant une hauteur figée et un second max-width en pixels par-dessus celui en caractères. Supprimés." },
+        { num: '3', statut: 'Fait', titre: 'Arrondir les valeurs sur les échelles', texte: "2 985 valeurs réécrites dans les 22 pages : 1 250 tailles de texte sur 8 pas, 710 gouttières sur 7 pas, 1 025 rayons sur 5 valeurs. Les valeurs réglées à l'œil dans les heros verrouillés n'ont pas été touchées — elles vivent dans la logique, pas dans le balisage." },
+        { num: '4', statut: 'Fait', titre: 'Ramener les tailles fluides sur les échelles', texte: "872 formules clamp() réécrites, 10 supprimées (amplitude nulle), puis 393 vitesses unifiées : 156 formules → 78. Les bornes tombent sur les mêmes pas que les valeurs fixes, et chaque couple de bornes d'espace suit un rythme unique. Conservés volontairement : les 261 accents au-delà de 48 px et les vitesses des grands titres (7 formules, près de 100 titres) — la hiérarchie du hero en dépend." },
+      { num: '5', statut: 'Fait', titre: 'Supprimer les variantes non retenues', texte: "Cinq variantes de hero d'accueil, le choix de hero mobile, deux jeux de cards, le style d'étiquette DPE et trois illustrations de hero ont été supprimés. Restent quatre heros d'accueil et deux illustrations, tous destinés à devenir des réglages du plugin." },
+      ],
+      etapes: [
+        { num: 'Étape 1', titre: 'Le socle', texte: "Écrire _tokens et _mixins, puis les 4 passes de nettoyage sur les maquettes. Un jour de travail, et tout le reste en découle." },
+        { num: 'Étape 2', titre: 'Les composants', texte: "Bouton, card, pastille, formulaire, étapes, FAQ — chacun avec ses déclinaisons, vérifié sur les 3 formats." },
+        { num: 'Étape 3', titre: 'Nav, pied, hero', texte: "Les trois blocs partagés par les 22 pages. C'est le plus gros gain de volume du chantier." },
+        { num: 'Étape 4', titre: 'Les pages', texte: "Le gabarit de fiche (12 pages d'un coup), l'accueil, le simulateur, l'article. Les exceptions restantes, s'il en reste, sont documentées." },
+      ],
+    };
+    const ec = (v) => ({ ecart: v, ecartFg: v === '—' ? '#9aa894' : (parseFloat(v) >= 2 ? '#8a6412' : '#5c7a63') });
+    V.echCols = narrow ? 'minmax(0,1fr)' : 'repeat(2,minmax(0,1fr))';
+    V.echelles = [
+      {
+        titre: 'Texte — 8 pas',
+        sous: '28 valeurs fixes → 8 pas. Appliqué aux 22 pages.',
+        note: 'Appliqué : 1 250 valeurs réécrites, 89 % d\u2019entre elles à un demi-pixel près. Une seule taille d\u2019affichage subsiste hors échelle, 34 px, sur un unique titre.',
+        lignes: [
+          Object.assign({ de: '10,5 · 11 · 11,5', vers: '11 px' }, ec('0,5 px')),
+          Object.assign({ de: '12 · 12,5 · 13', vers: '12,5 px' }, ec('0,5 px')),
+          Object.assign({ de: '13,5 · 14 · 14,5', vers: '14 px' }, ec('0,5 px')),
+          Object.assign({ de: '15 · 15,5 · 16', vers: '15,5 px' }, ec('0,5 px')),
+          Object.assign({ de: '16,5 · 17 · 17,5', vers: '17 px' }, ec('0,5 px')),
+          Object.assign({ de: '18 · 19 · 20', vers: '19 px' }, ec('1 px')),
+          Object.assign({ de: '21 · 22 · 23 · 24', vers: '22 px' }, ec('2 px')),
+          Object.assign({ de: '25 · 26 · 28', vers: '26 px' }, ec('2 px'))
+        ]
+      },
+      {
+        titre: 'Espaces — 7 pas',
+        sous: '66 gouttières → 7 pas. Appliqué aux 22 pages.',
+        note: 'Le pas de 2 px est conservé à part : ce n\u2019est pas un espace mais un décalage de filet, utilisé 88 fois.',
+        lignes: [
+          Object.assign({ de: '3 · 5 · 6 · 7', vers: '4 px' }, ec('3 px')),
+          Object.assign({ de: '8 · 9 · 10', vers: '8 px' }, ec('2 px')),
+          Object.assign({ de: '11 · 12 · 13', vers: '12 px' }, ec('1 px')),
+          Object.assign({ de: '14 · 15 · 16 · 18', vers: '16 px' }, ec('2 px')),
+          Object.assign({ de: '20 · 22 · 24', vers: '24 px' }, ec('4 px')),
+          Object.assign({ de: '30 · 32 · 40 · 44', vers: '40 px' }, ec('10 px')),
+          Object.assign({ de: '52 · 56 · 64', vers: '56 px' }, ec('8 px'))
+        ]
+      },
+      {
+        titre: 'Tailles fluides — bornes sur l\u2019échelle',
+        sous: '156 formules → 78. Appliqué aux 22 pages.',
+        note: '* 9 pas d\u2019espace : les 7 valeurs fixes, plus 72 et 96 px pour les grands rembourrages de section, qui n\u2019existent qu\u2019en fluide. Vitesses unifiées : un seul rythme par couple de bornes, celui que suivait déjà la majorité des usages. Les titres gardent leurs rythmes propres — un titre de hero doit grandir plus vite qu\u2019un titre de section.',
+        lignes: [
+          Object.assign({ de: 'bornes de titre', vers: '5 pas', }, ec('4 px')),
+          Object.assign({ de: 'bornes de corps', vers: '8 pas' }, ec('2 px')),
+          Object.assign({ de: 'bornes d\u2019espace', vers: '9 pas *' }, ec('8 px')),
+          Object.assign({ de: 'amplitude nulle (10)', vers: 'valeur fixe' }, ec('—')),
+          Object.assign({ de: 'accents > 48 px (261)', vers: 'inchangés' }, ec('—')),
+          Object.assign({ de: 'vitesses d\u2019espace (393)', vers: '1 par couple' }, ec('14 px'))
+        ]
+      },
+      {
+        titre: 'Rayons — 5 valeurs + pilule',
+        sous: '23 rayons → 5 valeurs. Appliqué aux 22 pages.',
+        note: 'La pilule (999 px) est une intention, pas une valeur : elle ne rentre dans aucun pas. Les rayons de 34 et 44 px sont de grands blocs arrondis, ils gardent leur propre pas.',
+        lignes: [
+          Object.assign({ de: '2 · 3 · 4 · 5 · 6', vers: '4 px' }, ec('2 px')),
+          Object.assign({ de: '8 · 9 · 10 · 11 · 12 · 13', vers: '10 px' }, ec('3 px')),
+          Object.assign({ de: '14 · 15 · 16 · 18', vers: '16 px' }, ec('2 px')),
+          Object.assign({ de: '20 · 22 · 24 · 26 · 28', vers: '26 px' }, ec('6 px')),
+          Object.assign({ de: '34 · 44', vers: '44 px' }, ec('10 px')),
+          Object.assign({ de: '999', vers: 'pilule' }, ec('—'))
+        ]
+      }
+    ];
+    const tons = {
+      'Fait':   { bg: '#e8f5e5', bd: '#bcdcb4', fg: '#1e5b34' },
+      'Engagé': { bg: '#fdf3e0', bd: '#e8d3a6', fg: '#8a6412' },
+      'À faire':{ bg: '#f2f5ef', bd: '#dce7d6', fg: '#5c7a63' },
+    };
+    V.nettoyage = V.nettoyage.map(n => Object.assign({}, n, tons[n.statut] || tons['À faire']));
+    return V;
+  }
+}
+</script>
+</body>
+</html>

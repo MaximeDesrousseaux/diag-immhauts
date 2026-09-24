@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Outfit:wght@600;800&family=Space+Grotesk:wght@600;700&family=Archivo:wght@600;800&family=Instrument+Sans:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #f0f0f1; font-family: Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #2271b1; text-decoration: none; }
+  a:hover { color: #135e96; text-decoration: underline; }
+</style>
+</helmet>
+
+<div style="display:grid;grid-template-columns:160px minmax(0,1fr);min-height:100vh;color:#1d2327;font-size:13px;">
+
+  <aside style="background:#1d2327;color:#f0f0f1;padding:0 0 24px;min-width:0;">
+    <div style="display:flex;align-items:center;gap:8px;padding:12px 12px 14px;border-bottom:1px solid #2c3338;">
+      <div style="width:22px;height:22px;border-radius:5px;background:#7bc62f;flex:none;"></div>
+      <span style="font-size:12.5px;font-weight:600;color:#f0f0f1;">diag-immhauts.fr</span>
+    </div>
+    <nav style="display:flex;flex-direction:column;padding-top:8px;">
+      <sc-for list="{{ menu }}" as="m" hint-placeholder-count="7">
+        <div style="display:flex;align-items:center;gap:9px;padding:9px 12px;font-size:13.5px;color:{{ m.color }};background:{{ m.bg }};border-left:3px solid {{ m.bar }};font-weight:{{ m.weight }};">
+          <span style="width:16px;height:16px;border-radius:4px;background:{{ m.dot }};flex:none;"></span>
+          <span>{{ m.label }}</span>
+        </div>
+      </sc-for>
+    </nav>
+  </aside>
+
+  <main style="min-width:0;padding:0 0 60px;">
+    <div style="background:#1d2327;height:32px;display:flex;align-items:center;padding:0 14px;gap:16px;color:#c3c4c7;font-size:12.5px;">
+      <span>Diag Imm'Hauts</span>
+      <span style="color:#72777c;">Bonjour, Maxime</span>
+    </div>
+
+    <div style="padding:20px clamp(16px,3vw,34px) 0;max-width:1120px;">
+      <h1 style="margin:0;font-family:Manrope,sans-serif;font-size:23px;font-weight:600;line-height:1.3;color:#1d2327;">Personnalisation du site</h1>
+      <p style="margin:8px 0 0;font-size:13.5px;line-height:1.6;color:#50575e;max-width:74ch;">Ces réglages s'appliquent à l'ensemble du site. Ils ne modifient pas le contenu des pages&nbsp;: aucun texte ni aucune image n'est touché.</p>
+
+      <nav style="display:flex;flex-wrap:wrap;gap:0 4px;margin-top:22px;border-bottom:1px solid #c3c4c7;">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+          <a href="#" onClick="{{ t.pick }}" style="margin-bottom:-1px;padding:9px 16px;font-size:14px;font-weight:600;line-height:1.4;text-decoration:none;color:{{ t.color }};background:{{ t.bg }};border:1px solid #c3c4c7;border-bottom-color:{{ t.bb }};border-radius:3px 3px 0 0;" style-hover="background:#fff;color:#1d2327">{{ t.label }}</a>
+        </sc-for>
+      </nav>
+      <sc-if value="{{ tab_identite }}" hint-placeholder-val="{{ true }}">
+      <div style="margin-top:18px;">
+        <p style="margin:0 0 14px;font-size:13px;color:#646970;">S'applique à&nbsp;: toutes les pages.</p>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:16px;">
+        <section style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;">
+          <div style="padding:clamp(16px,2.4vw,26px);">
+            <h2 style="margin:0;font-family:Manrope,sans-serif;font-size:16px;font-weight:700;line-height:1.35;color:#1d2327;">Logo du site</h2>
+        <p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:#646970;max-width:70ch;">Trois logos au choix, affichés dans l'en-tête et le pied de page des 22 pages. Le réglage vaut pour tout le site.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px;max-width:920px;">
+          <sc-for list="{{ logoOpts }}" as="o" hint-placeholder-count="3">
+            <a href="#" onClick="{{ o.pick }}" style="display:block;padding:18px;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};text-decoration:none;">
+              <div style="position:relative;display:flex;align-items:center;justify-content:center;height:72px;background:#f6f7f7;border-radius:4px;padding:12px 16px;">
+                <div role="img" aria-label="{{ o.titre }}" style="width:100%;height:{{ o.h }};background:url('{{ o.img }}') center / contain no-repeat;"></div>
+                <sc-if value="{{ o.sel }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;top:6px;right:6px;display:inline-flex;align-items:center;background:#2271b1;color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;">Actif</span>
+                </sc-if>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:13px;">
+                <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+              </div>
+              <p style="margin:7px 0 0 23px;font-size:12.5px;line-height:1.55;color:#646970;">{{ o.desc }}</p>
+            </a>
+          </sc-for>
+        </div>
+      
+            </div>
+        </section>
+        <section style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;">
+          <div style="padding:clamp(16px,2.4vw,26px);">
+            <h2 style="margin:0;font-family:Manrope,sans-serif;font-size:16px;font-weight:700;line-height:1.35;color:#1d2327;">Forme des boutons</h2>
+        <p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:#646970;max-width:70ch;">S'applique à tous les boutons verts du site (21 pages) : demandes de rappel, liens vers les fiches, bouton du simulateur.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px;max-width:620px;">
+          <sc-for list="{{ btnOpts }}" as="o" hint-placeholder-count="2">
+            <a href="#" onClick="{{ o.pick }}" style="display:block;padding:18px;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};text-decoration:none;">
+              <div style="display:flex;align-items:center;justify-content:center;height:56px;background:#f6f7f7;border-radius:4px;">
+                <span style="display:inline-flex;align-items:center;gap:8px;background:#7bc62f;color:#123f24;font-family:Manrope,sans-serif;font-weight:800;font-size:13px;padding:11px 18px;border-radius:{{ o.radius }};">Demande de rappel</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:14px;">
+                <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      
+            </div>
+        </section>
+        <section style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;">
+          <div style="padding:clamp(16px,2.4vw,26px);">
+            <h2 style="margin:0;font-family:Manrope,sans-serif;font-size:16px;font-weight:700;line-height:1.35;color:#1d2327;">Polices de caractères</h2>
+        <p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:#646970;max-width:70ch;">Deux réglages indépendants&nbsp;: la police des titres et celle du texte courant. Ils s'appliquent aux 22 pages. Toutes les polices proposées sont hébergées sur le site&nbsp;: aucune donnée n'est envoyée à un service extérieur.</p>
+
+        <h3 style="margin:20px 0 0;font-size:13.5px;font-weight:700;color:#1d2327;">Titres</h3>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:12px;max-width:920px;">
+          <sc-for list="{{ titreOpts }}" as="o" hint-placeholder-count="4">
+            <a href="#" onClick="{{ o.pick }}" style="display:block;padding:15px;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};text-decoration:none;">
+              <div style="display:flex;align-items:center;justify-content:center;height:70px;background:#f6f7f7;border-radius:4px;padding:8px;">
+                <span style="font-family:{{ o.stack }};font-weight:800;font-size:25px;letter-spacing:-0.02em;color:#1e5b34;">Diagnostic</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">
+                <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+              </div>
+              <p style="margin:6px 0 0 23px;font-size:12.5px;line-height:1.5;color:#646970;">{{ o.desc }}</p>
+            </a>
+          </sc-for>
+        </div>
+
+        <h3 style="margin:24px 0 0;font-size:13.5px;font-weight:700;color:#1d2327;">Texte courant</h3>
+        <p style="margin:5px 0 0;font-size:12.5px;line-height:1.6;color:#787c82;max-width:70ch;">Chaque police a son propre dessin&nbsp;: à taille égale, certaines paraissent plus petites. Une correction de taille est appliquée automatiquement pour que le texte garde la même présence d'un jeu à l'autre.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:12px;max-width:920px;">
+          <sc-for list="{{ texteOpts }}" as="o" hint-placeholder-count="2">
+            <a href="#" onClick="{{ o.pick }}" style="display:block;padding:15px;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};text-decoration:none;">
+              <div style="min-height:70px;background:#f6f7f7;border-radius:4px;padding:11px 13px;">
+                <p style="margin:0;font-family:{{ o.stack }};font-size:{{ o.size }};line-height:1.55;color:#17331f;">Le diagnostic de performance énergétique est obligatoire avant toute vente ou mise en location.</p>
+              </div>
+              <p style="margin:8px 0 0;font-size:11.5px;color:#8c8f94;">{{ o.corr }}</p>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">
+                <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+              </div>
+              <p style="margin:6px 0 0 23px;font-size:12.5px;line-height:1.5;color:#646970;">{{ o.desc }}</p>
+            </a>
+          </sc-for>
+        </div>
+      
+            </div>
+        </section>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ tab_accueil }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:18px;">
+        <p style="margin:0 0 14px;font-size:13px;color:#646970;">S'applique à&nbsp;: page d’accueil uniquement.</p>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:16px;">
+        <section style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;">
+          <div style="padding:clamp(16px,2.4vw,26px);">
+            <h2 style="margin:0;font-family:Manrope,sans-serif;font-size:16px;font-weight:700;line-height:1.35;color:#1d2327;">Visuel du haut de page d'accueil</h2>
+        <p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:#646970;max-width:70ch;">Quatre présentations possibles du premier écran. Le texte, les chiffres et le bouton restent les mêmes&nbsp;: seule la mise en scène change.</p>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px;max-width:920px;">
+          <sc-for list="{{ heroOpts }}" as="o" hint-placeholder-count="4">
+            <a href="#" onClick="{{ o.pick }}" style="display:flex;flex-direction:column;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};overflow:hidden;text-decoration:none;">
+              <div style="position:relative;aspect-ratio:1.9;background:#eef0ee url('{{ o.img }}') center center / 100% auto no-repeat;border-bottom:1px solid #dcdcde;">
+                <sc-if value="{{ o.sel }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;top:8px;right:8px;display:inline-flex;align-items:center;gap:5px;background:#2271b1;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;">Actif</span>
+                </sc-if>
+              </div>
+              <div style="padding:13px 15px 15px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                  <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+                </div>
+                <p style="margin:7px 0 0 23px;font-size:12.5px;line-height:1.55;color:#646970;">{{ o.desc }}</p>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      
+            </div>
+        </section>
+        <section style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;">
+          <div style="padding:clamp(16px,2.4vw,26px);">
+            <h2 style="margin:0;font-family:Manrope,sans-serif;font-size:16px;font-weight:700;line-height:1.35;color:#1d2327;">Bloc «&nbsp;Le détail&nbsp;» de l'accueil</h2>
+        <p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:#646970;max-width:70ch;">La grille des 12 diagnostics, sous «&nbsp;Nos prestations&nbsp;». Les liens, les illustrations et le bouton «&nbsp;Vérifier mon bien&nbsp;» restent les mêmes&nbsp;: seule la présentation change.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px;max-width:920px;">
+          <sc-for list="{{ detailOpts }}" as="o" hint-placeholder-count="3">
+            <a href="#" onClick="{{ o.pick }}" style="display:block;padding:12px;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};text-decoration:none;">
+              <div style="position:relative;aspect-ratio:1.56;background:#fff url('{{ o.img }}') center top / 100% auto no-repeat;border:1px solid #e6ebdd;border-radius:4px;">
+                <sc-if value="{{ o.sel }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;top:8px;right:8px;display:inline-flex;align-items:center;background:#2271b1;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;">Actif</span>
+                </sc-if>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:13px;">
+                <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+              </div>
+              <p style="margin:7px 0 0 23px;font-size:12.5px;line-height:1.55;color:#646970;">{{ o.desc }}</p>
+            </a>
+          </sc-for>
+        </div>
+      
+            </div>
+        </section>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ tab_interieures }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:18px;">
+        <p style="margin:0 0 14px;font-size:13px;color:#646970;">S'applique à&nbsp;: fiches, nos diagnostics, simulateur….</p>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:16px;">
+        <section style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;">
+          <div style="padding:clamp(16px,2.4vw,26px);">
+            <h2 style="margin:0;font-family:Manrope,sans-serif;font-size:16px;font-weight:700;line-height:1.35;color:#1d2327;">Décor du site (hauts de page)</h2>
+        <p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:#646970;max-width:70ch;">Le fond du premier écran des pages intérieures (fiches, Nos diagnostics, simulateur, professionnels, actualités, contact). L'accueil et «&nbsp;Qui suis-je&nbsp;» ont leur propre décor.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px;max-width:620px;">
+          <sc-for list="{{ decorOpts }}" as="o" hint-placeholder-count="2">
+            <a href="#" onClick="{{ o.pick }}" style="display:block;padding:14px;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};text-decoration:none;">
+              <div style="position:relative;aspect-ratio:2.4;background:{{ o.thumb }};border:1px solid #e6ebdd;border-radius:4px;">
+                <sc-if value="{{ o.sel }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;top:8px;right:8px;display:inline-flex;align-items:center;background:#2271b1;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;">Actif</span>
+                </sc-if>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:13px;">
+                <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+              </div>
+              <p style="margin:7px 0 0 23px;font-size:12.5px;line-height:1.55;color:#646970;">{{ o.desc }}</p>
+            </a>
+          </sc-for>
+        </div>
+      
+            </div>
+        </section>
+        <section style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;">
+          <div style="padding:clamp(16px,2.4vw,26px);">
+            <h2 style="margin:0;font-family:Manrope,sans-serif;font-size:16px;font-weight:700;line-height:1.35;color:#1d2327;">Entrées du haut de page «&nbsp;Nos diagnostics&nbsp;»</h2>
+        <p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:#646970;max-width:70ch;">Les trois raccourcis du premier écran (Vente &amp; location, Copropriétés, Audit énergétique). Les liens et les textes restent les mêmes&nbsp;: seule la présentation change.</p>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px;max-width:920px;">
+          <sc-for list="{{ entreeOpts }}" as="o" hint-placeholder-count="2">
+            <a href="#" onClick="{{ o.pick }}" style="display:flex;flex-direction:column;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};overflow:hidden;text-decoration:none;">
+              <div style="position:relative;aspect-ratio:2.25;background:#1e5b34 url('{{ o.img }}') left center / cover no-repeat;border-bottom:1px solid #dcdcde;">
+                <sc-if value="{{ o.sel }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;top:8px;right:8px;display:inline-flex;align-items:center;gap:5px;background:#2271b1;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;">Actif</span>
+                </sc-if>
+              </div>
+              <div style="padding:13px 15px 15px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                  <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+                </div>
+                <p style="margin:7px 0 0 23px;font-size:12.5px;line-height:1.55;color:#646970;">{{ o.desc }}</p>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      
+            </div>
+        </section>
+        <section style="background:#fff;border:1px solid #c3c4c7;border-radius:4px;">
+          <div style="padding:clamp(16px,2.4vw,26px);">
+            <h2 style="margin:0;font-family:Manrope,sans-serif;font-size:16px;font-weight:700;line-height:1.35;color:#1d2327;">Bloc «&nbsp;De votre appel au rapport, en 4 étapes&nbsp;»</h2>
+        <p style="margin:6px 0 0;font-size:13px;line-height:1.6;color:#646970;max-width:70ch;">Ce bloc apparaît sur les 12 fiches diagnostic, sur «&nbsp;Nos diagnostics&nbsp;» et sur le simulateur. Le réglage vaut pour les 14 pages en même temps.</p>
+
+        <h3 style="margin:20px 0 0;font-size:13.5px;font-weight:700;color:#1d2327;">Disposition sur ordinateur</h3>
+        <p style="margin:5px 0 0;font-size:12.5px;line-height:1.6;color:#787c82;max-width:70ch;">Sur mobile et sur tablette, les deux dispositions donnent le même rendu&nbsp;: les quatre étapes s'empilent le long d'un filet vertical.</p>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-top:12px;max-width:660px;">
+          <sc-for list="{{ etapeOpts }}" as="o" hint-placeholder-count="2">
+            <a href="#" onClick="{{ o.pick }}" style="display:block;padding:14px;border:{{ o.border }};border-radius:6px;background:{{ o.bg }};box-shadow:{{ o.shadow }};text-decoration:none;">
+              <div style="aspect-ratio:{{ o.ratio }};background:#fff url('{{ o.img }}') center center / 100% auto no-repeat;border:1px solid #e6ebdd;border-radius:4px;"></div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:13px;">
+                <span style="width:15px;height:15px;border-radius:50%;border:{{ o.dotBorder }};background:{{ o.dotBg }};flex:none;box-shadow:{{ o.dotInner }};"></span>
+                <span style="font-size:13.5px;font-weight:600;color:#1d2327;">{{ o.titre }}</span>
+              </div>
+              <p style="margin:7px 0 0 23px;font-size:12.5px;line-height:1.55;color:#646970;">{{ o.desc }}</p>
+            </a>
+          </sc-for>
+        </div>
+
+      
+            </div>
+        </section>
+        </div>
+      </div>
+      </sc-if>
+
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:22px;">
+        <a href="#" onClick="{{ save }}" style="display:inline-flex;align-items:center;background:#2271b1;color:#fff;font-size:13.5px;font-weight:500;padding:9px 16px;border-radius:3px;text-decoration:none;" style-hover="background:#135e96">Enregistrer les modifications</a>
+        <a href="Diag Imm'Hauts - Accueil.dc.html" target="_blank" style="font-size:13.5px;">Voir le résultat sur le site ↗</a>
+        <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}">
+          <span style="display:inline-flex;align-items:center;gap:7px;font-size:13px;color:#1e5b34;background:#edfaef;border:1px solid #a7d5b4;border-radius:3px;padding:7px 12px;">Réglages enregistrés.</span>
+        </sc-if>
+      </div>
+
+      <p style="margin:26px 0 0;font-size:12.5px;line-height:1.6;color:#787c82;max-width:76ch;border-top:1px solid #dcdcde;padding-top:14px;">Maquette de la page d'administration du plugin <strong style="font-weight:600;">diag-immhauts-core</strong> — sert de spécification. Les valeurs sont stockées une seule fois pour tout le site&nbsp;; les pages n'en gardent aucune copie.</p>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;heroActif&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;terrils-boutons&quot;,&quot;terrils-barre&quot;,&quot;max-bandeau&quot;,&quot;sansBG&quot;],&quot;default&quot;:&quot;terrils-boutons&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;},&quot;logoSite&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;toitures&quot;,&quot;actuel&quot;,&quot;terrils&quot;],&quot;default&quot;:&quot;toitures&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;},&quot;decorHero&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;terrils&quot;,&quot;grille&quot;],&quot;default&quot;:&quot;terrils&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;},&quot;detailStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ouvert&quot;,&quot;clair&quot;,&quot;damier&quot;],&quot;default&quot;:&quot;ouvert&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;},&quot;entreesHero&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;sommaire&quot;,&quot;cartes-blanches&quot;],&quot;default&quot;:&quot;sommaire&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;},&quot;formeBoutons&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pilule&quot;,&quot;arrondi&quot;],&quot;default&quot;:&quot;pilule&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;},&quot;policeTitre&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;manrope&quot;,&quot;outfit&quot;,&quot;space-grotesk&quot;,&quot;archivo&quot;],&quot;default&quot;:&quot;manrope&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;},&quot;policeTexte&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;inter&quot;,&quot;instrument-sans&quot;,&quot;source-sans-3&quot;],&quot;default&quot;:&quot;inter&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Maquette&quot;}}">
+class Component extends DCLogic {
+  state = { hero: null, boutons: null, etapes: null, entrees: null, logo: null, detail: null, decor: null, policeTitre: null, policeTexte: null, saved: false, tab: 'identite' };
+
+  __radio(sel) {
+    return sel
+      ? { border: '2px solid #2271b1', bg: '#fff', shadow: '0 0 0 1px #2271b1', dotBorder: '1px solid #2271b1', dotBg: '#2271b1', dotInner: 'inset 0 0 0 3px #fff' }
+      : { border: '1px solid #c3c4c7', bg: '#fff', shadow: 'none', dotBorder: '1px solid #8c8f94', dotBg: '#fff', dotInner: 'none' };
+  }
+
+  renderVals() {
+    const hero = this.state.hero || this.props.heroActif || 'terrils-boutons';
+    const boutons = this.state.boutons || this.props.formeBoutons || 'pilule';
+    const etapes = this.state.etapes || this.props.etapesDispo || 'en-ligne';
+    const logo = this.state.logo || this.props.logoSite || 'toitures';
+    const entrees = this.state.entrees || this.props.entreesHero || 'sommaire';
+    const pick = (k, v) => (e) => { if (e) e.preventDefault(); const s = {}; s[k] = v; s.saved = false; this.setState(s); };
+
+    const heroDefs = [
+      ['terrils-boutons', 'Décor de collines, deux boutons', 'La présentation actuelle : deux boutons côte à côte, pas de formulaire dans le visuel.', 'uploads/terrils-bouton.jpg'],
+      ['terrils-barre', 'Décor de collines, barre de rappel', 'Même décor, mais le formulaire de rappel occupe toute la largeur en bas du visuel.', 'uploads/terrils-barre.jpg'],
+      ['max-bandeau', 'Photo de Maxime', 'Votre photo à droite et le formulaire en bandeau. Met la personne en avant plutôt que le territoire.', 'uploads/max-bandeau.jpg'],
+      ['sansBG', 'Sans décor, formulaire à droite', 'Fond vert uni, formulaire complet à droite. La version la plus sobre et la plus rapide à charger.', 'uploads/sans-bg.jpg']
+    ];
+    const heroOpts = heroDefs.map(([id, titre, desc, img]) => Object.assign(
+      { titre, desc, img, sel: hero === id, pick: pick('hero', id) }, this.__radio(hero === id)
+    ));
+
+    const btnOpts = [
+      Object.assign({ titre: 'Pilule (arrondi complet)', radius: '999px', pick: pick('boutons', 'pilule') }, this.__radio(boutons === 'pilule')),
+      Object.assign({ titre: 'Coins arrondis', radius: '10px', pick: pick('boutons', 'arrondi') }, this.__radio(boutons === 'arrondi'))
+    ];
+
+    const titre = this.state.policeTitre || this.props.policeTitre || 'manrope';
+    const texte = this.state.policeTexte || this.props.policeTexte || 'inter';
+    const titreDefs = [
+      ['manrope', 'Manrope', 'Le jeu actuel du site.', "'Manrope', sans-serif"],
+      ['outfit', 'Outfit', 'Plus géométrique, contours plus doux.', "'Outfit', sans-serif"],
+      ['space-grotesk', 'Space Grotesk', 'Plus technique, un peu plus étroit.', "'Space Grotesk', sans-serif"],
+      ['archivo', 'Archivo', 'Plus dense et plus affirmé.', "'Archivo', sans-serif"]
+    ];
+    const titreOpts = titreDefs.map(([id, t, d, stack]) => Object.assign(
+      { titre: t, desc: d, stack, pick: pick('policeTitre', id) }, this.__radio(titre === id)
+    ));
+    // facteur de correction : égalise la présence visuelle (hauteur d'x) entre les jeux
+    const texteDefs = [
+      ['inter', 'Inter', 'Le jeu actuel du site. Très lisible sur écran.', "'Inter', sans-serif", 100],
+      ['instrument-sans', 'Instrument Sans', 'Un peu plus chaleureuse, lettres légèrement plus étroites.', "'Instrument Sans', sans-serif", 104],
+      ['source-sans-3', 'Source Sans 3', 'La plus humaine des trois, confortable en lecture longue.', "'Source Sans 3', sans-serif", 112]
+    ];
+    const texteOpts = texteDefs.map(([id, t, d, stack, pct]) => Object.assign(
+      {
+        titre: t, desc: d, stack, pick: pick('policeTexte', id),
+        size: (13 * pct / 100).toFixed(2) + 'px',
+        corr: pct === 100 ? 'Taille de référence' : 'Corrigée à ' + pct + ' %'
+      }, this.__radio(texte === id)
+    ));
+
+    const etapeOpts = [
+      Object.assign({
+        titre: 'Les 4 étapes en ligne',
+        desc: 'Les illustrations au-dessus, les quatre cartes alignées en dessous.',
+        img: 'screenshots/admin/etapes-en-ligne-v2.png', ratio: '2.37',
+        pick: pick('etapes', 'en-ligne')
+      }, this.__radio(etapes === 'en-ligne')),
+      Object.assign({
+        titre: 'Deux colonnes',
+        desc: 'Une grande illustration à gauche, les quatre étapes en damier à droite. Plus haut, plus illustré.',
+        img: 'screenshots/admin/etapes-deux-colonnes-v2.png', ratio: '1.98',
+        pick: pick('etapes', 'deux-colonnes')
+      }, this.__radio(etapes === 'deux-colonnes'))
+    ];
+
+    const logoOpts = [
+      ['toitures', 'Ancien logo mis à jour', 'Le logo actuel redessiné en vectoriel, aux couleurs de la charte.', 'uploads/logo-toitures.svg', '36px'],
+      ['actuel', 'Ancien logo', 'Le logo du site actuellement en ligne.', 'uploads/logo-diag.png', '36px'],
+      ['terrils', 'Nouveau logo', 'Les deux terrils du bassin minier sous le sillon : terril avant en vert clair.', 'uploads/logo-terrils-nav.svg', '48px']
+    ].map(([id, titre, desc, img, h]) => Object.assign({ titre, desc, img, h, sel: logo === id, pick: pick('logo', id) }, this.__radio(logo === id)));
+
+    const decor = this.state.decor || this.props.decorHero || 'terrils';
+    const decorOpts = [
+      ['terrils', 'Terrils', 'Le paysage des terrils en grand, l\u2019herbe sert de support à l\u2019illustration de chaque page.', "#1f5c38 url('screenshots/admin/decor-terrils.png') center / cover no-repeat"],
+      ['grille', 'Lignes graphiques', 'L\u2019ancien décor : fond vert uni, lignes isométriques et halos lumineux.', "#1e5b34 url('screenshots/admin/decor-lignes.png') center / cover no-repeat"]
+    ].map(([id, titre, desc, thumb]) => Object.assign({ titre, desc, thumb, sel: decor === id, pick: pick('decor', id) }, this.__radio(decor === id)));
+    const detail = this.state.detail || this.props.detailStyle || 'ouvert';
+    const detailOpts = [
+      ['ouvert', 'Cards blanches, pas de background', 'Aucun panneau : les 12 cartes blanches à filet vert clair sont posées directement sur le fond de la page. Le plus léger, dans la continuité des cards de l\u2019accueil.', 'screenshots/admin/detail-ouvert-v4.png', '1.775'],
+      ['clair', 'Panneau blanc, tuiles vert pâle', 'Un grand panneau blanc à filet fin regroupe les 12 diagnostics sur des tuiles vert très pâle. Au survol, la tuile passe en blanc avec un filet vert.', 'screenshots/admin/detail-clair-v4.png', '1.575'],
+      ['damier', 'Damier blanc / vert clair', 'Petites cartes à bordure vert foncé de 2 px, en alternance blanc / vert clair, flèche à côté du nom. Le plus structuré, reprend le standard des grandes cards.', 'screenshots/admin/detail-damier-v4.png', '1.78']
+    ].map(([id, titre, desc, img, ratio]) => Object.assign({ titre, desc, img, ratio, sel: detail === id, pick: pick('detail', id) }, this.__radio(detail === id)));
+
+    const entreeOpts = [
+      ['sommaire', 'Sommaire', 'Trois lignes séparées par un filet, sans cadre. Titres plus grands, flèche dans un cercle. Plus léger, laisse respirer l\u2019illustration.', 'screenshots/admin/entrees-sommaire-v2.png'],
+      ['cartes-blanches', 'Cartes blanches', 'Trois cartes blanches pleines, numéro vert et flèche dans une pastille verte. Plus visibles, invitent davantage au clic.', 'screenshots/admin/entrees-cartes-blanches-v2.png']
+    ].map(([id, titre, desc, img]) => Object.assign({ titre, desc, img, sel: entrees === id, pick: pick('entrees', id) }, this.__radio(entrees === id)));
+
+    const menuDefs = [
+      ['Tableau de bord', false], ['Articles', false], ['Médias', false], ['Pages', false],
+      ['Actualités', false], ['Diag Imm\u2019Hauts', true], ['Réglages', false]
+    ];
+    const menu = menuDefs.map(([label, on]) => ({
+      label,
+      color: on ? '#fff' : '#f0f0f1',
+      bg: on ? '#2271b1' : 'transparent',
+      bar: on ? '#7bc62f' : 'transparent',
+      weight: on ? '600' : '400',
+      dot: on ? 'rgba(255,255,255,.55)' : 'rgba(240,240,241,.32)'
+    }));
+
+    const tab = this.state.tab || 'identite';
+    const tabs = [['identite', 'Identité du site'], ['accueil', 'Accueil'], ['interieures', 'Pages intérieures']].map(([id, label]) => ({
+      label, color: tab === id ? '#1d2327' : '#50575e', bg: tab === id ? '#f0f0f1' : '#dcdcde', bb: tab === id ? '#f0f0f1' : '#c3c4c7',
+      pick: (e) => { if (e) e.preventDefault(); this.setState({ tab: id }); }
+    }));
+    return {
+      tabs, tab_identite: tab === 'identite', tab_accueil: tab === 'accueil', tab_interieures: tab === 'interieures',
+      menu, heroOpts, btnOpts, etapeOpts, entreeOpts, logoOpts, detailOpts, decorOpts, titreOpts, texteOpts,
+      saved: this.state.saved,
+      save: (e) => { if (e) e.preventDefault(); this.setState({ saved: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
