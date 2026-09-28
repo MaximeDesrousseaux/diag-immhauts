@@ -62,6 +62,7 @@ Pièges à ne pas réintroduire :
   verts de la charte avec elle (fondu 420 ms). Un `<img>` ne saurait pas changer de couleur.
 En WP c'est un **réglage global** de plus (comme `formeBoutons` et `etapesDispo`) : une valeur pour
 tout le site, lue par le partial du header.
+Cheminée soudée au chevron droit (tracé `M290 34 L290 14 L324 9 L324 66 Z`, sa base plonge dans le chevron). Favicon : `favicon.svg` / `favicon-32.png` / `apple-touch-icon.png`, pastille vert forêt.
 `Logo - 4 propositions.dc.html` = la page d'exploration (4 tours, 4b-charte retenue).
 
 ## Champ « Vérifier ma commune » (accueil, section `#zones`)
@@ -180,6 +181,9 @@ l'illustration sur l'herbe. `Qui suis-je` : tweak `decorHero` (`terrils` | `actu
 - Illustrations de hero des fiches en bureau réduites de 15 % ; DTG et Professionnels à 440 px (déplié 92 %).
 - `Nos diagnostics` déplié : illustration `heroIllTx: -8%`, `heroPadB: 110px` (pastilles « sommaire » de 76 px).
 - Attention : certaines sources contiennent des espaces insécables (`)\u00a0?`) — utiliser des regex `\s` pour les remplacements.
+
+## Illustrations des diagnostics — normalisées
+`img/diag_<clé>.webp` (12) : 800×640, orientation cuite, poids visuel égal (réf. DPE des cards liées). Plus de `scaleX(-1)` / `_plinth` / `_illTune` / `_k` par fichier — une taille par contexte. Heros fiches 370/326 px. Heros DPE et Audit inchangés.
 
 ## Images optimisées (WebP)
 Une seule version par illustration de diagnostic : les `_ssfond` (les `_hero` / `_v2` / `_v3` doublons en miroir ont été retirés du paquet) ; dans les heros des fiches, `scale:-1 1` sur l'`<img>` rend l'orientation d'origine. Pictos 4 étapes et cards liées : chemins `img/…webp` construits en JS (plus aucun `uploads/*.png`).

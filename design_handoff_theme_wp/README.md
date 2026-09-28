@@ -1,5 +1,14 @@
 # Passation : thème WordPress Diag Imm'Hauts
 
+## Bloc « rappel » (avant le footer)
+Deux boutons : appel + formulaire. **Bureau et tablette** : le formulaire (demande de rappel / devis) est le bouton principal vert, placé en premier ; « Appeler le 06… » est le secondaire (contour blanc). **Téléphone** : l'ordre s'inverse, l'appel passe en premier avec le style principal. Boutons secondaires : 26 px de rembourrage horizontal minimum (l'icône qui apparaît au survol doit avoir de la place).
+
+## Illustrations des diagnostics — jeu normalisé
+12 fichiers `img/diag_<clé>.webp` (dpe, audit, amiante, plomb, elec, gaz, termites, merule, erp, mesurage, assainissement, dtg) : toile **800 × 640 transparente**, objet détouré, centré, **orientation déjà appliquée** (tous tournés vers le bas-gauche, comme le DPE) et **poids visuel égalisé** (même surface apparente, référence : le DPE des cards « Souvent réalisés avec »). Conséquence : **aucun miroir CSS, aucun coefficient de taille par fichier** — une seule taille par contexte (cards : boîte carrée en `contain` ; heros des fiches : 370 px bureau / 326 px tablette / 100 % de la colonne sur téléphone). Les heros de DPE et d'Audit gardent leur illustration dédiée (`ill_dpe_v6`, `ill_audit_hero`).
+
+## Favicon
+`favicon.svg` (pastille vert forêt arrondie, chevron gauche blanc, chevron droit + cheminée en `--tech`), `favicon-32.png`, `apple-touch-icon.png` (180 px), à la racine du paquet. En WP : **Apparence › Personnaliser › Identité du site › Icône du site** avec le PNG 512 px à générer depuis le SVG, ou balises `<link rel="icon">` dans `header.php`.
+
 ## Vue d'ensemble
 Refonte complète du site de **Diag Imm'Hauts** (diagnostiqueur immobilier indépendant, Maxime Dillies, Artois / Pas-de-Calais). Le site passe de 6 à 22 pages : accueil, page catalogue, 12 fiches diagnostics, simulateur, page professionnels, journal d'actualités (index + 2 articles), qui suis-je, contact/devis, mentions légales. Une page d'options dans l'admin WP pilote quelques variantes d'apparence.
 
@@ -93,7 +102,7 @@ Gouttières et marges : **4 · 8 · 12 · 16 · 24 · 40 · 56** px (+ 72 · 96 
   - crans de pavé tactile regroupés par fenêtres de 140 ms ;
   - transition CSS de 420 ms `cubic-bezier(.4,0,.2,1)`.
 - **Un seul état fait foi (`solid`)**, réconcilié à chaque image : si `scrollY <= 0`, la nav redevient transparente, car aucun événement `scroll` n'est garanti au retour en haut. Burger ouvert : nav forcée en blanc.
-- **Item de la page en cours :** gras (600), **même couleur que les autres items** : blanc sur nav transparente, vert foncé (couleur héritée de la nav) sur nav blanche — jamais `--tech`. Items de 1er niveau seulement ; dans les menus déroulants, rien ne change (sinon blanc sur blanc).
+- **Item de la page en cours :** gras (600), **même couleur que les autres items** : blanc sur nav transparente, vert foncé (couleur héritée de la nav) sur nav blanche — jamais `--tech`. Items de 1er niveau seulement ; dans les menus déroulants, rien ne change (sinon blanc sur blanc). **Pas de filet de survol** sur l'item de la page en cours (`[aria-current="page"]::after { display:none }`) — on y est déjà.
 - **Carrousel des avis (accueil) :** défilement horizontal à aimantation, cards jusqu'aux bords du contenu (inchangé). En bureau et tablette, deux flèches **sous** le carrousel, alignées à droite : chevrons blancs de 22 px sans fond ni contour (zone cliquable 44 px), vert clair au survol. En début de liste la flèche gauche est grisée (opacité 0,3, désactivée), idem pour la droite en fin de liste. Un clic avance d'une card. Masquées sur téléphone.
 - **Survol sur nav blanche :** aucun changement de couleur, seul un filet vert clair glisse sous l'item. Idem sur le numéro de téléphone.
 - **Menus déroulants :**
@@ -119,7 +128,7 @@ Gouttières et marges : **4 · 8 · 12 · 16 · 24 · 40 · 56** px (+ 72 · 96 
 ### Décor des heros (terrils)
 - **19 pages intérieures** (toutes sauf Accueil et Qui suis-je) :
   - image : `img/hero_bg_sans_maison_large.webp` ;
-  - **bureau : taille et position FIXES**, indépendantes de la largeur de fenêtre : `1655px auto`, calée à `calc(50% + 190px) 82%` — le bord gauche de l'image est à 637 px à gauche du centre du contenu (cadrage de référence : fenêtre de 1 273 px). Au-delà d'environ 1 290 px, un fondu de 120 px vers `#0b381e` masque le bord gauche de l'image ; au-delà de 2 020 px, idem à droite ;
+  - **bureau : taille et position FIXES**, indépendantes de la largeur de fenêtre : `1655px auto`, calée à `calc(50% + 190px) max(-280px, 82%)` — le `max()` empêche le haut de l'image de remonter au-dessus de −280 px sur les heros courts, pour que le sommet des terrils reste **toujours sous les textes de la nav transparente** (référence : DPE et Audit) — le bord gauche de l'image est à 637 px à gauche du centre du contenu (cadrage de référence : fenêtre de 1 273 px). Au-delà d'environ 1 290 px, un fondu de 120 px vers `#0b381e` masque le bord gauche de l'image ; au-delà de 2 020 px, idem à droite ;
   - déplié : `max(130%, 1180px) auto`, calée à `0% 82%` ;
   - mobile : `auto 760px`, calée à `right -545px top calc(-249px + var(--nvH))`, fond de secours `#0b381e`.
 - **Voiles** : un voile `--forestDeep`, de 80 % à gauche jusqu'à 0 à 60 % de la largeur, plus un fondu en bas sur 22 %.

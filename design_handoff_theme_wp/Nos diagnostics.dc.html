@@ -8,6 +8,10 @@
 <body>
 <x-dc>
 <helmet>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
 <!-- seo -->
 <title>Tous les diagnostics immobiliers obligatoires — Arras &amp; Pas-de-Calais</title>
 <meta name="description" content="Les 12 diagnostics pour vendre ou louer : lesquels sont obligatoires pour votre bien, leur durée de validité et mon tarif. Devis gratuit sous 24 h.">
@@ -83,6 +87,7 @@
   [data-som]:hover .dih-arrow{border-color:var(--techBright,#a3e04a) !important;}
   .dih-hdr-tel span{transition:color .2s ease;}
   .dih-navrow > a,.dih-navrow > div > a[data-navtrigger]{position:relative;}
+  .dih-navrow [aria-current="page"]::after{display:none !important;}
   .dih-navrow > a::after,.dih-navrow > div > [data-navtrigger]::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:4px;background:var(--tech,#7bc62f);transform:scaleX(0);transform-origin:left center;transition:transform .26s cubic-bezier(.4,0,.2,1),opacity .26s ease;opacity:0;}
   .dih-navrow > a:hover::after,.dih-navrow > div:hover > [data-navtrigger]::after{transform:scaleX(1);opacity:1;}
   .dih-navrow > a:not(:hover)::after,.dih-navrow > div:not(:hover) > [data-navtrigger]::after{transform-origin:right center;}
@@ -118,7 +123,7 @@
         <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
     <div style="padding:calc(env(safe-area-inset-top, 0px) + 30px) clamp(16px,4vw,40px) 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
           <a href="Diag Imm'Hauts - Accueil.dc.html" style="display:flex;align-items:center;gap:8px;min-width:0;">
-        <svg width="70" height="20" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:20px;width:70px;"><defs><mask id="lghn" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghn)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 25 L290 14 L324 9 L324 53 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
+        <svg width="70" height="20" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:20px;width:70px;"><defs><mask id="lghn" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghn)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 34 L290 14 L324 9 L324 66 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
         <span style="display:flex;flex-direction:column;line-height:1;min-width:0;">
     <span class="dih-logo-word" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.03em;color:var(--forest,#1e5b34);white-space:nowrap;">Diag Imm'Hauts</span>
     <span class="dih-hdr-tag" style="font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted,#5e6d55);margin-top:3px;white-space:nowrap;">Diagnostics immobiliers</span>
@@ -134,7 +139,7 @@
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
     <div style="max-width:1200px;margin:0 auto;padding:clamp(8px,1.4vw,16px) clamp(16px,4vw,40px);display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:clamp(12px,1.6vw,24px);">
       <a href="Diag Imm'Hauts - Accueil.dc.html" class="dih-hdr-logo" style="display:flex;align-items:center;gap:12px;">
-        <svg width="77" height="22" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:22px;width:77px;"><defs><mask id="lghd" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghd)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 25 L290 14 L324 9 L324 53 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
+        <svg width="77" height="22" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:22px;width:77px;"><defs><mask id="lghd" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghd)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 34 L290 14 L324 9 L324 66 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
         <span style="display:flex;flex-direction:column;line-height:1;">
           <span class="dih-logo-word" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.03em;color:var(--forest);white-space:nowrap;">Diag Imm'Hauts</span>
           <span class="dih-hdr-tag" style="font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-top:3px;white-space:nowrap;">Diagnostics immobiliers</span>
@@ -534,8 +539,14 @@
           <h2 style="font-size:clamp(26px,3.2vw,44px);font-weight:800;color:#fff;">Un doute sur les diagnostics dont vous avez besoin&nbsp;?</h2>
           <p style="margin-top:18px;font-size:17px;line-height:1.6;color:var(--onDarkSoft,#d6e6cf);max-width:560px;">Décrivez-moi votre bien en deux minutes au téléphone&nbsp;: je vous dis exactement quels diagnostics sont obligatoires et je vous envoie un devis gratuit sous 24 heures.</p>
           <div style="margin-top:30px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+            <sc-if value="{{ ctaCallFirst }}" hint-placeholder-val="{{ false }}">
             <a href="tel:+33635884300" class="dih-cta" style="color:var(--forestDeep,#123f24); font-family: 'Manrope',sans-serif; font-weight: 800; font-size:15.5px; padding:16px clamp(16px,4vw,24px); border-radius:999px; box-shadow: 0 10px 22px -12px rgba(0,0,0,.6); transition: background .2s ease; background-color: var(--tech,#7bc62f)" style-hover="background:var(--techBright,#a3e04a)"><span class="dih-cta-t">Appeler le <span style="white-space:nowrap;">06 35 88 43 00</span></span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span></a>
-            <a href="Contact.dc.html#devis" class="dih-cta" style="color: #fff; font-weight: 600; font-size:15.5px; padding: 16px 6px; border-radius:999px; border: 1px solid color-mix(in oklab,#fff 26%,transparent); width:100%;max-width:260px" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Demande de rappel gratuit</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
+            <a href="Contact.dc.html#devis" class="dih-cta" style="color: #fff; font-weight: 600; font-size:15.5px; padding:16px 26px; border-radius:999px; border: 1px solid color-mix(in oklab,#fff 26%,transparent); width:100%;max-width:260px" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Demande de rappel gratuit</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
+            </sc-if>
+            <sc-if value="{{ ctaFormFirst }}" hint-placeholder-val="{{ true }}">
+            <a href="Contact.dc.html#devis" class="dih-cta" style="color:var(--forestDeep,#123f24); font-family: 'Manrope',sans-serif; font-weight: 800; font-size:15.5px; padding:16px clamp(16px,4vw,24px); border-radius:999px; box-shadow: 0 10px 22px -12px rgba(0,0,0,.6); transition: background .2s ease; background-color: var(--tech,#7bc62f)" style-hover="background:var(--techBright,#a3e04a)"><span class="dih-cta-t">Demande de rappel gratuit</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
+            <a href="tel:+33635884300" class="dih-cta" style="color: #fff; font-weight: 600; font-size:15.5px; padding:16px 26px; border-radius:999px; border: 1px solid color-mix(in oklab,#fff 26%,transparent); width:100%;max-width:260px" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Appeler le <span style="white-space:nowrap;">06 35 88 43 00</span></span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span></a>
+            </sc-if>
           </div>
         </div>
         <sc-if value="{{ ctaPhotoCol }}" hint-placeholder-val="{{ true }}">
@@ -703,7 +714,7 @@ class Component extends DCLogic {
     const _ph = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
     return {
       decorTerrils: _dec === 'terrils', decorGrille: _dec !== 'terrils', nbSpacer: _ph && _dec === 'terrils' ? '40px' : '0px',
-      trPos: _ph ? 'right -545px top calc(-249px + var(--nvH, 0px))' : (this.__isNarrow() ? '0% 82%' : 'calc(50% + 190px) 82%'), trSize: _ph ? 'auto 760px' : (this.__isNarrow() ? 'max(130%, 1180px) auto' : '1655px auto'), trFade: this.__trFade()
+      trPos: _ph ? 'right -545px top calc(-249px + var(--nvH, 0px))' : (this.__isNarrow() ? '0% 82%' : 'calc(50% + 190px) max(-280px, 82%)'), trSize: _ph ? 'auto 760px' : (this.__isNarrow() ? 'max(130%, 1180px) auto' : '1655px auto'), trFade: this.__trFade()
     };
   }
   __trFade() {
@@ -791,7 +802,7 @@ class Component extends DCLogic {
         return el;
       })();
       const tr = 'transition:color .42s cubic-bezier(.4,0,.2,1) !important;';
-      ink.textContent = 'header .dih-navrow,header .dih-navrow>a,header .dih-navrow>div>a[data-navtrigger]{' + tr + 'color:' + (t ? 'rgb(23,51,31)' : '#ffffff') + ' !important}'
+      ink.textContent = 'header .dih-navrow,header .dih-navrow>a,header .dih-navrow>div>[data-navtrigger]{' + tr + 'color:' + (t ? 'rgb(23,51,31)' : '#ffffff') + ' !important}'
         + 'header .dih-navpanel{color:var(--ink,#17331f) !important}'
         + (t ? '' : 'header a.dih-cta,header a.dih-cta:hover{background:#ffffff !important;color:var(--forestDeep,#123f24) !important}')
         + 'header a.dih-cta{transition:opacity .3s ease,transform .3s ease,background .42s cubic-bezier(.4,0,.2,1),color .42s cubic-bezier(.4,0,.2,1) !important}'
@@ -989,33 +1000,20 @@ class Component extends DCLogic {
 
     const withHref = (a) => a.map(x => Object.assign({ href: "#" }, x));
     const diagCards = withHref([
-      {title:'DPE', href:'DPE.dc.html', validity:'10 ans', icon:gauge, illus:'img/ill_dpe_ssfond-eb37ee46.webp', desc:'Classe énergétique et climatique du logement, de A à G, avec recommandations de travaux.', when:'Obligatoire pour toute vente ou location'},
-      {title:'Amiante', href:'Amiante.dc.html', validity:'Illimitée*', icon:shield, illus:'img/ill_amiante_ssfond.webp', desc:'Repérage des matériaux et produits contenant de l\u2019amiante dans le bâti.', when:'Permis de construire avant le 1er juillet 1997'},
-      {title:'Plomb (CREP)', href:'Plomb.dc.html', validity:'1 an / 6 ans', icon:droplet, illus:'img/ill_plomb_ssfond.webp', desc:'Constat de risque d\u2019exposition au plomb dans les peintures anciennes.', when:'Logement construit avant le 1er janvier 1949'},
-      {title:'Électricité', href:'Electricite.dc.html', validity:'3 ans / 6 ans', icon:bolt, illus:'img/ill_elec_ssfond.webp', desc:'État de l\u2019installation intérieure d\u2019électricité et des risques associés.', when:'Installation de plus de 15 ans'},
-      {title:'Gaz', href:'Gaz.dc.html', validity:'3 ans / 6 ans', icon:flame, illus:'img/ill_gaz_ssfond.webp', desc:'État de l\u2019installation intérieure de gaz : appareils, tuyauteries, ventilation.', when:'Installation de plus de 15 ans'},
-      {title:'Termites', href:'Termites.dc.html', validity:'6 mois', icon:leaf, illus:'img/ill_termites_ssfond2.webp', desc:'Recherche de termites et d\u2019agents de dégradation biologique du bois.', when:'Zone déclarée par arrêté préfectoral'},
-      {title:'État des risques (ERP)', href:'ERP.dc.html', validity:'6 mois', icon:risk, illus:'img/ill_erp_ssfond.webp', desc:'Risques naturels, miniers, technologiques et sismiques de la commune.', when:'Obligatoire dans les zones concernées'},
-      {title:'Mesurage Carrez / Boutin', href:'Mesurage.dc.html', validity:'Illimitée*', icon:ruler, illus:'img/ill_mesurage_detoure.webp', desc:'Surface privative en copropriété (Carrez) ou surface habitable en location (Boutin).', when:'Vente en copropriété · bail d\u2019habitation'},
-      {title:'Assainissement', href:'Assainissement.dc.html', validity:'Contrôle SPANC', icon:droplet, illus:'img/ill_assainissement_ssfond.webp', desc:'Contrôle de l\u2019installation non collective : il est réalisé par le SPANC de votre commune, je vous oriente et j\u2019intègre les autres diagnostics au même devis.', when:'Bien non raccordé au tout-à-l\u2019égout'},
-      {title:'Mérule', href:'Merule.dc.html', validity:'6 mois', icon:leaf, illus:'img/ill_merule_ssfond.webp', desc:'Recherche de mérule et de champignons lignivores dans les bois du bâti.', when:'Zone à risque délimitée par arrêté'},
+      {title:'DPE', href:'DPE.dc.html', validity:'10 ans', icon:gauge, illus:'img/diag_dpe.webp', desc:'Classe énergétique et climatique du logement, de A à G, avec recommandations de travaux.', when:'Obligatoire pour toute vente ou location'},
+      {title:'Amiante', href:'Amiante.dc.html', validity:'Illimitée*', icon:shield, illus:'img/diag_amiante.webp', desc:'Repérage des matériaux et produits contenant de l\u2019amiante dans le bâti.', when:'Permis de construire avant le 1er juillet 1997'},
+      {title:'Plomb (CREP)', href:'Plomb.dc.html', validity:'1 an / 6 ans', icon:droplet, illus:'img/diag_plomb.webp', desc:'Constat de risque d\u2019exposition au plomb dans les peintures anciennes.', when:'Logement construit avant le 1er janvier 1949'},
+      {title:'Électricité', href:'Electricite.dc.html', validity:'3 ans / 6 ans', icon:bolt, illus:'img/diag_elec.webp', desc:'État de l\u2019installation intérieure d\u2019électricité et des risques associés.', when:'Installation de plus de 15 ans'},
+      {title:'Gaz', href:'Gaz.dc.html', validity:'3 ans / 6 ans', icon:flame, illus:'img/diag_gaz.webp', desc:'État de l\u2019installation intérieure de gaz : appareils, tuyauteries, ventilation.', when:'Installation de plus de 15 ans'},
+      {title:'Termites', href:'Termites.dc.html', validity:'6 mois', icon:leaf, illus:'img/diag_termites.webp', desc:'Recherche de termites et d\u2019agents de dégradation biologique du bois.', when:'Zone déclarée par arrêté préfectoral'},
+      {title:'État des risques (ERP)', href:'ERP.dc.html', validity:'6 mois', icon:risk, illus:'img/diag_erp.webp', desc:'Risques naturels, miniers, technologiques et sismiques de la commune.', when:'Obligatoire dans les zones concernées'},
+      {title:'Mesurage Carrez / Boutin', href:'Mesurage.dc.html', validity:'Illimitée*', icon:ruler, illus:'img/diag_mesurage.webp', desc:'Surface privative en copropriété (Carrez) ou surface habitable en location (Boutin).', when:'Vente en copropriété · bail d\u2019habitation'},
+      {title:'Assainissement', href:'Assainissement.dc.html', validity:'Contrôle SPANC', icon:droplet, illus:'img/diag_assainissement.webp', desc:'Contrôle de l\u2019installation non collective : il est réalisé par le SPANC de votre commune, je vous oriente et j\u2019intègre les autres diagnostics au même devis.', when:'Bien non raccordé au tout-à-l\u2019égout'},
+      {title:'Mérule', href:'Merule.dc.html', validity:'6 mois', icon:leaf, illus:'img/diag_merule.webp', desc:'Recherche de mérule et de champignons lignivores dans les bois du bâti.', when:'Zone à risque délimitée par arrêté'},
       {title:'DTG & DPE collectif', href:'DTG et DPE collectif.dc.html', validity:'10 ans', icon:clipboard, illus:'img/ill_syndic_ssfond.webp', desc:'Étiquette énergétique de l\u2019immeuble entier et état technique global de la copropriété.', when:'Copropriétés d\u2019habitation'},
-      {title:'Audit énergétique', href:'Audit energetique.dc.html', validity:'5 ans', icon:gauge, illus:'img/ill_jauge_ssfond-e987f6cb.webp', desc:'Deux scénarios de travaux chiffrés pour sortir le logement des classes énergivores.', when:'Vente d\u2019une maison classée E, F ou G'},
+      {title:'Audit énergétique', href:'Audit energetique.dc.html', validity:'5 ans', icon:gauge, illus:'img/diag_audit.webp', desc:'Deux scénarios de travaux chiffrés pour sortir le logement des classes énergivores.', when:'Vente d\u2019une maison classée E, F ou G'},
     ]);
-    const _illTune = {
-      'img/ill_dpe_ssfond-eb37ee46.webp': { w: '70px', top: '50%', noFlip: true },
-      'img/ill_amiante_ssfond.webp': { w: '70px', top: '44%' },
-      'img/ill_gaz_ssfond.webp': { w: '80px', top: '50%' },
-      'img/ill_elec_ssfond.webp': { w: '72px', top: '48%', noFlip: true },
-      'img/ill_plomb_ssfond.webp': { w: '42px', top: '50%', noFlip: true },
-      'img/ill_termites_ssfond2.webp': { w: '78px', top: '50%', noFlip: true },
-      'img/ill_erp_ssfond.webp': { w: '80px', top: '52%' },
-      'img/ill_mesurage_detoure.webp': { w: '82px', top: '52%' },
-      'img/ill_assainissement_ssfond.webp': { w: '74px', top: '52%' },
-      'img/ill_merule_ssfond.webp': { w: '112px', top: '52%' },
-      'img/ill_jauge_ssfond-e987f6cb.webp': { w: '83px', top: '54%', noFlip: true },
-      'img/ill_syndic_ssfond.webp': { w: '78px', top: '50%', noFlip: true },
-    };
+    const _illTune = {};
     diagCards.forEach((x) => {
       x.noIllus = !x.illus;
       x.illusBg = x.illus ? 'url("' + x.illus + '")' : 'none';
@@ -1033,7 +1031,7 @@ class Component extends DCLogic {
     diagCards.forEach(function(x,i){
       Object.assign(x, _quinx ? _skins[[0,1,1,0][i % 4]] : _skins[i % 2]);
       x.num = (i < 9 ? '0' : '') + (i + 1);
-      const _k = {'img/ill_dpe_ssfond-eb37ee46.webp':0.9,'img/ill_erp_ssfond.webp':0.8,'img/ill_merule_ssfond.webp':0.68,'img/ill_mesurage_detoure.webp':0.86,'img/ill_assainissement_ssfond.webp':0.87,'img/ill_jauge_ssfond-e987f6cb.webp':0.9};
+      const _k = {};
       const w = Math.round(parseInt(x.illusW, 10) * 1.7 * (_k[x.illus] || 1));
       x.cardIllW = w + 'px';
       x.cardIllH = w + 'px';
@@ -1055,9 +1053,9 @@ class Component extends DCLogic {
       showLine: (i % _per !== _per - 1) && i < _rawSteps.length - 1 && _per > 1,
     }); });
     const coproItems = [
-      {title:'Diagnostic technique global (DTG)', desc:'État du bâti, analyse des améliorations possibles et projection budgétaire sur 10 ans.', icon:clipboard, illusBg:'url("img/ill_dtg_dpe_ssfond.webp")', illusTr:'translate(-50%,-50%) scale(0.8)'},
-      {title:'DPE collectif', desc:'Étiquette énergétique de l\u2019immeuble entier, obligatoire pour tous les immeubles d\u2019habitation.', icon:gauge, illusBg:'url("img/ill_dpe_ssfond-eb37ee46.webp")', illusTr:'translate(-50%,-50%)'},
-      {title:'Amiante des parties communes (DTA)', desc:'Dossier technique amiante et mise à jour du repérage avant travaux.', icon:shield, illusBg:'url("img/ill_amiante_ssfond.webp")', illusTr:'translate(-50%,-50%) scaleX(-1)'},
+      {title:'Diagnostic technique global (DTG)', desc:'État du bâti, analyse des améliorations possibles et projection budgétaire sur 10 ans.', icon:clipboard, illusBg:'url("img/diag_dtg.webp")', illusTr:'translate(-50%,-50%)'},
+      {title:'DPE collectif', desc:'Étiquette énergétique de l\u2019immeuble entier, obligatoire pour tous les immeubles d\u2019habitation.', icon:gauge, illusBg:'url("img/diag_dpe.webp")', illusTr:'translate(-50%,-50%)'},
+      {title:'Amiante des parties communes (DTA)', desc:'Dossier technique amiante et mise à jour du repérage avant travaux.', icon:shield, illusBg:'url("img/diag_amiante.webp")', illusTr:'translate(-50%,-50%)'},
       {title:'Accompagnement de parc', desc:'Planning annuel, référent unique et rapports harmonisés pour bailleurs et collectivités.', icon:users, illusBg:'url("img/ill_syndic_ssfond.webp")', illusTr:'translate(-50%,-50%)'},
     ];
     const faqData = [
@@ -1068,7 +1066,8 @@ class Component extends DCLogic {
     ];
     const faqs = faqData.map((f,i)=>{
       const open = this.state.open === i;
-      return { q:f.q, a:f.a, open, link:f.link, href:f.href, sign: open ? '\u2212' : '+', rows: open ? '1fr' : '0fr', aOpacity: open ? 1 : 0, aShift: open ? '0px' : '-6px', iconRot: open ? '180deg' : '0deg',
+      return {
+      ctaCallFirst: this.__isPhone(), ctaFormFirst: !this.__isPhone(), q:f.q, a:f.a, open, link:f.link, href:f.href, sign: open ? '\u2212' : '+', rows: open ? '1fr' : '0fr', aOpacity: open ? 1 : 0, aShift: open ? '0px' : '-6px', iconRot: open ? '180deg' : '0deg',
         iconBg: open ? 'var(--tech,#7bc62f)' : 'var(--bg,#f5f8ef)', iconColor: open ? '#06210f' : 'var(--forest,#1e5b34)',
         toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i })) };
     });

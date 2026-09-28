@@ -8,6 +8,10 @@
 <body>
 <x-dc>
 <helmet>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
 <!-- seo -->
 <title>Diagnostic plomb (CREP) à Arras — logements avant 1949</title>
 <meta name="description" content="Constat de risque d'exposition au plomb, obligatoire pour les logements construits avant le 1er janvier 1949. Valable 1 an à la vente, 6 ans en location.">
@@ -83,6 +87,7 @@
   @media (max-width:640px){.dih-hero-pill{background:color-mix(in oklab,var(--forest,#1e5b34) 78%,transparent) !important;border-color:color-mix(in oklab,var(--techBright) 60%,transparent) !important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 6px 16px -10px rgba(6,33,15,.6);}}
   .dih-hdr-tel span{transition:color .2s ease;}
   .dih-navrow > a,.dih-navrow > div > a[data-navtrigger]{position:relative;}
+  .dih-navrow [aria-current="page"]::after{display:none !important;}
   .dih-navrow > a::after,.dih-navrow > div > [data-navtrigger]::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:4px;background:var(--tech,#7bc62f);transform:scaleX(0);transform-origin:left center;transition:transform .26s cubic-bezier(.4,0,.2,1),opacity .26s ease;opacity:0;}
   .dih-navrow > a:hover::after,.dih-navrow > div:hover > [data-navtrigger]::after{transform:scaleX(1);opacity:1;}
   .dih-navrow > a:not(:hover)::after,.dih-navrow > div:not(:hover) > [data-navtrigger]::after{transform-origin:right center;}
@@ -115,7 +120,7 @@
   <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
     <div style="padding:calc(env(safe-area-inset-top, 0px) + 30px) clamp(16px,4vw,40px) 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
     <a href="Diag Imm'Hauts - Accueil.dc.html" style="display:flex;align-items:center;gap:8px;min-width:0;">
-  <svg width="70" height="20" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:20px;width:70px;"><defs><mask id="lghn" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghn)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 25 L290 14 L324 9 L324 53 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
+  <svg width="70" height="20" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:20px;width:70px;"><defs><mask id="lghn" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghn)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 34 L290 14 L324 9 L324 66 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
   <span style="display:flex;flex-direction:column;line-height:1;min-width:0;">
     <span class="dih-logo-word" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.03em;color:var(--forest,#1e5b34);white-space:nowrap;">Diag Imm'Hauts</span>
     <span class="dih-hdr-tag" style="font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted,#5e6d55);margin-top:3px;white-space:nowrap;">Diagnostics immobiliers</span>
@@ -131,7 +136,7 @@
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
     <div style="max-width:1200px;margin:0 auto;padding:clamp(8px,1.4vw,16px) clamp(16px,4vw,40px);display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:clamp(12px,1.6vw,24px);">
 <a href="Diag Imm'Hauts - Accueil.dc.html" class="dih-hdr-logo" style="display:flex;align-items:center;gap:12px;">
-  <svg width="77" height="22" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:22px;width:77px;"><defs><mask id="lghd" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghd)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 25 L290 14 L324 9 L324 53 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
+  <svg width="77" height="22" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:22px;width:77px;"><defs><mask id="lghd" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghd)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 34 L290 14 L324 9 L324 66 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
   <span style="display:flex;flex-direction:column;line-height:1;">
     <span class="dih-logo-word" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.03em;color:var(--forest);white-space:nowrap;">Diag Imm'Hauts</span>
     <span class="dih-hdr-tag" style="font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-top:3px;white-space:nowrap;">Diagnostics immobiliers</span>
@@ -276,12 +281,12 @@ Obligatoire pour tout logement construit avant 1949
     <p style="grid-column:1/-1;grid-row:3;margin-top:{{ heroParaMt }};font-size:15.5px;line-height:1.6;color:var(--onDarkSoft,#d6e6cf);max-width:520px;">Les peintures au plomb, interdites en 1949, restent présentes dans une grande partie du bâti ancien de l'Artois. Le CREP mesure leur présence sur chaque unité de diagnostic, évalue leur état de dégradation et détermine ce que vous devez surveiller, entretenir ou faire traiter avant une vente ou une mise en location.</p>
     <div style="grid-column:1/-1;grid-row:4;margin-top:{{ heroCtaMt }};display:flex;flex-wrap:wrap;gap:12px;">
 <a href="#rappel" class="dih-cta" style="background:var(--tech,#7bc62f);color:var(--forestDeep,#123f24);font-family:'Manrope',sans-serif;font-weight:800;font-size:15.5px;padding:14px clamp(16px,4vw,24px);border-radius:999px;box-shadow:0 10px 22px -12px rgba(0,0,0,.6);transition:background .2s ease;" style-hover="background:var(--techBright,#a3e04a)"><span class="dih-cta-t">Demander un devis gratuit</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
-<a href="Simulateur diagnostics.dc.html" class="dih-cta" style="color:#fff;font-weight:600;font-size:14px;padding:14px 16px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 26%,transparent);" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Vérifier mes obligations</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M4 12h15M13.5 6.2 20 12l-6.5 5.8"></path></svg></span></a>
+<a href="Simulateur diagnostics.dc.html" class="dih-cta" style="color:#fff;font-weight:600;font-size:14px;padding:14px 26px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 26%,transparent);" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Vérifier mes obligations</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M4 12h15M13.5 6.2 20 12l-6.5 5.8"></path></svg></span></a>
     </div>
   </div>
   <div style="grid-column:{{ heroImgCol }};grid-row:{{ heroImgRow }};position:relative;min-width:0;display:flex;align-items:center;justify-content:center;">
     <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(96%,460px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 46% 44%,color-mix(in oklab,var(--techBright) 24%,transparent) 0,transparent 70%);filter:blur(22px);pointer-events:none;"></div>
-    <img src="img/ill_plomb_ssfond.webp" alt="Illustration d'un constat de risque d'exposition au plomb" style="scale:-1 1;position:relative;display:block;transform:scaleX(-1);width:{{ heroIllusW }};max-width:none;height:auto;filter:drop-shadow(0 26px 44px rgba(6,33,15,.45));">
+    <img src="img/diag_plomb.webp" alt="Illustration d'un constat de risque d'exposition au plomb" style="position:relative;display:block;width:{{ heroIllusW }};max-width:none;height:auto;filter:drop-shadow(0 26px 44px rgba(6,33,15,.45));">
   </div>
 </div>
     </div>
@@ -529,8 +534,14 @@ Obligatoire pour tout logement construit avant 1949
   <h2 style="font-size:clamp(26px,3.2vw,36px);font-weight:800;color:#fff;">Besoin d'un CREP&nbsp;?</h2>
   <p style="margin-top:16px;font-size:17px;line-height:1.6;color:var(--onDarkSoft,#d6e6cf);">Donnez-moi l'année de construction, le nombre de pièces et le motif (vente, location, travaux)&nbsp;: vous recevez un devis gratuit sous 24 heures, mesures et rapport inclus.</p>
   <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+    <sc-if value="{{ ctaCallFirst }}" hint-placeholder-val="{{ false }}">
     <a href="tel:+33635884300" class="dih-cta" style="background:var(--tech,#7bc62f);color:var(--forestDeep,#123f24);font-family:'Manrope',sans-serif;font-weight:800;font-size:15.5px;padding:16px clamp(16px,4vw,24px);border-radius:999px;box-shadow:0 10px 22px -12px rgba(0,0,0,.6);transition:background .2s ease;" style-hover="background:var(--techBright,#a3e04a)"><span class="dih-cta-t">Appeler le <span style="white-space:nowrap;">06 35 88 43 00</span></span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span></a>
-    <a href="Contact.dc.html" class="dih-cta" style="color:#fff;font-weight:600;font-size:15.5px;padding:16px 18px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 26%,transparent);" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Formulaire de devis</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
+    <a href="Contact.dc.html" class="dih-cta" style="color:#fff;font-weight:600;font-size:15.5px;padding:16px 26px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 26%,transparent);" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Formulaire de devis</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
+    </sc-if>
+    <sc-if value="{{ ctaFormFirst }}" hint-placeholder-val="{{ true }}">
+    <a href="Contact.dc.html" class="dih-cta" style="background:var(--tech,#7bc62f);color:var(--forestDeep,#123f24);font-family:'Manrope',sans-serif;font-weight:800;font-size:15.5px;padding:16px clamp(16px,4vw,24px);border-radius:999px;box-shadow:0 10px 22px -12px rgba(0,0,0,.6);transition:background .2s ease;" style-hover="background:var(--techBright,#a3e04a)"><span class="dih-cta-t">Formulaire de devis</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
+    <a href="tel:+33635884300" class="dih-cta" style="color:#fff;font-weight:600;font-size:15.5px;padding:16px 26px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 26%,transparent);" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Appeler le <span style="white-space:nowrap;">06 35 88 43 00</span></span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span></a>
+    </sc-if>
   </div>
   </div>
   <sc-if value="{{ ctaPhotoCol }}" hint-placeholder-val="{{ true }}">
@@ -734,7 +745,7 @@ class Component extends DCLogic {
         return el;
       })();
       const tr = 'transition:color .42s cubic-bezier(.4,0,.2,1) !important;';
-      ink.textContent = 'header .dih-navrow,header .dih-navrow>a,header .dih-navrow>div>a[data-navtrigger]{' + tr + 'color:' + (t ? 'rgb(23,51,31)' : '#ffffff') + ' !important}'
+      ink.textContent = 'header .dih-navrow,header .dih-navrow>a,header .dih-navrow>div>[data-navtrigger]{' + tr + 'color:' + (t ? 'rgb(23,51,31)' : '#ffffff') + ' !important}'
         + 'header .dih-navpanel{color:var(--ink,#17331f) !important}'
         + (t ? '' : 'header a.dih-cta,header a.dih-cta:hover{background:#ffffff !important;color:var(--forestDeep,#123f24) !important}')
         + 'header a.dih-cta{transition:opacity .3s ease,transform .3s ease,background .42s cubic-bezier(.4,0,.2,1),color .42s cubic-bezier(.4,0,.2,1) !important}'
@@ -843,7 +854,7 @@ try {
     const _ph = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
     return {
       decorTerrils: _dec === 'terrils', decorGrille: _dec !== 'terrils',
-      trPos: _ph ? 'right -545px top calc(-249px + var(--nvH, 0px))' : (this.__isNarrow() ? '0% 82%' : 'calc(50% + 190px) 82%'), trSize: _ph ? 'auto 760px' : (this.__isNarrow() ? 'max(130%, 1180px) auto' : '1655px auto'), trFade: this.__trFade()
+      trPos: _ph ? 'right -545px top calc(-249px + var(--nvH, 0px))' : (this.__isNarrow() ? '0% 82%' : 'calc(50% + 190px) max(-280px, 82%)'), trSize: _ph ? 'auto 760px' : (this.__isNarrow() ? 'max(130%, 1180px) auto' : '1655px auto'), trFade: this.__trFade()
     };
   }
   __trFade() {
@@ -902,14 +913,14 @@ try {
   {title:'Électricité', desc:'Sécurité de l’installation intérieure de plus de 15 ans.', icon:bolt, href:'Electricite.dc.html'},
   {title:'ERP', desc:'Risques naturels, miniers et technologiques de la commune.', icon:doc2, href:'ERP.dc.html'},
 ];
-    const _illMap = {'DPE': 'ill_dpe_ssfond-eb37ee46', 'Amiante': 'ill_amiante_ssfond', 'Plomb (CREP)': 'ill_plomb_ssfond', 'Électricité': 'ill_elec_ssfond', 'Gaz': 'ill_gaz_ssfond', 'Termites': 'ill_termites_ssfond2', 'ERP': 'ill_erp_ssfond', 'Mesurage': 'ill_mesurage-848e1c2a', 'Mesurage Carrez': 'ill_mesurage-848e1c2a', 'Assainissement': 'ill_assainissement_ssfond', 'Mérule': 'ill_merule_ssfond', 'Audit énergétique': 'ill_jauge_ssfond', 'DTG & DPE collectif': 'ill_dtg_dpe_ssfond', 'DPE collectif': 'ill_dtg_dpe_ssfond'};
-    const _plinth = {'ill_amiante_ssfond':1,'ill_plomb_ssfond':1,'ill_elec_ssfond':1,'ill_gaz_ssfond':1,'ill_termites_ssfond2':0.95,'ill_erp_ssfond':1.15,'ill_assainissement_ssfond':0.95,'ill_merule_ssfond':0.95,'ill_dtg_dpe_ssfond':1.05,'ill_jauge_ssfond':1.15,'ill_mesurage_ssfond':0.95};
-    const _plinthXY = {'ill_erp_ssfond':[0.85,0.95]};
+    const _illMap = {'DPE': 'diag_dpe', 'Amiante': 'diag_amiante', 'Plomb (CREP)': 'diag_plomb', 'Électricité': 'diag_elec', 'Gaz': 'diag_gaz', 'Termites': 'diag_termites', 'ERP': 'diag_erp', 'Mesurage': 'diag_mesurage', 'Mesurage Carrez': 'diag_mesurage', 'Assainissement': 'diag_assainissement', 'Mérule': 'diag_merule', 'Audit énergétique': 'diag_audit', 'DTG & DPE collectif': 'diag_dtg', 'DPE collectif': 'diag_dtg'};
+    const _plinth = {};
+    const _plinthXY = {};
     const _rel = _related.map((r) => {
 const _k = _illMap[r.title] || _illMap[r.title.replace(/ \(.*/, '')] || 'ill_dpe_v6';
 return Object.assign({}, r, {
   illusBg: 'url("img/' + _k + '.webp")',
-  illusTr: (_k === 'ill_dpe_ssfond-eb37ee46' ? '' : 'scaleX(-1) ') + 'scale(' + ((_plinth[_k] || 1) * (_plinthXY[_k] || [1,1])[0]) + ',' + ((_plinth[_k] || 1) * (_plinthXY[_k] || [1,1])[1]) + ')',
+  illusTr: '' + 'scale(' + ((_plinth[_k] || 1) * (_plinthXY[_k] || [1,1])[0]) + ',' + ((_plinth[_k] || 1) * (_plinthXY[_k] || [1,1])[1]) + ')',
 });
     });
     const _steps = [
@@ -923,6 +934,7 @@ return Object.assign({}, r, {
     const _icoPrefix = (this.props.stepIcons || 'socle-blanc') === 'socle-blanc' ? 'ill_stb_' : 'ill_st_';
     const _per = this.__isPhone() ? 1 : (this.__isNarrow() ? 2 : 4);
     return {
+      ctaCallFirst: this.__isPhone(), ctaFormFirst: !this.__isPhone(),
 prepCols: this.__isPhone() ? 'minmax(0,1fr)' : 'repeat(2,minmax(0,1fr))',
 related: _rel,
 narrow: this.__isNarrow(),
@@ -937,7 +949,7 @@ crumbMb: this.__isPhone() ? '26px' : '16px',
       heroCtaMt: this.__isPhone() ? '4px' : '24px',
       heroCols: this.__isPhone() ? 'minmax(0,1fr) 34%' : (this.__isNarrow() ? 'minmax(0,57fr) minmax(0,43fr)' : 'repeat(auto-fit,minmax(min(100%,330px),1fr))'),
 scoreCols: this.__isPhone() ? '1fr' : 'repeat(3,minmax(0,1fr))',
-heroIllusW: this.__isPhone() ? '100%' : (this.__isNarrow() ? '211px' : '240px'),
+heroIllusW: this.__isPhone() ? '100%' : (this.__isNarrow() ? '326px' : '370px'),
 factBandCols: this.__isPhone() ? '1fr' : (this.__isNarrow() ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,auto))'),
 ctaCols: this.__isPhone() ? '1fr' : (this.__isNarrow() ? 'minmax(0,60fr) minmax(0,40fr)' : 'minmax(0,70fr) minmax(0,30fr)'),
 ctaPhotoW: this.__isNarrow() && !this.__isPhone() ? '128%' : '100%',

@@ -8,6 +8,10 @@
 <body>
 <x-dc>
 <helmet>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
 <!-- seo -->
 <title>Quels diagnostics obligatoires pour mon bien ? Simulateur gratuit</title>
 <meta name="description" content="Cinq questions et vous obtenez la liste exacte de vos diagnostics obligatoires, avec leur durée de validité. Gratuit, sans inscription.">
@@ -34,6 +38,7 @@
   a:hover .dih-rcard-l{color:var(--techBright) !important;}
   .dih-hdr-tel span{transition:color .2s ease;}
   .dih-navrow > a,.dih-navrow > div > a[data-navtrigger]{position:relative;}
+  .dih-navrow [aria-current="page"]::after{display:none !important;}
   .dih-navrow > a::after,.dih-navrow > div > [data-navtrigger]::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:4px;background:var(--tech,#7bc62f);transform:scaleX(0);transform-origin:left center;transition:transform .26s cubic-bezier(.4,0,.2,1),opacity .26s ease;opacity:0;}
   .dih-navrow > a:hover::after,.dih-navrow > div:hover > [data-navtrigger]::after{transform:scaleX(1);opacity:1;}
   .dih-navrow > a:not(:hover)::after,.dih-navrow > div:not(:hover) > [data-navtrigger]::after{transform-origin:right center;}
@@ -111,7 +116,7 @@
         <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
     <div style="padding:calc(env(safe-area-inset-top, 0px) + 30px) clamp(16px,4vw,40px) 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
           <a href="Diag Imm'Hauts - Accueil.dc.html" style="display:flex;align-items:center;gap:8px;min-width:0;">
-        <svg width="70" height="20" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:20px;width:70px;"><defs><mask id="lghn" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghn)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 25 L290 14 L324 9 L324 53 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
+        <svg width="70" height="20" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:20px;width:70px;"><defs><mask id="lghn" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghn)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 34 L290 14 L324 9 L324 66 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
         <span style="display:flex;flex-direction:column;line-height:1;min-width:0;">
     <span class="dih-logo-word" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.03em;color:var(--forest,#1e5b34);white-space:nowrap;">Diag Imm'Hauts</span>
     <span class="dih-hdr-tag" style="font-size:10px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted,#5e6d55);margin-top:3px;white-space:nowrap;">Diagnostics immobiliers</span>
@@ -127,7 +132,7 @@
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
     <div style="max-width:1200px;margin:0 auto;padding:clamp(8px,1.4vw,16px) clamp(16px,4vw,40px);display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:clamp(12px,1.6vw,24px);">
       <a href="Diag Imm'Hauts - Accueil.dc.html" class="dih-hdr-logo" style="display:flex;align-items:center;gap:12px;">
-        <svg width="77" height="22" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:22px;width:77px;"><defs><mask id="lghd" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghd)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 25 L290 14 L324 9 L324 53 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
+        <svg width="77" height="22" viewBox="0 0 404 116" fill="none" role="img" aria-label="Diag Imm'Hauts" style="display:block;flex:none;height:22px;width:77px;"><defs><mask id="lghd" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"></rect><path d="M130 124 L262 1 L398 124 Z" fill="#000"></path></mask></defs><g mask="url(#lghd)"><path class="dih-lg-a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z" style="fill:var(--forest,#1e5b34);"></path></g><path class="dih-lg-b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z" style="fill:var(--tech,#7bc62f);"></path><path class="dih-lg-b" d="M290 34 L290 14 L324 9 L324 66 Z" style="fill:var(--tech,#7bc62f);"></path></svg>
         <span style="display:flex;flex-direction:column;line-height:1;">
           <span class="dih-logo-word" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.03em;color:var(--forest);white-space:nowrap;">Diag Imm'Hauts</span>
           <span class="dih-hdr-tag" style="font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:var(--muted);margin-top:3px;white-space:nowrap;">Diagnostics immobiliers</span>
@@ -386,7 +391,7 @@
         </div>
           <div style="margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:{{ devisJustify }};">
             <a href="#rappel" class="dih-cta" style="flex:0 0 auto;background:var(--tech,#7bc62f);color:var(--forestDeep,#123f24);font-family:'Manrope',sans-serif;font-weight:800;font-size:15.5px;padding:14px 22px;border-radius:999px;box-shadow:0 10px 22px -12px rgba(0,0,0,.6);transition:background .2s ease;" style-hover="background:var(--techBright,#a3e04a)"><span class="dih-cta-t" style="white-space:nowrap;">Devis pour ce dossier</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
-            <a href="#simulateur" class="dih-cta" style="color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;padding:13px 20px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 30%,transparent);transition:border-color .2s ease,background .2s ease;" style-hover="border-color:var(--techBright);background:color-mix(in oklab,#fff 8%,transparent)"><span class="dih-cta-t">Modifier mes informations</span><span class="dih-cta-i"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></span></a>
+            <a href="#simulateur" class="dih-cta" style="color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;padding:13px 26px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 30%,transparent);transition:border-color .2s ease,background .2s ease;" style-hover="border-color:var(--techBright);background:color-mix(in oklab,#fff 8%,transparent)"><span class="dih-cta-t">Modifier mes informations</span><span class="dih-cta-i"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M12 19V5M6 11l6-6 6 6"></path></svg></span></a>
           </div>
         </div>
 
@@ -409,8 +414,14 @@
         <h2 style="font-size:clamp(26px,3.2vw,36px);font-weight:800;color:#fff;">Un devis groupé pour tout le dossier</h2>
         <p style="margin-top:16px;font-size:{{ ctaParaSize }};line-height:1.6;color:var(--onDarkSoft,#d6e6cf);">Réaliser plusieurs diagnostics en une seule visite coûte moins cher que de les commander séparément. Donnez-moi votre liste&nbsp;: vous recevez un prix global sous 24 heures.</p>
         <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+          <sc-if value="{{ ctaCallFirst }}" hint-placeholder-val="{{ false }}">
           <a href="tel:+33635884300" class="dih-cta" style="background:var(--tech,#7bc62f);color:var(--forestDeep,#123f24);font-family:'Manrope',sans-serif;font-weight:800;font-size:15.5px;padding:16px clamp(16px,4vw,24px);border-radius:999px;box-shadow:0 10px 22px -12px rgba(0,0,0,.6);transition:background .2s ease;" style-hover="background:var(--techBright,#a3e04a)"><span class="dih-cta-t">Appeler le <span style="white-space:nowrap;">06 35 88 43 00</span></span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span></a>
           <a href="Contact.dc.html" class="dih-cta" style="color:#fff;font-weight:600;font-size:15.5px;padding:16px 24px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 26%,transparent);" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Formulaire de devis</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
+          </sc-if>
+          <sc-if value="{{ ctaFormFirst }}" hint-placeholder-val="{{ true }}">
+          <a href="Contact.dc.html" class="dih-cta" style="background:var(--tech,#7bc62f);color:var(--forestDeep,#123f24);font-family:'Manrope',sans-serif;font-weight:800;font-size:15.5px;padding:16px clamp(16px,4vw,24px);border-radius:999px;box-shadow:0 10px 22px -12px rgba(0,0,0,.6);transition:background .2s ease;" style-hover="background:var(--techBright,#a3e04a)"><span class="dih-cta-t">Formulaire de devis</span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg></span></a>
+          <a href="tel:+33635884300" class="dih-cta" style="color:#fff;font-weight:600;font-size:15.5px;padding:16px 24px;border-radius:999px;border:1px solid color-mix(in oklab,#fff 26%,transparent);" style-hover="border-color:var(--techBright)"><span class="dih-cta-t">Appeler le <span style="white-space:nowrap;">06 35 88 43 00</span></span><span class="dih-cta-i"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span></a>
+          </sc-if>
         </div>
         </div>
         <sc-if value="{{ ctaPhotoCol }}" hint-placeholder-val="{{ true }}">
@@ -606,7 +617,7 @@ class Component extends DCLogic {
         return el;
       })();
       const tr = 'transition:color .42s cubic-bezier(.4,0,.2,1) !important;';
-      ink.textContent = 'header .dih-navrow,header .dih-navrow>a,header .dih-navrow>div>a[data-navtrigger]{' + tr + 'color:' + (t ? 'rgb(23,51,31)' : '#ffffff') + ' !important}'
+      ink.textContent = 'header .dih-navrow,header .dih-navrow>a,header .dih-navrow>div>[data-navtrigger]{' + tr + 'color:' + (t ? 'rgb(23,51,31)' : '#ffffff') + ' !important}'
         + 'header .dih-navpanel{color:var(--ink,#17331f) !important}'
         + (t ? '' : 'header a.dih-cta,header a.dih-cta:hover{background:#ffffff !important;color:var(--forestDeep,#123f24) !important}')
         + 'header a.dih-cta{transition:opacity .3s ease,transform .3s ease,background .42s cubic-bezier(.4,0,.2,1),color .42s cubic-bezier(.4,0,.2,1) !important}'
@@ -763,7 +774,7 @@ class Component extends DCLogic {
     const _ph = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
     return {
       decorTerrils: _dec === 'terrils', decorGrille: _dec !== 'terrils', nbSpacer: _ph && _dec === 'terrils' ? '40px' : '0px',
-      trPos: _ph ? 'right -545px top calc(-249px + var(--nvH, 0px))' : (this.__isNarrow() ? '0% 82%' : 'calc(50% + 190px) 82%'), trSize: _ph ? 'auto 760px' : (this.__isNarrow() ? 'max(130%, 1180px) auto' : '1655px auto'), trFade: this.__trFade()
+      trPos: _ph ? 'right -545px top calc(-249px + var(--nvH, 0px))' : (this.__isNarrow() ? '0% 82%' : 'calc(50% + 190px) max(-280px, 82%)'), trSize: _ph ? 'auto 760px' : (this.__isNarrow() ? 'max(130%, 1180px) auto' : '1655px auto'), trFade: this.__trFade()
     };
   }
   __trFade() {
@@ -874,33 +885,20 @@ class Component extends DCLogic {
     }
 
     const ILLUS = {
-      'DPE.dc.html': 'img/ill_dpe_ssfond-eb37ee46.webp',
-      'Amiante.dc.html': 'img/ill_amiante_ssfond.webp',
-      'Plomb.dc.html': 'img/ill_plomb_ssfond.webp',
-      'Electricite.dc.html': 'img/ill_elec_ssfond.webp',
-      'Gaz.dc.html': 'img/ill_gaz_ssfond.webp',
-      'Termites.dc.html': 'img/ill_termites_ssfond2.webp',
-      'Merule.dc.html': 'img/ill_merule_ssfond.webp',
-      'ERP.dc.html': 'img/ill_erp_ssfond.webp',
-      'Mesurage.dc.html': 'img/ill_mesurage_detoure.webp',
-      'Assainissement.dc.html': 'img/ill_assainissement_ssfond.webp',
-      'Audit energetique.dc.html': 'img/ill_jauge_ssfond-e987f6cb.webp',
+      'DPE.dc.html': 'img/diag_dpe.webp',
+      'Amiante.dc.html': 'img/diag_amiante.webp',
+      'Plomb.dc.html': 'img/diag_plomb.webp',
+      'Electricite.dc.html': 'img/diag_elec.webp',
+      'Gaz.dc.html': 'img/diag_gaz.webp',
+      'Termites.dc.html': 'img/diag_termites.webp',
+      'Merule.dc.html': 'img/diag_merule.webp',
+      'ERP.dc.html': 'img/diag_erp.webp',
+      'Mesurage.dc.html': 'img/diag_mesurage.webp',
+      'Assainissement.dc.html': 'img/diag_assainissement.webp',
+      'Audit energetique.dc.html': 'img/diag_audit.webp',
       'DTG et DPE collectif.dc.html': 'img/ill_syndic_ssfond.webp',
     };
-    const _illTune = {
-      'img/ill_dpe_ssfond-eb37ee46.webp': { w: 60, noFlip: true },
-      'img/ill_amiante_ssfond.webp': { w: 70 },
-      'img/ill_gaz_ssfond.webp': { w: 80 },
-      'img/ill_elec_ssfond.webp': { w: 72, noFlip: true },
-      'img/ill_plomb_ssfond.webp': { w: 50, noFlip: true },
-      'img/ill_termites_ssfond2.webp': { w: 78, noFlip: true },
-      'img/ill_erp_ssfond.webp': { w: 64 },
-      'img/ill_mesurage_detoure.webp': { w: 68 },
-      'img/ill_assainissement_ssfond.webp': { w: 64 },
-      'img/ill_merule_ssfond.webp': { w: 76 },
-      'img/ill_jauge_ssfond-e987f6cb.webp': { w: 83, noFlip: true },
-      'img/ill_syndic_ssfond.webp': { w: 78, noFlip: true },
-    };    const _light = {cardBg:'var(--surface,#ffffff)', descColor:'var(--muted)', eyebrow:'var(--forest,#1e5b34)', lineColor:'var(--line)'};
+    const _illTune = {};    const _light = {cardBg:'var(--surface,#ffffff)', descColor:'var(--muted)', eyebrow:'var(--forest,#1e5b34)', lineColor:'var(--line)'};
     const _sand = {cardBg:'color-mix(in oklab,var(--tech) 20%,#ffffff)', descColor:'#4d6152', eyebrow:'#1b5230', lineColor:'color-mix(in oklab,var(--tech) 42%,#ffffff)'};
     const _vue = this.state.vue || 'mosaique';
     const _cols = _vue === 'liste' ? 1 : (this.__isPhone() ? 1 : (this.__isNarrow() ? 2 : 3));
@@ -932,6 +930,7 @@ class Component extends DCLogic {
     ];
 
     return {
+      ctaCallFirst: this.__isPhone(), ctaFormFirst: !this.__isPhone(),
       narrow: this.__isNarrow(),
       ctaCols: this.__isPhone() ? '1fr' : (this.__isNarrow() ? 'minmax(0,60fr) minmax(0,40fr)' : 'minmax(0,70fr) minmax(0,30fr)'),
       ctaPhotoW: this.__isNarrow() && !this.__isPhone() ? '128%' : '100%',
@@ -984,7 +983,7 @@ class Component extends DCLogic {
       heroImgW: this.__isPhone() ? '300px' : (this.__isNarrow() ? '380px' : '480px'),
       heroImgRight: this.__isPhone() ? '-90px' : (this.__isNarrow() ? '-60px' : '-20px'),
       heroMaisonOutils: true,
-      simHaloShow: !this.__isPhone(),
+      simHaloShow: false,
       simHeroDisp: this.__isPhone() ? 'grid' : 'flex',
       simHeroCols: this.__isPhone() ? 'minmax(0,1fr) 44%' : 'none',
       simHeroAlign: this.__isPhone() ? 'center' : 'flex-start',
@@ -997,13 +996,13 @@ class Component extends DCLogic {
       heroImgCol: this.__isPhone() ? '2' : 'auto',
       heroImgRow: this.__isPhone() ? '2' : 'auto',
       simIllPos: this.__isPhone() ? 'relative' : 'absolute',
-      simIllH: this.__isPhone() ? 'auto' : (this.__isNarrow() ? '268px' : '402px'),
+      simIllH: this.__isPhone() ? 'auto' : (this.__isNarrow() ? '240px' : '350px'),
       simIllSelf: this.__isPhone() ? 'end' : 'auto',
       simIllMt: '0px',
       simIllTr: this.__isPhone() ? 'translate(-9%,7%)' : 'translateY(calc(-50% + 10px))',
       simIllL: this.__isPhone() ? 'auto' : (this.__isNarrow() ? '409px' : '659px'),
       simIllT: this.__isPhone() ? 'auto' : (this.__isNarrow() ? '154px' : '248px'),
-      simIllS: this.__isPhone() ? '110%' : (this.__isNarrow() ? '268px' : '402px'),
+      simIllS: this.__isPhone() ? '110%' : (this.__isNarrow() ? '240px' : '350px'),
       simParaMax: this.__isNarrow() ? 'min(100%,352px)' : 'min(100%,430px)',
       ctaParaSize: this.__isNarrow() ? '15.5px' : '17px',
       ctaPhotoW: this.__isNarrow() ? '300px' : '261px',
