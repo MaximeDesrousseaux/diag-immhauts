@@ -43,7 +43,7 @@ list( $dih_l_bureau, $dih_l_deplie, $dih_l_mobile ) = $dih_taille;
 				</div>
 			</div>
 			<div class="l-hero__illus-fiche" style="--illus-bureau:<?php echo esc_attr( $dih_l_bureau ); ?>;--illus-deplie:<?php echo esc_attr( $dih_l_deplie ); ?>;--illus-mobile:<?php echo esc_attr( $dih_l_mobile ); ?>">
-				<div class="l-hero__illus-halo" aria-hidden="true"></div>
+				<div class="l-hero__illus-halo<?php echo ! empty( $dih_h['halo'] ) ? ' l-hero__illus-halo--' . esc_attr( $dih_h['halo'] ) : ''; ?>" aria-hidden="true"></div>
 				<img src="<?php echo esc_url( dih_img( $dih_illus ) ); ?>" alt="<?php echo esc_attr( $dih_h['illus_alt'] ); ?>" fetchpriority="high" decoding="async">
 			</div>
 		</div>

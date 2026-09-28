@@ -3,7 +3,8 @@
  * Session « Vos obligations » : panneau vert foncé, trois cartes à pastille
  * colorée (vert clair, jaune, orange — ou classes E / F de l'étiquette DPE).
  *
- * Arguments : surtitre, titre, cartes [ pastille, teinte, titre, texte, illustration? ].
+ * Arguments : surtitre, titre, texte? (paragraphe d'ouverture : audit, DTG),
+ * cartes [ pastille, teinte, titre, texte, illustration? ].
  * L'illustration facultative (plomb) flotte à droite de la pastille.
  * Teintes : vert | jaune | orange | dpe-e | dpe-f.
  *
@@ -17,6 +18,9 @@
 		<div class="c-panneau__int">
 			<?php echo dih_surtitre( $args['surtitre'], 'c-surtitre--clair c-surtitre--serre' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<h2 class="l-section__titre c-panneau__titre"><?php echo esc_html( $args['titre'] ); ?></h2>
+			<?php if ( ! empty( $args['texte'] ) ) : ?>
+				<p class="c-panneau__texte"><?php echo esc_html( $args['texte'] ); ?></p>
+			<?php endif; ?>
 			<ul class="c-panneau__grille">
 				<?php foreach ( $args['cartes'] as $dih_c ) : ?>
 					<li class="c-card c-card--obligation">

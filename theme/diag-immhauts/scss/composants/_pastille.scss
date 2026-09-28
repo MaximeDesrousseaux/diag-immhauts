@@ -123,4 +123,8 @@
     height: 38px;
     font-size: rem(15.5);
   }
+
+  // Contenu du carré : chiffre (15,5 px) ou sigle (14 px) au lieu d'une lettre
+  &--carre.c-badge--chiffre { font-size: rem(15.5); }
+  &--carre.c-badge--sigle { font-size: rem(14); }
 }

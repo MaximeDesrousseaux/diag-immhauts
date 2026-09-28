@@ -59,16 +59,14 @@ $dih_prep    = $dih_args['preparation'];
 			<?php endforeach; ?>
 		</ol>
 
-		<?php if ( $dih_prep ) : ?>
-			<div class="c-etapes__prep">
-				<h3 class="c-etapes__prep-titre"><?php echo esc_html( $dih_prep['titre'] ); ?></h3>
-				<p class="c-etapes__prep-texte"><?php echo esc_html( $dih_prep['texte'] ); ?></p>
-				<ul class="c-etapes__prep-liste">
-					<?php foreach ( $dih_prep['liste'] as $dih_p ) : ?>
-						<li><span class="c-etapes__coche" aria-hidden="true">✓</span><?php echo esc_html( $dih_p ); ?></li>
-					<?php endforeach; ?>
-				</ul>
-			</div>
-		<?php endif; ?>
+		<?php
+		if ( $dih_prep ) {
+			// DPE : préparation intégrée au bloc, en style large.
+			if ( $dih_integre ) {
+				$dih_prep['style'] = 'large';
+			}
+			get_template_part( 'template-parts/composants/preparation', null, $dih_prep );
+		}
+		?>
 	</div>
 </section>

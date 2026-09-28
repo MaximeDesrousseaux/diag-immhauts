@@ -10,6 +10,8 @@
  * Arguments : titre, texte (défauts : ceux de l'accueil), variante :
  * - '' (accueil) : formulaire = « Demande de rappel gratuit » (popup) ;
  * - 'fiche' : formulaire = « Formulaire de devis » (page Contact).
+ * formulaire (fiches) : [ libellé, cible ] du bouton formulaire (défaut : « Formulaire
+ * de devis » vers Contact ; DTG : « Offre syndics & bailleurs » vers Professionnels).
  * boutons : 'obligations' (fiche DPE) remplace l'appel par « Vérifier mes
  * obligations » (simulateur), sans inversion sur téléphone.
  * options (fiches) : 'haut' (rembourrage vertical jusqu'à 40 px, mesurage),
@@ -26,7 +28,8 @@ $dih_args = wp_parse_args(
 		'texte'    => $dih_c['texte'],
 		'variante' => '',
 		'options'  => array(),
-		'boutons'  => '',
+		'boutons'    => '',
+		'formulaire' => array( 'Formulaire de devis', array( 'contact', '#devis' ) ),
 	)
 );
 $dih_fiche = 'fiche' === $dih_args['variante'];
@@ -56,7 +59,9 @@ foreach ( (array) $dih_args['options'] as $dih_option_rappel ) {
 						echo dih_bouton( 'Vérifier mes obligations', 'href="' . esc_url( dih_url( 'simulateur' ) ) . '"', 'fleche-courte', 'c-btn--contour c-btn--grand' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					} else {
 						if ( $dih_fiche ) {
-							echo dih_bouton( 'Formulaire de devis', 'href="' . esc_url( dih_url( 'contact', 'devis' ) ) . '"', 'enveloppe', 'c-btn--grand c-rappel__cta c-rappel__cta--form' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							$dih_f = $dih_args['formulaire'];
+							$dih_u = is_array( $dih_f[1] ) ? dih_url( $dih_f[1][0], ltrim( $dih_f[1][1], '#' ) ) : dih_url_cible( $dih_f[1] );
+							echo dih_bouton( $dih_f[0], 'href="' . esc_url( $dih_u ) . '"', 'enveloppe', 'c-btn--grand c-rappel__cta c-rappel__cta--form' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						} else {
 							echo dih_bouton( $dih_c['cta_2'], dih_attr_rappel(), 'enveloppe', 'c-btn--grand c-rappel__cta c-rappel__cta--form' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						}

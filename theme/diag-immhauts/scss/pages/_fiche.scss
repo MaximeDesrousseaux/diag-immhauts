@@ -175,7 +175,8 @@
 }
 
 // Trois cartes par ligne (README : minmax(max(200px, (100 % − 24 px) / 3), 1fr))
-.l-session__grille-tiers {
+.l-session__grille-tiers,
+.l-session--cadre-tiers .l-session__categories {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(max(200px, calc((100% - 24px) / 3)), 1fr));
   gap: 12px;
@@ -232,3 +233,100 @@
 
   .c-card--niveau { align-items: center; }
 }
+
+// Colonnes de 250 px (points sur place de l'audit et du DTG)
+.l-session__grille-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Intro agrandie (audit, DTG)
+.l-session__cadre-texte--grand {
+  .l-session__titre { font-size: clamp(26px, 3vw, 36px); }
+
+  .l-session__intro {
+    max-width: none;
+    margin-top: 24px;
+    font-size: rem(17);
+    line-height: 1.9;
+  }
+}
+
+// Audit : texte à gauche, catégories empilées à droite
+.l-session--cadre-cote {
+  .l-session__cadre {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+    gap: clamp(24px, 4vw, 56px);
+    align-items: stretch;
+  }
+
+  .l-session__categories {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+// DTG : texte (760 px au plus), puis trois catégories en colonne
+.l-session--cadre-colonnes {
+  .l-session__cadre {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 3.4vw, 40px);
+  }
+
+  .l-session__cadre-texte { max-width: 760px; }
+  .l-session__intro { line-height: 1.75; }
+
+  .l-session__categories {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @include bp(deplie) { grid-template-columns: 1fr; }
+  }
+
+  .c-card--categorie { flex-direction: column; }
+}
+
+// Obligations : paragraphe d'ouverture facultatif (audit, DTG)
+.c-panneau__texte {
+  position: relative;
+  max-width: 640px;
+  margin-top: 16px;
+  font-size: rem(15.5);
+  line-height: 1.7;
+  color: c(onDarkSoft);
+}
+
+// Résultat en grille (audit, DTG) : colonnes de 250 px, cartes alignées en haut
+.l-resultat__grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+
+  .c-card--niveau {
+    align-items: flex-start;
+    padding: clamp(16px, 4vw, 24px);
+  }
+}
+
+.l-resultat__texte:has(.l-resultat__grille) .l-resultat__intro { max-width: 640px; }
+
+// Préparation dans la section résultat (DTG)
+.l-resultat .c-prep { margin-top: 56px; }

@@ -544,7 +544,7 @@ $accueil-pas-mobile: clamp(12px, 3.4vw, 16px);
     position: relative;
     display: block;
     width: var(--illus-bureau);
-    max-width: 100%;
+    max-width: none; // le DTG déborde volontairement de sa colonne (150 % sur téléphone)
     height: auto;
     filter: $filtre-illus;
 
@@ -564,6 +564,12 @@ $accueil-pas-mobile: clamp(12px, 3.4vw, 16px);
   background: radial-gradient(circle at 46% 44%, teinte(techBright, 24%) 0, transparent 70%);
   filter: blur(22px);
   pointer-events: none;
+}
+
+// Halo lumineux et diffus (DTG)
+.l-hero__illus-halo--lumineux {
+  background: radial-gradient(closest-side, teinte(glow, 30%) 0, teinte(glow, 13%) 54%, transparent 84%);
+  filter: blur(56px);
 }
 
 // Fil d'Ariane des fiches : plus petit, trois niveaux

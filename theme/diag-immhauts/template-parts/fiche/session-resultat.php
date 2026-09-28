@@ -4,12 +4,14 @@
  * en trois niveaux numérotés (vert clair, jaune, orange).
  *
  * Arguments : surtitre, titre, texte, disposition, cartes [ numéro, teinte, titre, texte ].
- * Dispositions : cartes (trois colonnes : amiante, plomb) | liste (une colonne).
+ * Dispositions : cartes (trois colonnes : amiante, plomb) | liste (une colonne) |
+ * grille (colonnes de 250 px, cartes en ligne : audit, DTG).
+ * preparation? : « À réunir avant ma visite » dans la même section (DTG).
  *
  * @package DiagImmHauts
  */
 
-$dih_dispo = 'cartes' === $args['disposition'] ? 'cartes' : 'liste';
+$dih_dispo = in_array( $args['disposition'], array( 'cartes', 'grille' ), true ) ? $args['disposition'] : 'liste';
 ?>
 <section class="l-resultat">
 	<div class="l-resultat__int">
@@ -29,5 +31,10 @@ $dih_dispo = 'cartes' === $args['disposition'] ? 'cartes' : 'liste';
 				<?php endforeach; ?>
 			</ol>
 		</div>
+		<?php
+		if ( ! empty( $args['preparation'] ) ) {
+			get_template_part( 'template-parts/composants/preparation', null, $args['preparation'] );
+		}
+		?>
 	</div>
 </section>
