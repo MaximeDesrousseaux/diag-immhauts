@@ -11,18 +11,18 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'nom'      => 'Gaz',
 	'hero'     => array(
-		'pastille'      => 'Obligatoire si l\'installation a plus de 15 ans',
+		'pastille'      => 'Obligatoire si l\'installation a plus de 15 ans',
 		'titre'         => 'État de l\'installation intérieure de gaz',
 		'accent'        => 'étanchéité, combustion, ventilation.',
-		'chapeau'       => 'Une installation de gaz vieillissante expose à deux risques majeurs : la fuite et l\'intoxication au monoxyde de carbone. Le diagnostic contrôle les tuyauteries fixes, les appareils raccordés, l\'évacuation des produits de combustion et la ventilation du logement, puis classe chaque anomalie selon sa gravité.',
+		'chapeau'       => 'Une installation de gaz vieillissante expose à deux risques majeurs : la fuite et l\'intoxication au monoxyde de carbone. Le diagnostic contrôle les tuyauteries fixes, les appareils raccordés, l\'évacuation des produits de combustion et la ventilation du logement, puis classe chaque anomalie selon sa gravité.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
 		'illus_alt'     => 'Illustration gaz',
 	),
 	'reperes'  => array(
-		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', '+ de 15 ans', 'Installations concernées' ),
-		array( '<circle cx="12" cy="12" r="8"></circle><path d="M12 8v4l3 2"></path>', '45 min à 1 h', 'Durée moyenne sur place' ),
-		array( '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path>', '3 ans / 6 ans', 'Validité vente / location' ),
+		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', '+ de 15 ans', 'Installations concernées' ),
+		array( '<circle cx="12" cy="12" r="8"></circle><path d="M12 8v4l3 2"></path>', '45 min à 1 h', 'Durée moyenne sur place' ),
+		array( '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path>', '3 ans / 6 ans', 'Validité vente / location' ),
 		array( '<circle cx="12" cy="12" r="2"></circle><path d="M12 10V4a4 4 0 0 1 0 6M14 12h6a4 4 0 0 1-6 0M12 14v6a4 4 0 0 1 0-6M10 12H4a4 4 0 0 1 6 0"></path>', '4 domaines', 'Tuyauteries, appareils, évacuation, ventilation' ),
 	),
 	'sessions' => array(
@@ -32,9 +32,9 @@ return array(
 			'titre'     => 'Trois organes sous surveillance',
 			'texte'     => 'Le contrôle ne porte pas sur le réseau du distributeur mais sur votre installation intérieure, depuis le robinet de commande jusqu\'aux appareils et à l\'air qu\'ils consomment.',
 			'cartes'    => array(
-				array( 'T', 'vert', 'Tuyauteries fixes', 'Organe de coupure, canalisations, raccords et tuyaux flexibles : étanchéité, état et date de péremption.' ),
-				array( 'A', 'jaune', 'Appareils raccordés', 'Chaudière, chauffe-eau, cuisinière, radiateur : raccordement, stabilité de la combustion et taux de CO mesuré.' ),
-				array( 'V', 'orange', 'Évacuation & ventilation', 'Conduits de fumée, tirage, amenées d’air et sorties : c’est ce qui protège du monoxyde de carbone.' ),
+				array( 'T', 'vert', 'Tuyauteries fixes', 'Organe de coupure, canalisations, raccords et tuyaux flexibles : étanchéité, état et date de péremption.' ),
+				array( 'A', 'jaune', 'Appareils raccordés', 'Chaudière, chauffe-eau, cuisinière, radiateur : raccordement, stabilité de la combustion et taux de CO mesuré.' ),
+				array( 'V', 'orange', 'Évacuation & ventilation', 'Conduits de fumée, tirage, amenées d’air et sorties : c’est ce qui protège du monoxyde de carbone.' ),
 			),
 			'sur_place' => array(
 				'surtitre' => 'Sur place',
@@ -53,10 +53,10 @@ return array(
 		array(
 			'type'     => 'obligations',
 			'surtitre' => 'Vos obligations',
-			'titre'    => 'Quel diagnostic gaz dans votre situation ?',
+			'titre'    => 'Quel diagnostic gaz dans votre situation ?',
 			'cartes'   => array(
-				array( 'Vente', 'vert', 'Diagnostic valable 3 ans', 'Annexé au dossier de diagnostic technique. Les anomalies sont portées à la connaissance de l’acquéreur.' ),
-				array( 'Location', 'jaune', 'Diagnostic valable 6 ans', 'Remis avec le bail. Les anomalies affectant la sécurité doivent être corrigées avant l’entrée dans les lieux.' ),
+				array( 'Vente', 'vert', 'Diagnostic valable 3 ans', 'Annexé au dossier de diagnostic technique. Les anomalies sont portées à la connaissance de l’acquéreur.' ),
+				array( 'Location', 'jaune', 'Diagnostic valable 6 ans', 'Remis avec le bail. Les anomalies affectant la sécurité doivent être corrigées avant l’entrée dans les lieux.' ),
 				array( 'Après une coupure', 'orange', 'Remise en service encadrée', 'Après un DGI, l’installation ne peut être réalimentée qu’après réparation par un professionnel et attestation de son intervention.' ),
 			),
 		),
@@ -64,7 +64,7 @@ return array(
 			'type'        => 'resultat',
 			'disposition' => 'liste',
 			'surtitre'    => 'Le résultat',
-			'titre'       => 'Une anomalie relevée : et ensuite ?',
+			'titre'       => 'Une anomalie relevée : et ensuite ?',
 			'texte'       => 'Les anomalies sont codifiées. Leur code détermine le délai dans lequel il faut intervenir — et, dans le cas le plus grave, l\'arrêt immédiat de l\'installation.',
 			'cartes'      => array(
 				array( 'A1', 'vert', 'Anomalie mineure', 'À corriger lors d’une intervention ultérieure. L’installation peut continuer à fonctionner normalement.' ),
@@ -78,8 +78,8 @@ return array(
 		'surtitre'    => 'Comment ça se passe',
 		'titre'       => 'De votre appel au rapport, en 4 étapes',
 		'liste'       => array(
-			array( '1', 'Cadrage par téléphone', 'Nombre d’appareils au gaz, type de chaudière, motif : je confirme l’obligation et le prix.' ),
-			array( '2', 'Devis gratuit sous 24 h', 'Prix ferme, tout compris. Tarif réduit si le diagnostic est groupé avec l’électricité ou le DPE.' ),
+			array( '1', 'Cadrage par téléphone', 'Nombre d’appareils au gaz, type de chaudière, motif : je confirme l’obligation et le prix.' ),
+			array( '2', 'Devis gratuit sous 24 h', 'Prix ferme, tout compris. Tarif réduit si le diagnostic est groupé avec l’électricité ou le DPE.' ),
 			array( '3', 'Le contrôle sur place', 'Essais d’étanchéité, mesures de combustion et de monoxyde, vérification des ventilations et des conduits.' ),
 			array( '4', 'Rapport & explications', 'Rapport conforme avec les anomalies codifiées A1, A2 ou DGI, suivi d’un appel pour prioriser les interventions.' ),
 		),
@@ -94,25 +94,25 @@ return array(
 		'surtitre'  => 'Questions fréquentes',
 		'titre'     => 'Le gaz en clair',
 		'questions' => array(
-			array( 'Quand le diagnostic est-il obligatoire ?', 'Dès que le logement comporte une installation intérieure de gaz de plus de quinze ans, pour la vente comme pour la mise en location. Peu importe que les appareils soient encore utilisés ou non.', 'Vérifier mes obligations', 'simulateur' ),
-			array( 'Combien de temps est-il valable ?', 'Trois ans pour une vente, six ans pour une location. Un certificat de conformité récent délivré par un professionnel qualifié peut en tenir lieu dans certains cas.', 'Toutes les durées de validité', 'diagnostics' ),
-			array( 'Que se passe-t-il en cas de danger grave ?', 'Le code DGI impose l\'interruption immédiate de l\'alimentation en gaz. Je ferme l\'organe de coupure, j\'informe l\'occupant et le distributeur, et l\'installation ne peut être remise en service qu\'après réparation par un professionnel.', 'Poser une question sur mon rapport', 'contact' ),
-			array( 'Ma cuisinière au gaz est-elle contrôlée ?', 'Oui, comme tout appareil raccordé de manière fixe ou par tuyau flexible : cuisinière, table de cuisson, chaudière, chauffe-eau, radiateur. Son raccordement, sa combustion et sa ventilation sont vérifiés.', 'Demander un devis gaz', '#rappel' ),
-			array( 'Faut-il que le gaz soit ouvert ?', 'Oui. Sans mise en service, les essais d\'étanchéité et les mesures de combustion sont impossibles. Prévoyez aussi de l\'eau chaude et un accès à la chaudière.', 'Préparer ma visite', 'contact' ),
-			array( 'J\'ai supprimé le gaz, dois-je le déclarer ?', 'Si l\'installation a été condamnée dans les règles — coupure, obturation, dépose des appareils — le diagnostic n\'est plus exigé. Gardez le justificatif de l\'entreprise qui est intervenue.', 'Le diagnostic électricité', 'electricite' ),
+			array( 'Quand le diagnostic est-il obligatoire ?', 'Dès que le logement comporte une installation intérieure de gaz de plus de quinze ans, pour la vente comme pour la mise en location. Peu importe que les appareils soient encore utilisés ou non.', 'Vérifier mes obligations', 'simulateur' ),
+			array( 'Combien de temps est-il valable ?', 'Trois ans pour une vente, six ans pour une location. Un certificat de conformité récent délivré par un professionnel qualifié peut en tenir lieu dans certains cas.', 'Toutes les durées de validité', 'diagnostics' ),
+			array( 'Que se passe-t-il en cas de danger grave ?', 'Le code DGI impose l\'interruption immédiate de l\'alimentation en gaz. Je ferme l\'organe de coupure, j\'informe l\'occupant et le distributeur, et l\'installation ne peut être remise en service qu\'après réparation par un professionnel.', 'Poser une question sur mon rapport', 'contact' ),
+			array( 'Ma cuisinière au gaz est-elle contrôlée ?', 'Oui, comme tout appareil raccordé de manière fixe ou par tuyau flexible : cuisinière, table de cuisson, chaudière, chauffe-eau, radiateur. Son raccordement, sa combustion et sa ventilation sont vérifiés.', 'Demander un devis gaz', '#rappel' ),
+			array( 'Faut-il que le gaz soit ouvert ?', 'Oui. Sans mise en service, les essais d\'étanchéité et les mesures de combustion sont impossibles. Prévoyez aussi de l\'eau chaude et un accès à la chaudière.', 'Préparer ma visite', 'contact' ),
+			array( 'J\'ai supprimé le gaz, dois-je le déclarer ?', 'Si l\'installation a été condamnée dans les règles — coupure, obturation, dépose des appareils — le diagnostic n\'est plus exigé. Gardez le justificatif de l\'entreprise qui est intervenue.', 'Le diagnostic électricité', 'electricite' ),
 		),
 	),
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec le gaz',
 		'cartes' => array(
-			array( 'electricite', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
+			array( 'electricite', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
 			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
 			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
 			array( 'plomb', 'Plomb (CREP)', 'Risque d’exposition au plomb dans les peintures d’avant 1949.' ),
 		),
 	),
 	'rappel'   => array(
-		'titre' => 'Besoin d\'un diagnostic gaz ?',
-		'texte' => 'Donnez-moi le type de bien, le nombre d\'appareils au gaz et le motif : vous recevez un devis gratuit sous 24 heures. Groupé avec l\'électricité, il est nettement moins cher.',
+		'titre' => 'Besoin d\'un diagnostic gaz ?',
+		'texte' => 'Donnez-moi le type de bien, le nombre d\'appareils au gaz et le motif : vous recevez un devis gratuit sous 24 heures. Groupé avec l\'électricité, il est nettement moins cher.',
 	),
 );

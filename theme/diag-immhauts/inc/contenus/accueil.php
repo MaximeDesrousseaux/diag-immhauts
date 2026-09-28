@@ -16,18 +16,18 @@ return array(
 		'titre'          => 'Des diagnostics fiables,',
 		'titre_accent'   => "partout dans l'Artois.",
 		'titre_mobile'   => 'un interlocuteur unique.', // 2e ligne du titre sur téléphone
-		'chapeau'        => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies réalise lui-même les douze diagnostics. Un seul interlocuteur, avec rigueur, réactivité et pédagogie.',
+		'chapeau'        => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies réalise lui-même les douze diagnostics. Un seul interlocuteur, avec rigueur, réactivité et pédagogie.',
 		'cta'            => 'Demande de rappel',
 		'cta_2'          => 'Découvrir mes prestations',
 		'cta_2_court'    => 'Mes prestations', // déplié (VERROUILLÉ)
 		'avis_mobile'    => '5,0 · 12 avis · certifié Bureau Veritas',
 		'chiffres'       => array(
-			array( '8 ans', "d'expérience terrain" ),
-			array( '48 h', 'délai moyen de rendez-vous' ),
-			array( '100 %', 'certifié & assuré' ),
+			array( '8 ans', "d'expérience terrain" ),
+			array( '48 h', 'délai moyen de rendez-vous' ),
+			array( '100 %', 'certifié & assuré' ),
 		),
 		'carte_titre'    => 'Rappel gratuit',
-		'carte_delai'    => 'Réponse sous 24 h',
+		'carte_delai'    => 'Réponse sous 24 h',
 	),
 
 	'confiance'    => array(
@@ -45,7 +45,7 @@ return array(
 		'note'         => 'Dans le calcul du DPE depuis le 1<sup>er</sup> janvier 2026. Il descendra à 1,7 en 2027.',
 		'etiquette'    => 'Nouveau · réforme du DPE 2026',
 		'titre'        => 'Votre logement chauffé à l\'électricité a <span class="l-insecable">peut-être</span> gagné une classe.',
-		'texte'        => "Environ 850 000 logements sont sortis du statut de passoire thermique sans le moindre travaux. Si votre DPE date d'avant 2026, une attestation de nouvelle étiquette est gratuite : je vous dis en cinq minutes si votre bien est concerné et ce que ça change pour votre vente ou votre location.",
+		'texte'        => "Environ 850 000 logements sont sortis du statut de passoire thermique sans le moindre travaux. Si votre DPE date d'avant 2026, une attestation de nouvelle étiquette est gratuite : je vous dis en cinq minutes si votre bien est concerné et ce que ça change pour votre vente ou votre location.",
 		'cta'          => 'Vérifier mon étiquette',
 		'lien'         => 'Comprendre la réforme',
 		'lien_url'     => array( 'actualites', 'reforme-dpe-2026' ), // article du journal (étape 4)
@@ -54,7 +54,7 @@ return array(
 	'prestations'  => array(
 		'surtitre' => 'Nos prestations',
 		'titre'    => 'Un accompagnement pour chaque projet immobilier',
-		'texte'    => "Quatre pôles d'expertise, une même exigence : des rapports clairs, conformes et rendus dans les délais.",
+		'texte'    => "Quatre pôles d'expertise, une même exigence : des rapports clairs, conformes et rendus dans les délais.",
 		'cards'    => array(
 			array(
 				'teinte' => 'foret',
@@ -121,9 +121,9 @@ return array(
 		'photo_alt' => 'Maxime Dillies, diagnostiqueur immobilier certifié',
 		'nom'       => 'Maxime Dillies',
 		'role'      => 'Fondateur & diagnostiqueur certifié',
-		'surtitre'  => 'Qui suis-je ?',
+		'surtitre'  => 'Qui suis-je ?',
 		'titre'     => 'Un diagnostiqueur indépendant, pas un simple prestataire',
-		'texte'     => "Installé au cœur du Pas-de-Calais, j'ai fondé Diag Imm'Hauts pour offrir aux particuliers, agences et collectivités un diagnostic à la fois rigoureux et humain. Chaque intervention, je la mène moi-même : vous avez un interlocuteur unique, joignable, qui prend le temps d'expliquer.",
+		'texte'     => "Installé au cœur du Pas-de-Calais, j'ai fondé Diag Imm'Hauts pour offrir aux particuliers, agences et collectivités un diagnostic à la fois rigoureux et humain. Chaque intervention, je la mène moi-même : vous avez un interlocuteur unique, joignable, qui prend le temps d'expliquer.",
 		'valeurs'   => array(
 			array( 'bulle', 'Interlocuteur unique', 'Vous parlez directement à celui qui intervient.' ),
 			array( 'horloge', 'Réactivité', 'Rendez-vous rapides, rapports dans les délais.' ),
@@ -165,17 +165,17 @@ return array(
 		'titre'    => 'Vos questions sur le diagnostic immobilier',
 		// question, réponse, libellé du lien, cible (clé de page ou #ancre)
 		'questions' => array(
-			array( 'Quels diagnostics sont obligatoires pour vendre mon bien ?', 'Cela dépend de l’âge et de la localisation du logement : DPE, amiante (avant 1997), plomb (avant 1949), électricité et gaz (installations de plus de 15 ans), ERP, mesurage loi Carrez en copropriété… Je constitue pour vous le Dossier de Diagnostic Technique complet annexé à la promesse de vente.', 'Tester mon bien avec le simulateur', 'simulateur' ),
-			array( 'Combien de temps un DPE reste-t-il valide ?', 'Un DPE est valable 10 ans. Attention : les DPE réalisés entre le 1er janvier 2018 et le 30 juin 2021 ne sont plus valides depuis le 1er janvier 2025. Un audit énergétique est par ailleurs requis pour les biens classés E, F ou G à la vente.', 'Tout savoir sur le DPE', 'dpe' ),
-			array( 'Sous quel délai intervenez-vous ?', 'J’interviens généralement sous 48 heures, souvent plus vite en cas d’urgence. Le devis, lui, vous est communiqué gratuitement sous 24 heures après votre demande de rappel.', 'Demander un devis gratuit', 'contact' ),
-			array( 'Dans quelles communes vous déplacez-vous ?', 'Je couvre l’Artois et une large partie des Hauts-de-France : Arras, Lens, Béthune, Saint-Pol-sur-Ternoise et de nombreuses communes alentour. Si votre ville n’apparaît pas, appelez-moi : j’interviens très probablement chez vous.', 'Voir la carte des zones desservies', '#zones' ),
-			array( 'Vos diagnostics sont-ils certifiés et assurés ?', 'Oui. Je suis diagnostiqueur certifié (Bureau Veritas) sur l’ensemble des domaines et couvert par une assurance responsabilité civile professionnelle. Vos rapports sont opposables et reconnus par les notaires et agences.', 'Mon parcours et mes certifications', 'qui' ),
+			array( 'Quels diagnostics sont obligatoires pour vendre mon bien ?', 'Cela dépend de l’âge et de la localisation du logement : DPE, amiante (avant 1997), plomb (avant 1949), électricité et gaz (installations de plus de 15 ans), ERP, mesurage loi Carrez en copropriété… Je constitue pour vous le Dossier de Diagnostic Technique complet annexé à la promesse de vente.', 'Tester mon bien avec le simulateur', 'simulateur' ),
+			array( 'Combien de temps un DPE reste-t-il valide ?', 'Un DPE est valable 10 ans. Attention : les DPE réalisés entre le 1er janvier 2018 et le 30 juin 2021 ne sont plus valides depuis le 1er janvier 2025. Un audit énergétique est par ailleurs requis pour les biens classés E, F ou G à la vente.', 'Tout savoir sur le DPE', 'dpe' ),
+			array( 'Sous quel délai intervenez-vous ?', 'J’interviens généralement sous 48 heures, souvent plus vite en cas d’urgence. Le devis, lui, vous est communiqué gratuitement sous 24 heures après votre demande de rappel.', 'Demander un devis gratuit', 'contact' ),
+			array( 'Dans quelles communes vous déplacez-vous ?', 'Je couvre l’Artois et une large partie des Hauts-de-France : Arras, Lens, Béthune, Saint-Pol-sur-Ternoise et de nombreuses communes alentour. Si votre ville n’apparaît pas, appelez-moi : j’interviens très probablement chez vous.', 'Voir la carte des zones desservies', '#zones' ),
+			array( 'Vos diagnostics sont-ils certifiés et assurés ?', 'Oui. Je suis diagnostiqueur certifié (Bureau Veritas) sur l’ensemble des domaines et couvert par une assurance responsabilité civile professionnelle. Vos rapports sont opposables et reconnus par les notaires et agences.', 'Mon parcours et mes certifications', 'qui' ),
 		),
 	),
 
 	'rappel'       => array(
-		'titre'  => 'Un projet de vente, de location ou un audit ?',
-		'texte'  => 'Parlons-en. Décrivez-moi votre bien et recevez un devis gratuit, clair et sans engagement — généralement sous 24 heures.',
+		'titre'  => 'Un projet de vente, de location ou un audit ?',
+		'texte'  => 'Parlons-en. Décrivez-moi votre bien et recevez un devis gratuit, clair et sans engagement — généralement sous 24 heures.',
 		'cta_2'  => 'Demande de rappel gratuit',
 		'photo'  => 'maxime_tel.webp',
 		'photo_alt' => 'Maxime Dillies au téléphone',

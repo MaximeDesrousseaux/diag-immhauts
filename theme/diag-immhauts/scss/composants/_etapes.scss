@@ -191,10 +191,13 @@ $socle: clamp(76px, 8vw, 96px);
   .c-etapes--integree & { margin-top: 56px; }
 }
 
-// Style large : fond de page, rembourrage jusqu'à 40 px, colonnes de 250 px
+// Style large : fond de page, rembourrage jusqu'à 40 px, texte de 640 px au plus,
+// colonnes de 250 px
 .c-prep--large {
   padding: clamp(16px, 4vw, 40px);
   background: c(bg);
+
+  .c-prep__texte { max-width: 640px; }
 }
 
 .c-prep__titre {
@@ -204,7 +207,6 @@ $socle: clamp(76px, 8vw, 96px);
 }
 
 .c-prep__texte {
-  max-width: 640px;
   margin-top: 8px;
   font-size: rem(14);
   line-height: 1.6;

@@ -419,18 +419,19 @@
   .c-rappel--fiche & { padding-inline: 26px; }
 }
 
+// Préfixe .c-rappel : l'emporte sur les rembourrages de bureau (.c-rappel--fiche …).
 @include bp(mobile) {
-  .c-rappel__cta--appel {
+  .c-rappel .c-rappel__cta--appel {
     order: -1;
     @include btn-vert;
     padding-inline: clamp(16px, 4.2vw, 24px);
     box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6);
   }
 
-  .c-rappel__cta--form {
+  .c-rappel .c-rappel__cta--form {
     @include btn-contour;
     padding-inline: 28px;
-
-    .c-rappel--fiche & { padding-inline: 26px; }
   }
+
+  .c-rappel--fiche .c-rappel__cta--form { padding-inline: 26px; }
 }
