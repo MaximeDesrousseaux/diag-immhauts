@@ -494,6 +494,20 @@ a.c-card { @include survol-card; }
 // --- Obligation (panneau vert foncé des fiches) ------------------------------------------------
 .c-card--obligation {
   min-width: 0;
+  overflow: hidden;
+
+  // Illustration facultative (plomb), flottante à droite
+  .c-card__illus {
+    float: right;
+    shape-outside: margin-box;
+    width: clamp(70px, 7.6vw, 84px);
+    height: clamp(70px, 7.6vw, 84px);
+    margin: 0 0 8px 12px;
+    background: center / contain no-repeat;
+  }
+
+  .c-card__illus + .c-badge { white-space: nowrap; }
+
   padding: clamp(16px, 4vw, 24px);
   border: 1px solid color-mix(in oklab, #fff 15%, transparent);
   border-radius: 16px;
@@ -530,22 +544,35 @@ a.c-card { @include survol-card; }
 
   .c-card__picto {
     position: relative;
-    left: 7px;
-    width: 50px;
-    height: 50px;
-    margin-bottom: 8px;
+    width: 38px;
+    height: 38px;
     border-radius: 10px;
     background: color-mix(in oklab, #{c(tech)} 14%, #{c(surface)});
   }
 
-  // Illustration qui déborde du carré (80 × 80 px centrés sur 50 × 50)
+  // Illustration qui déborde du carré de 34 % de chaque côté
   .c-card__illus {
     position: absolute;
-    left: -34%;
-    top: -34%;
-    width: 80px;
-    height: 80px;
+    inset: -34%;
     background: center / contain no-repeat;
+  }
+
+  // Fiche DPE : carré de 50 px décalé, illustration de 80 × 80 px
+  &.c-card--lie-grand {
+    .c-card__picto {
+      left: 7px;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 8px;
+    }
+
+    .c-card__illus {
+      inset: auto;
+      left: -34%;
+      top: -34%;
+      width: 80px;
+      height: 80px;
+    }
   }
 
   .c-card__titre {
@@ -558,6 +585,96 @@ a.c-card { @include survol-card; }
   .c-card__texte {
     font-size: rem(12.5);
     line-height: 1.5;
+    color: c(muted);
+  }
+}
+
+// --- Catégorie à lettre (session « cadre ») -----------------------------------------------
+.c-card--categorie {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: clamp(16px, 4vw, 24px);
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-card__titre {
+    display: block;
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: rem(17);
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    display: block;
+    margin-top: 4px;
+    font-size: rem(14);
+    line-height: 1.6;
+    color: c(muted);
+  }
+}
+
+// --- Point recherché sur place (picto + titre + texte) ------------------------------------
+.c-card--point {
+  padding: clamp(12px, 3.4vw, 16px);
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-card__picto {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: color-mix(in oklab, #{c(tech)} 14%, #{c(surface)});
+    color: c(forest);
+  }
+
+  .c-card__titre {
+    display: block;
+    font-weight: 700;
+    font-size: rem(14);
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    display: block;
+    margin-top: 4px;
+    font-size: rem(12.5);
+    line-height: 1.5;
+    color: c(muted);
+  }
+}
+
+// --- Niveau de résultat (numéro coloré) -----------------------------------------------------
+.c-card--niveau {
+  display: flex;
+  gap: 16px;
+  padding: 20px 22px;
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(bg);
+
+  .c-card__corps { min-width: 0; }
+
+  .c-card__titre {
+    display: block;
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: rem(15.5);
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    display: block;
+    margin-top: 4px;
+    font-size: rem(14);
+    line-height: 1.6;
     color: c(muted);
   }
 }

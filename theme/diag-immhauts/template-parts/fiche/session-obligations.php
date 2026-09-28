@@ -3,7 +3,8 @@
  * Session « Vos obligations » : panneau vert foncé, trois cartes à pastille
  * colorée (vert clair, jaune, orange — ou classes E / F de l'étiquette DPE).
  *
- * Arguments : surtitre, titre, cartes [ pastille, teinte, titre, texte ].
+ * Arguments : surtitre, titre, cartes [ pastille, teinte, titre, texte, illustration? ].
+ * L'illustration facultative (plomb) flotte à droite de la pastille.
  * Teintes : vert | jaune | orange | dpe-e | dpe-f.
  *
  * @package DiagImmHauts
@@ -19,6 +20,9 @@
 			<ul class="c-panneau__grille">
 				<?php foreach ( $args['cartes'] as $dih_c ) : ?>
 					<li class="c-card c-card--obligation">
+						<?php if ( ! empty( $dih_c[4] ) ) : ?>
+							<span class="c-card__illus" aria-hidden="true" style="background-image:url('<?php echo esc_url( dih_img( $dih_c[4] ) ); ?>')"></span>
+						<?php endif; ?>
 						<span class="c-badge c-badge--<?php echo esc_attr( $dih_c[1] ); ?>"><?php echo esc_html( $dih_c[0] ); ?></span>
 						<span class="c-card__titre"><?php echo esc_html( $dih_c[2] ); ?></span>
 						<p class="c-card__texte"><?php echo esc_html( $dih_c[3] ); ?></p>

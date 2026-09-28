@@ -70,3 +70,27 @@ function dih_icone( $nom, $taille = 16, $args = array() ) {
 		$traces[ $nom ]
 	);
 }
+
+/**
+ * SVG à partir d'un tracé écrit dans les contenus (pictos propres à une fiche).
+ * Même gabarit que dih_icone() : 24 × 24, trait en currentColor.
+ *
+ * @param string $traces Éléments SVG (path, rect, circle…) relevés sur la maquette.
+ * @param int    $taille Largeur et hauteur en px.
+ * @return string
+ */
+function dih_svg( $traces, $taille = 22 ) {
+	$autorises = array(
+		'path'     => array( 'd' => true, 'fill' => true, 'stroke' => true ),
+		'rect'     => array( 'x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true ),
+		'circle'   => array( 'cx' => true, 'cy' => true, 'r' => true, 'fill' => true, 'stroke' => true ),
+		'line'     => array( 'x1' => true, 'y1' => true, 'x2' => true, 'y2' => true ),
+		'polyline' => array( 'points' => true ),
+		'ellipse'  => array( 'cx' => true, 'cy' => true, 'rx' => true, 'ry' => true ),
+	);
+	return sprintf(
+		'<svg width="%1$d" height="%1$d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">%2$s</svg>',
+		(int) $taille,
+		wp_kses( $traces, $autorises )
+	);
+}

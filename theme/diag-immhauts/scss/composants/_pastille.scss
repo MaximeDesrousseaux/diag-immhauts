@@ -102,4 +102,25 @@
   &--orange { background: $pastille-orange; }
   &--dpe-e { background: $dpe-e; }
   &--dpe-f { background: $dpe-f; }
+
+  // Carrés : lettre d'une catégorie (44 px), numéro d'un niveau (38 px)
+  &--carre,
+  &--carre-petit {
+    flex: none;
+    justify-content: center;
+    padding: 0;
+    border-radius: 10px;
+  }
+
+  &--carre {
+    width: 44px;
+    height: 44px;
+    font-size: rem(19);
+  }
+
+  &--carre-petit {
+    width: 38px;
+    height: 38px;
+    font-size: rem(15.5);
+  }
 }

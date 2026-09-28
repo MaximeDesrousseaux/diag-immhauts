@@ -165,3 +165,70 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: 16px;
 }
+
+// Session « cadre » : catégories à lettre, puis points recherchés sur place
+.l-session--cadre {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding-block: clamp(40px, 6vw, 64px);
+}
+
+// Trois cartes par ligne (README : minmax(max(200px, (100 % − 24 px) / 3), 1fr))
+.l-session__grille-tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(200px, calc((100% - 24px) / 3)), 1fr));
+  gap: 12px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+// --- Session « Le résultat » : fond blanc, niveaux en cartes ou en liste -------------------
+.l-resultat {
+  background: c(surface);
+  border-block: 1px solid c(line);
+}
+
+.l-resultat__int {
+  @include conteneur;
+  padding-block: clamp(44px, 6vw, 70px);
+}
+
+.l-resultat__intro {
+  max-width: 580px;
+  margin-top: 16px;
+  font-size: rem(15.5);
+  line-height: 1.7;
+  color: c(muted);
+}
+
+.l-resultat__cartes,
+.l-resultat__liste {
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.l-resultat__cartes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+
+  @include bp(mobile) { grid-template-columns: 1fr; }
+
+  .c-card--niveau {
+    min-width: 0;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.l-resultat__liste {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .c-card--niveau { align-items: center; }
+}

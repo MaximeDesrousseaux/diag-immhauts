@@ -6,6 +6,8 @@
  * Arguments : titre, texte (défauts : ceux de l'accueil), variante :
  * - '' (accueil) : « Appeler le 06… » + « Demande de rappel gratuit » ;
  * - 'fiche' : « Demander un devis gratuit » (popup) + « Vérifier mes obligations » (simulateur).
+ * options (fiches) : 'haut' (rembourrage vertical jusqu'à 40 px, mesurage),
+ * 'photo-large' (photo sur toute la colonne, assainissement).
  *
  * @package DiagImmHauts
  */
@@ -17,12 +19,22 @@ $dih_args = wp_parse_args(
 		'titre'    => $dih_c['titre'],
 		'texte'    => $dih_c['texte'],
 		'variante' => '',
+		'options'  => array(),
 	)
 );
 $dih_fiche = 'fiche' === $dih_args['variante'];
 $dih_tel  = '<span class="c-rappel__appel">Appeler le</span> <span class="l-insecable">' . esc_html( dih_info( 'telephone' ) ) . '</span>';
 ?>
-<section class="c-rappel<?php echo $dih_fiche ? ' c-rappel--fiche' : ''; ?>" id="rappel">
+<?php
+$dih_classes = array( 'c-rappel' );
+if ( $dih_fiche ) {
+	$dih_classes[] = 'c-rappel--fiche';
+}
+foreach ( (array) $dih_args['options'] as $dih_option_rappel ) {
+	$dih_classes[] = 'c-rappel--' . sanitize_html_class( $dih_option_rappel );
+}
+?>
+<section class="<?php echo esc_attr( implode( ' ', $dih_classes ) ); ?>" id="rappel">
 	<div class="c-rappel__bloc">
 		<div class="c-rappel__halo" aria-hidden="true"></div>
 		<img class="c-rappel__fond" src="<?php echo esc_url( dih_img( $dih_c['photo'] ) ); ?>" alt="" aria-hidden="true" loading="lazy" decoding="async" width="720" height="900">

@@ -391,3 +391,15 @@
 
   .c-rappel__photo { margin-bottom: calc(-1 * clamp(16px, 4vw, 24px)); }
 }
+
+// Options des fiches
+.c-rappel--haut {
+  .c-rappel__bloc { padding-block: clamp(16px, 4vw, 40px); }
+  .c-rappel__photo { margin-bottom: calc(-1 * clamp(16px, 4vw, 40px)); }
+}
+
+.c-rappel--photo-large .c-rappel__photo img {
+  width: 100%;
+  height: auto;
+  min-height: 326px;
+}

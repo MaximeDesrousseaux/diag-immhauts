@@ -2,7 +2,8 @@
 /**
  * « Souvent réalisés avec… » : cards vers les diagnostics liés.
  *
- * Arguments : titre, cartes [ clé de page, illustration, transformation, titre, texte ].
+ * Arguments : titre, cartes [ clé de page, illustration, transformation, titre, texte ],
+ * variante ('' : picto de 38 px ; 'grand' : picto de 50 px, fiche DPE).
  *
  * @package DiagImmHauts
  */
@@ -15,7 +16,7 @@
 	</div>
 	<div class="l-lies__grille">
 		<?php foreach ( $args['cartes'] as $dih_c ) : ?>
-			<a class="c-card c-card--lie" href="<?php echo esc_url( dih_url( $dih_c[0] ) ); ?>">
+			<a class="c-card c-card--lie<?php echo ! empty( $args['variante'] ) ? ' c-card--lie-' . esc_attr( $args['variante'] ) : ''; ?>" href="<?php echo esc_url( dih_url( $dih_c[0] ) ); ?>">
 				<span class="c-card__picto" aria-hidden="true">
 					<span class="c-card__illus" style="background-image:url('<?php echo esc_url( dih_img( $dih_c[1] ) ); ?>');transform:<?php echo esc_attr( $dih_c[2] ); ?>"></span>
 				</span>

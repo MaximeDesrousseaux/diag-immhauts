@@ -130,6 +130,7 @@ return array(
 	),
 
 	'lies'     => array(
+		'variante' => 'grand',
 		'titre'  => 'Souvent réalisés avec le DPE',
 		// clé de page, illustration, transformation, titre, texte
 		'cartes' => array(
