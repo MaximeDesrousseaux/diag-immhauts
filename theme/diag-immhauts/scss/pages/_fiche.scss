@@ -1,0 +1,167 @@
+// ==========================================================================
+// Gabarit « Fiche diagnostic » (12 fiches) : sessions typées, panneau des
+// obligations, diagnostics liés. Hero : layout/_hero.scss (.l-hero--fiche) ;
+// 4 étapes : composants/_etapes.scss.
+// ==========================================================================
+@use '../abstracts' as *;
+
+// --- Sessions ---------------------------------------------------------------------
+.l-session { @include conteneur; }
+
+.l-session__titre { max-width: none; font-size: clamp(26px, 2.6vw, 36px); }
+
+.l-session__intro {
+  max-width: 68ch;
+  margin-top: 16px;
+  font-size: rem(15.5);
+  line-height: 1.7;
+  color: c(muted);
+}
+
+.l-session__grille-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include bp(deplie) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @include bp(mobile) { grid-template-columns: 1fr; }
+}
+
+// « Le résultat » du DPE : texte + étiquette, puis « Sur place »
+.l-session--etiquette {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 4vw, 56px);
+  align-items: start;
+  padding-block: clamp(40px, 6vw, 64px);
+}
+
+.l-session__etiquette {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(24px, 3.4vw, 40px);
+  align-items: center;
+
+  @include bp(deplie-seul) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
+  @include bp(mobile) { grid-template-columns: 1fr; }
+}
+
+.l-session__etiquette-texte {
+  order: 1;
+  min-width: 0;
+  width: 504px;
+  height: 253px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include bp(deplie) {
+    width: 100%;
+    height: auto;
+  }
+
+  @include bp(deplie-seul) { order: 2; }
+}
+
+.l-session__etiquette-para {
+  max-width: 475px;
+  margin-top: 24px;
+  font-size: rem(17);
+  line-height: 1.9;
+  color: c(muted);
+
+  strong {
+    font-weight: 700;
+    color: c(forest);
+  }
+}
+
+.l-session__etiquette-image {
+  order: 2;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(40px, 7vw, 96px);
+
+  @include bp(deplie) { margin-top: 0; }
+  @include bp(deplie-seul) { order: 1; }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-height: 336px;
+    filter: drop-shadow(0 22px 36px teinte(forest, 20%));
+  }
+}
+
+.l-session__releves {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// DPE : l'intro de « Sur place » court sur toute la largeur
+.l-session--etiquette .l-session__intro { max-width: none; }
+
+// Réforme : carte blanche collée à la session précédente
+.l-session--reforme { padding-top: clamp(12px, 3.4vw, 16px); }
+
+// Obligations : panneau vert foncé
+.l-session--obligations { padding-block: clamp(38px, 5vw, 58px) clamp(40px, 6vw, 64px); }
+
+.c-panneau {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(16px, 4vw, 40px);
+  border-radius: 26px;
+  background: c(forest);
+}
+
+.c-panneau__halo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 120% at 95% 0, teinte(tech, 30%), transparent 62%);
+}
+
+.c-panneau__int { position: relative; }
+
+.c-panneau__titre {
+  max-width: 600px;
+  font-size: clamp(26px, 2.6vw, 36px);
+  color: #fff;
+}
+
+.c-panneau__grille {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+
+  @include bp(deplie) { grid-template-columns: 1fr; }
+}
+
+// --- Diagnostics liés ------------------------------------------------------------------
+.l-lies { padding-block: clamp(38px, 5vw, 58px) clamp(40px, 6vw, 64px); }
+
+.l-lies__tete { margin-bottom: 24px; }
+
+.l-lies__titre {
+  font-size: rem(22);
+  font-weight: 800;
+  color: c(forest);
+}
+
+.l-lies__grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 16px;
+}

@@ -54,3 +54,52 @@
   font-weight: 500;
   color: c(forest);
 }
+
+// Pastille au-dessus du titre d'une fiche ; sur téléphone, verre dépoli
+// (fond --forest à 78 % + flou 8 px) pour rester lisible sur le décor.
+.c-pastille--fiche {
+  margin-bottom: 16px;
+  padding: 6px 13px;
+  border: 1px solid teinte(techBright, 45%);
+  background: color-mix(in oklab, #fff 9%, transparent);
+  font-size: rem(12.5);
+  font-weight: 600;
+  color: c(onDark);
+
+  > span {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: c(techBright);
+  }
+
+  @include bp(mobile) {
+    margin-bottom: 0;
+    background: teinte(forest, 78%);
+    border-color: teinte(techBright, 60%);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 16px -10px rgba(6, 33, 15, .6);
+  }
+}
+
+// --- Badges : pastille pleine à encre foncée (obligations, lettres, scores) ------
+// Teintes : vert clair, puis les pastilles jaune et orange admises par le README,
+// ou les classes E / F de l'échelle réglementaire du DPE.
+.c-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: $r-pilule;
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(12.5);
+  color: $ombre-fonce;
+  background: c(techBright);
+
+  &--jaune { background: $pastille-jaune; }
+  &--orange { background: $pastille-orange; }
+  &--dpe-e { background: $dpe-e; }
+  &--dpe-f { background: $dpe-f; }
+}

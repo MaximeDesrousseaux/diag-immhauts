@@ -3,7 +3,8 @@
  * FAQ en accordéon (<details>) : la 1re question est ouverte, un lien suit
  * chaque réponse. Ouverture animée en CSS seul (composants/_faq.scss).
  *
- * Arguments : surtitre, titre, questions [ question, réponse, lien, cible ], id.
+ * Arguments : surtitre, titre, questions [ question, réponse, lien, cible ], id,
+ * variante ('' : accueil ; 'transparente' : fiche DPE ; 'blanche' : autres fiches).
  *
  * @package DiagImmHauts
  */
@@ -15,10 +16,11 @@ $dih_args = wp_parse_args(
 		'titre'     => '',
 		'questions' => array(),
 		'id'        => 'faq',
+		'variante'  => '',
 	)
 );
 ?>
-<section class="c-faq" id="<?php echo esc_attr( $dih_args['id'] ); ?>">
+<section class="c-faq<?php echo $dih_args['variante'] ? ' c-faq--fiche c-faq--' . esc_attr( $dih_args['variante'] ) : ''; ?>" id="<?php echo esc_attr( $dih_args['id'] ); ?>">
 	<div class="c-faq__int">
 		<div class="c-faq__tete">
 			<?php echo dih_surtitre( $dih_args['surtitre'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

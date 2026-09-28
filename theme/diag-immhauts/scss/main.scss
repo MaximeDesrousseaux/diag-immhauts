@@ -32,6 +32,8 @@ License: Propriétaire — tous droits réservés
 @use 'composants/pastille';
 @use 'composants/chiffre';
 @use 'composants/faq';
+@use 'composants/etapes';
+@use 'composants/frise';
 @use 'composants/formulaire';
 @use 'composants/article';
 
@@ -42,3 +44,4 @@ License: Propriétaire — tous droits réservés
 
 // 4. Pages
 @use 'pages/accueil';
+@use 'pages/fiche';

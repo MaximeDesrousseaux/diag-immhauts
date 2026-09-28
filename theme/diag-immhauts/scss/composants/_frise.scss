@@ -1,0 +1,61 @@
+// ==========================================================================
+// Frise d'échéances datées (.c-frise) : valeurs passées barrées, valeur en
+// vigueur encadrée de vert, valeur à venir en pointillés (réforme du DPE…).
+// ==========================================================================
+@use '../abstracts' as *;
+
+.c-frise {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-frise__item {
+  padding: 16px;
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(bg);
+}
+
+.c-frise__valeur {
+  display: block;
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(26);
+  line-height: 1;
+  color: c(subtle);
+  text-decoration: line-through;
+}
+
+.c-frise__legende {
+  display: block;
+  margin-top: 8px;
+  font-size: rem(12.5);
+  color: c(muted);
+}
+
+.c-frise__item--actuel {
+  border: 2px solid c(tech);
+  background: color-mix(in oklab, #{c(tech)} 9%, #fff);
+
+  .c-frise__legende {
+    font-weight: 700;
+    color: c(forest);
+  }
+}
+
+.c-frise__item--futur {
+  border: 1px dashed color-mix(in oklab, #{c(tech)} 45%, #fff);
+  background: #fff;
+}
+
+.c-frise__item--actuel,
+.c-frise__item--futur {
+  .c-frise__valeur {
+    color: c(forest);
+    text-decoration: none;
+  }
+}

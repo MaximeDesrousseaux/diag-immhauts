@@ -367,3 +367,27 @@
   border-radius: 50%;
   background: radial-gradient(circle, teinte(techBright, 40%) 0, transparent 70%);
 }
+
+// Variante des fiches : collé à la section précédente, bloc plus compact
+.c-rappel--fiche {
+  padding-top: 0;
+
+  .c-rappel__bloc {
+    padding: clamp(16px, 4vw, 24px) clamp(16px, 5vw, 52px);
+    border-radius: 26px;
+  }
+
+  .c-rappel__halo {
+    opacity: 1;
+    background: radial-gradient(70% 120% at 88% 20%, teinte(tech, 38%), transparent 60%);
+  }
+
+  .c-rappel__titre {
+    font-size: clamp(26px, 3.2vw, 36px);
+    line-height: 1.16;
+  }
+
+  .c-rappel__actions { margin-top: 24px; }
+
+  .c-rappel__photo { margin-bottom: calc(-1 * clamp(16px, 4vw, 24px)); }
+}

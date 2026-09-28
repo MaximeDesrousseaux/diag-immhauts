@@ -102,6 +102,23 @@
 
 .c-faq__lien { margin-top: 16px; }
 
+// --- Variante des fiches -------------------------------------------------------------
+// Rembourrages en clamp(16px, 4vw, 24px) ; deux fonds possibles :
+// --transparente (DPE) : sur le fond de page, questions blanches ;
+// --blanche (autres fiches) : section blanche, questions sur le fond de page.
+.c-faq--fiche {
+  .c-faq__int { padding-block: clamp(44px, 6vw, 70px); }
+  .c-faq__question { padding: clamp(16px, 4vw, 24px); }
+  .c-faq__reponse { padding: 0 clamp(16px, 4vw, 24px) clamp(16px, 4vw, 24px); }
+}
+
+.c-faq--transparente { background: transparent; }
+
+.c-faq--blanche {
+  .c-faq__int { padding-block: clamp(34px, 5vw, 58px) clamp(44px, 6vw, 70px); }
+  .c-faq__item { background: c(bg); }
+}
+
 @include sans-animation {
   .c-faq__item::details-content,
   .c-faq__reponse { transition: none; }

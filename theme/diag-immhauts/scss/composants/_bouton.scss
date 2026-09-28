@@ -86,6 +86,15 @@
 .c-btn--ombre { box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6); }
 .c-btn--ombre-douce { box-shadow: 0 10px 22px -12px rgba(18, 48, 36, .45); }
 
+// Hero des fiches : principal en 15,5 px, secondaire en contour compact
+.c-btn--fiche {
+  font-size: rem(15.5);
+  padding: 14px clamp(16px, 4vw, 24px);
+  box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6);
+}
+
+.c-btn--fiche-2 { padding: 14px 16px; }
+
 // Grande taille (bloc de rappel)
 .c-btn--grand {
   font-size: rem(15.5);
@@ -93,6 +102,7 @@
 
   &.c-btn--vert { box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6); }
   &.c-btn--contour { padding: 16px 28px; }
+  &.c-btn--contour.c-btn--serre { padding: 16px; }
 }
 
 @include sans-animation {

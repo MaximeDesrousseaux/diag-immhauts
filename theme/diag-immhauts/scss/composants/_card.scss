@@ -383,3 +383,181 @@ a.c-card { @include survol-card; }
     color: c(onDarkMuted);
   }
 }
+
+// --- Relevé sur place (fiche DPE) : illustration à gauche, texte à droite ---------------
+.c-card--releve {
+  min-width: 0;
+  min-height: 134px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-card__cadre {
+    position: relative;
+    flex: none;
+    align-self: stretch;
+    width: 68px;
+
+    @include bp(mobile) { width: 52px; }
+  }
+
+  // Débord réglé à l'œil ; chaque carte ajuste son échelle (transform en ligne)
+  .c-card__illus {
+    position: absolute;
+    inset: -6% -4%;
+    background: center / contain no-repeat;
+  }
+
+  .c-card__titre {
+    display: block;
+    font-weight: 700;
+    font-size: rem(14);
+    line-height: 1.25;
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    display: block;
+    margin-top: 4px;
+    font-size: rem(12.5);
+    line-height: 1.5;
+    color: c(muted);
+  }
+}
+
+// --- Réforme (fiche DPE) : grande carte blanche ---------------------------------------------
+.c-card--reforme {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: clamp(24px, 3.4vw, 40px);
+  border: 2px solid c(line);
+  border-radius: 26px;
+  background: #fff;
+
+  .c-card__tete {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+
+    .c-pastille { white-space: nowrap; }
+  }
+
+  .c-card__source {
+    font-size: rem(12.5);
+    color: c(muted);
+  }
+
+  .c-card__titre {
+    max-width: 760px;
+    font-size: clamp(22px, 2.6vw, 36px);
+    font-weight: 800;
+    line-height: 1.16;
+    letter-spacing: -.02em;
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    max-width: 760px;
+    font-size: rem(15.5);
+    line-height: 1.7;
+    color: c(muted);
+  }
+
+  .c-card__notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 16px;
+
+    p {
+      font-size: rem(14);
+      line-height: 1.65;
+      color: c(muted);
+    }
+
+    strong { color: c(forest); }
+  }
+
+  .c-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+// --- Obligation (panneau vert foncé des fiches) ------------------------------------------------
+.c-card--obligation {
+  min-width: 0;
+  padding: clamp(16px, 4vw, 24px);
+  border: 1px solid color-mix(in oklab, #fff 15%, transparent);
+  border-radius: 16px;
+  background: color-mix(in oklab, #fff 8%, transparent);
+
+  .c-badge { margin-bottom: 16px; }
+
+  .c-card__titre {
+    display: block;
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: rem(17);
+    color: #fff;
+  }
+
+  .c-card__texte {
+    margin-top: 8px;
+    font-size: rem(14);
+    line-height: 1.6;
+    color: c(onDarkSoft);
+  }
+}
+
+// --- Diagnostic lié (« Souvent réalisés avec… ») ---------------------------------------------------
+.c-card--lie {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(16px, 4vw, 24px);
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-card__picto {
+    position: relative;
+    left: 7px;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background: color-mix(in oklab, #{c(tech)} 14%, #{c(surface)});
+  }
+
+  // Illustration qui déborde du carré (80 × 80 px centrés sur 50 × 50)
+  .c-card__illus {
+    position: absolute;
+    left: -34%;
+    top: -34%;
+    width: 80px;
+    height: 80px;
+    background: center / contain no-repeat;
+  }
+
+  .c-card__titre {
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: rem(15.5);
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    font-size: rem(12.5);
+    line-height: 1.5;
+    color: c(muted);
+  }
+}

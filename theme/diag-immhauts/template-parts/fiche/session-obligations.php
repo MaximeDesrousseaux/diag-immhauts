@@ -1,0 +1,30 @@
+<?php
+/**
+ * Session « Vos obligations » : panneau vert foncé, trois cartes à pastille
+ * colorée (vert clair, jaune, orange — ou classes E / F de l'étiquette DPE).
+ *
+ * Arguments : surtitre, titre, cartes [ pastille, teinte, titre, texte ].
+ * Teintes : vert | jaune | orange | dpe-e | dpe-f.
+ *
+ * @package DiagImmHauts
+ */
+
+?>
+<section class="l-session l-session--obligations">
+	<div class="c-panneau">
+		<div class="c-panneau__halo" aria-hidden="true"></div>
+		<div class="c-panneau__int">
+			<?php echo dih_surtitre( $args['surtitre'], 'c-surtitre--clair c-surtitre--serre' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<h2 class="l-section__titre c-panneau__titre"><?php echo esc_html( $args['titre'] ); ?></h2>
+			<ul class="c-panneau__grille">
+				<?php foreach ( $args['cartes'] as $dih_c ) : ?>
+					<li class="c-card c-card--obligation">
+						<span class="c-badge c-badge--<?php echo esc_attr( $dih_c[1] ); ?>"><?php echo esc_html( $dih_c[0] ); ?></span>
+						<span class="c-card__titre"><?php echo esc_html( $dih_c[2] ); ?></span>
+						<p class="c-card__texte"><?php echo esc_html( $dih_c[3] ); ?></p>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,251 @@
+// ==========================================================================
+// Bloc « 4 étapes » des fiches + « À préparer avant ma visite ».
+// Bureau : socles illustrés reliés par un filet, cards dessous.
+// Déplié et téléphone : illustration à gauche, card à droite, rail vertical
+// (rail à left: 48 px). Variantes : --integree (DPE, fond blanc, préparation
+// intégrée) et --standard (fond de page, préparation dessous).
+// ==========================================================================
+@use '../abstracts' as *;
+
+$socle: clamp(76px, 8vw, 96px);
+
+.c-etapes--integree {
+  background: c(surface);
+  border-block: 1px solid c(line);
+}
+
+.c-etapes__int {
+  @include conteneur;
+  padding-block: clamp(44px, 6vw, 70px);
+
+  .c-etapes--standard & { padding-bottom: clamp(40px, 5vw, 60px); }
+}
+
+.c-etapes--standard .c-etapes__tete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.c-etapes__titre {
+  font-size: clamp(22px, 2.3vw, 31px);
+  font-weight: 800;
+  color: c(forest);
+  white-space: nowrap;
+
+  @include bp(deplie) { white-space: normal; }
+}
+
+// --- Liste des étapes -----------------------------------------------------------------
+.c-etapes__liste {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .c-etapes--integree & { margin-top: 24px; }
+
+  @include bp(deplie) {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .c-etapes--integree & { margin-top: 24px; }
+
+    // Rail vertical, dans l'axe des illustrations
+    &::before {
+      content: '';
+      position: absolute;
+      left: 48px;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 5px;
+      border-radius: 4px;
+      background: c(tech);
+    }
+  }
+}
+
+.c-etapes__item {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+
+  @include bp(deplie) {
+    position: relative;
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 24px;
+    align-items: center;
+  }
+}
+
+// Socle illustré ; le filet vers l'étape suivante (sauf la dernière)
+.c-etapes__socle {
+  position: relative;
+  flex: none;
+  height: $socle;
+  margin: 24px 0;
+
+  .c-etapes__item:not(:last-child) &::after {
+    content: '';
+    position: absolute;
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 5px;
+    border-radius: 4px;
+    background: c(tech);
+  }
+
+  @include bp(deplie) {
+    align-self: stretch;
+    width: 96px;
+    height: auto;
+    min-height: 100px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: c(surface); // masque le rail derrière l'illustration
+
+    .c-etapes--standard & { background: c(bg); }
+    .c-etapes__item:not(:last-child) &::after { display: none; }
+  }
+}
+
+.c-etapes__picto {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: $socle;
+  height: 100%;
+  background: center bottom / contain no-repeat;
+
+  @include bp(deplie) {
+    position: static;
+    transform: none;
+    width: 96px;
+    height: 96px;
+    margin-bottom: 40px; // échelle : exception (maquette : 42 px, c'est lui qui remonte l'illustration)
+    background-position: center;
+  }
+}
+
+.c-etapes__card {
+  flex: 1 1 0%;
+  min-width: 0;
+  padding: clamp(16px, 4vw, 24px);
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-etapes--integree & { background: c(bg); }
+}
+
+.c-etapes__ligne {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.c-etapes__num {
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(26);
+  line-height: 1;
+  color: c(tech);
+}
+
+.c-etapes__nom {
+  font-weight: 700;
+  font-size: rem(15.5);
+  letter-spacing: 0;
+  color: c(forest);
+}
+
+.c-etapes__texte {
+  margin-top: 8px;
+  font-size: rem(14);
+  line-height: 1.6;
+  color: c(muted);
+}
+
+// --- À préparer avant ma visite -----------------------------------------------------------
+.c-etapes__prep {
+  padding: clamp(16px, 4vw, 24px);
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-etapes--standard & { margin-top: clamp(24px, 3.4vw, 40px); }
+
+  .c-etapes--integree & {
+    margin-top: 56px;
+    padding: clamp(16px, 4vw, 40px);
+    background: c(bg);
+  }
+}
+
+.c-etapes__prep-titre {
+  font-size: rem(19);
+  font-weight: 700;
+  color: c(forest);
+}
+
+.c-etapes__prep-texte {
+  max-width: 640px;
+  margin-top: 8px;
+  font-size: rem(14);
+  line-height: 1.6;
+  color: c(muted);
+}
+
+.c-etapes__prep-liste {
+  display: grid;
+  gap: 11px clamp(16px, 4vw, 40px); // échelle : exception (README : gap de 11 px des listes de préparation)
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+
+  @include bp(mobile) { grid-template-columns: minmax(0, 1fr); }
+
+  .c-etapes--integree & {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 16px 40px;
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: rem(14);
+    line-height: 1.5;
+    color: c(ink);
+  }
+}
+
+.c-etapes__coche {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px; // échelle : exception (alignement optique sur la 1re ligne)
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: color-mix(in oklab, #{c(tech)} 20%, #{c(surface)});
+  color: c(forest);
+  font-size: rem(12.5);
+  font-weight: 800;
+}
