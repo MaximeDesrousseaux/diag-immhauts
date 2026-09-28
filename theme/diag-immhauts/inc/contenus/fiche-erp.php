@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'L\'ERP informe l\'acquéreur ou le locataire des risques auxquels le bien est exposé : inondation, aléa minier, risque technologique, sismicité, radon, pollution des sols. Dans le Pas-de-Calais, l\'aléa minier et le retrait-gonflement des argiles concernent une grande partie des communes.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_erp_ssfond.webp',
 		'illus_alt'     => 'Illustration erp',
-		'illus_tailles' => array( '344px', '304px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', 'Toute la France', 'Vente et location, sans exception' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec l\'ERP',
 		'cartes' => array(
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
-			array( 'termites', 'ill_termites_ssfond2.webp', 'scaleX(-1) scale(0.95, 0.95)', 'Termites', 'Recherche de termites dans les communes sous arrêté.' ),
-			array( 'assainissement', 'ill_assainissement_ssfond.webp', 'scaleX(-1) scale(0.95, 0.95)', 'Assainissement', 'Conformité de l’assainissement non collectif.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
+			array( 'termites', 'Termites', 'Recherche de termites dans les communes sous arrêté.' ),
+			array( 'assainissement', 'Assainissement', 'Conformité de l’assainissement non collectif.' ),
 		),
 	),
 	'rappel'   => array(

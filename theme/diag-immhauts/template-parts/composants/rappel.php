@@ -1,11 +1,17 @@
 <?php
 /**
- * Bloc « Un projet… ? » (#rappel) en bas de page : titre, texte, appel direct,
- * demande de rappel, photo de Max au téléphone (bureau et déplié).
+ * Bloc « Un projet… ? » (#rappel) en bas de page : titre, texte, deux boutons,
+ * photo de Max au téléphone (bureau et déplié).
+ *
+ * Boutons (README § Bloc « rappel ») : le formulaire et l'appel. Bureau et
+ * tablette : formulaire en premier, bouton principal ; appel en secondaire.
+ * Téléphone : l'appel passe en premier, en principal (composants/_formulaire.scss).
  *
  * Arguments : titre, texte (défauts : ceux de l'accueil), variante :
- * - '' (accueil) : « Appeler le 06… » + « Demande de rappel gratuit » ;
- * - 'fiche' : « Demander un devis gratuit » (popup) + « Vérifier mes obligations » (simulateur).
+ * - '' (accueil) : formulaire = « Demande de rappel gratuit » (popup) ;
+ * - 'fiche' : formulaire = « Formulaire de devis » (page Contact).
+ * boutons : 'obligations' (fiche DPE) remplace l'appel par « Vérifier mes
+ * obligations » (simulateur), sans inversion sur téléphone.
  * options (fiches) : 'haut' (rembourrage vertical jusqu'à 40 px, mesurage),
  * 'photo-large' (photo sur toute la colonne, assainissement).
  *
@@ -20,10 +26,11 @@ $dih_args = wp_parse_args(
 		'texte'    => $dih_c['texte'],
 		'variante' => '',
 		'options'  => array(),
+		'boutons'  => '',
 	)
 );
 $dih_fiche = 'fiche' === $dih_args['variante'];
-$dih_tel  = '<span class="c-rappel__appel">Appeler le</span> <span class="l-insecable">' . esc_html( dih_info( 'telephone' ) ) . '</span>';
+$dih_tel  = 'Appeler le <span class="l-insecable">' . esc_html( dih_info( 'telephone' ) ) . '</span>';
 ?>
 <?php
 $dih_classes = array( 'c-rappel' );
@@ -44,12 +51,16 @@ foreach ( (array) $dih_args['options'] as $dih_option_rappel ) {
 				<p class="c-rappel__para"><?php echo esc_html( $dih_args['texte'] ); ?></p>
 				<div class="c-rappel__actions">
 					<?php
-					if ( $dih_fiche ) {
+					if ( 'obligations' === $dih_args['boutons'] ) {
 						echo dih_bouton( 'Demander un devis gratuit', dih_attr_rappel(), 'enveloppe', 'c-btn--vert c-btn--grand' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo dih_bouton( 'Vérifier mes obligations', 'href="' . esc_url( dih_url( 'simulateur' ) ) . '"', 'fleche-courte', 'c-btn--contour c-btn--grand c-btn--serre' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo dih_bouton( 'Vérifier mes obligations', 'href="' . esc_url( dih_url( 'simulateur' ) ) . '"', 'fleche-courte', 'c-btn--contour c-btn--grand' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					} else {
-						echo dih_bouton( $dih_tel, 'href="tel:' . esc_attr( dih_info( 'telephone_lien' ) ) . '"', 'telephone', 'c-btn--vert c-btn--grand' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-						echo dih_bouton( $dih_c['cta_2'], dih_attr_rappel(), 'enveloppe', 'c-btn--contour c-btn--grand' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						if ( $dih_fiche ) {
+							echo dih_bouton( 'Formulaire de devis', 'href="' . esc_url( dih_url( 'contact', 'devis' ) ) . '"', 'enveloppe', 'c-btn--grand c-rappel__cta c-rappel__cta--form' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						} else {
+							echo dih_bouton( $dih_c['cta_2'], dih_attr_rappel(), 'enveloppe', 'c-btn--grand c-rappel__cta c-rappel__cta--form' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+						echo dih_bouton( $dih_tel, 'href="tel:' . esc_attr( dih_info( 'telephone_lien' ) ) . '"', 'telephone', 'c-btn--grand c-rappel__cta c-rappel__cta--appel' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					}
 					?>
 				</div>

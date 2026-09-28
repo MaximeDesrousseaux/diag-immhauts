@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'La mérule se développe dans l\'obscurité, à l\'abri des regards, et peut détruire une charpente ou un plancher en quelques mois. Dans les zones délimitées par arrêté préfectoral, le vendeur doit informer l\'acquéreur ; partout ailleurs, la recherche reste le seul moyen de lever le doute avant de signer.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_merule_ssfond.webp',
 		'illus_alt'     => 'Illustration merule',
-		'illus_tailles' => array( '299px', '264px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', 'Zone arrêtée', 'Information obligatoire du vendeur' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec la mérule',
 		'cartes' => array(
-			array( 'termites', 'ill_termites_ssfond2.webp', 'scaleX(-1) scale(0.95, 0.95)', 'Termites', 'Recherche de termites dans les communes sous arrêté.' ),
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
-			array( 'erp', 'ill_erp_ssfond.webp', 'scaleX(-1) scale(0.9775, 1.0925)', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
+			array( 'termites', 'Termites', 'Recherche de termites dans les communes sous arrêté.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
+			array( 'erp', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
 		),
 	),
 	'rappel'   => array(

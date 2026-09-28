@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'L\'installation électrique est l\'une des premières causes d\'incendie domestique. Le diagnostic électricité contrôle l\'ensemble de votre installation intérieure au regard de la sécurité des personnes : protection différentielle, mise à la terre, protection contre les surintensités, matériels vétustes et volumes de sécurité des pièces d\'eau.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_elec_ssfond.webp',
 		'illus_alt'     => 'Illustration electricite',
-		'illus_tailles' => array( '269px', '238px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', '+ de 15 ans', 'Installations concernées' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec l\'électricité',
 		'cartes' => array(
-			array( 'gaz', 'ill_gaz_ssfond.webp', 'scaleX(-1)', 'Gaz', 'Sécurité de l’installation intérieure de gaz et de la ventilation.' ),
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
-			array( 'plomb', 'ill_plomb_ssfond.webp', 'scaleX(-1)', 'Plomb (CREP)', 'Risque d’exposition au plomb dans les peintures d’avant 1949.' ),
+			array( 'gaz', 'Gaz', 'Sécurité de l’installation intérieure de gaz et de la ventilation.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
+			array( 'plomb', 'Plomb (CREP)', 'Risque d’exposition au plomb dans les peintures d’avant 1949.' ),
 		),
 	),
 	'rappel'   => array(

@@ -132,16 +132,17 @@ return array(
 	'lies'     => array(
 		'variante' => 'grand',
 		'titre'  => 'Souvent réalisés avec le DPE',
-		// clé de page, illustration, transformation, titre, texte
+		// clé de page, titre, texte (illustration : dih_illus_diagnostic())
 		'cartes' => array(
-			array( 'audit', 'ill_jauge_ssfond.webp', 'scaleX(-1) scale(1.05)', 'Audit énergétique', 'Obligatoire à la vente pour les classes E, F et G.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Pour les biens dont le permis est antérieur à juillet 1997.' ),
-			array( 'electricite', 'ill_elec_ssfond.webp', 'scaleX(-1)', 'Électricité', 'Pour toute installation de plus de 15 ans.' ),
-			array( 'mesurage', 'ill_mesurage-848e1c2a.webp', 'scaleX(-1)', 'Mesurage', 'Loi Carrez à la vente, loi Boutin en location.' ),
+			array( 'audit', 'Audit énergétique', 'Obligatoire à la vente pour les classes E, F et G.' ),
+			array( 'amiante', 'Amiante', 'Pour les biens dont le permis est antérieur à juillet 1997.' ),
+			array( 'electricite', 'Électricité', 'Pour toute installation de plus de 15 ans.' ),
+			array( 'mesurage', 'Mesurage', 'Loi Carrez à la vente, loi Boutin en location.' ),
 		),
 	),
 
 	'rappel'   => array(
+		'boutons' => 'obligations', // « Demander un devis gratuit » + « Vérifier mes obligations »
 		'titre' => "Besoin d'un DPE pour votre bien ?",
 		'texte' => 'Donnez-moi le type de bien, sa surface et sa commune : vous recevez un devis gratuit sous 24 heures et un rendez-vous sous 48 heures en moyenne.',
 	),

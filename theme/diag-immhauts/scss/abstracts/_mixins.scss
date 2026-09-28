@@ -119,3 +119,33 @@
   transition: color .2s ease;
   &:hover { color: c(techBright); }
 }
+
+// ==========================================================================
+// Apparences de bouton (README § Boutons), réutilisables quand un même bouton
+// change de rôle selon le format (bloc « rappel » : principal en bureau,
+// secondaire sur téléphone, et inversement).
+// ==========================================================================
+
+// Principal : fond --tech, texte vert foncé (jamais blanc, même au survol).
+@mixin btn-vert {
+  border: 0;
+  background: c(tech);
+  color: c(forestDeep);
+  font-family: var(--font-titre);
+  font-weight: 800;
+  @include survol-btn-vert;
+}
+
+// Secondaire : contour blanc à 26 %, bordure --techBright au survol.
+// Rembourrage horizontal de 26 px minimum : l'icône qui entre au survol
+// doit avoir la place de s'afficher (maquettes v10).
+@mixin btn-contour {
+  border: 1px solid color-mix(in oklab, #fff 26%, transparent);
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 600;
+  @include survol-btn-fantome;
+  &:hover { background: transparent; }
+}

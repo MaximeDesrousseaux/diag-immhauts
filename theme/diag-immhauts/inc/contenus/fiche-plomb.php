@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'Les peintures au plomb, interdites en 1949, restent présentes dans une grande partie du bâti ancien de l\'Artois. Le CREP mesure leur présence sur chaque unité de diagnostic, évalue leur état de dégradation et détermine ce que vous devez surveiller, entretenir ou faire traiter avant une vente ou une mise en location.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_plomb_ssfond.webp',
 		'illus_alt'     => 'Illustration d\'un constat de risque d\'exposition au plomb',
-		'illus_tailles' => array( '240px', '211px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', 'Avant 1949', 'Logements concernés' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec le CREP',
 		'cartes' => array(
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
-			array( 'electricite', 'ill_elec_ssfond.webp', 'scaleX(-1)', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
-			array( 'erp', 'ill_erp_ssfond.webp', 'scaleX(-1) scale(0.9775, 1.0925)', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
+			array( 'electricite', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
+			array( 'erp', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
 		),
 	),
 	'rappel'   => array(

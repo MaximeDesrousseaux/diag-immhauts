@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'Un bien non raccordé au réseau collectif dispose de sa propre filière de traitement des eaux usées. Le contrôle en vérifie l\'existence, l\'état et le bon fonctionnement : c\'est le SPANC qui le réalise, et son rapport, valable trois ans, doit être annexé à la vente.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_assainissement_ssfond.webp',
 		'illus_alt'     => 'Illustration assainissement',
-		'illus_tailles' => array( '299px', '264px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<path d="M4 8h8a4 4 0 0 1 4 4v8"></path><path d="M2 6h4v4H2zM14 20h4v-4h-4"></path>', 'Non raccordé', 'Biens concernés par le contrôle' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec l\'assainissement',
 		'cartes' => array(
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'erp', 'ill_erp_ssfond.webp', 'scaleX(-1) scale(0.9775, 1.0925)', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
-			array( 'mesurage', 'ill_mesurage-848e1c2a.webp', 'scaleX(-1)', 'Mesurage', 'Surface privative Carrez ou surface habitable Boutin.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'erp', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
+			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
+			array( 'mesurage', 'Mesurage', 'Surface privative Carrez ou surface habitable Boutin.' ),
 		),
 	),
 	'rappel'   => array(

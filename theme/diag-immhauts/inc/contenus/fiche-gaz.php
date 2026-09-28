@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'Une installation de gaz vieillissante expose à deux risques majeurs : la fuite et l\'intoxication au monoxyde de carbone. Le diagnostic contrôle les tuyauteries fixes, les appareils raccordés, l\'évacuation des produits de combustion et la ventilation du logement, puis classe chaque anomalie selon sa gravité.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_gaz_ssfond.webp',
 		'illus_alt'     => 'Illustration gaz',
-		'illus_tailles' => array( '240px', '211px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', '+ de 15 ans', 'Installations concernées' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec le gaz',
 		'cartes' => array(
-			array( 'electricite', 'ill_elec_ssfond.webp', 'scaleX(-1)', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
-			array( 'plomb', 'ill_plomb_ssfond.webp', 'scaleX(-1)', 'Plomb (CREP)', 'Risque d’exposition au plomb dans les peintures d’avant 1949.' ),
+			array( 'electricite', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
+			array( 'plomb', 'Plomb (CREP)', 'Risque d’exposition au plomb dans les peintures d’avant 1949.' ),
 		),
 	),
 	'rappel'   => array(

@@ -25,7 +25,10 @@
 }
 
 $fondu-transparent: rgba(11, 56, 30, 0);
-$terrils-bureau-pos: calc(50% + 190px) 82%;
+// max(-280px, 82 %) : sur les heros courts, le haut de l'image ne remonte pas
+// au-dessus de −280 px, pour que le sommet des terrils reste toujours sous les
+// textes de la nav transparente (maquettes v10 ; référence : DPE et Audit).
+$terrils-bureau-pos: calc(50% + 190px) max(-280px, 82%);
 $terrils-bureau-taille: 1655px auto;
 
 // Bureau : taille et position FIXES (bord gauche de l'image à 637 px à gauche

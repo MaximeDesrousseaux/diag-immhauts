@@ -83,3 +83,25 @@ add_action(
 function dih_img( $fichier, $dossier = 'img' ) {
 	return DIH_URI . '/assets/' . $dossier . '/' . $fichier;
 }
+
+/**
+ * Favicon (README § Favicon) : SVG, PNG 32 px et icône Apple 180 px, servis par le
+ * thème. Si une « Icône du site » est définie dans Personnaliser, WordPress la sert
+ * lui-même et le thème s'efface.
+ */
+add_action(
+	'wp_head',
+	function () {
+		if ( has_site_icon() ) {
+			return;
+		}
+		$base = DIH_URI . '/assets/favicon/';
+		printf( '<link rel="icon" href="%s" type="image/svg+xml">' . "
+", esc_url( $base . 'favicon.svg' ) );
+		printf( '<link rel="icon" href="%s" sizes="32x32" type="image/png">' . "
+", esc_url( $base . 'favicon-32.png' ) );
+		printf( '<link rel="apple-touch-icon" href="%s">' . "
+", esc_url( $base . 'apple-touch-icon.png' ) );
+	},
+	3
+);

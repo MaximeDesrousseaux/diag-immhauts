@@ -51,20 +51,12 @@
 }
 
 // Principal : fond vert, texte vert foncé — y compris au survol (jamais blanc).
-.c-btn--vert {
-  background: c(tech);
-  color: c(forestDeep);
-  font-family: var(--font-titre);
-  font-weight: 800;
-  @include survol-btn-vert;
-}
+.c-btn--vert { @include btn-vert; }
 
 // Contour clair sur fond vert (secondaire) : bordure --techBright au survol.
 .c-btn--contour {
-  color: #fff;
-  font-weight: 600;
-  border: 1px solid color-mix(in oklab, #fff 26%, transparent);
-  @include survol-btn-fantome;
+  @include btn-contour;
+  padding-inline: 26px;
 }
 
 // Hero de l'accueil : un peu plus serré, ombre portée marquée
@@ -75,7 +67,7 @@
 
 // Verre dépoli sur le décor du hero (secondaire) : bordure --techBright au survol
 .c-btn--verre {
-  padding: 14px 20px;
+  padding: 14px 26px;
   color: #fff;
   font-weight: 700;
   border: 1px solid color-mix(in oklab, #fff 32%, transparent);
@@ -93,7 +85,7 @@
   box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6);
 }
 
-.c-btn--fiche-2 { padding: 14px 16px; }
+.c-btn--fiche-2 { padding: 14px 26px; }
 
 // Grande taille (bloc de rappel)
 .c-btn--grand {
@@ -101,8 +93,7 @@
   padding: 16px clamp(16px, 4.2vw, 24px);
 
   &.c-btn--vert { box-shadow: 0 10px 22px -12px rgba(0, 0, 0, .6); }
-  &.c-btn--contour { padding: 16px 28px; }
-  &.c-btn--contour.c-btn--serre { padding: 16px; }
+  &.c-btn--contour { padding: 16px 26px; }
 }
 
 @include sans-animation {

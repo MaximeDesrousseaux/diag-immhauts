@@ -1,19 +1,24 @@
 <?php
 /**
  * Hero d'une fiche diagnostic : fil d'Ariane, pastille, titre (h1), chapeau,
- * deux CTA, illustration (_ssfond, orientation d'origine).
+ * deux CTA, illustration.
  *
  * Téléphone : deux colonnes en tête (titre à gauche, illustration à droite),
  * puis chapeau et CTA pleine largeur ; la colonne texte passe en display:contents.
  *
  * Arguments : le tableau de la fiche (clés « nom » et « hero »).
+ * Illustration : jeu normalisé img/diag_<clé>.webp à 370 / 326 px / 100 % de la
+ * colonne (maquettes v10) ; une fiche peut garder une illustration dédiée avec ses
+ * propres tailles (hero.illustration + hero.illus_tailles : DPE, audit).
  *
  * @package DiagImmHauts
  */
 
-$dih_nom = $args['nom'];
-$dih_h   = $args['hero'];
-list( $dih_l_bureau, $dih_l_deplie, $dih_l_mobile ) = $dih_h['illus_tailles'];
+$dih_nom    = $args['nom'];
+$dih_h      = $args['hero'];
+$dih_illus  = ! empty( $dih_h['illustration'] ) ? $dih_h['illustration'] : dih_illus_diagnostic( dih_page_courante() );
+$dih_taille = ! empty( $dih_h['illus_tailles'] ) ? $dih_h['illus_tailles'] : array( '370px', '326px', '100%' );
+list( $dih_l_bureau, $dih_l_deplie, $dih_l_mobile ) = $dih_taille;
 ?>
 <section class="l-hero l-hero--fiche">
 	<?php get_template_part( 'template-parts/hero/decor' ); ?>
@@ -39,7 +44,7 @@ list( $dih_l_bureau, $dih_l_deplie, $dih_l_mobile ) = $dih_h['illus_tailles'];
 			</div>
 			<div class="l-hero__illus-fiche" style="--illus-bureau:<?php echo esc_attr( $dih_l_bureau ); ?>;--illus-deplie:<?php echo esc_attr( $dih_l_deplie ); ?>;--illus-mobile:<?php echo esc_attr( $dih_l_mobile ); ?>">
 				<div class="l-hero__illus-halo" aria-hidden="true"></div>
-				<img src="<?php echo esc_url( dih_img( $dih_h['illustration'] ) ); ?>" alt="<?php echo esc_attr( $dih_h['illus_alt'] ); ?>" fetchpriority="high" decoding="async">
+				<img src="<?php echo esc_url( dih_img( $dih_illus ) ); ?>" alt="<?php echo esc_attr( $dih_h['illus_alt'] ); ?>" fetchpriority="high" decoding="async">
 			</div>
 		</div>
 	</div>

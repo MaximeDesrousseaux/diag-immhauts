@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'L\'amiante a été utilisé dans des centaines de produits du bâtiment jusqu\'à son interdiction en 1997 : dalles de sol, colles, conduits, toitures, enduits. Le repérage identifie ces matériaux, évalue leur état de conservation et détermine ce que vous devez surveiller, faire retirer ou déclarer avant travaux.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_amiante_ssfond.webp',
 		'illus_alt'     => 'Illustration amiante',
-		'illus_tailles' => array( '269px', '238px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', 'Avant 07/1997', 'Permis de construire concerné' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec l\'amiante',
 		'cartes' => array(
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'plomb', 'ill_plomb_ssfond.webp', 'scaleX(-1)', 'Plomb (CREP)', 'Risque d’exposition au plomb dans les peintures d’avant 1949.' ),
-			array( 'electricite', 'ill_elec_ssfond.webp', 'scaleX(-1)', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
-			array( 'termites', 'ill_termites_ssfond2.webp', 'scaleX(-1) scale(0.95, 0.95)', 'Termites', 'Recherche de termites dans les communes sous arrêté.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'plomb', 'Plomb (CREP)', 'Risque d’exposition au plomb dans les peintures d’avant 1949.' ),
+			array( 'electricite', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
+			array( 'termites', 'Termites', 'Recherche de termites dans les communes sous arrêté.' ),
 		),
 	),
 	'rappel'   => array(

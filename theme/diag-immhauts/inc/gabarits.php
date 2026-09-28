@@ -13,7 +13,8 @@ defined( 'ABSPATH' ) || exit;
  * - toitures (défaut) : SVG en ligne, deux tracés c-logo__a / c-logo__b dont les
  *   remplissages suivent la nav (blanc sur fond transparent, verts de la charte
  *   sur nav blanche). Piège : les tracés descendent à y=124 alors que le viewBox
- *   coupe à 116, sinon un liseré d'un pixel apparaît en bas.
+ *   coupe à 116, sinon un liseré d'un pixel apparaît en bas. La cheminée est
+ *   soudée au chevron droit (maquettes v10) : sa base plonge dans le chevron.
  * - terrils : SVG en ligne en currentColor, terril avant en --techBright.
  * - actuel : l'ancien logo PNG (pas de version pour fond transparent).
  *
@@ -41,7 +42,7 @@ function dih_logo_marque() {
 				. '<defs><mask id="logo-masque" maskUnits="userSpaceOnUse" x="0" y="0" width="404" height="116"><rect x="0" y="0" width="404" height="116" fill="#fff"/><path d="M130 124 L262 1 L398 124 Z" fill="#000"/></mask></defs>'
 				. '<g mask="url(#logo-masque)"><path class="c-logo__a" d="M1 124 L138 1 L275 124 L225 124 L138 43 L51 124 Z"/></g>'
 				. '<path class="c-logo__b" d="M130 124 L262 1 L398 124 L348 124 L262 44 L180 124 Z"/>'
-				. '<path class="c-logo__b" d="M290 25 L290 14 L324 9 L324 53 Z"/>'
+				. '<path class="c-logo__b" d="M290 34 L290 14 L324 9 L324 66 Z"/>'
 				. '</svg>';
 	}
 }
@@ -144,4 +145,30 @@ function dih_surtitre( $texte, $classes = '' ) {
 		esc_attr( $classes ),
 		esc_html( $texte )
 	);
+}
+
+/**
+ * Illustration normalisée d'un diagnostic (jeu img/diag_<clé>.webp, maquettes v10) :
+ * toile 800 × 640, orientation déjà appliquée, poids visuel égalisé. Aucun miroir
+ * ni coefficient de taille par fichier : une seule taille par contexte, en CSS.
+ *
+ * @param string $cle Clé de page (dih_chemins) : dpe, amiante, electricite…
+ * @return string Nom du fichier, ou chaîne vide si la page n'est pas un diagnostic.
+ */
+function dih_illus_diagnostic( $cle ) {
+	$fichiers = array(
+		'dpe'            => 'diag_dpe',
+		'audit'          => 'diag_audit',
+		'amiante'        => 'diag_amiante',
+		'plomb'          => 'diag_plomb',
+		'electricite'    => 'diag_elec',
+		'gaz'            => 'diag_gaz',
+		'termites'       => 'diag_termites',
+		'merule'         => 'diag_merule',
+		'erp'            => 'diag_erp',
+		'mesurage'       => 'diag_mesurage',
+		'assainissement' => 'diag_assainissement',
+		'dtg'            => 'diag_dtg',
+	);
+	return isset( $fichiers[ $cle ] ) ? $fichiers[ $cle ] . '.webp' : '';
 }

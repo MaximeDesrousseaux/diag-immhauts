@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'Une erreur de surface se paie cher : au-delà de 5 % d\'écart, l\'acquéreur d\'un lot de copropriété peut demander une réduction du prix proportionnelle, pendant un an après l\'acte. Le mesurage établit une surface opposable, relevé au télémètre laser et détaillé pièce par pièce.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_mesurage_hero_v2.webp',
 		'illus_alt'     => 'Illustration mesurage',
-		'illus_tailles' => array( '379px', '334px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<rect x="3" y="8" width="18" height="8" rx="1"></rect><path d="M7 8v3M11 8v4M15 8v3M19 8v4"></path>', 'Laser', 'Relevé au télémètre, pièce par pièce' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec le mesurage',
 		'cartes' => array(
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
-			array( 'electricite', 'ill_elec_ssfond.webp', 'scaleX(-1)', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
-			array( 'erp', 'ill_erp_ssfond.webp', 'scaleX(-1) scale(0.9775, 1.0925)', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
+			array( 'electricite', 'Électricité', 'Sécurité de l’installation intérieure de plus de 15 ans.' ),
+			array( 'erp', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
 		),
 	),
 	'rappel'   => array(

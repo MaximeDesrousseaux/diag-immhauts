@@ -17,9 +17,7 @@ return array(
 		'chapeau'       => 'Les termites souterrains progressent sans signe visible, à l\'abri de la lumière, et peuvent compromettre une charpente en quelques années. Dans les communes couvertes par un arrêté préfectoral, l\'état parasitaire est obligatoire à la vente : j\'examine et sonde l\'ensemble des bois accessibles du bâti et de ses abords.',
 		'cta'           => 'Demander un devis gratuit',
 		'cta_2'         => array( 'Vérifier mes obligations', 'simulateur' ),
-		'illustration'  => 'ill_termites_ssfond2.webp',
 		'illus_alt'     => 'Illustration termites',
-		'illus_tailles' => array( '299px', '264px', '100%' ),
 	),
 	'reperes'  => array(
 		array( '<rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="M8 3v4M16 3v4M4 11h16"></path>', 'Zone arrêtée', 'Communes visées par arrêté préfectoral' ),
@@ -107,10 +105,10 @@ return array(
 	'lies'     => array(
 		'titre'  => 'Souvent réalisés avec l\'état parasitaire',
 		'cartes' => array(
-			array( 'merule', 'ill_merule_ssfond.webp', 'scaleX(-1) scale(0.95, 0.95)', 'Mérule', 'Recherche de ce champignon lignivore en zone déclarée.' ),
-			array( 'dpe', 'ill_dpe_ssfond-eb37ee46.webp', 'none', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
-			array( 'amiante', 'ill_amiante_ssfond.webp', 'scaleX(-1)', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
-			array( 'erp', 'ill_erp_ssfond.webp', 'scaleX(-1) scale(0.9775, 1.0925)', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
+			array( 'merule', 'Mérule', 'Recherche de ce champignon lignivore en zone déclarée.' ),
+			array( 'dpe', 'DPE', 'Classe énergie et climat du logement, de A à G.' ),
+			array( 'amiante', 'Amiante', 'Recherche des matériaux amiantés dans le bâti d’avant 1997.' ),
+			array( 'erp', 'ERP', 'Risques naturels, miniers et technologiques de la commune.' ),
 		),
 	),
 	'rappel'   => array(

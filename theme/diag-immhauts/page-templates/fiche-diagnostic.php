@@ -38,6 +38,7 @@ $dih_fiche = dih_contenu( 'fiche-' . $dih_cle );
 				'titre'    => $dih_fiche['rappel']['titre'],
 				'texte'    => $dih_fiche['rappel']['texte'],
 				'options'  => isset( $dih_fiche['rappel']['options'] ) ? $dih_fiche['rappel']['options'] : array(),
+				'boutons'  => isset( $dih_fiche['rappel']['boutons'] ) ? $dih_fiche['rappel']['boutons'] : '',
 			)
 		);
 	endif;

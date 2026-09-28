@@ -281,14 +281,6 @@ a.c-card { @include survol-card; }
     }
   }
 
-  .c-card__illus--reduite {
-    width: clamp(64px, 6vw, 86px);
-    height: clamp(64px, 6vw, 86px);
-  }
-
-  // Illustrations _ssfond affichées en miroir (README § Assets)
-  .c-card__illus--miroir { transform: scaleX(-1); }
-
   .c-card__titre {
     min-width: 0;
     max-width: 100%;

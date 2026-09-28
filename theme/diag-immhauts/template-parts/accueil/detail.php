@@ -19,7 +19,7 @@ $dih_c = dih_contenu( 'accueil', 'detail' );
 		<?php foreach ( $dih_c['tuiles'] as $dih_t ) : ?>
 			<a class="c-card c-card--tuile" href="<?php echo esc_url( dih_url( $dih_t[1] ) ); ?>">
 				<span class="c-card__cadre">
-					<span class="c-card__illus<?php echo $dih_t[3] ? ' c-card__illus--miroir' : ''; ?><?php echo $dih_t[4] ? ' c-card__illus--reduite' : ''; ?>" role="presentation" style="background-image:url('<?php echo esc_url( dih_img( $dih_t[2] ) ); ?>')"></span>
+					<span class="c-card__illus" role="presentation" style="background-image:url('<?php echo esc_url( dih_img( dih_illus_diagnostic( $dih_t[1] ) ) ); ?>')"></span>
 				</span>
 				<span class="c-card__titre"><?php echo wp_kses( $dih_t[0], array() ); ?></span>
 			</a>
