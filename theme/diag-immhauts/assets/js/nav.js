@@ -5,8 +5,10 @@
  *   Le hero (1re section .l-hero) remonte dessous : margin-top -H, padding-top + H.
  * - Nav transparente en haut de page, blanche (.is-solid) au défilement,
  *   PAR ÉVÉNEMENT et non par distance :
- *     bureau : au 2e cran de molette ; déplié et mobile : au 1er cran ou dès scrollY > 0 ;
- *     repli à y > 220 px en bureau (clavier, barre de défilement) ;
+ *     21 pages intérieures, tous formats : au 1er cran de molette ou dès scrollY > 0
+ *     (le texte de la nav ne doit jamais passer sur celui du hero) ;
+ *     accueil : au 2e cran en bureau (repli à y > 220 px pour le clavier et la barre
+ *     de défilement), au 1er cran en déplié et mobile ;
  *     crans de pavé tactile regroupés par fenêtres de 140 ms.
  * - Un seul état fait foi (solide), réconcilié à chaque image : si scrollY <= 0,
  *   la nav redevient transparente (aucun événement scroll n'est garanti au retour).
@@ -43,6 +45,9 @@
 	var hauteur = 0;
 
 	function etroit() { return mqEtroit.matches; }
+	// Seuils du passage au blanc : seul l'accueil en bureau attend le 2e cran.
+	function cransRequis() { return accueil && !etroit() ? 2 : 1; }
+	function repli() { return accueil && !etroit() ? 220 : 0; }
 	function modeBarre() { return accueil && mqMobile.matches; }
 
 	// Barre du hero de l'accueil (téléphone) : état continu, pas de .is-solid.
@@ -116,13 +121,13 @@
 		if (maintenant - dernierCran < 140) { dernierCran = maintenant; return; }
 		dernierCran = maintenant;
 		crans += 1;
-		if (crans >= (etroit() ? 1 : 2)) fixer(true);
+		if (crans >= cransRequis()) fixer(true);
 	}, { passive: true });
 
 	window.addEventListener('scroll', function () {
 		var y = window.scrollY || 0;
 		if (y <= 0) { crans = 0; fixer(false); }
-		else if (y > (etroit() ? 0 : 220)) { crans = Math.max(crans, 2); fixer(true); }
+		else if (y > repli()) { crans = Math.max(crans, 2); fixer(true); }
 		planifier();
 	}, { passive: true });
 

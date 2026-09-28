@@ -201,12 +201,9 @@ $entete-seuils: (
   position: relative;
   color: inherit;
 
-  // Rubrique en cours : gras ; blanche sur nav transparente, vert foncé sur nav
-  // blanche (arbitrage : --tech sur blanc n'atteint que 2,3:1 de contraste).
-  &.is-courant {
-    font-weight: 600;
-    @include nav-blanche { color: c(forest); }
-  }
+  // Rubrique en cours : seulement en gras, même couleur que les autres items
+  // (blanc sur nav transparente, encre de la nav sur nav blanche) — jamais --tech.
+  &.is-courant { font-weight: 600; }
 
   &[data-navtrigger]:is(span) { cursor: pointer; }
 
@@ -217,6 +214,9 @@ $entete-seuils: (
 a.l-nav__item:hover,
 .l-nav__deroulant:hover > .l-nav__item,
 .l-nav__item:focus-visible { @include survol-lien-nav-actif; }
+
+// Page en cours (item de 1er niveau) : pas de filet de survol.
+.l-nav__item[aria-current="page"]::after { display: none; }
 
 // --- Menus déroulants ------------------------------------------------------------
 @keyframes dihUnfold {
@@ -378,14 +378,20 @@ a.l-nav__item:hover,
     font-size: rem(14);
     padding: 12px 22px;
     white-space: nowrap;
-    // Sur nav transparente : fond blanc, texte vert foncé (y compris au survol).
+    // Nav transparente : fond blanc, texte vert foncé, y compris au survol ;
+    // il ne redevient vert (survol --techBright) qu'une fois la nav passée au blanc.
     background: #fff;
     color: c(forestDeep);
     transition: opacity .3s ease, transform .3s ease, background $tr-nav, color $tr-nav;
 
+    &:hover {
+      background: #fff;
+      color: c(forestDeep);
+    }
+
     @include nav-blanche {
       background: c(tech);
-      @include survol-btn-vert;
+      &:hover { background: c(techBright); }
     }
   }
 
@@ -434,16 +440,14 @@ a.l-nav__item:hover,
       }
     }
 
-    .c-btn:hover .c-btn__icone::after { animation: dihMailBump .9s cubic-bezier(.45, 0, .25, 1); }
+    .c-btn:hover .c-btn__icone::after { animation: dihMailBump .8s cubic-bezier(.37, 0, .63, 1); }
   }
 }
 
+// Deux petits sauts de l'enveloppe (bouton de rappel réduit, 1061–1232 px)
 @keyframes dihMailBump {
-  0% { transform: translateY(0); }
-  40% { transform: translateY(-4px); }
-  70% { transform: translateY(0); }
-  85% { transform: translateY(-1px); }
-  100% { transform: translateY(0); }
+  0%, 50%, 100% { transform: translateY(0); }
+  25%, 75% { transform: translateY(-2px); }
 }
 
 // --- Burger (déplié et mobile) ------------------------------------------------------

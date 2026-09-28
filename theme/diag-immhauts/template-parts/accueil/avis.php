@@ -1,7 +1,8 @@
 <?php
 /**
  * « Avis clients » : note Google, puis les avis en carrousel horizontal
- * (scroll-snap, CSS seul).
+ * (scroll-snap). En bureau et tablette, flèches précédent / suivant sous le
+ * carrousel (assets/js/avis.js) ; masquées sur téléphone.
  *
  * @package DiagImmHauts
  */
@@ -24,7 +25,8 @@ $dih_c = dih_contenu( 'accueil', 'avis' );
 				</span>
 			</div>
 		</div>
-		<ul class="l-avis__liste">
+		<div class="l-avis__carrousel" data-dih-avis>
+		<ul class="l-avis__liste" id="avis-liste" tabindex="0" aria-label="Avis clients, défilement horizontal">
 			<?php foreach ( $dih_c['liste'] as $dih_a ) : ?>
 				<?php
 				$dih_initiales = '';
@@ -48,5 +50,14 @@ $dih_c = dih_contenu( 'accueil', 'avis' );
 				</li>
 			<?php endforeach; ?>
 		</ul>
+		<div class="l-avis__fleches">
+			<button type="button" class="l-avis__fleche" aria-label="Avis précédents" aria-controls="avis-liste" data-dih-avis-dir="-1" disabled>
+				<?php echo dih_icone( 'chevron-gauche', 22 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			</button>
+			<button type="button" class="l-avis__fleche" aria-label="Avis suivants" aria-controls="avis-liste" data-dih-avis-dir="1">
+				<?php echo dih_icone( 'chevron-droite', 22 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			</button>
+		</div>
+		</div>
 	</div>
 </section>

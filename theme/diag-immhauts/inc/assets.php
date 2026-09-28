@@ -35,6 +35,7 @@ add_action(
 		);
 		if ( is_front_page() ) {
 			$scripts['dih-commune'] = 'assets/js/commune.js'; // « Vérifier ma commune »
+			$scripts['dih-avis']    = 'assets/js/avis.js';    // flèches du carrousel des avis
 		}
 		foreach ( $scripts as $poignee => $fichier ) {
 			if ( ! file_exists( DIH_DIR . '/' . $fichier ) ) {

@@ -28,6 +28,8 @@ function dih_icone( $nom, $taille = 16, $args = array() ) {
 		'enveloppe'       => '<rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 6.5 8.5 6 8.5-6"/>',
 		'fleche'          => '<path d="M4 12h15M13.5 6.2 20 12l-6.5 5.8"/>',
 		'fleche-bas'      => '<path d="M12 4v15M6.2 13.5 12 20l5.8-6.5"/>',
+		'chevron-gauche'  => '<path d="M15 6l-6 6 6 6"/>',
+		'chevron-droite'  => '<path d="M9 6l6 6-6 6"/>',
 		'fleche-courte'   => '<path d="M5 12h14M13 6l6 6-6 6"/>',
 		'descendre'       => '<path d="M12 5v14M6 13l6 6 6-6"/>',
 		'bouclier'        => '<path d="M12 3 5 6v5c0 4 3 7 7 8 4-1 7-4 7-8V6z"/><path d="m9 12 2 2 4-4"/>',

@@ -55,7 +55,7 @@ Architecture : celle de `Audit code SCSS.dc.html` (7-1 allégée), sans échelle
 
 JS natif, un fichier par module, dans `assets/js/` : `nav.js` (nav transparente + burger),
 `glide.js` (défilement d'ancre), `commune.js` (« Vérifier ma commune »), `simulateur.js`,
-`popup.js` (demande de rappel). Rien du runtime des maquettes (`support.js`, `DCLogic`) n'est porté ;
+`popup.js` (demande de rappel), `avis.js` (flèches du carrousel des avis, maquettes v9). Rien du runtime des maquettes (`support.js`, `DCLogic`) n'est porté ;
 tout le reste est du PHP + CSS.
 
 ## Réglages
@@ -69,7 +69,7 @@ Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa val
 |---|---|
 | Header entre 901 et 1060 px | Comme la maquette : téléphone et pastille ronde du CTA restent visibles jusqu'à 901 px |
 | Bouton d'appel fixe (déplié et mobile) | Sans bordure, comme la maquette |
-| Rubrique en cours sur nav blanche | Vert foncé (`--forest`) en gras, pour le contraste (`--tech` sur blanc : 2,3:1) |
+| Rubrique en cours dans la nav | Maquettes v9 : même couleur que les autres items, seulement en gras (600) — jamais `--tech` |
 | Fiches diagnostics | Pages WordPress avec le gabarit « Fiche diagnostic » (pas de CPT) |
 | Actualités | Articles WordPress standard (`home.php` / `single.php`) |
 

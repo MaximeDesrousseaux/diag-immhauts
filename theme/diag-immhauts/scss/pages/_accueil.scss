@@ -385,7 +385,43 @@
   color: c(onDarkMuted);
 }
 
-// Carrousel horizontal en scroll-snap (CSS seul), qui déborde jusqu'aux bords
+// Carrousel : la liste, puis les flèches dessous (bureau et tablette)
+.l-avis__carrousel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.l-avis__fleches {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+
+  @include bp(mobile) { display: none; }
+}
+
+// Chevron blanc de 22 px sans fond ni contour, zone cliquable de 44 px ;
+// grisé à 0,3 et désactivé en début / fin de liste (assets/js/avis.js).
+.l-avis__fleche {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 -10px; // échelle : exception (ramène le chevron au bord du contenu malgré la zone de 44 px)
+  color: #fff;
+  transition: color .2s ease, opacity .2s ease;
+  @include focus-visible;
+
+  &:hover:not(:disabled) { color: c(techBright); }
+
+  &:disabled {
+    opacity: .3;
+    cursor: default;
+  }
+}
+
+// Carrousel horizontal en scroll-snap, qui déborde jusqu'aux bords
 .l-avis__liste {
   display: flex;
   gap: clamp(12px, 1.6vw, 24px);
@@ -396,6 +432,7 @@
   scroll-snap-type: x mandatory;
   scroll-padding-inline: clamp(16px, 4vw, 32px);
   scrollbar-width: none;
+  @include focus-visible;
 
   &::-webkit-scrollbar { display: none; }
 }
