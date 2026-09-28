@@ -36,6 +36,9 @@ Tu construis le site WordPress de Diag Imm'Hauts (diagnostiqueur immobilier, Pas
 
 ## Règles
 
+- **SCSS** : suivre l'architecture de `Audit code SCSS.dc.html` (7-1 allégée, tokens, mixins `bp(deplie)` / `bp(mobile)`, échelles typo / gouttières / rayons, formules `clamp()` déjà unifiées). Ne pas réinventer d'échelle ni de nommage.
+- **JS** : le code des maquettes (`class Component extends DCLogic`, `renderVals`, `support.js`) n'est **pas** à porter. Seuls ces comportements sont réécrits en JS natif, un fichier par module : nav transparente + burger, `glide()` d'ancre, champ « Vérifier ma commune », simulateur, popup de rappel, animations au survol déjà décrites en CSS. Tout le reste est du PHP + CSS.
+
 - Fidélité visuelle d'abord ; en cas de doute, la maquette `.dc.html` fait foi, puis le README.
 - Pas de dépendance front lourde (pas de jQuery, pas de framework JS).
 - Défilement d'ancre : fonction `glide()` 1,2 s ease-in-out, jamais `scroll-behavior:smooth`.

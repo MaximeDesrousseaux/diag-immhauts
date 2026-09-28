@@ -88,13 +88,13 @@ Gouttières et marges : **4 · 8 · 12 · 16 · 24 · 40 · 56** px (+ 72 · 96 
 ### Header (commun aux 22 pages) et nav transparente
 - **Nav transparente sur les 22 pages et dans les 3 formats.** Le header est épinglé (`position: fixed`, `left/right: 0`) avec un espaceur dans le flux. Le hero (1re `section` après le header) reçoit `margin-top: -H` et `padding-top: padding d'origine + H`, où H est la hauteur du header, exposée en `--nvH`. Sur fond transparent, logo, items, téléphone et burger sont en blanc (le vert clair reste sur le chevron du logo).
 - **Passage au blanc par événement, pas par distance :**
-  - bureau : au **2e cran** de molette ;
-  - déplié et mobile : au **1er cran**, ou dès `scrollY > 0` ;
-  - repli : `y > 220 px` en bureau, pour le clavier et la barre de défilement ;
+  - **21 pages intérieures, tous formats** : au **1er cran** de molette, ou dès `scrollY > 0` (le texte de la nav ne doit jamais passer sur celui du hero) ;
+  - **accueil** : au **2e cran** en bureau (repli `y > 220 px` pour le clavier et la barre de défilement), au 1er cran en déplié et mobile ;
   - crans de pavé tactile regroupés par fenêtres de 140 ms ;
   - transition CSS de 420 ms `cubic-bezier(.4,0,.2,1)`.
 - **Un seul état fait foi (`solid`)**, réconcilié à chaque image : si `scrollY <= 0`, la nav redevient transparente, car aucun événement `scroll` n'est garanti au retour en haut. Burger ouvert : nav forcée en blanc.
-- **Item de la page en cours :** gras. Il est en blanc sur nav transparente et en `--tech` sur nav blanche. Cela ne concerne que les items de 1er niveau : dans les menus déroulants, il reste en vert (sinon blanc sur blanc).
+- **Item de la page en cours :** gras (600), **même couleur que les autres items** : blanc sur nav transparente, vert foncé (couleur héritée de la nav) sur nav blanche — jamais `--tech`. Items de 1er niveau seulement ; dans les menus déroulants, rien ne change (sinon blanc sur blanc).
+- **Carrousel des avis (accueil) :** défilement horizontal à aimantation, cards jusqu'aux bords du contenu (inchangé). En bureau et tablette, deux flèches **sous** le carrousel, alignées à droite : chevrons blancs de 22 px sans fond ni contour (zone cliquable 44 px), vert clair au survol. En début de liste la flèche gauche est grisée (opacité 0,3, désactivée), idem pour la droite en fin de liste. Un clic avance d'une card. Masquées sur téléphone.
 - **Survol sur nav blanche :** aucun changement de couleur, seul un filet vert clair glisse sous l'item. Idem sur le numéro de téléphone.
 - **Menus déroulants :**
   - alignés à gauche sur l'item parent : `left: calc(-1 * clamp(16px,4.2vw,24px))`, items à `margin-left: -9px` ;

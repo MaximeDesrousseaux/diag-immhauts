@@ -25,11 +25,14 @@ la source de vérité unique — conservée d'un recâblage à l'autre, peinte *
 changement (rAF annulé), et réconciliée en tête de `__nvTick` (`scrollY <= 0` → transparente), car
 aucun événement `scroll` n'est garanti au retour en haut. Repli à `y > 220px` pour clavier / barre
 de défilement ; crans groupés par 140 ms pour le pavé tactile.
-**Déplié (accueil + 21 pages)** : nav transparente aussi, passage au blanc dès le **1er cran** (ou `y > 0`) ; sur l'accueil les réglages `dTerrils*` du déplié sont décalés de `var(--nvH)` (hauteur du header) pour garder le cadrage verrouillé.
+**21 pages intérieures, tous formats** : passage au blanc dès le **1er cran** (ou `y > 0`) — l'accueil garde le 2e cran en bureau. **Déplié (accueil)** : 1er cran aussi ; sur l'accueil les réglages `dTerrils*` du déplié sont décalés de `var(--nvH)` (hauteur du header) pour garder le cadrage verrouillé.
 **Étendue aux 21 autres pages** (bureau + déplié + mobile, `__navTransp() = true` ; décor mobile décalé de `var(--nvH)` posé sur le hero ; en déplié logo SVG `lghn`, burger `.dih-burg-l` blanc, nav forcée blanche burger ouvert) : même `__navWire`
 porté, le hero (1re `section` après le header) reçoit `margin-top:-H` + `padding-top` d'origine + H ; logo
 toitures en SVG en ligne (`dih-lg-a/b`) ; sous-titre ciblé par `.dih-hdr-tag` ; le CTA du header reste visible
 s'il n'y a pas de `a.dih-cta` dans le hero. Accueil mobile : barre du hero (déjà transparente → blanche).
+
+## Carrousel des avis (accueil)
+Flèches bureau/tablette **sous** le carrousel, alignées à droite, chevrons sans rond (`revPrev`/`revNext`, `__revSync` sur le `scroll`, seuil 24 px) : grisées à 0,3 et désactivées en début / fin ; masquées sur téléphone.
 
 ## Header commun aux 22 pages
 Entre 1061 et 1232 px, mode compact plutôt que sacrifier le CTA : logo 22 px, `.dih-navrow` à 14 px

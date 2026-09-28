@@ -44,8 +44,8 @@
     .dih-hdr-cta a.dih-cta .dih-cta-i{position:static !important;opacity:1 !important;transform:none !important;display:flex !important;align-items:center;justify-content:center;width:auto !important;height:auto !important;}
     .dih-hdr-cta a.dih-cta .dih-cta-i svg{display:none;}
     .dih-hdr-cta a.dih-cta .dih-cta-i::after{content:"";display:block;flex:none;width:17px;height:17px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' vie%77Box='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='4.5' width='19' height='15' rx='2.5'/%3E%3Cpath d='m3 6.5 9 6 9-6'/%3E%3C/svg%3E") center / contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' vie%77Box='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='4.5' width='19' height='15' rx='2.5'/%3E%3Cpath d='m3 6.5 9 6 9-6'/%3E%3C/svg%3E") center / contain no-repeat;}
-    .dih-hdr-cta a.dih-cta:hover .dih-cta-i::after{animation:dihMailBump .9s cubic-bezier(.45,0,.25,1);}
-    @keyframes dihMailBump{0%{transform:translateY(0);}40%{transform:translateY(-4px);}70%{transform:translateY(0);}85%{transform:translateY(-1px);}100%{transform:translateY(0);}}
+    .dih-hdr-cta a.dih-cta:hover .dih-cta-i::after{animation:dihMailBump .8s cubic-bezier(.37,0,.63,1);}
+    @keyframes dihMailBump{0%,50%,100%{transform:translateY(0);}25%,75%{transform:translateY(-2px);}}
   }
   .dih-hdr-tel .dih-tel-n{position:relative;}
   .dih-hdr-tel .dih-tel-n::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:4px;background:var(--tech,#7bc62f);transform:scaleX(0);transform-origin:left center;opacity:0;transition:transform .32s cubic-bezier(.2,.8,.25,1),opacity .32s ease;}
@@ -600,7 +600,7 @@ class Component extends DCLogic {
       const tr = 'transition:color .42s cubic-bezier(.4,0,.2,1) !important;';
       ink.textContent = 'header .dih-navrow,header .dih-navrow>a,header .dih-navrow>div>a[data-navtrigger]{' + tr + 'color:' + (t ? 'rgb(23,51,31)' : '#ffffff') + ' !important}'
         + 'header .dih-navpanel{color:var(--ink,#17331f) !important}'
-        + (t ? '' : 'header a.dih-cta{background:#ffffff !important;color:var(--forestDeep,#123f24) !important}')
+        + (t ? '' : 'header a.dih-cta,header a.dih-cta:hover{background:#ffffff !important;color:var(--forestDeep,#123f24) !important}')
         + 'header a.dih-cta{transition:opacity .3s ease,transform .3s ease,background .42s cubic-bezier(.4,0,.2,1),color .42s cubic-bezier(.4,0,.2,1) !important}'
         + (t ? '' : 'header .dih-navrow>[aria-current="page"],header .dih-navrow>div>[aria-current="page"],header .dih-navrow>a[style*="--tech"],header .dih-navrow>div>a[style*="--tech"]{color:#ffffff !important}')
         + 'header .dih-burg-l{transition:background .42s cubic-bezier(.4,0,.2,1) !important;background:' + (t ? 'var(--forest,#1e5b34)' : '#ffffff') + ' !important}'
@@ -642,12 +642,12 @@ class Component extends DCLogic {
       if (now - (this.__nvLast || 0) < 140) { this.__nvLast = now; return; }
       this.__nvLast = now;
       this.__nvSteps += 1;
-      if (this.__nvSteps >= (this.__isNarrow() ? 1 : 2)) this.__nvSet(true);
+      if (this.__nvSteps >= 1) this.__nvSet(true);
     };
     this.__nvScroll = () => {
       const y = window.scrollY || 0;
       if (y <= 0) { this.__nvSteps = 0; this.__nvSet(false); }
-      else if (y > (this.__isNarrow() ? 0 : 220)) { this.__nvSteps = Math.max(this.__nvSteps, 2); this.__nvSet(true); }
+      else if (y > 0) { this.__nvSteps = Math.max(this.__nvSteps, 2); this.__nvSet(true); }
       this.__nvOn();
     };
     window.addEventListener('wheel', this.__nvWheel, { passive: true });
