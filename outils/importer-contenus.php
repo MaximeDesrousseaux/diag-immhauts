@@ -8,7 +8,8 @@
  * Usage : wp eval-file outils/importer-contenus.php
  *         wp eval-file outils/importer-contenus.php forcer   (réécrit aussi les champs déjà remplis)
  *
- * - Sans « forcer », un champ déjà rempli dans l'admin n'est jamais touché.
+ * - Sans « forcer », un champ déjà rempli dans l'admin n'est jamais touché ; un champ
+ *   vide est rempli (fiches : champ par champ, un chapeau vidé est repris seul).
  * - Les liens internes sont enregistrés en chemins relatifs (/dpe/, /contact-devis/…) :
  *   ils restent justes après le passage de la préprod au site en ligne.
  * - Exige le thème Diag Imm'Hauts, le plugin Diag Imm'Hauts — Cœur, et ACF Pro ou
@@ -121,15 +122,23 @@ foreach ( dih_core_pages_faq() as $dih_fichier => $dih_cle ) {
 	if ( ! $page_id ) {
 		continue; // déjà signalé avec la FAQ
 	}
-	if ( ! $dih_forcer && get_field( 'etapes_liste', $page_id ) ) {
-		printf( "Fiche / étapes %s : déjà remplies, inchangées.\n", $dih_cle );
-		continue;
-	}
+	// Champ par champ : sans « forcer », seul un champ vide est rempli (un chapeau vidé
+	// dans l'admin est ainsi repris, sans toucher aux champs modifiés à côté).
+	$c       = dih_contenu( $dih_fichier );
+	$remplis = array();
+	$ecrire  = function ( $cle, $nom, $valeur ) use ( $dih_forcer, $page_id, &$remplis ) {
+		$actuel = get_field( $nom, $page_id );
+		$plein  = is_array( $actuel ) ? count( $actuel ) > 0 : '' !== trim( (string) $actuel );
+		if ( $plein && ! $dih_forcer ) {
+			return;
+		}
+		update_field( $cle, $valeur, $page_id );
+		$remplis[] = $nom;
+	};
 
-	$c = dih_contenu( $dih_fichier );
 	if ( $dih_fiche ) {
 		foreach ( array( 'pastille', 'titre', 'accent', 'chapeau' ) as $champ ) {
-			update_field( 'field_dih_fiche_' . $champ, $c['hero'][ $champ ], $page_id );
+			$ecrire( 'field_dih_fiche_' . $champ, 'fiche_' . $champ, $c['hero'][ $champ ] );
 		}
 		$lignes = array();
 		foreach ( $c['reperes'] as $r ) {
@@ -138,7 +147,7 @@ foreach ( dih_core_pages_faq() as $dih_fichier => $dih_cle ) {
 				'legende' => $r[2],
 			);
 		}
-		update_field( 'field_dih_fiche_reperes', $lignes, $page_id );
+		$ecrire( 'field_dih_fiche_reperes', 'fiche_reperes', $lignes );
 	}
 
 	$lignes = array();
@@ -148,20 +157,27 @@ foreach ( dih_core_pages_faq() as $dih_fichier => $dih_cle ) {
 			'texte' => $e[2],
 		);
 	}
-	update_field( 'field_dih_etapes_liste', $lignes, $page_id );
+	$ecrire( 'field_dih_etapes_liste', 'etapes_liste', $lignes );
 
 	$preparation = isset( $c['etapes']['preparation']['liste'] ) ? $c['etapes']['preparation']['liste'] : array();
 	if ( $preparation ) {
-		update_field(
+		$ecrire(
 			'field_dih_preparation_liste',
+			'preparation_liste',
 			array_map(
 				function ( $element ) {
 					return array( 'element' => $element );
 				},
 				$preparation
-			),
-			$page_id
+			)
 		);
 	}
-	printf( "Fiche / étapes %s : importées (page %d).\n", $dih_cle, $page_id );
+
+	if ( ! $remplis ) {
+		printf( "Fiche / étapes %s : déjà remplies, inchangées.\n", $dih_cle );
+		continue;
+	}
+	// Tout rempli : même message qu'avant ; sinon, les champs repris.
+	$tout = $dih_fiche ? ( $preparation ? 7 : 6 ) : 1;
+	printf( "Fiche / étapes %s : importées (page %d)%s.\n", $dih_cle, $page_id, count( $remplis ) < $tout ? ' : ' . implode( ', ', $remplis ) : '' );
 }
