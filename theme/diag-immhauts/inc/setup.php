@@ -91,7 +91,7 @@ add_action(
 
 /**
  * Mentions légales : noindex, follow (README § Pages). Les autres balises SEO
- * (title, description, og, JSON-LD) arrivent à l'étape 6.
+ * (title, description, og, JSON-LD) : inc/seo.php.
  */
 add_filter(
 	'wp_robots',

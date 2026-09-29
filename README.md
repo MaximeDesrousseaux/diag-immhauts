@@ -72,6 +72,18 @@ par le plugin (`inc/personnalisation.php`, ACF Pro) :
 
 Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage prend sa valeur par défaut.
 
+## SEO
+
+- **Balises** (thème, `inc/seo.php`) : titre, description, canonique, `og:*`, `twitter:card` et directive
+  robots des 22 pages, repris à la lettre des blocs `<!-- seo -->` des maquettes dans
+  `inc/contenus/seo.php` (clé de `dih_chemins()`, ou `article:<slug>` ; un article sans entrée reprend
+  son titre et son extrait). JSON-LD `LocalBusiness` sur l'accueil, avec l'adresse du site réel et les
+  coordonnées de `dih_info()`. Si Yoast, Rank Math, SEOPress ou AIOSEO est actif, le thème s'efface.
+- **Plan de migration** (plugin, `inc/redirections.php`) : les 8 anciennes adresses du README renvoient
+  en 301 vers les nouvelles, sur une 404 seulement (jamais par-dessus une page existante), avant les
+  suppositions de WordPress. Filtre `dih_redirections` pour en ajouter.
+- **Plan du site** : celui de WordPress (`/wp-sitemap.xml`), à soumettre dans la Search Console.
+
 ## Arbitrages (écarts entre maquette et README de passation)
 
 | Sujet | Choix retenu |
@@ -111,6 +123,9 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Hero `terrils-barre` en déplié | Dans la maquette, les chiffres (remontés faute de CTA) passent sous les cartes DPE et la barre recouvre le bas de l'illustration : chiffres descendus à la place qu'ils ont sous les CTA, décor arrêté au haut de la barre (même échelle et même cadrage que `terrils-boutons`), hero allongé de la hauteur de la barre (106 px) |
 | Illustration « maison verte » de Nos diagnostics (`min-height: 363px` dans la maquette) | Hauteur minimale supprimée : sans `object-fit`, elle étirait la maison sous 1100 px de large ; image pleine largeur du cadre 4:3 (même ratio que le fichier), halo lumineux conservé. Variable `--sr` de la maquette : lue nulle part, non reprise |
 | Bloc « 4 étapes » en `deux-colonnes` | Bureau : deux colonnes au-delà de 1150 px, illustration au-dessus des cards 2 × 2 de 901 à 1150 px (maquette DPE). Déplié et téléphone : rail vertical des deux dispositions, comme l'annonce la page d'options (« même rendu »), et non les cards 2 × 2 de la maquette DPE. Qui suis-je, absente de la liste des pages du réglage, reste en ligne |
+| Redirections : « 7 » dans le rapport SEO, 8 lignes dans son tableau et dans le README | Les 8 lignes (les deux variantes en `/wp/` comprises) ; l'ancien journal renvoie vers `/actualites/`, comme le README (« journal conservé ») |
+| Image de partage 1200 × 630 (rapport SEO, chantier S3) | Non fournie : pas de `og:image` tant qu'elle manque |
+| Canonique et `og:url` | Adresse du site réel (`home_url`), pas `https://diagimmhauts.fr` en dur : la préprod ne se déclare pas comme la production |
 | Hero `sansBG` en déplié | La maquette n'affiche pas le formulaire dans la carte (`formAucun` réservé au bureau) : formulaire affiché, sinon la carte est vide |
 | Espacements hors échelle des variantes du hero (28, 13, 50, 48 px, rayon 18 px, marge basse −22…−34 px de la barre) | 24, 12, 56, 40 px, rayon 16 px ; la barre de `terrils-barre` annule exactement le rembourrage bas (−24…−40 px) et reste collée au bas |
 | Halo `#eaffd8` de `max-bandeau` | Jeton `--glow` |

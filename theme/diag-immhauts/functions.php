@@ -25,3 +25,4 @@ require DIH_DIR . '/inc/icones.php';      // pictos SVG en ligne
 require DIH_DIR . '/inc/gabarits.php';    // balises de gabarit : logo, CTA, liens de nav
 require DIH_DIR . '/inc/formulaires.php'; // emplacements de formulaires (Fluent Forms)
 require DIH_DIR . '/inc/contenus.php';    // dih_contenu() : textes par défaut des gabarits
+require DIH_DIR . '/inc/seo.php';         // titre, description, canonique, og, JSON-LD
