@@ -1,6 +1,7 @@
 <?php
 /**
- * Dépendances : ACF Pro (blocs, champs, page d'options) et Fluent Forms Pro (formulaires).
+ * Dépendances : ACF Pro ou Secure Custom Fields (champs, pages d'options) et Fluent
+ * Forms Pro (formulaires).
  *
  * Tant qu'elles manquent, rien ne plante : le site s'affiche avec ses valeurs par
  * défaut et un message d'administration indique ce qu'il reste à installer.
@@ -11,12 +12,17 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * ACF Pro est-il actif ? (les blocs et la page d'options exigent la version Pro)
+ * ACF Pro, ou Secure Custom Fields (reprise gratuite d'ACF par WordPress.org, qui
+ * inclut les fonctions Pro), est-il actif ? Pages d'options et champs répétables
+ * exigent l'un ou l'autre : ACF gratuit ne suffit pas.
  *
  * @return bool
  */
 function dih_core_acf_actif() {
-	return class_exists( 'ACF' ) && defined( 'ACF_PRO' ) && ACF_PRO;
+	if ( ! class_exists( 'ACF' ) ) {
+		return false;
+	}
+	return ( defined( 'ACF_PRO' ) && ACF_PRO ) || function_exists( 'acf_add_options_page' );
 }
 
 /**
@@ -40,7 +46,7 @@ add_action(
 
 		$manquants = array();
 		if ( ! dih_core_acf_actif() ) {
-			$manquants[] = '<strong>ACF Pro</strong> (blocs éditables et page « Personnalisation »)';
+			$manquants[] = '<strong>ACF Pro</strong> ou <strong>Secure Custom Fields</strong> (contenus modifiables et page « Personnalisation »)';
 		}
 		if ( ! dih_core_fluentforms_actif() ) {
 			$manquants[] = '<strong>Fluent Forms Pro</strong> (formulaires de rappel, devis et contact)';

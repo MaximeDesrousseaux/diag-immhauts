@@ -9,6 +9,7 @@ plugin/diag-immhauts-core/  CPT, blocs ACF, page d'options, intégration Fluent 
 design_handoff_theme_wp/    maquettes .dc.html (référence visuelle, non embarquées)
 outils/installer.ps1        liens vers le site LocalWP + compilation
 outils/image-partage.html   source de l'image de partage (og:image)
+outils/importer-*.php       imports WP-CLI : articles du journal, contenus modifiables
 ```
 
 ## Installation locale (Windows, LocalWP)
@@ -73,6 +74,16 @@ par le plugin (`inc/personnalisation.php`, ACF Pro) :
 
 Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage prend sa valeur par défaut.
 
+**Contenus modifiables** (plugin, `inc/contenus-modifiables.php`) : ils remplacent les textes du thème
+(`inc/contenus/*.php`) section par section, par le filtre `dih_contenu` ; un champ vide garde le texte du thème.
+
+- **Diag Imm'Hauts → Avis clients** : les avis du carrousel de l'accueil ;
+- **encart « Questions fréquentes (FAQ) »** des 15 pages qui en ont une (accueil, Nos diagnostics,
+  Professionnels, 12 fiches) : question, réponse, lien facultatif.
+
+Pour que l'admin montre les textes en place plutôt que des champs vides :
+`wp eval-file outils/importer-contenus.php` (ajouter `forcer` pour réécrire des champs déjà remplis).
+
 ## SEO
 
 - **Balises** (thème, `inc/seo.php`) : titre, description, canonique, `og:*`, `twitter:card` et directive
@@ -106,7 +117,7 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Rayons 12 et 22 px de la maquette | Ramenés aux jetons 10 et 26 px (Audit SCSS) |
 | Fond de l'accueil `#E5F2D4` et couleurs du champ « Vérifier ma commune » | Jeton `$vert-brume` ; pastilles oui / limite prises dans la palette (`$pastille-jaune`, `$pastille-orange`) |
 | Bloc rappel de la fiche DPE | Garde ses boutons propres (« obligations ») ; les autres fiches suivent la règle v10 formulaire / appel |
-| Avis clients de l'accueil | Textes provisoires de la maquette, à remplacer par les vrais avis (étape 5, ACF) |
+| Avis clients de l'accueil | Modifiables dans Diag Imm'Hauts → Avis clients ; textes par défaut à remplacer par les vrais avis du site actuel. La note (5,0) et le nombre d'avis restent des chiffres arrêtés |
 | Formulaires | Emplacement balisé tant que Fluent Forms n'est pas installé |
 | Liens `#rappel` (FAQ, CTA de section) | Ouvrent la popup de rappel, comme le script des maquettes ; sans JS, ils descendent au bloc « rappel » |
 | Illustrations des résultats du simulateur | La maquette les retourne en miroir (`scaleX(-1)`) : supprimé, conformément au README v10 (aucun miroir CSS) |
@@ -142,7 +153,8 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 
 ## Dépendances
 
-- **ACF Pro** : blocs éditables et page « Personnalisation ».
+- **ACF Pro** ou **Secure Custom Fields** (reprise gratuite d'ACF par WordPress.org, avec les fonctions Pro) :
+  contenus modifiables et pages « Personnalisation », « Formulaires », « Avis clients ». Le même code sert aux deux.
 - **Fluent Forms Pro** : formulaires (rappel, devis, contact) + Cloudflare Turnstile ; envoi via Brevo.
 
 Sans elles, rien ne plante : un message d'administration signale ce qui manque et les formulaires

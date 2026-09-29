@@ -3,8 +3,9 @@
  * Contenus par défaut des gabarits (textes relevés sur les maquettes).
  *
  * Chaque page a son fichier inc/contenus/<page>.php qui retourne un tableau.
- * Les blocs ACF (étape 5) les remplacent section par section via le filtre
- * dih_contenu, sans que les gabarits changent : ils ne lisent QUE dih_contenu().
+ * Les contenus modifiables dans l'admin (plugin, inc/contenus-modifiables.php) les
+ * remplacent section par section via le filtre dih_contenu, sans que les gabarits
+ * changent : ils ne lisent QUE dih_contenu().
  *
  * @package DiagImmHauts
  */
@@ -42,7 +43,8 @@ function dih_contenu( $page, $section = '' ) {
 
 /**
  * URL d'une cible de lien écrite dans les contenus : clé de page (dih_chemins),
- * ancre de la page courante (« #zones »), ou tableau [ clé, ancre ].
+ * ancre de la page courante (« #zones »), tableau [ clé, ancre ], ou adresse
+ * complète (champ « lien » des contenus modifiables dans l'admin).
  *
  * @param string|array $cible Cible.
  * @return string
@@ -51,7 +53,7 @@ function dih_url_cible( $cible ) {
 	if ( is_array( $cible ) ) {
 		return dih_url( $cible[0] ) . ( isset( $cible[1] ) ? $cible[1] . '/' : '' );
 	}
-	if ( 0 === strpos( (string) $cible, '#' ) ) {
+	if ( 0 === strpos( (string) $cible, '#' ) || preg_match( '#^(https?:)?//|^/#', (string) $cible ) ) {
 		return $cible;
 	}
 	return dih_url( $cible );

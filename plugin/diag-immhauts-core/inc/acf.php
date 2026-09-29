@@ -1,11 +1,12 @@
 <?php
 /**
- * Point d'accroche ACF : groupes de champs, blocs verrouillés et page d'options.
+ * Point d'accroche ACF : groupes de champs et pages d'options.
  *
- * Tout ce qui dépend d'ACF est enregistré sur 'acf/init' : si ACF Pro est absent,
- * ce hook ne se déclenche jamais et rien ne plante (voir inc/dependances.php).
- * Les modules s'accrochent à dih_core_acf_init : inc/personnalisation.php
- * (pages d'options « Personnalisation » et « Formulaires », réglages de page).
+ * Tout ce qui dépend d'ACF est enregistré sur 'acf/init' : sans ACF Pro ni Secure
+ * Custom Fields, ce hook ne se déclenche jamais et rien ne plante (inc/dependances.php).
+ * Les modules s'accrochent à dih_core_acf_init : inc/personnalisation.php (pages
+ * d'options « Personnalisation » et « Formulaires », réglages de page) et
+ * inc/contenus-modifiables.php (avis clients, FAQ).
  *
  * @package DiagImmHautsCore
  */
