@@ -30,7 +30,8 @@ function dih_formulaire( $cle, $variante = '' ) {
 	$noms = array(
 		'rappel'  => 'Demande de rappel',
 		'devis'   => 'Demande de devis',
-		'contact' => 'Contact',
+		'contact'    => 'Contact',
+		'partenaire' => 'Compte partenaire',
 	);
 	$nom  = isset( $noms[ $cle ] ) ? $noms[ $cle ] : $cle;
 	?>

@@ -119,6 +119,12 @@
   .c-faq__item { background: c(bg); }
 }
 
+// Professionnels : sur le fond de page, questions blanches
+.c-faq--pros {
+  background: transparent;
+  .c-faq__int { padding-block: clamp(40px, 5vw, 60px) clamp(44px, 6vw, 70px); }
+}
+
 // Filet en haut (Nos diagnostics)
 .c-faq--filet { border-top: 1px solid c(line); }
 

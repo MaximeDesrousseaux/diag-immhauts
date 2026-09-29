@@ -5,7 +5,8 @@
  *
  * Arguments : surtitre, titre, questions [ question, réponse, lien, cible ], id,
  * variante ('' : accueil ; 'transparente' : fiche DPE ; 'blanche' : autres fiches ;
- * 'filet' : comme l'accueil, avec un filet en haut — Nos diagnostics).
+ * 'filet' : comme l'accueil, avec un filet en haut — Nos diagnostics ;
+ * 'pros' : comme une fiche, sur le fond de page — Professionnels).
  *
  * @package DiagImmHauts
  */
@@ -23,7 +24,7 @@ $dih_args = wp_parse_args(
 ?>
 <?php
 $dih_classes_faq = 'c-faq';
-if ( in_array( $dih_args['variante'], array( 'transparente', 'blanche' ), true ) ) {
+if ( in_array( $dih_args['variante'], array( 'transparente', 'blanche', 'pros' ), true ) ) {
 	$dih_classes_faq .= ' c-faq--fiche';
 }
 if ( $dih_args['variante'] ) {

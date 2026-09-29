@@ -87,6 +87,9 @@ Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa val
 | Illustrations des résultats du simulateur | La maquette les retourne en miroir (`scaleX(-1)`) : supprimé, conformément au README v10 (aucun miroir CSS) |
 | Note « Cette liste est indicative » du simulateur | Placée dans le panneau vert du dossier, comme la maquette |
 | Pastilles du simulateur (13,5 et 11,5 px, écart 9 et 6 px) | 14 et 12,5 px, écart 8 et 4 px (échelles) ; titre du hero sur téléphone en 30 px conservé (exception) |
+| Ligne « condition » des cards blanches de Nos diagnostics (`#629E25`) | Mélange de `--tech` et `--forestDeep`, sans valeur hors palette |
+| Titre du hero Professionnels sur téléphone (28 px) | 26 px, comme les fiches (échelle) |
+| Popup de rappel de Professionnels | Surtitre, titre, intro et formulaire « Compte partenaire » propres à la page (section `popup` de ses contenus) |
 | Statuts « Selon situation » et « Recommandé » | Teintes dérivées de la palette (`--warm`, `--line`, `--forest`) au lieu de `#f6e6b4` / `#6b4d11` / `#3f5c46` |
 
 ## Dépendances
