@@ -3,8 +3,10 @@
  * Nav de bureau (> 900 px). Pas d'item « Accueil » : le logo fait le lien.
  * « Actualités » vient avant « Qui suis-je ».
  *
- * La rubrique en cours est en gras (.is-courant) ; dans les menus déroulants,
- * la page en cours est un <span aria-current="page">.
+ * La rubrique en cours est en gras (.is-courant), avec un filet vert permanent
+ * dessous ; dans les menus déroulants, la page en cours est un
+ * <span aria-current="page"> sur fond clair, marqué d'un filet vertical vert.
+ * Menu « Professionnels » : la page Professionnels d'abord, puis le DTG.
  *
  * @package DiagImmHauts
  */
@@ -71,8 +73,8 @@ $dih_col = function ( $titre, $items ) {
 			$dih_col(
 				'Pour les professionnels',
 				array(
-					'dtg'  => 'DTG &amp; DPE collectif',
 					'pros' => 'Syndics, agences &amp; bailleurs',
+					'dtg'  => 'DTG &amp; DPE collectif',
 				)
 			);
 			?>
@@ -87,8 +89,8 @@ $dih_col = function ( $titre, $items ) {
 		<div class="l-nav__panneau l-nav__panneau--etroit">
 			<div class="l-nav__panneau-titre">Pour les professionnels</div>
 			<?php
-			echo dih_lien_nav( 'dtg', 'DTG &amp; DPE collectif', 'l-nav__panneau-lien' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo dih_lien_nav( 'pros', 'Syndics, agences &amp; bailleurs', 'l-nav__panneau-lien' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo dih_lien_nav( 'dtg', 'DTG &amp; DPE collectif', 'l-nav__panneau-lien' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			?>
 		</div>
 	</div>

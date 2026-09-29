@@ -225,8 +225,15 @@ a.l-nav__item:hover,
 .l-nav__deroulant:hover > .l-nav__item,
 .l-nav__item:focus-visible { @include survol-lien-nav-actif; }
 
-// Page en cours (item de 1er niveau) : pas de filet de survol.
-.l-nav__item[aria-current="page"]::after { display: none; }
+// Rubrique en cours (page ou rubrique de la page) : petit filet vert permanent,
+// 28 × 2 px, aligné sur le début du texte, 6 px dessous (maquettes v1.12).
+.l-nav__item.is-courant::after {
+  right: auto;
+  width: 28px;
+  transform: none;
+  opacity: 1;
+  transition: none;
+}
 
 // --- Menus déroulants ------------------------------------------------------------
 @keyframes dihUnfold {
@@ -327,6 +334,25 @@ a.l-nav__item:hover,
   margin-left: -9px; // échelle : exception (README : items des menus à −9 px)
   border-radius: 10px;
   @include survol-item-burger;
+}
+
+// Page en cours dans un menu déroulant : fond clair, gras, filet vertical vert
+.l-nav__panneau-lien[aria-current="page"] {
+  position: relative;
+  background: c(bg);
+  color: c(forest);
+  font-weight: 700;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    bottom: 7px;
+    width: 3px;
+    border-radius: 4px;
+    background: c(tech);
+  }
 }
 
 .l-nav__panneau-pied {
@@ -546,6 +572,14 @@ a.l-nav__item:hover,
   display: flex;
   align-items: center;
   @include survol-item-burger;
+}
+
+// Page en cours dans le burger : fond clair, gras, filet vertical vert
+.l-burger__lien[aria-current="page"] {
+  background: c(bg);
+  color: c(forest);
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 c(tech);
 }
 
 .l-burger__titre {

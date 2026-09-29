@@ -69,9 +69,18 @@
 		hdr.style.removeProperty('--s');
 	}
 
+	var relance = 0;
+
+	// Hauteur du header → --nvH (décalage du hero sous la nav fixe). Appelée au
+	// chargement et à chaque changement de taille (ResizeObserver, plus bas) ;
+	// si le header n'a pas encore de hauteur (0), on réessaie à l'image suivante.
 	function mesurer() {
 		var h = hdr.offsetHeight;
-		if (h && h !== hauteur) {
+		if (!h) {
+			if (!relance) relance = requestAnimationFrame(function () { relance = 0; mesurer(); });
+			return;
+		}
+		if (h !== hauteur) {
 			hauteur = h;
 			root.style.setProperty('--nvH', h + 'px');
 		}

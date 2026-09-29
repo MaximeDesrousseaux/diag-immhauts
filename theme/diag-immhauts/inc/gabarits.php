@@ -177,7 +177,7 @@ function dih_date_article( $article ) {
  */
 function dih_illus_diagnostic( $cle ) {
 	$fichiers = array(
-		'dpe'            => 'diag_dpe',
+		'dpe'            => 'diag_dpe_v2',
 		'audit'          => 'diag_audit',
 		'amiante'        => 'diag_amiante',
 		'plomb'          => 'diag_plomb',

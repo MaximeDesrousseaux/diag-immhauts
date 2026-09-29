@@ -69,7 +69,7 @@ Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa val
 |---|---|
 | Header entre 901 et 1060 px | Comme la maquette : téléphone et pastille ronde du CTA restent visibles jusqu'à 901 px |
 | Bouton d'appel fixe (déplié et mobile) | Sans bordure, comme la maquette |
-| Rubrique en cours dans la nav | Maquettes v9 : même couleur que les autres items, seulement en gras (600) — jamais `--tech` |
+| Rubrique en cours dans la nav | Maquettes v9 : même couleur que les autres items, seulement en gras (600) — jamais `--tech`. Maquettes 1.12 : filet vert permanent de 28 px sous la rubrique en cours ; page en cours signalée dans les menus déroulants et le burger |
 | Fiches diagnostics | Pages WordPress avec le gabarit « Fiche diagnostic » (pas de CPT) |
 | Actualités | Articles WordPress standard (`home.php` / `single.php`) |
 | Espacements hors échelle dans la maquette (18, 20, 28, 30, 36 px…) | Arrondis au cran le plus proche de l'échelle 4·8·12·16·24·40·56 ; écart ≤ 18 px par section, mesuré en 1440 / 820 / 390 |
