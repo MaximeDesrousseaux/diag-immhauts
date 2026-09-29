@@ -670,3 +670,130 @@ a.c-card { @include survol-card; }
     color: c(muted);
   }
 }
+
+// --- Validité d'un diagnostic (« Nos diagnostics ») : illustration en débord -------------
+.c-card--validite {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 18px;
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-card__illus {
+    position: absolute;
+    right: 0;
+    top: 14px;
+    transform: translateY(-50%);
+    width: 119px;
+    height: 119px;
+    background: center / contain no-repeat;
+    pointer-events: none;
+    filter: drop-shadow(0 0 1px rgba(18, 48, 36, .5)) drop-shadow(0 2px 3px rgba(18, 48, 36, .22)) drop-shadow(0 12px 20px rgba(18, 48, 36, .22));
+  }
+
+  .c-card__validite {
+    position: relative;
+    font-family: var(--font-titre);
+    font-weight: 800;
+    font-size: rem(14);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: c(forest);
+  }
+
+  .c-card__titre {
+    position: relative;
+    max-width: 86%;
+    margin-top: 56px;
+    font-size: rem(19);
+    font-weight: 800;
+    letter-spacing: -.015em;
+    line-height: 1.18;
+    color: c(forest);
+
+    @include bp(mobile) { max-width: 80%; }
+  }
+
+  .c-card__texte {
+    position: relative;
+    margin: 8px 0 16px;
+    font-size: rem(14);
+    line-height: 1.58;
+    text-wrap: pretty;
+    color: c(muted);
+  }
+
+  .c-card__condition {
+    position: relative;
+    margin-top: auto;
+    padding-top: 11px;
+    border-top: 1px solid c(line);
+    font-size: rem(11);
+    font-weight: 600;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: c(forest);
+  }
+
+  .c-card__bouton {
+    position: relative;
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 4px;
+    margin-top: 16px;
+    padding: 10px 16px 10px 15px;
+    border-radius: $r-pilule;
+    font-family: var(--font-titre);
+    font-weight: 800;
+    font-size: rem(12.5);
+    background: color-mix(in oklab, #{c(tech)} 24%, #fff);
+    color: c(forest);
+  }
+}
+
+// --- Prestation illustrée (« Copropriétés & collectivités ») ------------------------------
+.c-card--prestation {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  padding: 16px 18px;
+  border: 1px solid c(line);
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-card__cadre {
+    position: relative;
+    flex: none;
+    align-self: stretch;
+    width: 72px;
+  }
+
+  .c-card__illus {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 88px;
+    height: 88px;
+    background: center / contain no-repeat;
+  }
+
+  .c-card__corps { min-width: 0; }
+
+  .c-card__titre {
+    display: block;
+    font-weight: 700;
+    font-size: rem(15.5);
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    display: block;
+    margin-top: 4px;
+    font-size: rem(14);
+    line-height: 1.55;
+    color: c(muted);
+  }
+}

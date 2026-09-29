@@ -119,6 +119,9 @@
   .c-faq__item { background: c(bg); }
 }
 
+// Filet en haut (Nos diagnostics)
+.c-faq--filet { border-top: 1px solid c(line); }
+
 @include sans-animation {
   .c-faq__item::details-content,
   .c-faq__reponse { transition: none; }

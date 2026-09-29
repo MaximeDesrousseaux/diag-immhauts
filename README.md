@@ -72,6 +72,17 @@ Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa val
 | Rubrique en cours dans la nav | Maquettes v9 : même couleur que les autres items, seulement en gras (600) — jamais `--tech` |
 | Fiches diagnostics | Pages WordPress avec le gabarit « Fiche diagnostic » (pas de CPT) |
 | Actualités | Articles WordPress standard (`home.php` / `single.php`) |
+| Espacements hors échelle dans la maquette (18, 20, 28, 30, 36 px…) | Arrondis au cran le plus proche de l'échelle 4·8·12·16·24·40·56 ; écart ≤ 18 px par section, mesuré en 1440 / 820 / 390 |
+| Réglages « VERROUILLÉS » (hero de l'accueil, Nos diagnostics en bureau et déplié) | Repris tels quels, marqués `// échelle : exception (…)` pour le vérificateur |
+| Titre des heros de fiche | Formule de la maquette `clamp(30px, 3.1vw, 42px)` conservée (exception déclarée) |
+| Rayons 12 et 22 px de la maquette | Ramenés aux jetons 10 et 26 px (Audit SCSS) |
+| Fond de l'accueil `#E5F2D4` et couleurs du champ « Vérifier ma commune » | Jeton `$vert-brume` ; pastilles oui / limite prises dans la palette (`$pastille-jaune`, `$pastille-orange`) |
+| Card DTG de « Nos diagnostics » | Illustration `ill_syndic_ssfond` de la maquette, pas `diag_dtg` (le jeu v10 ne couvre que heros et cards standard) |
+| Bloc rappel de « Nos diagnostics » | Les boutons ne s'affichent pas dans la maquette (bogue `ctaCallFirst` / `ctaFormFirst`) : règle du README appliquée, formulaire puis appel |
+| Pictos des 4 étapes de « Nos diagnostics » | La maquette pointe vers `uploads/ill_stb_*.png`, absents : le thème sert `img/ill_stb_*.webp` |
+| Bloc rappel de la fiche DPE | Garde ses boutons propres (« obligations ») ; les autres fiches suivent la règle v10 formulaire / appel |
+| Avis clients de l'accueil | Textes provisoires de la maquette, à remplacer par les vrais avis (étape 5, ACF) |
+| Formulaires | Emplacement balisé tant que Fluent Forms n'est pas installé |
 
 ## Dépendances
 

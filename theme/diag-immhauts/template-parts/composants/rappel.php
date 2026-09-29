@@ -9,7 +9,8 @@
  *
  * Arguments : titre, texte (défauts : ceux de l'accueil), variante :
  * - '' (accueil) : formulaire = « Demande de rappel gratuit » (popup) ;
- * - 'fiche' : formulaire = « Formulaire de devis » (page Contact).
+ * - 'fiche' : formulaire = « Formulaire de devis » (page Contact) ;
+ * - 'page' : pages intérieures hors fiches (Nos diagnostics…), bloc plus aéré.
  * formulaire (fiches) : [ libellé, cible ] du bouton formulaire (défaut : « Formulaire
  * de devis » vers Contact ; DTG : « Offre syndics & bailleurs » vers Professionnels).
  * boutons : 'obligations' (fiche DPE) remplace l'appel par « Vérifier mes
@@ -39,6 +40,8 @@ $dih_tel  = 'Appeler le <span class="l-insecable">' . esc_html( dih_info( 'telep
 $dih_classes = array( 'c-rappel' );
 if ( $dih_fiche ) {
 	$dih_classes[] = 'c-rappel--fiche';
+} elseif ( 'page' === $dih_args['variante'] ) {
+	$dih_classes[] = 'c-rappel--page';
 }
 foreach ( (array) $dih_args['options'] as $dih_option_rappel ) {
 	$dih_classes[] = 'c-rappel--' . sanitize_html_class( $dih_option_rappel );
@@ -58,7 +61,7 @@ foreach ( (array) $dih_args['options'] as $dih_option_rappel ) {
 						echo dih_bouton( 'Demander un devis gratuit', dih_attr_rappel(), 'enveloppe', 'c-btn--vert c-btn--grand' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						echo dih_bouton( 'Vérifier mes obligations', 'href="' . esc_url( dih_url( 'simulateur' ) ) . '"', 'fleche-courte', 'c-btn--contour c-btn--grand' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					} else {
-						if ( $dih_fiche ) {
+						if ( $dih_fiche || 'page' === $dih_args['variante'] ) {
 							$dih_f = $dih_args['formulaire'];
 							$dih_u = is_array( $dih_f[1] ) ? dih_url( $dih_f[1][0], ltrim( $dih_f[1][1], '#' ) ) : dih_url_cible( $dih_f[1] );
 							echo dih_bouton( $dih_f[0], 'href="' . esc_url( $dih_u ) . '"', 'enveloppe', 'c-btn--grand c-rappel__cta c-rappel__cta--form' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

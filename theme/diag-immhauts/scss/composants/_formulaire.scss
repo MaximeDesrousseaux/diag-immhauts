@@ -435,3 +435,32 @@
 
   .c-rappel--fiche .c-rappel__cta--form { padding-inline: 26px; }
 }
+
+// Variante des pages intérieures hors fiches (Nos diagnostics…)
+.c-rappel--page {
+  padding-top: clamp(44px, 6vw, 70px);
+
+  .c-rappel__bloc { padding: clamp(22px, 5vw, 60px) clamp(16px, 5vw, 56px); border-radius: 26px; }
+
+  .c-rappel__halo {
+    opacity: 1;
+    background: radial-gradient(70% 120% at 88% 20%, teinte(tech, 38%), transparent 60%);
+  }
+
+  .c-rappel__titre {
+    font-size: clamp(26px, 3.2vw, 44px);
+    line-height: 1.16;
+  }
+
+  .c-rappel__para { max-width: 560px; }
+
+  .c-rappel__photo {
+    margin-bottom: calc(-1 * clamp(22px, 5vw, 60px)); // échelle : exception (annule le rembourrage bas du bloc)
+
+    img {
+      width: 100%;
+      height: auto;
+      min-height: 349px;
+    }
+  }
+}

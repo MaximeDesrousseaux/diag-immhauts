@@ -4,7 +4,8 @@
  * chaque réponse. Ouverture animée en CSS seul (composants/_faq.scss).
  *
  * Arguments : surtitre, titre, questions [ question, réponse, lien, cible ], id,
- * variante ('' : accueil ; 'transparente' : fiche DPE ; 'blanche' : autres fiches).
+ * variante ('' : accueil ; 'transparente' : fiche DPE ; 'blanche' : autres fiches ;
+ * 'filet' : comme l'accueil, avec un filet en haut — Nos diagnostics).
  *
  * @package DiagImmHauts
  */
@@ -20,7 +21,16 @@ $dih_args = wp_parse_args(
 	)
 );
 ?>
-<section class="c-faq<?php echo $dih_args['variante'] ? ' c-faq--fiche c-faq--' . esc_attr( $dih_args['variante'] ) : ''; ?>" id="<?php echo esc_attr( $dih_args['id'] ); ?>">
+<?php
+$dih_classes_faq = 'c-faq';
+if ( in_array( $dih_args['variante'], array( 'transparente', 'blanche' ), true ) ) {
+	$dih_classes_faq .= ' c-faq--fiche';
+}
+if ( $dih_args['variante'] ) {
+	$dih_classes_faq .= ' c-faq--' . $dih_args['variante'];
+}
+?>
+<section class="<?php echo esc_attr( $dih_classes_faq ); ?>" id="<?php echo esc_attr( $dih_args['id'] ); ?>">
 	<div class="c-faq__int">
 		<div class="c-faq__tete">
 			<?php echo dih_surtitre( $dih_args['surtitre'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
