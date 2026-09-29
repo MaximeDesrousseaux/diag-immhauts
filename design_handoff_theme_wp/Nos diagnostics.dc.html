@@ -87,7 +87,10 @@
   [data-som]:hover .dih-arrow{border-color:var(--techBright,#a3e04a) !important;}
   .dih-hdr-tel span{transition:color .2s ease;}
   .dih-navrow > a,.dih-navrow > div > a[data-navtrigger]{position:relative;}
-  .dih-navrow [aria-current="page"]::after{display:none !important;}
+  .dih-navrow [data-cur]{position:relative;display:inline-block;}
+  .dih-navrow [data-cur]::after{content:"";position:absolute;left:0 !important;right:auto !important;width:28px;margin-left:0;bottom:-6px;height:2px;border-radius:4px;background:var(--tech,#7bc62f);transform:none !important;opacity:1 !important;}
+  header .dih-navpanel [aria-current="page"],.dih-mnav [aria-current="page"]{position:relative;background:var(--bg,#f5f8ef);color:var(--forest,#1e5b34) !important;font-weight:700 !important;}
+  header .dih-navpanel [aria-current="page"]::before{content:"";position:absolute;left:0;top:7px;bottom:7px;width:3px;border-radius:4px;background:var(--tech,#7bc62f);}
   .dih-navrow > a::after,.dih-navrow > div > [data-navtrigger]::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:4px;background:var(--tech,#7bc62f);transform:scaleX(0);transform-origin:left center;transition:transform .26s cubic-bezier(.4,0,.2,1),opacity .26s ease;opacity:0;}
   .dih-navrow > a:hover::after,.dih-navrow > div:hover > [data-navtrigger]::after{transform:scaleX(1);opacity:1;}
   .dih-navrow > a:not(:hover)::after,.dih-navrow > div:not(:hover) > [data-navtrigger]::after{transform-origin:right center;}
@@ -148,7 +151,7 @@
       <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
       <nav class="dih-navrow" style="display:flex;align-items:center;gap:clamp(16px,4vw,24px);font-size:14px;font-weight:500;white-space:nowrap;">
               <div onMouseEnter="{{ openNav }}" onMouseLeave="{{ closeNav }}" onClick="{{ toggleNav }}" style="position:relative;padding:19px 0;margin:-19px 0;">
-          <span aria-current="page" data-navtrigger="1" style="cursor:pointer;color:inherit;font-weight:600;">Nos diagnostics</span>
+          <span aria-current="page" data-navtrigger="1" data-cur="1" style="cursor:pointer;color:inherit;font-weight:600;">Nos diagnostics</span>
       <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
         <div class="dih-navpanel dih-navpanel-lg" style="position:absolute;top:100%;left:calc(-1 * clamp(16px,4.2vw,24px));transform:none;width:min(760px,calc(100vw - 48px));background:#fff;border:1px solid #e6ebdd;border-radius:16px;box-shadow:0 34px 64px -30px rgba(9,26,15,.45);padding:clamp(16px,4vw,24px) clamp(16px,4vw,24px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:40px;z-index:60;">
         <div style="display:flex;flex-direction:column;gap:2px;">
@@ -170,8 +173,8 @@
         </div>
         <div style="display:flex;flex-direction:column;gap:2px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--subtle,#8a9a80);margin-bottom:10px;">Pour les professionnels</div>
-          <a href="DTG et DPE collectif.dc.html" style="font-size:14px;font-weight:500;color:#17331f;padding:7px 9px;margin-left:-9px;border-radius:10px;" style-hover="background:#f5f8ef;color:#1e5b34">DTG &amp; DPE collectif</a>
           <a href="Professionnels.dc.html" style="font-size:14px;font-weight:500;color:#17331f;padding:7px 9px;margin-left:-9px;border-radius:10px;" style-hover="background:#f5f8ef;color:#1e5b34">Syndics, agences &amp; bailleurs</a>
+          <a href="DTG et DPE collectif.dc.html" style="font-size:14px;font-weight:500;color:#17331f;padding:7px 9px;margin-left:-9px;border-radius:10px;" style-hover="background:#f5f8ef;color:#1e5b34">DTG &amp; DPE collectif</a>
         </div>
         <div style="grid-column:1 / -1;margin-top:6px;padding-top:18px;border-top:1px solid #e6ebdd;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;">
           <a class="dih-link" href="Simulateur diagnostics.dc.html" style="display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:700;color:#1e5b34;" style-hover="color:#7bc62f">De quoi ai-je besoin&nbsp;?<span class="dih-arrow" style="display:inline-flex;align-items:center;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M4 12h15M13.5 6.2 20 12l-6.5 5.8"></path></svg></span></a>
@@ -185,8 +188,8 @@
           <sc-if value="{{ proNavOpen }}" hint-placeholder-val="{{ false }}">
           <div class="dih-navpanel" style="position:absolute;top:100%;left:calc(-1 * clamp(16px,4.2vw,24px));transform:none;width:min(300px,calc(100vw - 48px));background:#fff;border:1px solid #e6ebdd;border-radius:16px;box-shadow:0 34px 64px -30px rgba(9,26,15,.45);padding:clamp(16px,4.2vw,24px);display:flex;flex-direction:column;gap:2px;z-index:60;">
             <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--subtle,#8a9a80);margin-bottom:10px;">Pour les professionnels</div>
-            <a href="DTG et DPE collectif.dc.html" style="font-size:14px;font-weight:500;color:#17331f;padding:7px 9px;margin-left:-9px;border-radius:10px;" style-hover="background:#f5f8ef;color:#1e5b34">DTG &amp; DPE collectif</a>
             <a href="Professionnels.dc.html" style="font-size:14px;font-weight:500;color:#17331f;padding:7px 9px;margin-left:-9px;border-radius:10px;" style-hover="background:#f5f8ef;color:#1e5b34">Syndics, agences &amp; bailleurs</a>
+            <a href="DTG et DPE collectif.dc.html" style="font-size:14px;font-weight:500;color:#17331f;padding:7px 9px;margin-left:-9px;border-radius:10px;" style-hover="background:#f5f8ef;color:#1e5b34">DTG &amp; DPE collectif</a>
           </div>
           </sc-if>
         </div>
@@ -208,7 +211,7 @@
     <sc-if value="{{ burgerOpen }}" hint-placeholder-val="{{ false }}">
         <div class="dih-burger-panel {{ burgerCls }}" style="position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid #e6ebdd;box-shadow:0 26px 44px -26px rgba(9,26,15,.4);padding:14px clamp(16px,4vw,40px) 22px;max-height:76vh;overflow-y:auto;z-index:70;display:flex;flex-direction:column;">
           <a href="Diag Imm'Hauts - Accueil.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">Accueil</a>
-          <span aria-current="page" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;">Tous les diagnostics</span>
+          <span aria-current="page" style="font-size:15.5px;font-weight:700;color:var(--forest,#1e5b34);background:var(--bg,#f5f8ef);box-shadow:inset 3px 0 0 var(--tech,#7bc62f);padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;">Tous les diagnostics</span>
           <a href="Simulateur diagnostics.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">De quoi ai-je besoin&nbsp;?</a>
           <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--subtle,#8a9a80);margin:14px 0 4px;">Diagnostics</div>
           <a href="DPE.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">DPE</a>
@@ -223,8 +226,8 @@
           <a href="Mesurage.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">Mesurage Carrez / Boutin</a>
           <a href="Assainissement.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">Assainissement</a>
           <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--subtle,#8a9a80);margin:14px 0 4px;">Professionnels</div>
-          <a href="DTG et DPE collectif.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">DTG &amp; DPE collectif</a>
           <a href="Professionnels.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">Syndics, agences &amp; bailleurs</a>
+          <a href="DTG et DPE collectif.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">DTG &amp; DPE collectif</a>
           <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--subtle,#8a9a80);margin:14px 0 4px;">Le diagnostiqueur</div>
             <a href="Actualites.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">Actualités</a>
           <a href="Qui suis-je.dc.html" style="font-size:15.5px;font-weight:600;color:#17331f;padding:14px 12px;margin:0 -12px;border-radius:10px;min-height:46px;display:flex;align-items:center;" style-hover="background:#f5f8ef;color:#1e5b34">Qui suis-je&nbsp;?</a>
@@ -724,10 +727,10 @@ class Component extends DCLogic {
     if (w > 2020) L.push('linear-gradient(270deg,#0b381e,' + g + ') calc(50% + 958px) 0 / 120px 100% no-repeat');
     return L.length ? L.join(',') + ',' : '';
   }
-  renderVals() { return Object.assign({}, this.renderValsBase(), this.quoteVals(), this.__decorVals()); }
+  renderVals() { return Object.assign({}, this.renderValsBase(), this.quoteVals(), this.__decorVals(), { ctaCallFirst: this.__isPhone(), ctaFormFirst: !this.__isPhone() }); }
   __navTransp() { return true; }
   __navWire() {
-    const VER = 17;
+    const VER = 19;
     if (this.__nvBound && this.__nvVer === VER) { this.__nvTick(); return; }
     if (this.__nvBound) {
       if (this.__nvOn) { window.removeEventListener('resize', this.__nvOn); }
@@ -785,6 +788,7 @@ class Component extends DCLogic {
       }
       if (strip) strip.style.display = 'none';
       const H = hdr.offsetHeight || 0;
+      if (!H) { requestAnimationFrame(() => this.__nvTick && this.__nvTick()); return; }
       const y = window.scrollY || 0;
       ensureSpacer().style.height = H + 'px';
       hdr.style.position = 'fixed';
@@ -857,6 +861,7 @@ class Component extends DCLogic {
     window.addEventListener('wheel', this.__nvWheel, { passive: true });
     window.addEventListener('scroll', this.__nvScroll, { passive: true });
     window.addEventListener('resize', this.__nvOn, { passive: true });
+    if (window.ResizeObserver) { if (this.__nvRO) this.__nvRO.disconnect(); let _lh = 0; this.__nvRO = new ResizeObserver(() => { const nh = hdr.offsetHeight; if (nh && nh !== _lh) { _lh = nh; if (this.__nvTick) this.__nvTick(); } }); this.__nvRO.observe(hdr); }
     requestAnimationFrame(this.__nvTick);
   }
   componentDidUpdate() { try { this.__navWire(); } catch (e) {} }
@@ -1000,7 +1005,7 @@ class Component extends DCLogic {
 
     const withHref = (a) => a.map(x => Object.assign({ href: "#" }, x));
     const diagCards = withHref([
-      {title:'DPE', href:'DPE.dc.html', validity:'10 ans', icon:gauge, illus:'img/diag_dpe.webp', desc:'Classe énergétique et climatique du logement, de A à G, avec recommandations de travaux.', when:'Obligatoire pour toute vente ou location'},
+      {title:'DPE', href:'DPE.dc.html', validity:'10 ans', icon:gauge, illus:'img/diag_dpe_v2.webp', desc:'Classe énergétique et climatique du logement, de A à G, avec recommandations de travaux.', when:'Obligatoire pour toute vente ou location'},
       {title:'Amiante', href:'Amiante.dc.html', validity:'Illimitée*', icon:shield, illus:'img/diag_amiante.webp', desc:'Repérage des matériaux et produits contenant de l\u2019amiante dans le bâti.', when:'Permis de construire avant le 1er juillet 1997'},
       {title:'Plomb (CREP)', href:'Plomb.dc.html', validity:'1 an / 6 ans', icon:droplet, illus:'img/diag_plomb.webp', desc:'Constat de risque d\u2019exposition au plomb dans les peintures anciennes.', when:'Logement construit avant le 1er janvier 1949'},
       {title:'Électricité', href:'Electricite.dc.html', validity:'3 ans / 6 ans', icon:bolt, illus:'img/diag_elec.webp', desc:'État de l\u2019installation intérieure d\u2019électricité et des risques associés.', when:'Installation de plus de 15 ans'},
@@ -1010,7 +1015,7 @@ class Component extends DCLogic {
       {title:'Mesurage Carrez / Boutin', href:'Mesurage.dc.html', validity:'Illimitée*', icon:ruler, illus:'img/diag_mesurage.webp', desc:'Surface privative en copropriété (Carrez) ou surface habitable en location (Boutin).', when:'Vente en copropriété · bail d\u2019habitation'},
       {title:'Assainissement', href:'Assainissement.dc.html', validity:'Contrôle SPANC', icon:droplet, illus:'img/diag_assainissement.webp', desc:'Contrôle de l\u2019installation non collective : il est réalisé par le SPANC de votre commune, je vous oriente et j\u2019intègre les autres diagnostics au même devis.', when:'Bien non raccordé au tout-à-l\u2019égout'},
       {title:'Mérule', href:'Merule.dc.html', validity:'6 mois', icon:leaf, illus:'img/diag_merule.webp', desc:'Recherche de mérule et de champignons lignivores dans les bois du bâti.', when:'Zone à risque délimitée par arrêté'},
-      {title:'DTG & DPE collectif', href:'DTG et DPE collectif.dc.html', validity:'10 ans', icon:clipboard, illus:'img/ill_syndic_ssfond.webp', desc:'Étiquette énergétique de l\u2019immeuble entier et état technique global de la copropriété.', when:'Copropriétés d\u2019habitation'},
+      {title:'DTG & DPE collectif', href:'DTG et DPE collectif.dc.html', validity:'10 ans', icon:clipboard, illus:'img/diag_dtg.webp', desc:'Étiquette énergétique de l\u2019immeuble entier et état technique global de la copropriété.', when:'Copropriétés d\u2019habitation'},
       {title:'Audit énergétique', href:'Audit energetique.dc.html', validity:'5 ans', icon:gauge, illus:'img/diag_audit.webp', desc:'Deux scénarios de travaux chiffrés pour sortir le logement des classes énergivores.', when:'Vente d\u2019une maison classée E, F ou G'},
     ]);
     const _illTune = {};
@@ -1047,14 +1052,14 @@ class Component extends DCLogic {
     const _stepScale = {};
     const _per = this.__isPhone() ? 1 : (this.__isNarrow() ? 2 : 4);
     const steps = _rawSteps.map(function(x,i){ return Object.assign({}, x, {
-      illusBg: 'url("uploads/ill_stb_' + x.ico + '.png")',
+      illusBg: 'url("img/ill_stb_' + x.ico + '.webp")',
       illusK: _stepScale['ill_stb_' + x.ico] || 1,
       illusY: '0px',
       showLine: (i % _per !== _per - 1) && i < _rawSteps.length - 1 && _per > 1,
     }); });
     const coproItems = [
       {title:'Diagnostic technique global (DTG)', desc:'État du bâti, analyse des améliorations possibles et projection budgétaire sur 10 ans.', icon:clipboard, illusBg:'url("img/diag_dtg.webp")', illusTr:'translate(-50%,-50%)'},
-      {title:'DPE collectif', desc:'Étiquette énergétique de l\u2019immeuble entier, obligatoire pour tous les immeubles d\u2019habitation.', icon:gauge, illusBg:'url("img/diag_dpe.webp")', illusTr:'translate(-50%,-50%)'},
+      {title:'DPE collectif', desc:'Étiquette énergétique de l\u2019immeuble entier, obligatoire pour tous les immeubles d\u2019habitation.', icon:gauge, illusBg:'url("img/diag_dpe_v2.webp")', illusTr:'translate(-50%,-50%)'},
       {title:'Amiante des parties communes (DTA)', desc:'Dossier technique amiante et mise à jour du repérage avant travaux.', icon:shield, illusBg:'url("img/diag_amiante.webp")', illusTr:'translate(-50%,-50%)'},
       {title:'Accompagnement de parc', desc:'Planning annuel, référent unique et rapports harmonisés pour bailleurs et collectivités.', icon:users, illusBg:'url("img/ill_syndic_ssfond.webp")', illusTr:'translate(-50%,-50%)'},
     ];
@@ -1067,7 +1072,7 @@ class Component extends DCLogic {
     const faqs = faqData.map((f,i)=>{
       const open = this.state.open === i;
       return {
-      ctaCallFirst: this.__isPhone(), ctaFormFirst: !this.__isPhone(), q:f.q, a:f.a, open, link:f.link, href:f.href, sign: open ? '\u2212' : '+', rows: open ? '1fr' : '0fr', aOpacity: open ? 1 : 0, aShift: open ? '0px' : '-6px', iconRot: open ? '180deg' : '0deg',
+      q:f.q, a:f.a, open, link:f.link, href:f.href, sign: open ? '\u2212' : '+', rows: open ? '1fr' : '0fr', aOpacity: open ? 1 : 0, aShift: open ? '0px' : '-6px', iconRot: open ? '180deg' : '0deg',
         iconBg: open ? 'var(--tech,#7bc62f)' : 'var(--bg,#f5f8ef)', iconColor: open ? '#06210f' : 'var(--forest,#1e5b34)',
         toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i })) };
     });

@@ -1,5 +1,9 @@
 # Diag Imm'Hauts — notes de projet
 
+**Règle de travail : ne jamais créer de nouvelle version, de lien de téléchargement ni de message pour Claude Code sans demande explicite.**
+
+**Versionnage : `1.x`** (plus de « vN » seul). Version courante : **1.12** (`checkpoints/v1.12 - livrables/`). Prochaine : **1.13**. Même numéro partout : dossier de sauvegarde `checkpoints/v1.x - …/`, libellé des liens de téléchargement, en-tête du message pour Claude Code (« Maquettes 1.x »), ligne `Version :` du README du paquet. Les corrections s'appliquent aux maquettes, au paquet et au dossier client ; le versionnage attend le feu vert.
+
 ## État
 Refonte appliquée sur l'accueil, `Nos diagnostics`, `Professionnels`, le `Simulateur` et les
 13 fiches. Les cards « accueil » (bordure 2px, illustration débordante, damier blanc / vert clair)
@@ -152,14 +156,17 @@ illustration avec `margin-bottom:42px` — c'est lui qui les remonte).
 - `Qui suis-je` : légende « Certifié Bureau Veritas » retirée de la photo ; bandeau blanc = **même composant que la trust bar de l'accueil** (Google 5,0 ★ · Certifié Bureau Veritas · Rendez-vous sous 48 h), filets verticaux en bureau (`qsDesk`).
 - « peut-être » toujours insécable (`white-space:nowrap`).
 - Audit pré-empaquetage : balises équilibrées, trous tous alimentés, ressources toutes présentes, JSON-LD valide, 1 h1 par page (les doublons sont en `sc-if` exclusifs). Couleurs de secours obsolètes corrigées (`#59b529`, `#6dcc38`, `#123024`, **`#0d241b`** → canoniques) sur les 22 pages. Écarts d'échelle restants volontaires : 10 px (sous-titre du logo, « LIGNE DIRECTE »), `gap:11px` (listes de préparation des fiches).
-- Sauvegarde : `checkpoints/v1.5 - pre-empaquetage/`.
-- **v1.6 - pre-empaquetage** (`checkpoints/v1.6 - pre-empaquetage/`) : nav transparente partout, décor terrils, teintes en variables, `overflow-x:clip` sur html/body. `clamp()` unifiés (73 distinctes dans le balisage ; `clamp(16px,4.2vw,24px)` réservé à la nav) ; palette portée en `var(--x,#hex)` dans la logique JS (257) et dans les SVG en ligne (133, `fill`/`stroke` passés en `style`).
+- Sauvegarde : `checkpoints/v1.05 - pre-empaquetage/`.
+- **v1.06 - pre-empaquetage** (`checkpoints/v1.06 - pre-empaquetage/`) : nav transparente partout, décor terrils, teintes en variables, `overflow-x:clip` sur html/body. `clamp()` unifiés (73 distinctes dans le balisage ; `clamp(16px,4.2vw,24px)` réservé à la nav) ; palette portée en `var(--x,#hex)` dans la logique JS (257) et dans les SVG en ligne (133, `fill`/`stroke` passés en `style`).
 - Fiches (Amiante, Plomb, Électricité, Gaz, Termites, ERP, Mesurage, Assainissement, Mérule) : les deux sessions « cadre du contrôle » / « sur place » sont empilées (plus de 2 colonnes), cards 3 par ligne (`minmax(max(200px,calc((100% - 24px)/3)),1fr)`) — incluses dans la sauvegarde v1.6.
 
-## Livrables — v1.7 (`checkpoints/v1.7 - livrables/`)
+## Livrables — v1.7 (`checkpoints/v1.07 - livrables/`)
 `design_handoff_theme_wp/` (README + `PROMPT-CLAUDE-CODE.md` + 22 pages + admin + img/ + logos) pour la suite en Claude Code : thème classique PHP/SCSS + plugin `diag-immhauts-core` (CPT, blocs ACF, page d'options, simulateur). `dossier_client_en_ligne/` (`index.html` = dossier client) à héberger.
 
 **Stack probable (en attente de validation client)** : ACF Pro + Fluent Forms Pro + Brevo (≈ 110 €/an). Manquent toujours : n° de certification, assureur RC pro, médiateur.
+
+## Livrables — 1.12 (`checkpoints/v1.12 - livrables/`)
+Paquet `design_handoff_theme_wp/` + `dossier_client_en_ligne/` (Netlify). Contenu : illustration DPE `diag_dpe_v2.webp` (−14 %), nav transparente robuste au chargement (`ResizeObserver` sur le header). La sauvegarde ne contient que les pages, textes et `img/` — logos PNG, favicons PNG et vignettes admin sont dans les deux dossiers livrables.
 
 ## Empaquetage — plan validé
 Deux livrables : (1) `design_handoff_theme_wp/` pour Claude Code (README de spécification + 22 pages + admin + img/ + logos, sans captures) ; (2) `Dossier client - Refonte.dc.html`, présentation élégante de la refonte graphique et fonctionnelle, style des aperçus, **sans étapes de développement**.
@@ -183,7 +190,7 @@ l'illustration sur l'herbe. `Qui suis-je` : tweak `decorHero` (`terrils` | `actu
 - Attention : certaines sources contiennent des espaces insécables (`)\u00a0?`) — utiliser des regex `\s` pour les remplacements.
 
 ## Illustrations des diagnostics — normalisées
-`img/diag_<clé>.webp` (12) : 800×640, orientation cuite, poids visuel égal (réf. DPE des cards liées). Plus de `scaleX(-1)` / `_plinth` / `_illTune` / `_k` par fichier — une taille par contexte. Heros fiches 370/326 px. Heros DPE et Audit inchangés.
+`img/diag_<clé>.webp` (12) : 800×640, orientation cuite, poids visuel égal (réf. DPE des cards liées). Plus de `scaleX(-1)` / `_plinth` / `_illTune` / `_k` par fichier — une taille par contexte. Heros fiches 370/326 px. Heros DPE et Audit inchangés. **Règle : hors des deux heros DPE/Audit, toute vignette de diagnostic utilise le jeu `diag_*` — jamais `ill_dpe_v6` / `ill_audit_hero`, jamais de réglage de taille par fichier.**
 
 ## Images optimisées (WebP)
 Une seule version par illustration de diagnostic : les `_ssfond` (les `_hero` / `_v2` / `_v3` doublons en miroir ont été retirés du paquet) ; dans les heros des fiches, `scale:-1 1` sur l'`<img>` rend l'orientation d'origine. Pictos 4 étapes et cards liées : chemins `img/…webp` construits en JS (plus aucun `uploads/*.png`).
@@ -258,7 +265,7 @@ assureur RC pro, médiateur de la consommation.
 
 ## Passe 3 de l'audit SCSS — APPLIQUÉE aux 22 pages
 2 985 valeurs du **balisage** ramenées sur trois échelles (sauvegarde :
-`checkpoints/v1.1 - avant passe 3/`). Ne plus introduire de valeur hors échelle :
+`checkpoints/v1.01 - avant passe 3/`). Ne plus introduire de valeur hors échelle :
 - texte : `11 · 12,5 · 14 · 15,5 · 17 · 19 · 22 · 26` px (+ 34 px, une taille d'affichage) ;
 - gouttières : `4 · 8 · 12 · 16 · 24 · 40 · 56` px (le `gap:2px` des filets est conservé) ;
 - rayons : `4 · 10 · 16 · 26 · 44` px + `999px` pour les pilules.
@@ -267,13 +274,13 @@ par la **logique** — donc les réglages à l'œil des heros verrouillés (`her
 `heroStatsGap`, `heroPadB`…) sont intacts.
 
 ## Chantier K6 — APPLIQUÉ aux 22 pages
-156 formules `clamp()` → **107** (sauvegarde : `checkpoints/v1.2 - avant K6/`). 872 réécrites,
+156 formules `clamp()` → **107** (sauvegarde : `checkpoints/v1.02 - avant K6/`). 872 réécrites,
 10 supprimées (bornes identiques après arrondi → valeur fixe). Règles à respecter :
 - bornes de texte sur l'échelle typo `11 · 12,5 · 14 · 15,5 · 17 · 19 · 22 · 26 · 31 · 36 · 44` ;
 - bornes d'espace sur `4 · 8 · 12 · 16 · 24 · 40 · 56 · 72 · 96` ;
 - **accents conservés** : toute borne max ≥ 48 px est volontaire et reste hors échelle
   (261 cas — le « 1,9 » de la card actualité à 58 px, les grands titres de fiche) ;
-- **vitesses unifiées sur les espaces** (2e temps, sauvegarde `checkpoints/v1.3 - avant
+- **vitesses unifiées sur les espaces** (2e temps, sauvegarde `checkpoints/v1.03 - avant
   unification vitesses/`) : 393 formules réécrites, un seul rythme par couple de bornes —
   celui que suivait déjà la majorité des usages. Total **156 → 78 formules**. Ne plus
   introduire deux vitesses pour un même couple `min→max` de rembourrage ou de gouttière ;
