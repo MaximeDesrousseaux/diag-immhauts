@@ -41,7 +41,7 @@ function dih_seo_cle() {
  * Les articles écrits plus tard, absents des maquettes, reprennent leur titre
  * et leur extrait.
  *
- * @return array{titre?:string, description?:string, og_titre?:string, og_description?:string, og_type?:string, jsonld?:array}
+ * @return array{titre?:string, description?:string, og_titre?:string, og_description?:string, og_type?:string, og_image?:string, jsonld?:array}
  */
 function dih_seo() {
 	static $seo = null;
@@ -147,6 +147,12 @@ function dih_seo_balises() {
 		array( 'property', 'og:title', isset( $seo['og_titre'] ) ? $seo['og_titre'] : ( isset( $seo['titre'] ) ? $seo['titre'] : '' ) ),
 		array( 'property', 'og:description', isset( $seo['og_description'] ) ? $seo['og_description'] : ( isset( $seo['description'] ) ? $seo['description'] : '' ) ),
 		array( 'property', 'og:url', $canonique ),
+		// Image de partage unique (rapport SEO, S3) : aperçu des liens dans WhatsApp,
+		// Messenger, Facebook, LinkedIn… Source : outils/image-partage.html.
+		array( 'property', 'og:image', isset( $seo['og_image'] ) ? $seo['og_image'] : dih_img( 'partage.jpg' ) ),
+		array( 'property', 'og:image:width', isset( $seo['og_image'] ) ? '' : '1200' ),
+		array( 'property', 'og:image:height', isset( $seo['og_image'] ) ? '' : '630' ),
+		array( 'property', 'og:image:alt', isset( $seo['og_image'] ) ? '' : "Diag Imm'Hauts : des diagnostics fiables, partout dans l'Artois" ),
 		array( 'name', 'twitter:card', 'summary_large_image' ),
 	);
 

@@ -8,6 +8,7 @@ theme/diag-immhauts/        thème classique PHP + SCSS (Dart Sass), JS natif
 plugin/diag-immhauts-core/  CPT, blocs ACF, page d'options, intégration Fluent Forms
 design_handoff_theme_wp/    maquettes .dc.html (référence visuelle, non embarquées)
 outils/installer.ps1        liens vers le site LocalWP + compilation
+outils/image-partage.html   source de l'image de partage (og:image)
 ```
 
 ## Installation locale (Windows, LocalWP)
@@ -85,6 +86,8 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 - **Données structurées du rapport SEO (S3)** : JSON-LD `BreadcrumbList` tiré du fil d'Ariane affiché
   (les heros l'impriment par `dih_ariane()`), et `FAQPage` tiré des FAQ affichées (partial
   `composants/faq`), imprimés en pied de page.
+- **Image de partage** (aperçu des liens dans WhatsApp, Messenger, Facebook, LinkedIn…) : `assets/img/partage.jpg`
+  (1200 × 630), commune aux pages ; une page peut en fixer une autre par le filtre `dih_seo` (`og_image`).
 - **Plan du site** : celui de WordPress (`/wp-sitemap.xml`), à soumettre dans la Search Console.
 
 ## Arbitrages (écarts entre maquette et README de passation)
@@ -129,7 +132,7 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Bloc « 4 étapes » en `deux-colonnes` | Bureau : deux colonnes au-delà de 1150 px, illustration au-dessus des cards 2 × 2 de 901 à 1150 px (maquette DPE). Déplié et téléphone : rail vertical des deux dispositions, comme l'annonce la page d'options (« même rendu »), et non les cards 2 × 2 de la maquette DPE. Qui suis-je, absente de la liste des pages du réglage, reste en ligne |
 | Colonnes de liens du pied de page (elles varient d'une maquette à l'autre : « Infos & FAQ », « Mes engagements », « Demande de rappel »…) | Un seul pied de page pour les 22 pages (README de passation : `footer.php` commun ; audit SCSS, K5) : celui de l'accueil |
 | Redirections : « 7 » dans le rapport SEO, 8 lignes dans son tableau et dans le README | Les 8 lignes (les deux variantes en `/wp/` comprises) ; l'ancien journal renvoie vers `/actualites/`, comme le README (« journal conservé ») |
-| Image de partage 1200 × 630 (rapport SEO, chantier S3) | Non fournie : pas de `og:image` tant qu'elle manque |
+| Image de partage 1200 × 630 (rapport SEO, chantier S3), non fournie | Composée à partir du thème (décor des terrils, logo, accroche de l'accueil, pastilles « Certifié Bureau Veritas », « Devis sous 24 h », téléphone) : `assets/img/partage.jpg`, source `outils/image-partage.html` ; en JPEG et non en WebP, que certaines messageries n'affichent pas en aperçu |
 | Canonique et `og:url` | Adresse du site réel (`home_url`), pas `https://diagimmhauts.fr` en dur : la préprod ne se déclare pas comme la production |
 | Hero `sansBG` en déplié | La maquette n'affiche pas le formulaire dans la carte (`formAucun` réservé au bureau) : formulaire affiché, sinon la carte est vide |
 | Espacements hors échelle des variantes du hero (28, 13, 50, 48 px, rayon 18 px, marge basse −22…−34 px de la barre) | 24, 12, 56, 40 px, rayon 16 px ; la barre de `terrils-barre` annule exactement le rembourrage bas (−24…−40 px) et reste collée au bas |
