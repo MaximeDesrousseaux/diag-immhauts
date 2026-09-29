@@ -12,8 +12,11 @@
  *   Nos diagnostics, Professionnels, 12 fiches) : questions, réponses, lien.
  * - Encart « Fiche diagnostic » des 12 fiches : pastille, titre, accent et chapeau
  *   du haut de page ; chiffres et légendes des quatre repères (pictos fixes).
- * - Encart « Bloc 4 étapes » des fiches et de Nos diagnostics : titres et textes des
- *   étapes (numéros fixes) ; liste « À préparer avant ma visite » des fiches.
+ * - Encart « Bloc 4 étapes » des fiches, de Nos diagnostics et de Qui suis-je : titres
+ *   et textes des étapes (numéros fixes) ; liste « À préparer avant ma visite » des fiches.
+ * - Encart « Haut de page » des six pages uniques (accueil, Nos diagnostics,
+ *   Professionnels, Qui suis-je, Contact, simulateur) : textes du hero et ses listes
+ *   (chiffres, entrées, promesses), décrits page par page dans dih_core_heros().
  *
  * Pour partir des textes en place plutôt que de champs vides :
  * wp eval-file outils/importer-contenus.php (voir ce fichier).
@@ -38,6 +41,20 @@ function dih_core_pages_faq() {
 		$pages[ 'fiche-' . $cle ] = $cle;
 	}
 	return $pages;
+}
+
+/**
+ * Toutes les pages à contenus modifiables : pages à FAQ, plus Qui suis-je, Contact
+ * et le simulateur (haut de page, étapes de Qui suis-je).
+ *
+ * @return array<string, string> Fichier de contenus du thème => clé de page.
+ */
+function dih_core_pages() {
+	return dih_core_pages_faq() + array(
+		'qui'        => 'qui',
+		'contact'    => 'contact',
+		'simulateur' => 'simulateur',
+	);
 }
 
 add_action(
@@ -185,7 +202,7 @@ add_action(
  * @return int Identifiant de la page, ou 0.
  */
 function dih_core_id_si_affichee( $page ) {
-	$pages = dih_core_pages_faq();
+	$pages = dih_core_pages();
 	if ( isset( $pages[ $page ] ) && function_exists( 'dih_page_courante' ) && dih_page_courante() === $pages[ $page ] ) {
 		return (int) get_queried_object_id();
 	}
@@ -309,7 +326,7 @@ add_action(
 						'key'          => 'field_dih_etapes_liste',
 						'name'         => 'etapes_liste',
 						'label'        => 'Étapes',
-						'instructions' => 'Quatre étapes, numérotées automatiquement (les pictos suivent l’ordre). Liste vide : étapes actuelles.',
+						'instructions' => 'Quatre étapes, numérotées automatiquement (les pictos et les étiquettes suivent l’ordre). Liste vide : étapes actuelles.',
 						'type'         => 'repeater',
 						'layout'       => 'block',
 						'max'          => 4,
@@ -352,7 +369,7 @@ add_action(
 						),
 					),
 				),
-				'location'   => dih_core_location_gabarits( array( 'page-templates/fiche-diagnostic.php', 'page-templates/nos-diagnostics.php' ) ),
+				'location'   => dih_core_location_gabarits( array( 'page-templates/fiche-diagnostic.php', 'page-templates/nos-diagnostics.php', 'page-templates/qui.php' ) ),
 				'position'   => 'normal',
 				'menu_order' => 10,
 			)
@@ -454,9 +471,13 @@ function dih_core_contenus_fiches( $donnees, $page ) {
 			if ( empty( $ligne['titre'] ) || empty( $ligne['texte'] ) ) {
 				continue;
 			}
-			$n        = count( $etapes );
-			$num      = isset( $donnees['etapes']['liste'][ $n ][0] ) ? $donnees['etapes']['liste'][ $n ][0] : sprintf( '%02d', $n + 1 );
-			$etapes[] = array( $num, $ligne['titre'], $ligne['texte'] );
+			$n      = count( $etapes );
+			$defaut = isset( $donnees['etapes']['liste'][ $n ] ) ? $donnees['etapes']['liste'][ $n ] : array();
+			$etape  = array( isset( $defaut[0] ) ? $defaut[0] : sprintf( '%02d', $n + 1 ), $ligne['titre'], $ligne['texte'] );
+			if ( isset( $defaut[3] ) ) {
+				$etape[] = $defaut[3]; // étiquette « ÉTAPE 01 » de Qui suis-je
+			}
+			$etapes[] = $etape;
 		}
 		if ( $etapes ) {
 			$donnees['etapes']['liste'] = $etapes;
@@ -491,7 +512,7 @@ function dih_core_fichier_de_page( $post_id ) {
 		return '';
 	}
 	$chemins = dih_chemins();
-	foreach ( dih_core_pages_faq() as $fichier => $cle ) {
+	foreach ( dih_core_pages() as $fichier => $cle ) {
 		if ( 'accueil' === $cle ) {
 			$id = (int) get_option( 'page_on_front' );
 		} else {
@@ -526,3 +547,245 @@ add_filter(
 		return empty( $contenus['etapes']['preparation']['liste'] ) ? false : $field;
 	}
 );
+
+/**
+ * Haut de page des six pages uniques : textes modifiables, page par page.
+ *
+ * - champs : clé du hero dans les contenus du thème => [ libellé, type ] (text,
+ *   textarea). Les titres gardent le découpage des maquettes (retours à la ligne).
+ * - listes : clé => [ libellé, colonnes, max ] ; colonnes : nom du sous-champ =>
+ *   [ position dans l'élément du thème, libellé ] (position null : liste de textes).
+ *   Les positions absentes (numéro, ancre…) restent celles du thème, par rang.
+ *
+ * @return array
+ */
+function dih_core_heros() {
+	return array(
+		'accueil'         => array(
+			'lieu'   => array( 'page_type', 'front_page' ),
+			'champs' => array(
+				'pastille'     => array( 'Pastille', 'text' ),
+				'titre'        => array( 'Titre, 1re ligne', 'text' ),
+				'titre_accent' => array( 'Titre, 2e ligne en vert (ordinateur et tablette)', 'text' ),
+				'titre_mobile' => array( 'Titre, 2e ligne en vert (téléphone)', 'text' ),
+				'chapeau'      => array( 'Chapeau', 'textarea' ),
+				'cta'          => array( 'Bouton « Demande de rappel »', 'text' ),
+				'cta_2'        => array( 'Bouton « Découvrir mes prestations »', 'text' ),
+				'avis_mobile'  => array( 'Ligne sous le titre (téléphone)', 'text' ),
+			),
+			'listes' => array(
+				'chiffres' => array(
+					'Chiffres sous les boutons',
+					array(
+						'valeur'  => array( 0, 'Chiffre' ),
+						'legende' => array( 1, 'Légende' ),
+					),
+					3,
+				),
+			),
+		),
+		'nos-diagnostics' => array(
+			'lieu'   => array( 'page_template', 'page-templates/nos-diagnostics.php' ),
+			'champs' => array(
+				'titre_1'  => array( 'Titre, 1er morceau', 'text' ),
+				'titre_2'  => array( 'Titre, 2e morceau', 'text' ),
+				'accent_1' => array( 'Titre en vert, 1er morceau', 'text' ),
+				'accent_2' => array( 'Titre en vert, 2e morceau', 'text' ),
+				'chapeau'  => array( 'Chapeau', 'textarea' ),
+			),
+			'listes' => array(
+				'entrees' => array(
+					'Les trois entrées (numéro et bloc visé fixes)',
+					array(
+						'titre' => array( 1, 'Titre' ),
+						'sous'  => array( 2, 'Sous-titre' ),
+					),
+					3,
+				),
+			),
+		),
+		'professionnels'  => array(
+			'lieu'   => array( 'page_template', 'page-templates/professionnels.php' ),
+			'champs' => array(
+				'pastille' => array( 'Pastille', 'text' ),
+				'titre'    => array( 'Titre, 1re ligne', 'text' ),
+				'accent'   => array( 'Titre, 2e ligne (en vert)', 'text' ),
+				'chapeau'  => array( 'Chapeau', 'textarea' ),
+				'cta'      => array( 'Bouton principal', 'text' ),
+			),
+		),
+		'qui'             => array(
+			'lieu'   => array( 'page_template', 'page-templates/qui.php' ),
+			'champs' => array(
+				'pastille'      => array( 'Pastille', 'text' ),
+				'titre'         => array( 'Titre, 1re ligne', 'text' ),
+				'accent_1'      => array( 'Titre en vert, 1er morceau', 'text' ),
+				'accent_2'      => array( 'Titre en vert, 2e morceau', 'text' ),
+				'chapeau'       => array( 'Chapeau (ordinateur et tablette)', 'textarea' ),
+				'chapeau_court' => array( 'Chapeau court (téléphone)', 'textarea' ),
+				'cta'           => array( 'Bouton principal', 'text' ),
+				'cta_parcours'  => array( 'Bouton « Découvrir mon parcours »', 'text' ),
+			),
+		),
+		'contact'         => array(
+			'lieu'   => array( 'page_template', 'page-templates/contact.php' ),
+			'champs' => array(
+				'titre_1' => array( 'Titre, 1er morceau', 'text' ),
+				'titre_2' => array( 'Titre, 2e morceau', 'text' ),
+				'accent'  => array( 'Titre en vert', 'text' ),
+				'chapeau' => array( 'Chapeau', 'textarea' ),
+			),
+			'listes' => array(
+				'promesses' => array(
+					'Promesses cochées',
+					array( 'texte' => array( null, 'Promesse' ) ),
+					3,
+				),
+			),
+		),
+		'simulateur'      => array(
+			'lieu'   => array( 'page_template', 'page-templates/simulateur.php' ),
+			'champs' => array(
+				'titre_1' => array( 'Titre, avant le mot en vert', 'text' ),
+				'accent'  => array( 'Titre, mot en vert', 'text' ),
+				'titre_2' => array( 'Titre, après le mot en vert', 'text' ),
+				'chapeau' => array( 'Chapeau', 'textarea' ),
+				'cta'     => array( 'Bouton principal', 'text' ),
+			),
+		),
+	);
+}
+
+add_action(
+	'dih_core_acf_init',
+	function () {
+		foreach ( dih_core_heros() as $page => $hero ) {
+			$champs = array();
+			foreach ( $hero['champs'] as $cle => $def ) {
+				$champ = array(
+					'key'          => 'field_dih_hero_' . $page . '_' . $cle,
+					'name'         => 'hero_' . $cle,
+					'label'        => $def[0],
+					'instructions' => 'Vide : texte actuel du thème.',
+					'type'         => $def[1],
+				);
+				if ( 'textarea' === $def[1] ) {
+					$champ['rows']      = 3;
+					$champ['new_lines'] = '';
+				}
+				$champs[] = $champ;
+			}
+
+			foreach ( isset( $hero['listes'] ) ? $hero['listes'] : array() as $cle => $liste ) {
+				$sous    = array();
+				$largeur = (string) floor( 100 / count( $liste[1] ) );
+				foreach ( $liste[1] as $nom => $colonne ) {
+					$sous[] = array(
+						'key'      => 'field_dih_hero_' . $page . '_' . $cle . '_' . $nom,
+						'name'     => $nom,
+						'label'    => $colonne[1],
+						'type'     => 'text',
+						'required' => 1,
+						'wrapper'  => array( 'width' => $largeur ),
+					);
+				}
+				$champs[] = array(
+					'key'          => 'field_dih_hero_' . $page . '_' . $cle,
+					'name'         => 'hero_' . $cle,
+					'label'        => $liste[0],
+					'instructions' => 'Dans l’ordre d’affichage. Liste vide : liste actuelle du thème.',
+					'type'         => 'repeater',
+					'layout'       => 'table',
+					'max'          => $liste[2],
+					'button_label' => 'Ajouter une ligne',
+					'sub_fields'   => $sous,
+				);
+			}
+
+			acf_add_local_field_group(
+				array(
+					'key'        => 'group_dih_hero_' . $page,
+					'title'      => 'Haut de page',
+					'fields'     => $champs,
+					'location'   => array(
+						array(
+							array(
+								'param'    => $hero['lieu'][0],
+								'operator' => '==',
+								'value'    => $hero['lieu'][1],
+							),
+						),
+					),
+					'position'   => 'normal',
+					'menu_order' => -10,
+				)
+			);
+		}
+	}
+);
+
+/**
+ * Haut de page des six pages uniques : textes et listes saisis dans l'admin.
+ * Chaque champ vide garde le texte du thème.
+ *
+ * @param array  $donnees Contenus de la page.
+ * @param string $page    Nom du fichier de contenus.
+ * @return array
+ */
+function dih_core_contenus_heros( $donnees, $page ) {
+	$heros = dih_core_heros();
+	if ( ! isset( $heros[ $page ], $donnees['hero'] ) || is_admin() || ! dih_core_acf_actif() || ! function_exists( 'get_field' ) ) {
+		return $donnees;
+	}
+	$id = dih_core_id_si_affichee( $page );
+	if ( ! $id ) {
+		return $donnees;
+	}
+
+	foreach ( array_keys( $heros[ $page ]['champs'] ) as $cle ) {
+		$valeur = get_field( 'hero_' . $cle, $id );
+		if ( ! is_string( $valeur ) || '' === trim( $valeur ) ) {
+			continue;
+		}
+		$donnees['hero'][ $cle ] = $valeur;
+		// Accueil : un texte saisi vaut pour toutes les variantes du hero.
+		if ( isset( $donnees['hero']['variantes'] ) ) {
+			foreach ( array_keys( $donnees['hero']['variantes'] ) as $variante ) {
+				unset( $donnees['hero']['variantes'][ $variante ][ $cle ] );
+			}
+		}
+	}
+
+	foreach ( isset( $heros[ $page ]['listes'] ) ? $heros[ $page ]['listes'] : array() as $cle => $liste ) {
+		$elements = array();
+		foreach ( (array) get_field( 'hero_' . $cle, $id ) as $ligne ) {
+			$premier = array_key_first( $liste[1] );
+			if ( empty( $ligne[ $premier ] ) ) {
+				continue;
+			}
+			$defaut = isset( $donnees['hero'][ $cle ][ count( $elements ) ] ) ? $donnees['hero'][ $cle ][ count( $elements ) ] : array();
+			if ( null === $liste[1][ $premier ][0] ) {
+				$elements[] = (string) $ligne[ $premier ]; // liste de textes
+				continue;
+			}
+			$element = is_array( $defaut ) ? $defaut : array();
+			foreach ( $liste[1] as $nom => $colonne ) {
+				$element[ $colonne[0] ] = isset( $ligne[ $nom ] ) ? (string) $ligne[ $nom ] : '';
+			}
+			ksort( $element );
+			$elements[] = $element;
+		}
+		if ( $elements ) {
+			$donnees['hero'][ $cle ] = $elements;
+		}
+	}
+
+	// Simulateur : le mot en vert est collé aux deux morceaux, espaces compris.
+	if ( 'simulateur' === $page ) {
+		$donnees['hero']['titre_1'] = rtrim( $donnees['hero']['titre_1'] ) . ' ';
+		$donnees['hero']['titre_2'] = ' ' . ltrim( $donnees['hero']['titre_2'] );
+	}
+
+	return $donnees;
+}
+add_filter( 'dih_contenu', 'dih_core_contenus_heros', 10, 2 );

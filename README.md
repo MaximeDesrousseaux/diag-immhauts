@@ -82,8 +82,12 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
   Professionnels, 12 fiches) : question, réponse, lien facultatif ;
 - **encart « Fiche diagnostic »** des 12 fiches : pastille, titre (deux lignes) et chapeau du haut de
   page ; chiffre et légende des quatre repères (le picto reste celui de sa position) ;
-- **encart « Bloc 4 étapes »** des fiches et de Nos diagnostics : titre et texte des étapes (numéros
-  automatiques), liste « À préparer avant ma visite » des fiches.
+- **encart « Bloc 4 étapes »** des fiches, de Nos diagnostics et de Qui suis-je : titre et texte des
+  étapes (numéros et étiquettes automatiques), liste « À préparer avant ma visite » des fiches ;
+- **encart « Haut de page »** des six pages uniques (accueil, Nos diagnostics, Professionnels, Qui suis-je,
+  Contact, simulateur) : textes du hero, titres gardant le découpage des maquettes, et ses listes
+  (chiffres de l'accueil, entrées de Nos diagnostics, promesses de Contact). Décrit page par page dans
+  `dih_core_heros()`. Sur l'accueil, un texte saisi vaut pour les quatre variantes du hero.
 
 Pour que l'admin montre les textes en place plutôt que des champs vides :
 `wp eval-file outils/importer-contenus.php` (ajouter `forcer` pour réécrire des champs déjà remplis).
