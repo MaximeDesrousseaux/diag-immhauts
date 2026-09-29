@@ -4,7 +4,7 @@
  * n'est pas réglable (README § Défilement vers une ancre).
  *
  * S'applique aux liens internes a[href^="#"] dont la cible existe
- * (hors liens de la popup de rappel). Exposé en window.dihGlide(id).
+ * (hors liens de la popup de rappel, #rappel compris). Exposé en window.dihGlide(id).
  */
 (function () {
 	'use strict';
@@ -42,7 +42,7 @@
 
 	function cible(e) {
 		var a = e.target.closest && e.target.closest('a[href^="#"]');
-		if (!a || a.hasAttribute('data-dih-rappel')) return null;
+		if (!a || a.hasAttribute('data-dih-rappel') || a.getAttribute('href') === '#rappel') return null; // popup.js
 		var id = decodeURIComponent(a.getAttribute('href').slice(1));
 		return id && document.getElementById(id) ? { lien: a, id: id } : null;
 	}

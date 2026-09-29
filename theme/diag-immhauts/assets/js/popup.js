@@ -1,6 +1,8 @@
 /**
  * Popup « Demande de rappel ».
  * Tout lien [data-dih-rappel] l'ouvre ; sans JS, il mène au formulaire de Contact.
+ * Les liens href="#rappel" (FAQ, CTA de section) l'ouvrent aussi, comme dans les
+ * maquettes ; sans JS, ils descendent au bloc « rappel » de la page.
  * [data-dih-rappel-intro] sur le lien remplace le texte d'introduction.
  * Fermeture : bouton ×, clic sur le voile, touche Échap. Le focus revient au lien.
  */
@@ -34,7 +36,7 @@
 	}
 
 	document.addEventListener('click', function (e) {
-		var lien = e.target.closest && e.target.closest('a[data-dih-rappel]');
+		var lien = e.target.closest && e.target.closest('a[data-dih-rappel], a[href="#rappel"]');
 		if (lien) { e.preventDefault(); ouvrir(lien); return; }
 		if (e.target.closest && e.target.closest('[data-dih-popup-fermer]')) { fermer(); return; }
 		if (e.target === popup) fermer(); // clic sur le voile

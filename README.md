@@ -83,6 +83,7 @@ Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa val
 | Bloc rappel de la fiche DPE | Garde ses boutons propres (« obligations ») ; les autres fiches suivent la règle v10 formulaire / appel |
 | Avis clients de l'accueil | Textes provisoires de la maquette, à remplacer par les vrais avis (étape 5, ACF) |
 | Formulaires | Emplacement balisé tant que Fluent Forms n'est pas installé |
+| Liens `#rappel` (FAQ, CTA de section) | Ouvrent la popup de rappel, comme le script des maquettes ; sans JS, ils descendent au bloc « rappel » |
 | Illustrations des résultats du simulateur | La maquette les retourne en miroir (`scaleX(-1)`) : supprimé, conformément au README v10 (aucun miroir CSS) |
 | Note « Cette liste est indicative » du simulateur | Placée dans le panneau vert du dossier, comme la maquette |
 | Pastilles du simulateur (13,5 et 11,5 px, écart 9 et 6 px) | 14 et 12,5 px, écart 8 et 4 px (échelles) ; titre du hero sur téléphone en 30 px conservé (exception) |
