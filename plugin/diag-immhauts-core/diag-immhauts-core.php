@@ -22,4 +22,5 @@ define( 'DIH_CORE_URL', plugin_dir_url( __FILE__ ) );
 require DIH_CORE_DIR . 'inc/dependances.php'; // ACF Pro et Fluent Forms : détection + message d'admin
 require DIH_CORE_DIR . 'inc/formulaires.php'; // rendu des formulaires Fluent Forms
 require DIH_CORE_DIR . 'inc/acf.php';         // point d'accroche des champs, blocs et options ACF
+require DIH_CORE_DIR . 'inc/personnalisation.php'; // page d'options « Personnalisation », formulaires, réglages de page
 require DIH_CORE_DIR . 'inc/communes.php';    // table des codes postaux de « Vérifier ma commune »

@@ -5,12 +5,16 @@
  * Présentation de Maxime Dillies (/maxime-dillies-diagnostiqueur/) : hero
  * portrait, bandeau de confiance, parcours et frise, engagements,
  * certifications, déroulé d'une intervention, bloc rappel.
+ * Réglage de la page : citation (5 choix, champ ACF).
  *
  * @package DiagImmHauts
  */
 
 get_header();
 $dih_c = dih_contenu( 'qui' );
+
+// Citation du parcours : réglage de la page (champ ACF « citation »).
+$dih_c['parcours']['citation'] = $dih_c['parcours']['citations'][ dih_option_page( 'citation' ) ];
 ?>
 <main id="contenu" class="l-main l-main--qui">
 	<?php

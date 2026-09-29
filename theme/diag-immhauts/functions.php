@@ -16,7 +16,7 @@ define( 'DIH_VERSION', '0.2.0' );
 define( 'DIH_DIR', get_template_directory() );
 define( 'DIH_URI', get_template_directory_uri() );
 
-require DIH_DIR . '/inc/options.php';     // dih_option() : réglages globaux (défauts en dur jusqu'à l'étape 5)
+require DIH_DIR . '/inc/options.php';     // dih_option() : réglages globaux (page d'options ACF, défauts en dur)
 require DIH_DIR . '/inc/infos.php';       // dih_info()   : coordonnées et chiffres arrêtés
 require DIH_DIR . '/inc/liens.php';       // dih_url(), page et section en cours
 require DIH_DIR . '/inc/setup.php';       // supports du thème, classes du body

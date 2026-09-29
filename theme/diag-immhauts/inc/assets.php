@@ -59,13 +59,25 @@ add_action(
 );
 
 /**
- * Préchargement des deux graisses visibles au-dessus de la ligne de flottaison
- * (titres Manrope 800, texte Inter 400) : évite le saut de police du header.
+ * Préchargement des graisses visibles au-dessus de la ligne de flottaison
+ * (titres 800 et 700, texte 400 et 500) des polices choisies dans la page
+ * d'options : évite le saut de police du header.
  */
 add_action(
 	'wp_head',
 	function () {
-		$polices = array( 'manrope-latin-800-normal', 'manrope-latin-700-normal', 'inter-latin-400-normal', 'inter-latin-500-normal' );
+		$titre = dih_option( 'police_titre' );
+		$texte = dih_option( 'police_texte' );
+		// Space Grotesk s'arrête à 700 : son 700 sert aussi les titres en 800.
+		$gras    = 'space-grotesk' === $titre ? '700' : '800';
+		$polices = array_unique(
+			array(
+				$titre . '-latin-' . $gras . '-normal',
+				$titre . '-latin-700-normal',
+				$texte . '-latin-400-normal',
+				$texte . '-latin-500-normal',
+			)
+		);
 		foreach ( $polices as $police ) {
 			printf(
 				'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",

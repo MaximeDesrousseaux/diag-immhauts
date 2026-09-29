@@ -39,6 +39,27 @@ function dih_attributs_body() {
 }
 
 /**
+ * Réglage « Polices de caractères » exposé sur <html> : la correction de taille
+ * du texte change la taille racine, base de tous les rem() (voir base/_typographie).
+ * Le front seulement : l'administration garde ses propres polices.
+ */
+add_filter(
+	'language_attributes',
+	function ( $sortie, $doctype ) {
+		if ( is_admin() || 'html' !== $doctype ) {
+			return $sortie;
+		}
+		return $sortie . sprintf(
+			' data-police-titre="%s" data-police-texte="%s"',
+			esc_attr( dih_option( 'police_titre' ) ),
+			esc_attr( dih_option( 'police_texte' ) )
+		);
+	},
+	10,
+	2
+);
+
+/**
  * Allège le <head> : emojis et liens inutiles pour ce site vitrine.
  */
 add_action(

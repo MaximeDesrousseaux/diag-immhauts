@@ -4,8 +4,8 @@
  *
  * Tout ce qui dépend d'ACF est enregistré sur 'acf/init' : si ACF Pro est absent,
  * ce hook ne se déclenche jamais et rien ne plante (voir inc/dependances.php).
- * Les enregistrements arrivent aux étapes 3 (bloc « Fiche diagnostic »)
- * et 5 (page d'options « Personnalisation Diag Imm'Hauts »).
+ * Les modules s'accrochent à dih_core_acf_init : inc/personnalisation.php
+ * (pages d'options « Personnalisation » et « Formulaires », réglages de page).
  *
  * @package DiagImmHautsCore
  */

@@ -34,7 +34,14 @@ return array(
 			'Avant le diagnostic, j\'ai été volleyeur professionnel : une discipline qui apprend la rigueur, la préparation et le sens du collectif. Je me suis ensuite formé au diagnostic immobilier, exerçant depuis 2018 et certifié en 2020. Chaque visite m\'apprend à lire un bâtiment autrement qu\'à travers une grille de contrôle — reconnaître une ancienne peinture au plomb sous trois couches, deviner une isolation absente au toucher d\'un mur.',
 			'Ce réflexe de terrain guide ma façon de travailler. Je ne coche pas des cases : j\'explique ce que j\'observe, ce que ça implique pour votre vente ou votre location, et ce qui mérite des travaux avant le reste.',
 		),
-		'citation'   => '« Un diagnostic n’a de valeur que si son propriétaire le comprend. »',
+		// Réglage de la page « citation » (champ ACF de la page, voir dih_option_page()).
+		'citations'  => array(
+			'comprendre'    => '« Un diagnostic n’a de valeur que si son propriétaire le comprend. »',
+			'mesurer'       => '« Je ne coche pas des cases : je mesure, je justifie, j’explique. »',
+			'terrain'       => '« Ce qui compte n’est pas le rapport que je remets, c’est la décision qu’il vous permet de prendre. »',
+			'interlocuteur' => '« Vous n’avez qu’un numéro à retenir : celui de la personne qui vient chez vous. »',
+			'preparation'   => '« Un diagnostic bien préparé, c’est une vente qui ne se renégocie pas. »',
+		),
 		'signature'  => 'Maxime Dillies',
 		// [ année, titre, texte ]
 		'frise'      => array(

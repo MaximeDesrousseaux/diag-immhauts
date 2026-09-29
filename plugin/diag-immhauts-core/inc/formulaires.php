@@ -1,6 +1,7 @@
 <?php
 /**
- * Formulaires Fluent Forms : rappel (popup), devis (page Contact), contact.
+ * Formulaires Fluent Forms : rappel (popup), devis (page Contact), contact,
+ * compte partenaire (popup de Professionnels).
  *
  * Le thème appelle dih_core_formulaire( $cle ) ; une chaîne vide lui signale
  * d'afficher son emplacement balisé (Fluent Forms absent ou formulaire non créé).
@@ -11,26 +12,30 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Identifiants Fluent Forms de chaque formulaire du site.
- * À renseigner une fois les formulaires créés (étape 5 : champ de la page d'options).
+ * Identifiants Fluent Forms de chaque formulaire du site, saisis dans
+ * Diag Imm'Hauts → Formulaires (page d'options ACF, inc/personnalisation.php).
  *
  * @return array<string, int>
  */
 function dih_core_formulaires_ids() {
-	return apply_filters(
-		'dih_formulaires_ids',
-		array(
-			'rappel'  => 0,
-			'devis'   => 0,
-			'contact' => 0,
-		)
+	$ids = array(
+		'rappel'     => 0,
+		'devis'      => 0,
+		'contact'    => 0,
+		'partenaire' => 0,
 	);
+	if ( dih_core_acf_actif() ) {
+		foreach ( array_keys( $ids ) as $cle ) {
+			$ids[ $cle ] = absint( get_field( 'formulaire_' . $cle, 'option' ) );
+		}
+	}
+	return apply_filters( 'dih_formulaires_ids', $ids );
 }
 
 /**
  * HTML du formulaire demandé, ou chaîne vide s'il n'est pas disponible.
  *
- * @param string $cle 'rappel' | 'devis' | 'contact'.
+ * @param string $cle 'rappel' | 'devis' | 'contact' | 'partenaire'.
  * @return string
  */
 function dih_core_formulaire( $cle ) {

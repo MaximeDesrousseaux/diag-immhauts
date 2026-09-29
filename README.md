@@ -60,8 +60,17 @@ tout le reste est du PHP + CSS.
 
 ## Réglages
 
-Les gabarits lisent les réglages globaux via `dih_option( 'cle' )` (thème, `inc/options.php`).
-Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa valeur par défaut.
+Les gabarits lisent les réglages globaux via `dih_option( 'cle' )` (thème, `inc/options.php`),
+et les réglages propres à une page via `dih_option_page( 'cle' )`. Les champs sont déclarés en PHP
+par le plugin (`inc/personnalisation.php`, ACF Pro) :
+
+- **Diag Imm'Hauts → Personnalisation** : la page d'options de la maquette `Admin WP - Personnalisation`
+  (onglets Identité du site · Accueil · Pages intérieures, choix à vignettes ; mise en forme
+  `assets/admin/personnalisation.css`, vignettes WebP dans `assets/admin/`) ;
+- **Diag Imm'Hauts → Formulaires** : identifiants Fluent Forms (rappel, devis, contact, compte partenaire) ;
+- **Qui suis-je** (encart latéral de la page) : citation du parcours.
+
+Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage prend sa valeur par défaut.
 
 ## Arbitrages (écarts entre maquette et README de passation)
 
@@ -98,6 +107,9 @@ Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa val
 | Permaliens des articles | `/actualites/%postname%/` (réglé par le script d'import) ; « Hello world! » passé en brouillon |
 | Typographie WordPress | `wptexturize` désactivé : apostrophes et espaces insécables restent ceux des maquettes |
 | Barres de l'échelle A→G et pastilles d'échéance des articles | Couleurs réglementaires du DPE (`$dpe-a` … `$dpe-g`) au lieu des teintes propres aux maquettes |
+| Réglage `step_icons` (listé dans la page d'options par le README de passation) | Pas de champ : la maquette d'admin a retiré ce choix (NOTES : « socle vert en dur ») ; valeur par défaut, modifiable par le filtre `dih_option` |
+| Polices (`police_titre`, `police_texte`) | Attributs `data-police-titre` / `data-police-texte` sur `<html>` et non sur le `body` : la correction du texte (104 % Instrument Sans, 112 % Source Sans 3) passe par la taille racine, base de tous les `rem()`, comme le prévoit l'audit SCSS (« une valeur ») ; toutes les polices sont auto-hébergées (`assets/fonts`) |
+| Identifiants des formulaires | Sous-page « Formulaires », hors maquette : la page « Personnalisation » ne porte que l'apparence |
 | Statuts « Selon situation » et « Recommandé » | Teintes dérivées de la palette (`--warm`, `--line`, `--forest`) au lieu de `#f6e6b4` / `#6b4d11` / `#3f5c46` |
 
 ## Dépendances
