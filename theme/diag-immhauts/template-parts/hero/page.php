@@ -5,6 +5,7 @@
  *
  * Arguments (get_template_part, 3e paramètre) :
  * - titre         string  Titre (h1). Défaut : titre de la page.
+ * - ariane        string  Dernier maillon du fil d'Ariane. Défaut : le titre.
  * - chapeau       string  Paragraphe sous le titre.
  * - note          string  Petite ligne (ex. date de mise à jour).
  * - illustration  string  Fichier de assets/img (ex. 'ill_mentions_legales.webp').
@@ -16,6 +17,7 @@ $dih_args = wp_parse_args(
 	$args,
 	array(
 		'titre'        => get_the_title(),
+		'ariane'       => '',
 		'chapeau'      => '',
 		'note'         => '',
 		'illustration' => '',
@@ -29,7 +31,7 @@ $dih_args = wp_parse_args(
 			<nav class="c-ariane c-ariane--espace" aria-label="Fil d'Ariane">
 				<a href="<?php echo esc_url( dih_url( 'accueil' ) ); ?>">Accueil</a>
 				<span class="c-ariane__sep" aria-hidden="true">/</span>
-				<span aria-current="page"><?php echo esc_html( wp_strip_all_tags( $dih_args['titre'] ) ); ?></span>
+				<span aria-current="page"><?php echo esc_html( wp_strip_all_tags( $dih_args['ariane'] ? $dih_args['ariane'] : $dih_args['titre'] ) ); ?></span>
 			</nav>
 			<h1 class="l-hero__titre"><?php echo wp_kses_post( $dih_args['titre'] ); ?></h1>
 			<?php if ( $dih_args['chapeau'] ) : ?>

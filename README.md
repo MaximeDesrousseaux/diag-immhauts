@@ -92,6 +92,8 @@ Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa val
 | Popup de rappel de Professionnels | Surtitre, titre, intro et formulaire « Compte partenaire » propres à la page (section `popup` de ses contenus) |
 | Étapes de Qui suis-je en déplié et sur téléphone | La maquette n'affiche pas les grands numéros (champ `n` absent de ses données) : numéros conservés, comme sur les fiches |
 | Décor du hero de Qui suis-je en bureau | Cadrage de la maquette (`0% 82%`, `max(130%, 1180px)`), pas celui des autres heros |
+| Adresse e-mail | Deux adresses dans les maquettes : `contact@diagimmhauts.fr` (Contact) et `bureau@diagimmhauts.fr` (Mentions légales) ; chacune reprise telle quelle, **à confirmer par le client** |
+| Mentions « à compléter » (certification, RC Pro, médiateur, mesure d'audience) | Surlignage conservé, teintes dérivées de `--warm` ; informations à fournir par le client |
 | Statuts « Selon situation » et « Recommandé » | Teintes dérivées de la palette (`--warm`, `--line`, `--forest`) au lieu de `#f6e6b4` / `#6b4d11` / `#3f5c46` |
 
 ## Dépendances
