@@ -108,6 +108,7 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Typographie WordPress | `wptexturize` désactivé : apostrophes et espaces insécables restent ceux des maquettes |
 | Barres de l'échelle A→G et pastilles d'échéance des articles | Couleurs réglementaires du DPE (`$dpe-a` … `$dpe-g`) au lieu des teintes propres aux maquettes |
 | Hero de l'accueil `max-bandeau` et `sansBG` : hauteur | Celle des autres variantes (`100svh` − bandeau, 690 px au moins, comme le script de la nav transparente de la maquette) ; `max-bandeau` : photo ancrée au bas du hero, hauteur − `--nvH` − 44 px (pas de tête sous la nav) ; `sansBG` : contenu centré verticalement |
+| Hero `terrils-barre` en déplié | Dans la maquette, les chiffres (remontés faute de CTA) passent sous les cartes DPE et la barre recouvre le bas de l'illustration : chiffres descendus à la place qu'ils ont sous les CTA, décor arrêté au haut de la barre (même échelle et même cadrage que `terrils-boutons`), hero allongé de la hauteur de la barre (106 px) |
 | Hero `sansBG` en déplié | La maquette n'affiche pas le formulaire dans la carte (`formAucun` réservé au bureau) : formulaire affiché, sinon la carte est vide |
 | Espacements hors échelle des variantes du hero (28, 13, 50, 48 px, rayon 18 px, marge basse −22…−34 px de la barre) | 24, 12, 56, 40 px, rayon 16 px ; la barre de `terrils-barre` annule exactement le rembourrage bas (−24…−40 px) et reste collée au bas |
 | Halo `#eaffd8` de `max-bandeau` | Jeton `--glow` |

@@ -456,6 +456,25 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
   }
 
   .l-hero__barre-tete { flex: 0 0 auto; }
+
+  // Déplié : la barre recouvrait le bas de l'illustration et les chiffres, remontés
+  // faute de CTA, passaient sous les cartes DPE. Le décor s'arrête au haut de la
+  // barre (même échelle et même cadrage que terrils-boutons) et les chiffres
+  // retrouvent la place qu'ils ont sous les deux CTA.
+  @include bp(deplie-seul) {
+    $barre-deplie: 106px; // hauteur de la barre (titre + formulaire en ligne)
+
+    .l-hero__decor--accueil { bottom: $barre-deplie; }
+
+    .c-chiffres {
+      margin-top: calc(34px + 47px + 38px); // échelle : exception (écart CTA + hauteur des CTA + écart chiffres de terrils-boutons, déplié VERROUILLÉ)
+    }
+
+    .l-hero__barre {
+      min-height: $barre-deplie;
+      margin-top: clamp(24px, 3.4vw, 40px);
+    }
+  }
 }
 
 // --- Variante « max-bandeau » : halos verts, photo de Maxime (bureau), panneau de rappel --
