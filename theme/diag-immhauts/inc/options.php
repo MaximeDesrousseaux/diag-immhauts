@@ -71,7 +71,8 @@ function dih_option( $cle ) {
  */
 function dih_options_page_valeurs() {
 	return array(
-		'citation' => array( 'comprendre', 'mesurer', 'terrain', 'interlocuteur', 'preparation' ),
+		'citation'          => array( 'comprendre', 'mesurer', 'terrain', 'interlocuteur', 'preparation' ),
+		'hero_illustration' => array( 'livrets', 'maison-verte' ),
 	);
 }
 

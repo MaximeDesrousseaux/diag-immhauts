@@ -7,7 +7,8 @@
  * porte le nom du réglage que le thème lit par dih_option( 'cle' ) : une valeur
  * pour tout le site, stockée une seule fois (options_<cle>).
  * Menu « Diag Imm'Hauts » → Formulaires : identifiants des formulaires Fluent Forms.
- * Réglage propre à une page : citation (Qui suis-je), lue par dih_option_page().
+ * Réglages propres à une page : citation (Qui suis-je) et hero_illustration (Nos
+ * diagnostics), lus par dih_option_page().
  *
  * Tout est enregistré sur dih_core_acf_init : sans ACF Pro, rien de tout cela
  * n'existe et le thème garde ses valeurs par défaut.
@@ -394,6 +395,39 @@ add_action(
 							'param'    => 'page_template',
 							'operator' => '==',
 							'value'    => 'page-templates/qui.php',
+						),
+					),
+				),
+				'position' => 'side',
+			)
+		);
+
+		// Réglage propre à Nos diagnostics (README § Réglages globaux).
+		acf_add_local_field_group(
+			array(
+				'key'      => 'group_dih_nos',
+				'title'    => 'Nos diagnostics',
+				'fields'   => array(
+					array(
+						'key'           => 'field_dih_hero_illustration',
+						'name'          => 'hero_illustration',
+						'label'         => 'Illustration du haut de page',
+						'type'          => 'radio',
+						'choices'       => array(
+							'livrets'      => 'Livrets de diagnostic et étiquette DPE',
+							'maison-verte' => 'Maison verte',
+						),
+						'default_value' => 'livrets',
+						'layout'        => 'vertical',
+						'return_format' => 'value',
+					),
+				),
+				'location' => array(
+					array(
+						array(
+							'param'    => 'page_template',
+							'operator' => '==',
+							'value'    => 'page-templates/nos-diagnostics.php',
 						),
 					),
 				),

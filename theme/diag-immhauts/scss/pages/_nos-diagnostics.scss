@@ -170,7 +170,46 @@
   }
 }
 
-// Illustration (réglage hero_illustration : livrets) — VERROUILLÉ
+// Réglage entrees_hero : cartes-blanches. Cartes blanches pleines, numéro vert,
+// flèche dans une pastille verte ; élévation au survol (cards cliquables).
+.c-entrees--cartes {
+  .c-entrees__lien {
+    padding: 14px 16px;
+    background: c(surface);
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px -18px rgba(8, 30, 16, .55);
+    @include survol-card;
+
+    @include bp(deplie-seul) { padding: 9px 14px; }
+  }
+
+  .c-entrees__num {
+    font-weight: 800;
+    font-size: rem(14);
+    letter-spacing: .02em;
+    color: c(tech);
+  }
+
+  .c-entrees__titre {
+    font-size: rem(15.5);
+    color: c(forestDeep);
+  }
+
+  .c-entrees__sous { color: c(muted); }
+
+  .c-entrees__fleche {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    background: c(tech);
+    color: c(forestDeep);
+
+    .c-entrees__lien:hover & { color: c(forestDeep); }
+  }
+}
+
+// Illustration (réglage de la page hero_illustration : livrets par défaut) — VERROUILLÉ
 .l-hero__illus-nos {
   position: relative;
   width: 100%;
@@ -213,6 +252,16 @@
 
     @include bp(deplie) { width: 78%; }
   }
+
+  // maison-verte : halo lumineux, maison sur toute la largeur du cadre (4:3, comme lui)
+  &--maison-verte img { width: 100%; }
+}
+
+.l-hero__illus-lueur {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background: radial-gradient(closest-side ellipse at 52% 44%, teinte(glow, 13%) 0, teinte(glow, 6%) 40%, transparent 72%);
 }
 
 // --- Vente & location ----------------------------------------------------------------

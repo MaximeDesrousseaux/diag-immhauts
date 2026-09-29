@@ -68,7 +68,7 @@ par le plugin (`inc/personnalisation.php`, ACF Pro) :
   (onglets Identité du site · Accueil · Pages intérieures, choix à vignettes ; mise en forme
   `assets/admin/personnalisation.css`, vignettes WebP dans `assets/admin/`) ;
 - **Diag Imm'Hauts → Formulaires** : identifiants Fluent Forms (rappel, devis, contact, compte partenaire) ;
-- **Qui suis-je** (encart latéral de la page) : citation du parcours.
+- **Qui suis-je** et **Nos diagnostics** (encart latéral de la page) : citation du parcours, illustration du haut de page.
 
 Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage prend sa valeur par défaut.
 
@@ -109,6 +109,7 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Barres de l'échelle A→G et pastilles d'échéance des articles | Couleurs réglementaires du DPE (`$dpe-a` … `$dpe-g`) au lieu des teintes propres aux maquettes |
 | Hero de l'accueil `max-bandeau` et `sansBG` : hauteur | Celle des autres variantes (`100svh` − bandeau, 690 px au moins, comme le script de la nav transparente de la maquette) ; `max-bandeau` : photo ancrée au bas du hero, hauteur − `--nvH` − 44 px (pas de tête sous la nav) ; `sansBG` : contenu centré verticalement |
 | Hero `terrils-barre` en déplié | Dans la maquette, les chiffres (remontés faute de CTA) passent sous les cartes DPE et la barre recouvre le bas de l'illustration : chiffres descendus à la place qu'ils ont sous les CTA, décor arrêté au haut de la barre (même échelle et même cadrage que `terrils-boutons`), hero allongé de la hauteur de la barre (106 px) |
+| Illustration « maison verte » de Nos diagnostics (`min-height: 363px` dans la maquette) | Hauteur minimale supprimée : sans `object-fit`, elle étirait la maison sous 1100 px de large ; image pleine largeur du cadre 4:3 (même ratio que le fichier), halo lumineux conservé. Variable `--sr` de la maquette : lue nulle part, non reprise |
 | Hero `sansBG` en déplié | La maquette n'affiche pas le formulaire dans la carte (`formAucun` réservé au bureau) : formulaire affiché, sinon la carte est vide |
 | Espacements hors échelle des variantes du hero (28, 13, 50, 48 px, rayon 18 px, marge basse −22…−34 px de la barre) | 24, 12, 56, 40 px, rayon 16 px ; la barre de `terrils-barre` annule exactement le rembourrage bas (−24…−40 px) et reste collée au bas |
 | Halo `#eaffd8` de `max-bandeau` | Jeton `--glow` |

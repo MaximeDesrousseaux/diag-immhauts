@@ -1,13 +1,18 @@
 <?php
 /**
  * Hero de « Nos diagnostics » — VERROUILLÉ (bureau et déplié).
- * Pas de bouton vert : les trois entrées (réglage entrees_hero : sommaire) sont
- * les accès principaux. En déplié, elles passent en ligne de trois au bas du hero.
+ * Pas de bouton vert : les trois entrées sont les accès principaux (réglage global
+ * entrees_hero : sommaire, ou cartes-blanches). En déplié, elles passent en ligne
+ * de trois au bas du hero.
+ * Illustration : réglage de la page hero_illustration (livrets ou maison-verte).
  * Téléphone : titre à gauche, illustration à droite (48 %), puis chapeau et entrées.
  *
  * @package DiagImmHauts
  */
 
+$dih_entrees = 'cartes-blanches' === dih_option( 'entrees_hero' ) ? ' c-entrees--cartes' : '';
+$dih_illus_v = dih_option_page( 'hero_illustration' );
+$dih_illus   = $args['illustrations'][ $dih_illus_v ];
 ?>
 <section class="l-hero l-hero--nos">
 	<?php get_template_part( 'template-parts/hero/decor' ); ?>
@@ -24,7 +29,7 @@
 			</h1>
 			<p class="l-hero__chapeau"><?php echo esc_html( $args['chapeau'] ); ?></p>
 			<div class="l-hero__entrees">
-				<ul class="c-entrees">
+				<ul class="c-entrees<?php echo esc_attr( $dih_entrees ); ?>">
 					<?php foreach ( $args['entrees'] as $dih_e ) : ?>
 						<li>
 							<a class="c-entrees__lien" href="#<?php echo esc_attr( $dih_e[3] ); ?>">
@@ -40,9 +45,12 @@
 				</ul>
 			</div>
 		</div>
-		<div class="l-hero__illus-nos">
+		<div class="l-hero__illus-nos l-hero__illus-nos--<?php echo esc_attr( $dih_illus_v ); ?>">
 			<div class="l-hero__illus-cadre">
-				<img src="<?php echo esc_url( dih_img( $args['illustration'] ) ); ?>" alt="<?php echo esc_attr( $args['illus_alt'] ); ?>" fetchpriority="high" decoding="async">
+				<?php if ( 'maison-verte' === $dih_illus_v ) : ?>
+					<div class="l-hero__illus-lueur" aria-hidden="true"></div>
+				<?php endif; ?>
+				<img src="<?php echo esc_url( dih_img( $dih_illus[0] ) ); ?>" alt="<?php echo esc_attr( $dih_illus[1] ); ?>" fetchpriority="high" decoding="async">
 			</div>
 		</div>
 	</div>

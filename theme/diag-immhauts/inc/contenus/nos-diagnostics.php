@@ -15,14 +15,17 @@ return array(
 		'accent_1' => 'son obligation',
 		'accent_2' => 'et sa durée.',
 		'chapeau'  => "Vente, location, copropriété ou audit énergétique : l'ensemble des prestations, leurs obligations et leur durée de validité.",
-		// numéro, titre, sous-titre, ancre (réglage entrees_hero : sommaire)
+		// numéro, titre, sous-titre, ancre (réglage entrees_hero : sommaire ou cartes-blanches)
 		'entrees'  => array(
 			array( '01', 'Vente & location', 'Les diagnostics du dossier technique', 'vente' ),
 			array( '02', 'Copropriétés', 'DPE collectif, DTG et plan de travaux', 'copro' ),
 			array( '03', 'Audit énergétique', 'Scénarios de travaux chiffrés', 'audit' ),
 		),
-		'illustration' => 'ill_diags-3d205249.webp', // réglage hero_illustration : livrets
-		'illus_alt'    => 'Rapports de diagnostic et étiquette DPE',
+		// Réglage de la page « hero_illustration » : fichier, texte alternatif
+		'illustrations' => array(
+			'livrets'      => array( 'ill_diags-3d205249.webp', 'Rapports de diagnostic et étiquette DPE' ),
+			'maison-verte' => array( 'ill_nosdiags_maison.webp', 'Maison individuelle diagnostiquée' ),
+		),
 	),
 
 	'vente'   => array(

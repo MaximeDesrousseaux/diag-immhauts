@@ -3,7 +3,7 @@
  * Template Name: Nos diagnostics
  *
  * Catalogue des diagnostics (/diagnostics-immobiliers/) : hero à trois entrées
- * (réglage entrees_hero : sommaire), vente & location, 4 étapes, copropriétés,
+ * (réglages entrees_hero et hero_illustration), vente & location, 4 étapes, copropriétés,
  * audits énergétiques, FAQ, rappel. VERROUILLÉE en bureau et en déplié.
  *
  * @package DiagImmHauts
