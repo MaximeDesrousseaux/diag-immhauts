@@ -90,7 +90,8 @@
 		if (solide && !veille) veille = requestAnimationFrame(veiller);
 
 		if (ctaHdr) {
-			var parti = ctaHero ? ctaHero.getBoundingClientRect().bottom < hauteur + 8 : true;
+			// Bas du header (barre d'administration WordPress comprise, si présente)
+			var parti = ctaHero ? ctaHero.getBoundingClientRect().bottom < hdr.getBoundingClientRect().bottom + 8 : true;
 			hdr.classList.toggle('l-entete--cta-cache', !parti);
 		}
 	}

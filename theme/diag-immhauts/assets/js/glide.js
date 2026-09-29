@@ -23,7 +23,9 @@
 		if (!el) return false;
 		var box = document.scrollingElement || document.documentElement;
 		var depart = box.scrollTop;
-		var arrivee = Math.max(0, depart + el.getBoundingClientRect().top - DECALAGE);
+		var barreWp = document.getElementById('wpadminbar'); // utilisateur connecté
+		var decalage = DECALAGE + (barreWp ? barreWp.offsetHeight : 0);
+		var arrivee = Math.max(0, depart + el.getBoundingClientRect().top - decalage);
 		if (Math.abs(arrivee - depart) < 2) return true;
 		if (raf) cancelAnimationFrame(raf);
 		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

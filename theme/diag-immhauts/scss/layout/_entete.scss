@@ -61,6 +61,16 @@ $entete-seuils: (
   }
 }
 
+// Barre d'administration WordPress (utilisateur connecté) : le header épinglé
+// se pose dessous (32 px, 46 px sous 783 px ; variable fournie par WordPress).
+// Sous 601 px, WordPress la laisse défiler avec la page : on la fige pour que
+// le header ne laisse pas de vide au-dessus de lui.
+.admin-bar .l-entete { top: var(--wp-admin--admin-bar--height, 32px); }
+
+@media (max-width: 600px) {
+  #wpadminbar { position: fixed; }
+}
+
 // Espaceur dans le flux : réserve la hauteur du header épinglé.
 .l-entete__espaceur { height: var(--nvH); }
 
