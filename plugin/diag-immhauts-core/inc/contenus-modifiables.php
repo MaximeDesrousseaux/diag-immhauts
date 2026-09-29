@@ -337,7 +337,7 @@ add_action(
 						'key'          => 'field_dih_preparation_liste',
 						'name'         => 'preparation_liste',
 						'label'        => 'À préparer avant ma visite',
-						'instructions' => 'Les documents listés sous les étapes (fiches seulement ; la fiche DTG n’a pas cette liste). Liste vide : liste actuelle.',
+						'instructions' => 'Les documents listés sous les étapes (champ absent des pages qui n’ont pas cette liste). Liste vide : liste actuelle.',
 						'type'         => 'repeater',
 						'layout'       => 'table',
 						'button_label' => 'Ajouter un document',
@@ -478,3 +478,51 @@ function dih_core_contenus_fiches( $donnees, $page ) {
 	return $donnees;
 }
 add_filter( 'dih_contenu', 'dih_core_contenus_fiches', 10, 2 );
+
+/**
+ * Fichier de contenus du thème d'une page à contenus modifiables (ex. 'fiche-dpe'),
+ * ou '' si la page n'en a pas.
+ *
+ * @param int $post_id Identifiant de la page.
+ * @return string
+ */
+function dih_core_fichier_de_page( $post_id ) {
+	if ( ! $post_id || ! function_exists( 'dih_chemins' ) ) {
+		return '';
+	}
+	$chemins = dih_chemins();
+	foreach ( dih_core_pages_faq() as $fichier => $cle ) {
+		if ( 'accueil' === $cle ) {
+			$id = (int) get_option( 'page_on_front' );
+		} else {
+			$page = isset( $chemins[ $cle ] ) ? get_page_by_path( trim( $chemins[ $cle ], '/' ) ) : null;
+			$id   = $page ? (int) $page->ID : 0;
+		}
+		if ( $id === (int) $post_id ) {
+			return $fichier;
+		}
+	}
+	return '';
+}
+
+/**
+ * « À préparer avant ma visite » : champ masqué dans l'admin des pages dont la
+ * maquette n'a pas cette liste (Nos diagnostics, DTG & DPE collectif). Règle tirée
+ * des contenus du thème : une page qui gagnerait la liste retrouverait le champ.
+ * Un champ masqué n'est pas enregistré : sa valeur éventuelle reste en l'état.
+ */
+add_filter(
+	'acf/prepare_field/key=field_dih_preparation_liste',
+	function ( $field ) {
+		$post_id = function_exists( 'acf_get_form_data' ) ? (int) acf_get_form_data( 'post_id' ) : 0;
+		if ( ! $post_id ) {
+			$post_id = (int) get_the_ID();
+		}
+		$fichier = dih_core_fichier_de_page( $post_id );
+		if ( '' === $fichier || ! function_exists( 'dih_contenu' ) ) {
+			return $field;
+		}
+		$contenus = dih_contenu( $fichier );
+		return empty( $contenus['etapes']['preparation']['liste'] ) ? false : $field;
+	}
+);
