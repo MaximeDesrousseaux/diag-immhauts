@@ -202,7 +202,6 @@ return array(
 			'titre'    => 'DTG — diagnostic technique global',
 			'validite' => '—',
 			'texte'    => 'Immeuble en monopropriété ou mise en copropriété : le DTG anticipe les travaux et sécurise l’opération.',
-			'illus'    => 'ill_syndic_ssfond.webp', // maquette : pas diag_dtg (voir Arbitrages)
 		),
 		'tertiaire'        => array(
 			'page'     => 'contact',

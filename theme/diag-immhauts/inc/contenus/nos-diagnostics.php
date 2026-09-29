@@ -44,7 +44,7 @@ return array(
 			array( 'mesurage', 'Illimitée*', 'Mesurage Carrez / Boutin', 'Surface privative en copropriété (Carrez) ou surface habitable en location (Boutin).', 'Vente en copropriété · bail d’habitation' ),
 			array( 'assainissement', 'Contrôle SPANC', 'Assainissement', 'Contrôle de l’installation non collective : il est réalisé par le SPANC de votre commune, je vous oriente et j’intègre les autres diagnostics au même devis.', 'Bien non raccordé au tout-à-l’égout' ),
 			array( 'merule', '6 mois', 'Mérule', 'Recherche de mérule et de champignons lignivores dans les bois du bâti.', 'Zone à risque délimitée par arrêté' ),
-			array( 'dtg', '10 ans', 'DTG & DPE collectif', 'Étiquette énergétique de l’immeuble entier et état technique global de la copropriété.', 'Copropriétés d’habitation', 'ill_syndic_ssfond.webp' ),
+			array( 'dtg', '10 ans', 'DTG & DPE collectif', 'Étiquette énergétique de l’immeuble entier et état technique global de la copropriété.', 'Copropriétés d’habitation' ),
 			array( 'audit', '5 ans', 'Audit énergétique', 'Deux scénarios de travaux chiffrés pour sortir le logement des classes énergivores.', 'Vente d’une maison classée E, F ou G' ),
 		),
 		'cta'      => 'De quels diagnostics ai-je besoin ?',

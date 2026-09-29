@@ -105,9 +105,6 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Titre des heros de fiche | Formule de la maquette `clamp(30px, 3.1vw, 42px)` conservée (exception déclarée) |
 | Rayons 12 et 22 px de la maquette | Ramenés aux jetons 10 et 26 px (Audit SCSS) |
 | Fond de l'accueil `#E5F2D4` et couleurs du champ « Vérifier ma commune » | Jeton `$vert-brume` ; pastilles oui / limite prises dans la palette (`$pastille-jaune`, `$pastille-orange`) |
-| Card DTG de « Nos diagnostics » | Illustration `ill_syndic_ssfond` de la maquette, pas `diag_dtg` (le jeu v10 ne couvre que heros et cards standard) |
-| Bloc rappel de « Nos diagnostics » | Les boutons ne s'affichent pas dans la maquette (bogue `ctaCallFirst` / `ctaFormFirst`) : règle du README appliquée, formulaire puis appel |
-| Pictos des 4 étapes de « Nos diagnostics » | La maquette pointe vers `uploads/ill_stb_*.png`, absents : le thème sert `img/ill_stb_*.webp` |
 | Bloc rappel de la fiche DPE | Garde ses boutons propres (« obligations ») ; les autres fiches suivent la règle v10 formulaire / appel |
 | Avis clients de l'accueil | Textes provisoires de la maquette, à remplacer par les vrais avis (étape 5, ACF) |
 | Formulaires | Emplacement balisé tant que Fluent Forms n'est pas installé |
@@ -120,7 +117,7 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Popup de rappel de Professionnels | Surtitre, titre, intro et formulaire « Compte partenaire » propres à la page (section `popup` de ses contenus) |
 | Étapes de Qui suis-je en déplié et sur téléphone | La maquette n'affiche pas les grands numéros (champ `n` absent de ses données) : numéros conservés, comme sur les fiches |
 | Décor du hero de Qui suis-je en bureau | Cadrage de la maquette (`0% 82%`, `max(130%, 1180px)`), pas celui des autres heros |
-| Adresse e-mail | Deux adresses dans les maquettes : `contact@diagimmhauts.fr` (Contact) et `bureau@diagimmhauts.fr` (Mentions légales) ; chacune reprise telle quelle, **à confirmer par le client** |
+| Adresse e-mail | Deux adresses voulues : `contact@diagimmhauts.fr` pour les formulaires et les devis (Contact), `bureau@diagimmhauts.fr` pour les mentions légales et le RGPD |
 | Mentions « à compléter » (certification, RC Pro, médiateur, mesure d'audience) | Surlignage conservé, teintes dérivées de `--warm` ; informations à fournir par le client |
 | Contenu des deux articles | HTML versionné dans `outils/contenus/articles/`, importé par `wp eval-file outils/importer-articles.php` (bloc « HTML personnalisé » ; liens `{url:…}` résolus à l'import) ; cards de l'index alimentées par des champs `dih_*` ; article épinglé = « à la une » |
 | Permaliens des articles | `/actualites/%postname%/` (réglé par le script d'import) ; « Hello world! » passé en brouillon |
@@ -132,7 +129,7 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Bloc « 4 étapes » en `deux-colonnes` | Bureau : deux colonnes au-delà de 1150 px, illustration au-dessus des cards 2 × 2 de 901 à 1150 px (maquette DPE). Déplié et téléphone : rail vertical des deux dispositions, comme l'annonce la page d'options (« même rendu »), et non les cards 2 × 2 de la maquette DPE. Qui suis-je, absente de la liste des pages du réglage, reste en ligne |
 | Colonnes de liens du pied de page (elles varient d'une maquette à l'autre : « Infos & FAQ », « Mes engagements », « Demande de rappel »…) | Un seul pied de page pour les 22 pages (README de passation : `footer.php` commun ; audit SCSS, K5) : celui de l'accueil |
 | Redirections : « 7 » dans le rapport SEO, 8 lignes dans son tableau et dans le README | Les 8 lignes (les deux variantes en `/wp/` comprises) ; l'ancien journal renvoie vers `/actualites/`, comme le README (« journal conservé ») |
-| Image de partage 1200 × 630 (rapport SEO, chantier S3), non fournie | Composée à partir du thème (décor des terrils, logo, accroche de l'accueil, pastilles « Certifié Bureau Veritas », « Devis sous 24 h », téléphone) : `assets/img/partage.jpg`, source `outils/image-partage.html` ; en JPEG et non en WebP, que certaines messageries n'affichent pas en aperçu |
+| Image de partage 1200 × 630 (rapport SEO, chantier S3), non fournie | Composée à partir du thème (décor des terrils, logo, accroche de l'accueil, pastilles « Certifié Bureau Veritas », « Devis sous 24 h ouvrées », téléphone) : `assets/img/partage.jpg`, source `outils/image-partage.html` ; en JPEG et non en WebP, que certaines messageries n'affichent pas en aperçu |
 | Canonique et `og:url` | Adresse du site réel (`home_url`), pas `https://diagimmhauts.fr` en dur : la préprod ne se déclare pas comme la production |
 | Hero `sansBG` en déplié | La maquette n'affiche pas le formulaire dans la carte (`formAucun` réservé au bureau) : formulaire affiché, sinon la carte est vide |
 | Espacements hors échelle des variantes du hero (28, 13, 50, 48 px, rayon 18 px, marge basse −22…−34 px de la barre) | 24, 12, 56, 40 px, rayon 16 px ; la barre de `terrils-barre` annule exactement le rembourrage bas (−24…−40 px) et reste collée au bas |
