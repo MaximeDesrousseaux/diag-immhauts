@@ -677,6 +677,7 @@ a.c-card { @include survol-card; }
   display: flex;
   flex-direction: column;
   padding: 20px 20px 18px;
+  border: 2px solid c(forest);
   border-radius: 16px;
   background: c(surface);
 
@@ -733,7 +734,7 @@ a.c-card { @include survol-card; }
     font-weight: 600;
     line-height: 1.4;
     text-transform: uppercase;
-    color: c(forest);
+    color: color-mix(in srgb, #{c(tech)} 75%, #{c(forestDeep)}); // #629E25 de la maquette, dérivé de la palette
   }
 
   .c-card__bouton {

@@ -152,14 +152,18 @@
 
 // ==========================================================================
 // Damier des cards à illustration en débord (Nos diagnostics, résultats du
-// simulateur) : teintes blanche et vert clair, en alternance selon les colonnes.
+// simulateur, profils de Professionnels) : teintes blanche et vert clair, en
+// alternance selon les colonnes.
 // ==========================================================================
 @mixin card-teintee {
   background: color-mix(in oklab, #{c(tech)} 20%, #fff);
 
   .c-card__texte { color: color-mix(in srgb, #{c(muted)} 80%, #{c(forest)}); }
   .c-card__condition,
-  .c-card__pied { border-top-color: color-mix(in oklab, #{c(tech)} 42%, #fff); }
+  .c-card__pied,
+  .c-card__points { border-top-color: color-mix(in oklab, #{c(tech)} 42%, #fff); }
+  .c-card__coche { background: color-mix(in oklab, #{c(tech)} 34%, #fff); }
+  .c-card__condition { color: c(forest); }
 
   .c-card__bouton {
     background: c(forest);
@@ -172,7 +176,10 @@
 
   .c-card__texte { color: c(muted); }
   .c-card__condition,
-  .c-card__pied { border-top-color: c(line); }
+  .c-card__pied,
+  .c-card__points { border-top-color: c(line); }
+  .c-card__coche { background: color-mix(in oklab, #{c(tech)} 20%, #{c(surface)}); }
+  .c-card__condition { color: color-mix(in srgb, #{c(tech)} 75%, #{c(forestDeep)}); }
 
   .c-card__bouton {
     background: color-mix(in oklab, #{c(tech)} 24%, #fff);
