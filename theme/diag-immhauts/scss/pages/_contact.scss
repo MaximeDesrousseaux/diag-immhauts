@@ -1,0 +1,334 @@
+// ==========================================================================
+// Contact & devis (/contact-devis/) : hero à promesses, formulaire de devis
+// (Fluent Forms) et colonne de contact.
+// ==========================================================================
+@use '../abstracts' as *;
+
+// --- Hero ------------------------------------------------------------------------------
+.l-hero--contact {
+  // Téléphone : décor calé 40 px plus haut que les autres heros (README § Décor)
+  .l-hero__decor--terrils {
+    @include bp(mobile) { background-position: right -545px top calc(-289px + var(--nvH)); }
+  }
+
+  .l-hero__int {
+    position: relative;
+    max-width: $conteneur;
+    margin: 0 auto;
+    padding: clamp(24px, 3.4vw, 40px) $gouttiere-page 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(8px, 3vw, 40px);
+    align-items: end;
+
+    @include bp(mobile) {
+      grid-template-columns: minmax(0, 1fr) 36%;
+      gap: 16px 12px;
+      padding-bottom: clamp(22px, 5vw, 30px);
+    }
+  }
+
+  .l-hero__texte {
+    padding-bottom: clamp(32px, 4vw, 52px);
+
+    @include bp(mobile) {
+      display: contents;
+      padding-bottom: 0;
+    }
+  }
+
+  .c-ariane {
+    grid-area: 1 / 1 / auto / -1;
+    margin-bottom: 24px;
+
+    @include bp(mobile) { margin-bottom: 0; }
+  }
+
+  .l-hero__titre {
+    grid-area: 2 / 1;
+    align-self: center;
+    max-width: 680px;
+    font-size: clamp(30px, 3.2vw, 44px); // échelle : exception (formule du titre de Contact)
+    font-weight: 800;
+
+    @include bp(mobile) { font-size: rem(26); }
+  }
+
+  .l-hero__accent {
+    color: c(techBright);
+    white-space: nowrap;
+  }
+
+  .l-hero__chapeau {
+    grid-area: 3 / 1 / auto / -1;
+    max-width: 600px;
+    margin-top: 16px;
+    font-size: rem(17);
+    line-height: 1.6;
+    color: c(onDarkSoft);
+
+    @include bp(mobile) {
+      margin-top: 2px; // décalage de filet : le gap de la grille fait l'écart
+      font-size: rem(14);
+    }
+  }
+}
+
+.l-contact__promesses {
+  grid-area: 4 / 1 / auto / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+
+  @include bp(mobile) { margin-top: 16px; }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: rem(14);
+    line-height: 1.5; // ligne de 21 px, comme la maquette
+    color: c(onDark);
+  }
+}
+
+.l-contact__coche {
+  display: flex;
+  color: c(techBright);
+}
+
+.l-contact__illus {
+  position: relative;
+  min-width: 0;
+  align-self: end;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: clamp(24px, 3.4vw, 40px);
+
+  @include bp(deplie-seul) {
+    align-self: center;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  @include bp(mobile) {
+    grid-area: 2 / 2;
+    margin-bottom: 0;
+  }
+
+  .l-hero__illus-halo {
+    left: 52%;
+    top: 46%;
+    width: 86%;
+    aspect-ratio: 1.15;
+  }
+
+  img {
+    position: relative;
+    display: block;
+    width: 305px;
+    max-width: 100%;
+    height: auto;
+    filter: $filtre-illus;
+
+    @include bp(deplie-seul) { width: 80%; }
+
+    @include bp(mobile) {
+      width: 150%;
+      max-width: none;
+    }
+  }
+}
+
+// --- Formulaire de devis et colonne de contact ---------------------------------------------
+.l-devis {
+  scroll-margin-top: 90px;
+  padding-block: clamp(36px, 5vw, 56px) clamp(48px, 7vw, 80px);
+}
+
+.l-devis__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+
+  @media (min-width: 1151px) { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+}
+
+.l-devis__form {
+  min-width: 0;
+  padding: clamp(16px, 4vw, 40px);
+  border: 1px solid c(line);
+  border-radius: 26px;
+  background: c(surface);
+}
+
+.l-devis__titre {
+  font-size: rem(22);
+  font-weight: 800;
+  color: c(forest);
+}
+
+.l-devis__intro {
+  margin-top: 8px;
+  font-size: rem(14);
+  color: c(muted);
+}
+
+.l-devis__champs { margin-top: 24px; }
+
+// Colonne : pile en grand bureau ; grille 2 colonnes en dessous, 1 sur téléphone
+.l-devis__cote {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+
+  @media (min-width: 1151px) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  @include bp(mobile) { grid-template-columns: minmax(0, 1fr); }
+}
+
+.c-bloc-contact {
+  min-width: 0;
+  padding: clamp(16px, 4vw, 24px);
+  border: 1px solid c(line);
+  border-radius: 26px;
+  background: c(surface);
+
+  // Grand bureau : les blocs clairs prennent la largeur de leur contenu (maquette)
+  @media (min-width: 1151px) {
+    &:not(.c-bloc-contact--tel) { align-self: flex-start; }
+  }
+
+  @media (max-width: 1150px) and (min-width: #{$bp-mobile + 1}) {
+    &--tel,
+    &--zone { grid-column: 1 / -1; }
+    &--tel { grid-row: 1; }
+    &--zone { grid-row: 2; }
+    &--horaires { grid-area: 3 / 1; }
+    &--coordonnees { grid-area: 3 / 2; }
+  }
+}
+
+.c-bloc-contact__titre {
+  font-size: rem(15.5);
+  font-weight: 700;
+  line-height: 1.35;
+  color: c(forest);
+}
+
+.c-bloc-contact__texte {
+  margin-top: 8px;
+  font-size: rem(14);
+  line-height: 1.65;
+  color: c(muted);
+}
+
+// Bloc « Plus rapide au téléphone » : fond vert
+.c-bloc-contact--tel {
+  border: 0;
+  background: c(forest);
+  color: c(onDark);
+
+  .c-bloc-contact__titre {
+    font-size: rem(19);
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .c-bloc-contact__texte {
+    line-height: 1.6;
+    color: color-mix(in srgb, #{c(onDarkSoft)} 60%, #{c(onDarkMuted)}); // #c7dcc0 de la maquette
+  }
+}
+
+.c-bloc-contact__appel,
+.c-bloc-contact__mail {
+  display: block;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.c-bloc-contact__appel {
+  margin-top: 16px;
+  padding-block: 15px;
+  font-size: rem(15.5);
+  font-weight: 700;
+  background: c(tech);
+  color: c(forestDeep);
+  @include survol-btn-vert;
+}
+
+.c-bloc-contact__mail {
+  margin-top: 8px;
+  border: 1px solid color-mix(in oklab, #fff 26%, transparent);
+  font-size: rem(14);
+  font-weight: 600;
+  color: #fff;
+  @include survol-btn-fantome;
+}
+
+.c-bloc-contact__horaires {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0 0;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: rem(14);
+  }
+
+  dt { color: c(muted); }
+
+  dd {
+    margin: 0;
+    font-weight: 600;
+    color: c(forest);
+  }
+}
+
+.c-bloc-contact__communes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 7px 12px;
+    border: 1px solid c(line);
+    border-radius: $r-pilule;
+    background: c(bg);
+    font-size: rem(12.5);
+    font-weight: 500;
+    color: c(forest);
+  }
+}
+
+.c-bloc-contact__note {
+  margin-top: 16px;
+  font-size: rem(12.5);
+  color: c(muted);
+}
+
+.c-bloc-contact__adresse {
+  margin-top: 12px;
+  font-style: normal;
+  font-size: rem(14);
+  line-height: 1.75;
+  color: c(muted);
+}
