@@ -180,6 +180,53 @@ $socle: clamp(76px, 8vw, 96px);
   color: c(muted);
 }
 
+// --- Réglage etapes_dispo : deux-colonnes (bureau seulement) --------------------------------
+// Grande illustration à gauche, cards en damier 2 × 2 à droite ; au-dessous de 1150 px,
+// illustration au-dessus (maquette DPE). Déplié et téléphone : rail vertical ci-dessus.
+.c-etapes__illus { display: none; }
+
+@include bp(bureau) {
+  .c-etapes--deux-colonnes {
+    .c-etapes__deux {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: clamp(24px, 3.4vw, 40px);
+      align-items: center;
+    }
+
+    &.c-etapes--integree .c-etapes__deux { margin-top: 24px; }
+
+    .c-etapes__illus {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+
+      img {
+        display: block;
+        width: 90%;
+        max-width: 100%;
+        height: auto;
+        filter: drop-shadow(0 20px 34px teinte(forest, 18%));
+      }
+    }
+
+    .c-etapes__liste {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 0;
+    }
+
+    .c-etapes__socle { display: none; }
+  }
+}
+
+@media (min-width: #{$bp-deplie + 1}) and (max-width: 1150px) {
+  .c-etapes--deux-colonnes {
+    .c-etapes__deux { grid-template-columns: minmax(0, 1fr); }
+    .c-etapes__illus img { width: 414px; }
+  }
+}
+
 // --- À préparer avant ma visite (.c-prep, partial composants/preparation) ----------------
 .c-prep {
   padding: clamp(16px, 4vw, 24px);
