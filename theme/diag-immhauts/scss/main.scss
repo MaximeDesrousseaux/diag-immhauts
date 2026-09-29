@@ -36,6 +36,7 @@ License: Propriétaire — tous droits réservés
 @use 'composants/frise';
 @use 'composants/formulaire';
 @use 'composants/article';
+@use 'composants/journal';
 
 // 3. Mise en page
 @use 'layout/entete';
@@ -51,3 +52,4 @@ License: Propriétaire — tous droits réservés
 @use 'pages/qui';
 @use 'pages/contact';
 @use 'pages/mentions';
+@use 'pages/actualites';

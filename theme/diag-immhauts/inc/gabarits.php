@@ -148,6 +148,26 @@ function dih_surtitre( $texte, $classes = '' ) {
 }
 
 /**
+ * Titre échappé où « peut-être » reste insécable (README, contenus arrêtés).
+ *
+ * @param string $titre Titre brut.
+ * @return string HTML.
+ */
+function dih_titre_insecable( $titre ) {
+	return str_replace( 'peut-être', '<span class="l-insecable">peut-être</span>', esc_html( $titre ) );
+}
+
+/**
+ * Date d'un article du journal, en toutes lettres (« 16 septembre 2026 »).
+ *
+ * @param int|WP_Post $article Article.
+ * @return string
+ */
+function dih_date_article( $article ) {
+	return wp_date( 'j F Y', get_post_timestamp( $article ) );
+}
+
+/**
  * Illustration normalisée d'un diagnostic (jeu img/diag_<clé>.webp, maquettes v10) :
  * toile 800 × 640, orientation déjà appliquée, poids visuel égalisé. Aucun miroir
  * ni coefficient de taille par fichier : une seule taille par contexte, en CSS.

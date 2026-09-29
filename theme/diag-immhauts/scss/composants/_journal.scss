@@ -1,0 +1,643 @@
+// ==========================================================================
+// Journal : corps d'un article (.c-art, single.php) et ses composants, encart
+// d'appel, « À lire ensuite ». Le HTML des articles (outils/contenus/articles)
+// n'utilise que ces classes.
+// ==========================================================================
+@use 'sass:list';
+@use '../abstracts' as *;
+
+$art-vert-texte: color-mix(in srgb, #{c(tech)} 88%, #{c(forestDeep)}); // #6EB12B de la maquette
+
+.c-art {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 68px) $gouttiere-page;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3.4vw, 40px);
+
+  h2 {
+    font-size: clamp(22px, 2.4vw, 26px);
+    font-weight: 800;
+    color: c(forest);
+  }
+
+  h3 {
+    font-size: rem(17);
+    font-weight: 800;
+    line-height: 1.25;
+    color: c(forest);
+  }
+
+  strong {
+    font-weight: 700;
+    color: c(forest);
+  }
+}
+
+.c-art__etiquette {
+  font-size: rem(11);
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: c(forest);
+
+  &--gris { color: c(muted); }
+
+  .c-art__encadre & { letter-spacing: .07em; }
+  .c-art__encadre--neutre & { color: c(muted); }
+}
+
+// « L'essentiel en deux phrases »
+.c-art__essentiel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: clamp(16px, 4vw, 24px);
+  border-left: 3px solid c(tech);
+
+  p {
+    font-size: rem(17);
+    font-weight: 500;
+    line-height: 1.7;
+    color: c(forest);
+  }
+}
+
+.c-art__section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  > p {
+    font-size: rem(15.5);
+    line-height: 1.75;
+    color: c(muted);
+  }
+
+  > .c-art__para-serre { line-height: 1.7; }
+}
+
+// Frise du coefficient : quatre valeurs (deux sur téléphone)
+.c-frise--article {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 8px;
+
+  @include bp(mobile) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .c-frise__item:not(.c-frise__item--actuel):not(.c-frise__item--futur) { background: c(surface); }
+}
+
+// Encadrés : blanc (défaut), vert pâle (--vert), fond clair (--neutre)
+.c-art__encadre {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: clamp(16px, 4vw, 24px);
+  border: 2px solid c(line);
+  border-radius: 16px;
+  background: #fff;
+
+  p {
+    font-size: rem(15.5);
+    line-height: 1.65;
+    color: c(muted);
+  }
+
+  &--exemple { margin-top: 8px; }
+  &--serre { gap: 12px; }
+
+  &--vert,
+  &--neutre {
+    gap: 8px;
+
+    p { line-height: 1.7; }
+  }
+
+  &--vert {
+    border-color: color-mix(in oklab, #{c(tech)} 30%, #fff);
+    background: color-mix(in oklab, #{c(tech)} 7%, #fff);
+
+    p,
+    .c-art__liste { color: c(forest); }
+  }
+
+  &--neutre { background: c(surface); }
+}
+
+.c-art__bloc {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.c-art__liste {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: rem(15.5);
+  line-height: 1.6;
+  color: c(muted);
+}
+
+.c-art__colonnes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+
+  @include bp(mobile) { grid-template-columns: minmax(0, 1fr); }
+
+  &--serrees { gap: 12px; }
+}
+
+// Marche à suivre numérotée (pastilles vertes)
+.c-art__marche {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: marche;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    counter-increment: marche;
+
+    &::before {
+      content: counter(marche);
+      flex: none;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $r-pilule;
+      background: c(tech);
+      color: c(forestDeep);
+      font-family: var(--font-titre);
+      font-weight: 800;
+      font-size: rem(14);
+    }
+  }
+}
+
+.c-art__encadre .c-art__note {
+  padding-top: 12px;
+  border-top: 1px solid c(line);
+  font-size: rem(14);
+  line-height: 1.6;
+}
+
+// Trois réflexes (« Ce qu'il faut faire, dans l'ordre »)
+.c-art__etapes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+
+  @include bp(deplie) { grid-template-columns: minmax(0, 1fr); }
+
+  p {
+    font-size: rem(14);
+    line-height: 1.65;
+  }
+}
+
+.c-art__quand {
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(12.5);
+  color: $art-vert-texte;
+}
+
+.c-art__suite {
+  font-size: rem(14);
+  font-weight: 700;
+  color: c(forest);
+
+  &:hover { color: c(tech); }
+}
+
+// --- Échelle A → G (exemple chiffré) : couleurs réglementaires du DPE -------------
+.c-echelle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-echelle__classe {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+
+.c-echelle__lettre {
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(14);
+  color: c(muted);
+
+  .is-actuelle & { color: c(forest); }
+}
+
+.c-echelle__ligne {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.c-echelle__barre {
+  height: 18px;
+  border-radius: 4px 14px 14px 4px; // échelle : exception (pointe de flèche des barres d'étiquette DPE)
+  opacity: .32;
+
+  .is-actuelle &,
+  .is-ancienne & {
+    height: 26px;
+    opacity: 1;
+  }
+
+  .is-actuelle & {
+    outline: 2px solid c(forest);
+    outline-offset: 2px;
+  }
+}
+
+$echelle: (a: $dpe-a 30%, b: $dpe-b 40%, c: $dpe-c 50%, d: $dpe-d 60%, e: $dpe-e 70%, f: $dpe-f 82%, g: $dpe-g 94%);
+
+@each $classe, $reglage in $echelle {
+  .c-echelle__classe--#{$classe} .c-echelle__barre {
+    width: list.nth($reglage, 2);
+    background: list.nth($reglage, 1);
+  }
+}
+
+.c-echelle__valeur {
+  font-size: rem(12.5);
+  font-weight: 800;
+  white-space: nowrap;
+  color: c(forest);
+
+  span { font-weight: 600; }
+
+  .is-ancienne & {
+    font-weight: 700;
+    color: c(muted);
+
+    span { font-weight: 500; }
+  }
+}
+
+// --- Échéances datées (location) : pastille de classe, date, explication ----------
+.c-echeance {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(12px, 1.6vw, 24px);
+  align-items: start;
+  padding: clamp(16px, 4vw, 24px);
+  border: 2px solid c(line);
+  border-radius: 16px;
+  background: #fff;
+
+  @include bp(mobile) { grid-template-columns: minmax(0, 1fr); }
+
+  p {
+    min-width: 0;
+    font-size: rem(15.5);
+    line-height: 1.7;
+    color: c(muted);
+  }
+}
+
+.c-echeance__date {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.c-echeance__classe {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #fff;
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(19);
+
+  &--g { background: $dpe-g; }
+  &--f { background: $dpe-f; }
+  &--e { background: $dpe-e; }
+}
+
+.c-echeance__jour {
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(15.5);
+  color: c(forest);
+}
+
+.c-echeance__etat {
+  margin-top: 2px; // échelle : exception (décalage de filet)
+  font-size: rem(12.5);
+  font-weight: 600;
+  color: c(muted);
+}
+
+// --- Encart d'appel (fin d'article, index du journal) ------------------------------
+.c-encart-appel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  gap: clamp(16px, 4vw, 24px);
+  align-items: center;
+  padding: 24px;
+  border: 2px solid c(line);
+  border-radius: 26px;
+  background: c(surface);
+
+  @include bp(deplie) { grid-template-columns: minmax(0, 1fr); }
+
+  &--journal { margin-top: 8px; }
+}
+
+.c-encart-appel__texte {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  h2 {
+    font-size: clamp(19px, 2vw, 22px);
+    font-weight: 800;
+    line-height: 1.25;
+    color: c(forest);
+  }
+
+  p {
+    font-size: rem(15.5);
+    line-height: 1.65;
+    color: c(muted);
+  }
+}
+
+.c-encart-appel .c-encart-appel__cta {
+  justify-self: end;
+  padding: 15px 24px;
+  font-size: rem(15.5);
+
+  @include bp(deplie) { justify-self: start; }
+}
+
+// --- « À lire ensuite » -------------------------------------------------------------
+.c-a-lire {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid c(line);
+}
+
+.c-a-lire__lien {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px;
+  border: 2px solid c(line);
+  border-radius: 16px;
+  background: #fff;
+  @include survol-card;
+
+  p {
+    font-size: rem(14);
+    line-height: 1.6;
+    color: c(muted);
+  }
+}
+
+// --- Cards de l'index du journal (home.php) ------------------------------------------
+// À la une : panneau chiffré vert à gauche (34 %), texte à droite ; une colonne en déplié.
+.c-card--actu-une {
+  display: grid;
+  grid-template-columns: minmax(0, 34%) minmax(0, 1fr);
+  overflow: hidden;
+  border: 2px solid c(line);
+  border-radius: 26px;
+  background: #fff;
+
+  @include bp(deplie) { grid-template-columns: minmax(0, 1fr); }
+
+  .c-card__chiffre {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    padding: clamp(24px, 3.4vw, 40px);
+    background: c(forest);
+    color: #fff;
+  }
+
+  .c-card__illus {
+    width: 100%;
+    max-width: 165px;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto 2px; // échelle : exception (réglage de la maquette)
+    background: bottom center / contain no-repeat;
+  }
+
+  .c-card__legende {
+    font-size: rem(11);
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: c(techBright);
+  }
+
+  .c-card__evolution {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--font-titre);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+
+  .c-card__avant {
+    font-size: clamp(26px, 3vw, 36px);
+    color: color-mix(in srgb, #{c(onDarkSoft)} 70%, #{c(onDarkMuted)}); // #C2D5BE de la maquette
+    text-decoration: line-through;
+  }
+
+  .c-card__vers {
+    font-size: clamp(19px, 2vw, 22px);
+    color: c(techBright);
+  }
+
+  .c-card__apres {
+    font-size: clamp(31px, 4vw, 44px);
+    color: #fff;
+  }
+
+  .c-card__note {
+    font-size: rem(14);
+    font-weight: 500;
+    line-height: 1.6;
+    color: c(onDark);
+  }
+
+  .c-card__corps {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: clamp(24px, 3.4vw, 40px);
+  }
+
+  .c-card__titre {
+    font-size: clamp(22px, 2.3vw, 31px);
+    font-weight: 800;
+    line-height: 1.2;
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    font-size: rem(15.5);
+    line-height: 1.7;
+    color: c(muted);
+  }
+
+  .c-card__cta {
+    align-self: flex-start;
+    margin-top: 4px;
+    padding: 13px 21px;
+  }
+}
+
+.c-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.c-card__date {
+  font-size: rem(12.5);
+  color: c(muted);
+}
+
+// Article en ligne : vignette | texte | « Lire l'article »
+.c-card--actu {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) max-content;
+  gap: clamp(16px, 4vw, 24px);
+  align-items: center;
+  padding: clamp(16px, 4vw, 24px);
+  border: 2px solid c(line);
+  border-radius: 26px;
+  background: #fff;
+
+  @include bp(deplie) { grid-template-columns: 134px minmax(0, 1fr); }
+  @include bp(mobile) { grid-template-columns: minmax(0, 1fr); }
+
+  .c-card__illus {
+    min-width: 0;
+    align-self: stretch;
+    min-height: 126px;
+    margin: 20px 0; // échelle : exception (réglage de la maquette)
+    border: 1px solid color-mix(in oklab, #{c(tech)} 22%, #fff);
+    border-radius: 16px;
+    background: color-mix(in oklab, #{c(tech)} 8%, #fff) center 58% / 104% no-repeat;
+  }
+
+  .c-card__corps {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .c-card__titre {
+    font-size: clamp(19px, 2.1vw, 26px);
+    font-weight: 800;
+    line-height: 1.22;
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    font-size: rem(15.5);
+    line-height: 1.7;
+    color: c(muted);
+  }
+
+  .c-card__lien {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: rem(14);
+    font-weight: 700;
+    white-space: nowrap;
+    color: c(forest);
+
+    @include bp(deplie) { justify-self: start; }
+  }
+}
+
+.c-pastille--petite {
+  padding: 5px 11px;
+  font-size: rem(11);
+}
+
+// Article à paraître (non cliquable)
+.c-card--a-paraitre {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(16px, 4vw, 24px);
+  border: 2px solid c(line);
+  border-radius: 16px;
+  background: #fff;
+
+  .c-card__illus {
+    width: 100%;
+    max-width: 120px;
+    aspect-ratio: 4 / 3;
+    margin-left: -20px; // échelle : exception (réglage de la maquette)
+    background: center left / contain no-repeat;
+  }
+
+  .c-card__quand {
+    font-size: rem(11);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: c(muted);
+  }
+
+  .c-card__titre {
+    font-size: rem(17);
+    font-weight: 800;
+    line-height: 1.25;
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    font-size: rem(14);
+    line-height: 1.65;
+    color: c(muted);
+  }
+}

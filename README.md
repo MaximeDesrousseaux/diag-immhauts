@@ -94,6 +94,10 @@ Tant que la page d'options ACF n'est pas branchée, chaque réglage prend sa val
 | Décor du hero de Qui suis-je en bureau | Cadrage de la maquette (`0% 82%`, `max(130%, 1180px)`), pas celui des autres heros |
 | Adresse e-mail | Deux adresses dans les maquettes : `contact@diagimmhauts.fr` (Contact) et `bureau@diagimmhauts.fr` (Mentions légales) ; chacune reprise telle quelle, **à confirmer par le client** |
 | Mentions « à compléter » (certification, RC Pro, médiateur, mesure d'audience) | Surlignage conservé, teintes dérivées de `--warm` ; informations à fournir par le client |
+| Contenu des deux articles | HTML versionné dans `outils/contenus/articles/`, importé par `wp eval-file outils/importer-articles.php` (bloc « HTML personnalisé » ; liens `{url:…}` résolus à l'import) ; cards de l'index alimentées par des champs `dih_*` ; article épinglé = « à la une » |
+| Permaliens des articles | `/actualites/%postname%/` (réglé par le script d'import) ; « Hello world! » passé en brouillon |
+| Typographie WordPress | `wptexturize` désactivé : apostrophes et espaces insécables restent ceux des maquettes |
+| Barres de l'échelle A→G et pastilles d'échéance des articles | Couleurs réglementaires du DPE (`$dpe-a` … `$dpe-g`) au lieu des teintes propres aux maquettes |
 | Statuts « Selon situation » et « Recommandé » | Teintes dérivées de la palette (`--warm`, `--line`, `--forest`) au lieu de `#f6e6b4` / `#6b4d11` / `#3f5c46` |
 
 ## Dépendances

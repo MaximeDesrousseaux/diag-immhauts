@@ -83,3 +83,10 @@ add_filter(
 		return $robots;
 	}
 );
+
+/**
+ * Typographie : les textes sont saisis avec leur typographie définitive
+ * (apostrophes et espaces insécables des maquettes) ; WordPress ne doit pas
+ * convertir les apostrophes droites ni les guillemets.
+ */
+add_filter( 'run_wptexturize', '__return_false' );
