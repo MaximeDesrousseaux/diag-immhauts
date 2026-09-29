@@ -21,7 +21,7 @@ $dih_c = dih_contenu( 'simulateur' );
 		null,
 		array(
 			'variante' => 'fiche',
-			'options'  => array( 'ample' ),
+			'options'  => array( 'ample', 'photo-haute' ),
 			'titre'    => $dih_c['rappel']['titre'],
 			'texte'    => $dih_c['rappel']['texte'],
 		)

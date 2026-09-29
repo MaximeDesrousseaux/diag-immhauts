@@ -2,13 +2,16 @@
 /**
  * Bandeau de confiance : note Google + trois engagements.
  * Même composant sur l'accueil et Qui suis-je (README).
+ * Arguments : items [ picto, titre, légende ] (défaut : ceux de l'accueil),
+ * variante ('' | 'qui' : en ligne, calée à gauche en déplié).
  *
  * @package DiagImmHauts
  */
 
-$dih_items = dih_contenu( 'accueil', 'confiance' );
+$dih_items    = ! empty( $args['items'] ) ? $args['items'] : dih_contenu( 'accueil', 'confiance' );
+$dih_variante = ! empty( $args['variante'] ) ? ' c-confiance--' . $args['variante'] : '';
 ?>
-<section class="c-confiance" aria-label="Nos garanties">
+<section class="c-confiance<?php echo esc_attr( $dih_variante ); ?>" aria-label="Nos garanties">
 	<div class="c-confiance__int">
 		<div class="c-confiance__google">
 			<span class="c-confiance__logo" aria-hidden="true" style="background-image:url('<?php echo esc_url( dih_img( 'google.svg', 'logos' ) ); ?>')"></span>

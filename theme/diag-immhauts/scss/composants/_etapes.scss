@@ -252,3 +252,32 @@ $socle: clamp(76px, 8vw, 96px);
   font-size: rem(12.5);
   font-weight: 800;
 }
+
+// --- Variante « qui » (Qui suis-je) : titre plus grand, étiquette « ÉTAPE 01 »
+// en bureau (le grand numéro reprend sa place en déplié et sur téléphone).
+.c-etapes__etiquette { display: none; }
+
+.c-etapes--qui {
+  .c-etapes__int { padding-top: clamp(46px, 6vw, 74px); }
+
+  .c-etapes__titre {
+    max-width: 520px;
+    font-size: clamp(26px, 2.8vw, 36px);
+    white-space: normal;
+  }
+
+  @include bp(bureau) {
+    .c-etapes__etiquette {
+      display: block;
+      font-family: var(--font-titre);
+      font-weight: 800;
+      font-size: rem(12.5);
+      letter-spacing: .08em;
+      color: c(tech);
+    }
+
+    .c-etapes__num { display: none; }
+    .c-etapes__ligne { display: block; margin-top: 8px; }
+    .c-etapes__nom { font-size: rem(17); }
+  }
+}

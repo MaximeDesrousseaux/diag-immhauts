@@ -9,7 +9,10 @@
  *
  * Variantes (clé « variante » des contenus) :
  * - integree : fond blanc, préparation dans le même bloc (DPE, page de référence) ;
- * - standard : sur le fond de page, lien « Demander un devis », préparation dessous.
+ * - standard : sur le fond de page, lien « Demander un devis », préparation dessous ;
+ * - qui : comme standard, titre plus grand, étiquette « ÉTAPE 01 » en bureau
+ *   (4e élément de chaque étape), lien propre (Qui suis-je).
+ * lien : [ libellé, cible ] du lien de l'en-tête (défaut : « Demander un devis »).
  *
  * @package DiagImmHauts
  */
@@ -22,6 +25,7 @@ $dih_args = wp_parse_args(
 		'titre'       => '',
 		'liste'       => array(),
 		'preparation' => array(),
+		'lien'        => array( 'Demander un devis', 'contact' ),
 	)
 );
 
@@ -30,7 +34,7 @@ $dih_pictos  = array( 'tel', 'cal', 'maison', 'rapport' );
 $dih_integre = 'integree' === $dih_args['variante'];
 $dih_prep    = $dih_args['preparation'];
 ?>
-<section class="c-etapes c-etapes--<?php echo esc_attr( $dih_args['variante'] ); ?>">
+<section class="c-etapes c-etapes--<?php echo esc_attr( 'qui' === $dih_args['variante'] ? 'standard c-etapes--qui' : $dih_args['variante'] ); ?>">
 	<div class="c-etapes__int">
 		<div class="c-etapes__tete">
 			<div>
@@ -38,7 +42,7 @@ $dih_prep    = $dih_args['preparation'];
 				<h2 class="c-etapes__titre"><?php echo esc_html( $dih_args['titre'] ); ?></h2>
 			</div>
 			<?php if ( ! $dih_integre ) : ?>
-				<a class="c-lien c-lien--vert" href="<?php echo esc_url( dih_url( 'contact' ) ); ?>">Demander un devis<span class="c-fleche"><?php echo dih_icone( 'fleche', 16, array( 'epaisseur' => 2.6 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></a>
+				<a class="c-lien c-lien--vert" href="<?php echo esc_url( dih_url_cible( $dih_args['lien'][1] ) ); ?>"><?php echo esc_html( $dih_args['lien'][0] ); ?><span class="c-fleche"><?php echo dih_icone( 'fleche', 16, array( 'epaisseur' => 2.6 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></a>
 			<?php endif; ?>
 		</div>
 
@@ -49,6 +53,9 @@ $dih_prep    = $dih_args['preparation'];
 						<span class="c-etapes__picto" style="background-image:url('<?php echo esc_url( dih_img( $dih_prefixe . $dih_pictos[ $dih_i % 4 ] . '.webp' ) ); ?>')"></span>
 					</span>
 					<div class="c-etapes__card">
+						<?php if ( ! empty( $dih_e[3] ) ) : ?>
+							<span class="c-etapes__etiquette"><?php echo esc_html( $dih_e[3] ); ?></span>
+						<?php endif; ?>
 						<div class="c-etapes__ligne">
 							<span class="c-etapes__num"><?php echo esc_html( $dih_e[0] ); ?></span>
 							<h3 class="c-etapes__nom"><?php echo esc_html( $dih_e[1] ); ?></h3>
