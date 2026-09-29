@@ -79,7 +79,11 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 
 - **Diag Imm'Hauts → Avis clients** : les avis du carrousel de l'accueil ;
 - **encart « Questions fréquentes (FAQ) »** des 15 pages qui en ont une (accueil, Nos diagnostics,
-  Professionnels, 12 fiches) : question, réponse, lien facultatif.
+  Professionnels, 12 fiches) : question, réponse, lien facultatif ;
+- **encart « Fiche diagnostic »** des 12 fiches : pastille, titre (deux lignes) et chapeau du haut de
+  page ; chiffre et légende des quatre repères (le picto reste celui de sa position) ;
+- **encart « Bloc 4 étapes »** des fiches et de Nos diagnostics : titre et texte des étapes (numéros
+  automatiques), liste « À préparer avant ma visite » des fiches.
 
 Pour que l'admin montre les textes en place plutôt que des champs vides :
 `wp eval-file outils/importer-contenus.php` (ajouter `forcer` pour réécrire des champs déjà remplis).

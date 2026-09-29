@@ -1,8 +1,9 @@
 <?php
 /**
- * Remplit les contenus modifiables de l'admin (avis de l'accueil, FAQ des 15 pages)
- * avec les textes actuels du thème (inc/contenus/*.php), pour que l'admin montre
- * les textes en place au lieu de champs vides.
+ * Remplit les contenus modifiables de l'admin avec les textes actuels du thème
+ * (inc/contenus/*.php), pour que l'admin montre les textes en place au lieu de
+ * champs vides : avis de l'accueil, FAQ des 15 pages, haut de page et repères des
+ * 12 fiches, bloc « 4 étapes » des fiches et de Nos diagnostics.
  *
  * Usage : wp eval-file outils/importer-contenus.php
  *         wp eval-file outils/importer-contenus.php forcer   (réécrit aussi les champs déjà remplis)
@@ -29,6 +30,7 @@ $dih_forcer = isset( $args ) && in_array( 'forcer', (array) $args, true );
 
 // Les textes par défaut du thème, sans ce que l'admin contient déjà.
 remove_filter( 'dih_contenu', 'dih_core_contenus_modifiables', 10 );
+remove_filter( 'dih_contenu', 'dih_core_contenus_fiches', 10 );
 
 /**
  * Lien d'une question : [ libellé, cible ] du thème → champ « lien » d'ACF.
@@ -71,13 +73,22 @@ if ( ! $dih_forcer && get_field( 'avis_liste', 'option' ) ) {
 
 // FAQ des pages ----------------------------------------------------------------------
 $dih_chemins = dih_chemins();
-foreach ( dih_core_pages_faq() as $dih_fichier => $dih_cle ) {
-	if ( 'accueil' === $dih_cle ) {
-		$page_id = (int) get_option( 'page_on_front' );
-	} else {
-		$page    = get_page_by_path( trim( $dih_chemins[ $dih_cle ], '/' ) );
-		$page_id = $page ? (int) $page->ID : 0;
+
+/**
+ * Identifiant de la page WordPress d'une clé de dih_chemins(), ou 0.
+ *
+ * @param string $cle Clé de page.
+ * @return int
+ */
+$dih_page_id = function ( $cle ) use ( $dih_chemins ) {
+	if ( 'accueil' === $cle ) {
+		return (int) get_option( 'page_on_front' );
 	}
+	$page = get_page_by_path( trim( $dih_chemins[ $cle ], '/' ) );
+	return $page ? (int) $page->ID : 0;
+};
+foreach ( dih_core_pages_faq() as $dih_fichier => $dih_cle ) {
+	$page_id = $dih_page_id( $dih_cle );
 	if ( ! $page_id ) {
 		printf( "FAQ %s : page introuvable (%s), ignorée.\n", $dih_cle, $dih_chemins[ $dih_cle ] );
 		continue;
@@ -98,4 +109,59 @@ foreach ( dih_core_pages_faq() as $dih_fichier => $dih_cle ) {
 	}
 	update_field( 'field_dih_faq_questions', $lignes, $page_id );
 	printf( "FAQ %s : %d questions importées (page %d).\n", $dih_cle, count( $lignes ), $page_id );
+}
+
+// Fiches (haut de page, repères) et bloc « 4 étapes » (fiches, Nos diagnostics) -----------
+foreach ( dih_core_pages_faq() as $dih_fichier => $dih_cle ) {
+	$dih_fiche = 0 === strpos( $dih_fichier, 'fiche-' );
+	if ( ! $dih_fiche && 'nos-diagnostics' !== $dih_fichier ) {
+		continue;
+	}
+	$page_id = $dih_page_id( $dih_cle );
+	if ( ! $page_id ) {
+		continue; // déjà signalé avec la FAQ
+	}
+	if ( ! $dih_forcer && get_field( 'etapes_liste', $page_id ) ) {
+		printf( "Fiche / étapes %s : déjà remplies, inchangées.\n", $dih_cle );
+		continue;
+	}
+
+	$c = dih_contenu( $dih_fichier );
+	if ( $dih_fiche ) {
+		foreach ( array( 'pastille', 'titre', 'accent', 'chapeau' ) as $champ ) {
+			update_field( 'field_dih_fiche_' . $champ, $c['hero'][ $champ ], $page_id );
+		}
+		$lignes = array();
+		foreach ( $c['reperes'] as $r ) {
+			$lignes[] = array(
+				'valeur'  => $r[1],
+				'legende' => $r[2],
+			);
+		}
+		update_field( 'field_dih_fiche_reperes', $lignes, $page_id );
+	}
+
+	$lignes = array();
+	foreach ( $c['etapes']['liste'] as $e ) {
+		$lignes[] = array(
+			'titre' => $e[1],
+			'texte' => $e[2],
+		);
+	}
+	update_field( 'field_dih_etapes_liste', $lignes, $page_id );
+
+	$preparation = isset( $c['etapes']['preparation']['liste'] ) ? $c['etapes']['preparation']['liste'] : array();
+	if ( $preparation ) {
+		update_field(
+			'field_dih_preparation_liste',
+			array_map(
+				function ( $element ) {
+					return array( 'element' => $element );
+				},
+				$preparation
+			),
+			$page_id
+		);
+	}
+	printf( "Fiche / étapes %s : importées (page %d).\n", $dih_cle, $page_id );
 }

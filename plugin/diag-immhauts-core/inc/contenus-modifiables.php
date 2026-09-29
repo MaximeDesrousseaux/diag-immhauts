@@ -10,6 +10,10 @@
  * - Diag Imm'Hauts → Avis clients : les avis du carrousel de l'accueil.
  * - Encart « Questions fréquentes » des 15 pages qui ont une FAQ (accueil,
  *   Nos diagnostics, Professionnels, 12 fiches) : questions, réponses, lien.
+ * - Encart « Fiche diagnostic » des 12 fiches : pastille, titre, accent et chapeau
+ *   du haut de page ; chiffres et légendes des quatre repères (pictos fixes).
+ * - Encart « Bloc 4 étapes » des fiches et de Nos diagnostics : titres et textes des
+ *   étapes (numéros fixes) ; liste « À préparer avant ma visite » des fiches.
  *
  * Pour partir des textes en place plutôt que de champs vides :
  * wp eval-file outils/importer-contenus.php (voir ce fichier).
@@ -166,8 +170,191 @@ add_action(
 						),
 					),
 				),
-				'location' => $location,
-				'position' => 'normal',
+				'location'   => $location,
+				'position'   => 'normal',
+				'menu_order' => 20,
+			)
+		);
+	}
+);
+
+/**
+ * Page affichée, si elle correspond au fichier de contenus demandé.
+ *
+ * @param string $page Nom du fichier de contenus du thème (ex. 'fiche-dpe').
+ * @return int Identifiant de la page, ou 0.
+ */
+function dih_core_id_si_affichee( $page ) {
+	$pages = dih_core_pages_faq();
+	if ( isset( $pages[ $page ] ) && function_exists( 'dih_page_courante' ) && dih_page_courante() === $pages[ $page ] ) {
+		return (int) get_queried_object_id();
+	}
+	return 0;
+}
+
+/**
+ * Emplacement ACF : pages utilisant l'un des gabarits donnés.
+ *
+ * @param string[] $gabarits Gabarits de page (page-templates/…).
+ * @return array
+ */
+function dih_core_location_gabarits( $gabarits ) {
+	$location = array();
+	foreach ( $gabarits as $gabarit ) {
+		$location[] = array(
+			array(
+				'param'    => 'page_template',
+				'operator' => '==',
+				'value'    => $gabarit,
+			),
+		);
+	}
+	return $location;
+}
+
+add_action(
+	'dih_core_acf_init',
+	function () {
+		$vide = 'Vide : texte actuel du thème.';
+
+		acf_add_local_field_group(
+			array(
+				'key'        => 'group_dih_fiche',
+				'title'      => 'Fiche diagnostic',
+				'fields'     => array(
+					array(
+						'key'       => 'field_dih_fiche_onglet_haut',
+						'label'     => 'Haut de page',
+						'type'      => 'tab',
+						'placement' => 'top',
+					),
+					array(
+						'key'          => 'field_dih_fiche_pastille',
+						'name'         => 'fiche_pastille',
+						'label'        => 'Pastille',
+						'instructions' => 'Au-dessus du titre (ex. « Obligatoire pour toute vente et toute location »). ' . $vide,
+						'type'         => 'text',
+					),
+					array(
+						'key'          => 'field_dih_fiche_titre',
+						'name'         => 'fiche_titre',
+						'label'        => 'Titre, 1re ligne',
+						'instructions' => $vide,
+						'type'         => 'text',
+						'wrapper'      => array( 'width' => '50' ),
+					),
+					array(
+						'key'          => 'field_dih_fiche_accent',
+						'name'         => 'fiche_accent',
+						'label'        => 'Titre, 2e ligne (en vert)',
+						'instructions' => $vide,
+						'type'         => 'text',
+						'wrapper'      => array( 'width' => '50' ),
+					),
+					array(
+						'key'          => 'field_dih_fiche_chapeau',
+						'name'         => 'fiche_chapeau',
+						'label'        => 'Chapeau',
+						'instructions' => 'Le paragraphe sous le titre. ' . $vide,
+						'type'         => 'textarea',
+						'rows'         => 4,
+						'new_lines'    => '',
+					),
+					array(
+						'key'       => 'field_dih_fiche_onglet_reperes',
+						'label'     => 'Repères',
+						'type'      => 'tab',
+						'placement' => 'top',
+					),
+					array(
+						'key'          => 'field_dih_fiche_reperes',
+						'name'         => 'fiche_reperes',
+						'label'        => 'Les quatre repères sous le haut de page',
+						'instructions' => 'Dans l’ordre d’affichage ; chaque picto reste celui de sa position. Liste vide : repères actuels.',
+						'type'         => 'repeater',
+						'layout'       => 'table',
+						'max'          => 4,
+						'button_label' => 'Ajouter un repère',
+						'sub_fields'   => array(
+							array(
+								'key'      => 'field_dih_fiche_repere_valeur',
+								'name'     => 'valeur',
+								'label'    => 'Chiffre',
+								'type'     => 'text',
+								'required' => 1,
+								'wrapper'  => array( 'width' => '35' ),
+							),
+							array(
+								'key'     => 'field_dih_fiche_repere_legende',
+								'name'    => 'legende',
+								'label'   => 'Légende',
+								'type'    => 'text',
+								'wrapper' => array( 'width' => '65' ),
+							),
+						),
+					),
+				),
+				'location'   => dih_core_location_gabarits( array( 'page-templates/fiche-diagnostic.php' ) ),
+				'position'   => 'normal',
+				'menu_order' => 0,
+			)
+		);
+
+		acf_add_local_field_group(
+			array(
+				'key'        => 'group_dih_etapes',
+				'title'      => 'Bloc « 4 étapes »',
+				'fields'     => array(
+					array(
+						'key'          => 'field_dih_etapes_liste',
+						'name'         => 'etapes_liste',
+						'label'        => 'Étapes',
+						'instructions' => 'Quatre étapes, numérotées automatiquement (les pictos suivent l’ordre). Liste vide : étapes actuelles.',
+						'type'         => 'repeater',
+						'layout'       => 'block',
+						'max'          => 4,
+						'button_label' => 'Ajouter une étape',
+						'sub_fields'   => array(
+							array(
+								'key'      => 'field_dih_etape_titre',
+								'name'     => 'titre',
+								'label'    => 'Titre',
+								'type'     => 'text',
+								'required' => 1,
+							),
+							array(
+								'key'       => 'field_dih_etape_texte',
+								'name'      => 'texte',
+								'label'     => 'Texte',
+								'type'      => 'textarea',
+								'rows'      => 2,
+								'new_lines' => '',
+								'required'  => 1,
+							),
+						),
+					),
+					array(
+						'key'          => 'field_dih_preparation_liste',
+						'name'         => 'preparation_liste',
+						'label'        => 'À préparer avant ma visite',
+						'instructions' => 'Les documents listés sous les étapes (fiches seulement ; la fiche DTG n’a pas cette liste). Liste vide : liste actuelle.',
+						'type'         => 'repeater',
+						'layout'       => 'table',
+						'button_label' => 'Ajouter un document',
+						'sub_fields'   => array(
+							array(
+								'key'      => 'field_dih_preparation_element',
+								'name'     => 'element',
+								'label'    => 'Document',
+								'type'     => 'text',
+								'required' => 1,
+							),
+						),
+					),
+				),
+				'location'   => dih_core_location_gabarits( array( 'page-templates/fiche-diagnostic.php', 'page-templates/nos-diagnostics.php' ) ),
+				'position'   => 'normal',
+				'menu_order' => 10,
 			)
 		);
 	}
@@ -222,3 +409,72 @@ function dih_core_contenus_modifiables( $donnees, $page ) {
 	return $donnees;
 }
 add_filter( 'dih_contenu', 'dih_core_contenus_modifiables', 10, 2 );
+
+/**
+ * Fiches et Nos diagnostics : haut de page, repères, 4 étapes, « À préparer ».
+ * Chaque champ vide garde le texte du thème.
+ *
+ * @param array  $donnees Contenus de la page.
+ * @param string $page    Nom du fichier de contenus.
+ * @return array
+ */
+function dih_core_contenus_fiches( $donnees, $page ) {
+	if ( is_admin() || ! dih_core_acf_actif() || ! function_exists( 'get_field' ) ) {
+		return $donnees;
+	}
+	$id = dih_core_id_si_affichee( $page );
+	if ( ! $id ) {
+		return $donnees;
+	}
+
+	if ( 0 === strpos( $page, 'fiche-' ) ) {
+		foreach ( array( 'pastille', 'titre', 'accent', 'chapeau' ) as $cle ) {
+			$valeur = get_field( 'fiche_' . $cle, $id );
+			if ( isset( $donnees['hero'] ) && is_string( $valeur ) && '' !== trim( $valeur ) ) {
+				$donnees['hero'][ $cle ] = $valeur;
+			}
+		}
+
+		// Repères : le picto reste celui de la position (tracés propres à chaque fiche).
+		$reperes = array();
+		foreach ( array_values( (array) get_field( 'fiche_reperes', $id ) ) as $i => $ligne ) {
+			if ( empty( $ligne['valeur'] ) || ! isset( $donnees['reperes'][ $i ] ) ) {
+				continue;
+			}
+			$reperes[] = array( $donnees['reperes'][ $i ][0], $ligne['valeur'], isset( $ligne['legende'] ) ? (string) $ligne['legende'] : '' );
+		}
+		if ( $reperes ) {
+			$donnees['reperes'] = $reperes;
+		}
+	}
+
+	if ( isset( $donnees['etapes']['liste'] ) ) {
+		$etapes = array();
+		foreach ( (array) get_field( 'etapes_liste', $id ) as $ligne ) {
+			if ( empty( $ligne['titre'] ) || empty( $ligne['texte'] ) ) {
+				continue;
+			}
+			$n        = count( $etapes );
+			$num      = isset( $donnees['etapes']['liste'][ $n ][0] ) ? $donnees['etapes']['liste'][ $n ][0] : sprintf( '%02d', $n + 1 );
+			$etapes[] = array( $num, $ligne['titre'], $ligne['texte'] );
+		}
+		if ( $etapes ) {
+			$donnees['etapes']['liste'] = $etapes;
+		}
+
+		if ( ! empty( $donnees['etapes']['preparation']['liste'] ) ) {
+			$preparation = array();
+			foreach ( (array) get_field( 'preparation_liste', $id ) as $ligne ) {
+				if ( ! empty( $ligne['element'] ) ) {
+					$preparation[] = (string) $ligne['element'];
+				}
+			}
+			if ( $preparation ) {
+				$donnees['etapes']['preparation']['liste'] = $preparation;
+			}
+		}
+	}
+
+	return $donnees;
+}
+add_filter( 'dih_contenu', 'dih_core_contenus_fiches', 10, 2 );
