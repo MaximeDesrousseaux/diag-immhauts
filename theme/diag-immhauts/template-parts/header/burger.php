@@ -35,8 +35,8 @@ $dih_lien = function ( $cle, $texte ) {
 	?>
 	<div class="l-burger__titre">Professionnels</div>
 	<?php
-	$dih_lien( 'dtg', 'DTG &amp; DPE collectif' );
 	$dih_lien( 'pros', 'Syndics, agences &amp; bailleurs' );
+	$dih_lien( 'dtg', 'DTG &amp; DPE collectif' );
 	?>
 	<div class="l-burger__titre">Le diagnostiqueur</div>
 	<?php

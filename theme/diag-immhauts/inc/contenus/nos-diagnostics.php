@@ -72,7 +72,7 @@ return array(
 		// illustration, titre, texte
 		'cartes'    => array(
 			array( 'diag_dtg.webp', 'Diagnostic technique global (DTG)', 'État du bâti, analyse des améliorations possibles et projection budgétaire sur 10 ans.' ),
-			array( 'diag_dpe.webp', 'DPE collectif', 'Étiquette énergétique de l’immeuble entier, obligatoire pour tous les immeubles d’habitation.' ),
+			array( 'diag_dpe_v2.webp', 'DPE collectif', 'Étiquette énergétique de l’immeuble entier, obligatoire pour tous les immeubles d’habitation.' ),
 			array( 'diag_amiante.webp', 'Amiante des parties communes (DTA)', 'Dossier technique amiante et mise à jour du repérage avant travaux.' ),
 			array( 'ill_syndic_ssfond.webp', 'Accompagnement de parc', 'Planning annuel, référent unique et rapports harmonisés pour bailleurs et collectivités.' ),
 		),
