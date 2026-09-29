@@ -28,6 +28,21 @@ return array(
 		),
 		'carte_titre'    => 'Rappel gratuit',
 		'carte_delai'    => 'Réponse sous 24 h',
+		// Barre de rappel (variantes terrils-barre et max-bandeau)
+		'barre_titre'    => 'Rappel gratuit sous 24 h',
+		'barre_lien'     => 'Besoin d\'un devis détaillé ?', // max-bandeau seulement
+		'photo_alt'      => 'Maxime Dillies au téléphone', // max-bandeau
+		// Textes propres à une variante (réglage hero_accueil), fusionnés sur les précédents.
+		'variantes'      => array(
+			'max-bandeau' => array(
+				'titre_accent' => 'un interlocuteur unique.',
+				'chapeau'      => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies vous accompagne partout dans l\'Artois, avec rigueur, réactivité et pédagogie.',
+			),
+			'sansBG'      => array(
+				'titre_accent' => 'un interlocuteur unique.',
+				'chapeau'      => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies vous accompagne partout dans l\'Artois et les Hauts-de-France, avec rigueur, réactivité et pédagogie.',
+			),
+		),
 	),
 
 	'confiance'    => array(

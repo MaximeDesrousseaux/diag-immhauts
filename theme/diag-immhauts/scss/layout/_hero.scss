@@ -171,7 +171,8 @@ $terrils-bureau-taille: 1655px auto;
 }
 
 // ==========================================================================
-// Hero de l'accueil — variante « terrils-boutons » (réglage hero_accueil).
+// Hero de l'accueil — base : variante « terrils-boutons » (réglage hero_accueil,
+// défaut) ; les trois autres variantes suivent, puis le téléphone, commun aux quatre.
 // Réglages à l'œil de la maquette (logique, hors passe 3 de l'audit) : ils
 // portent « échelle : exception ». Déplié et téléphone : VERROUILLÉS.
 // ==========================================================================
@@ -330,12 +331,328 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
   }
 }
 
-// --- Téléphone : hero plein écran, décor portrait, carte de rappel — VERROUILLÉ --------
+// --- Carte « Rappel gratuit » : téléphone (les quatre variantes) et bureau (sansBG) ---
+.l-hero__carte-tete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(12px, 3.4vw, 16px);
+}
+
+.l-hero__carte-titre {
+  font-family: var(--font-titre);
+  font-weight: 700;
+  font-size: rem(15.5);
+  color: #fff;
+}
+
+.l-hero__carte-delai {
+  font-size: rem(12.5);
+  font-weight: 600;
+  color: $vert-pale;
+}
+
+.l-hero__carte-rgpd {
+  margin-top: 8px;
+  font-size: rem(11);
+  line-height: 1.5;
+  text-align: center;
+  color: c(onDarkMuted);
+
+  a {
+    font-weight: 600;
+    color: c(onDarkSoft);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+// --- Fond des variantes sans terrils (max-bandeau, sansBG) -------------------------
+// Le décor des terrils ne sert plus qu'au téléphone (image vide au-delà de 640 px).
+.l-hero--max,
+.l-hero--sobre {
+  .l-hero__decor--accueil { display: none; }
+}
+
+.l-hero__fond {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+// --- Barre de rappel : terrils-barre (bande collée au bas) et max-bandeau (panneau) --
+.l-hero__barre {
+  position: relative;
+  z-index: 3;
+}
+
+.l-hero__barre-tete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.l-hero__barre-titre {
+  font-family: var(--font-titre);
+  font-weight: 800;
+  font-size: rem(15.5);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.l-hero__barre-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: rem(12.5);
+  font-weight: 700;
+  color: #fff;
+}
+
+.l-hero__barre-form {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+// Emplacement du formulaire, en ligne tant que Fluent Forms n'est pas branché.
+.l-hero__barre .c-formulaire__emplacement {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 8px;
+  padding: 12px 16px;
+  border-radius: var(--r-zone);
+}
+
+// --- Variante « terrils-barre » : mêmes décor et textes, barre à la place des CTA ------
+.l-hero--barre {
+  .l-hero__barre {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: auto;
+    // Collée au bas du hero : annule le rembourrage bas de .l-hero__int.
+    margin-bottom: calc(-1 * clamp(24px, 3.4vw, 40px));
+    padding: 20px 0;
+
+    // Bande pleine largeur derrière la barre
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      z-index: -1;
+      width: 100vw;
+      transform: translateX(-50%);
+      pointer-events: none;
+      background: teinte(forestDeep, 88%);
+      border-top: 1px solid teinte(techBright, 26%);
+    }
+  }
+
+  .l-hero__barre-tete { flex: 0 0 auto; }
+}
+
+// --- Variante « max-bandeau » : halos verts, photo de Maxime (bureau), panneau de rappel --
+.l-hero--max {
+  .l-hero__fond {
+    background:
+      radial-gradient(58% 78% at 70% 34%, teinte(techBright, 30%) 0, teinte(tech, 14%) 38%, transparent 72%),
+      radial-gradient(120% 90% at 78% -14%, teinte(glow, 12%) 0, transparent 58%),
+      radial-gradient(80% 70% at 8% 8%, teinte(forestDeep, 55%) 0, transparent 66%),
+      linear-gradient(160deg, transparent 0, teinte(forestDeep, 42%) 100%);
+  }
+
+  .l-hero__texte { width: min(100%, 500px); }
+
+  .l-hero__titre {
+    width: min(100%, 499px);
+    max-width: min(100%, 611px);
+    font-size: clamp(28px, 3.2vw, 44px); // échelle : exception (réglage à l'œil du hero)
+    line-height: 1.08;
+
+    @include bp(deplie-seul) { font-size: 43px; } // échelle : exception (déplié VERROUILLÉ)
+  }
+
+  .l-hero__chapeau {
+    max-width: min(100%, 500px);
+    font-size: clamp(15px, 1.5vw, 17px); // échelle : exception (réglage à l'œil du hero)
+
+    @include bp(deplie-seul) { max-width: min(100%, 392px); }
+  }
+
+  .l-hero__barre {
+    margin-top: 24px;
+    padding: clamp(15px, 1.8vw, 20px) clamp(16px, 2vw, 22px);
+    background: teinte(techBright, 22%);
+    border: 1px solid teinte(techBright, 40%);
+    border-radius: 16px;
+    box-shadow: 0 26px 54px -28px rgba(0, 0, 0, .55);
+    backdrop-filter: blur(12px);
+  }
+
+  .l-hero__barre-tete { margin-bottom: 12px; }
+}
+
+// Photo : bureau seulement, ancrée au bas du hero, sous la nav (−var(--nvH)).
+.l-hero__photo,
+.l-hero__photo-img { display: none; }
+
+@include bp(bureau) {
+  .l-hero--max {
+    .l-hero__photo {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .l-hero__photo-halo {
+      position: absolute;
+      left: 66%;
+      top: 2%;
+      width: min(84%, 980px);
+      aspect-ratio: 1.05;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, teinte(techBright, 15%) 0, teinte(tech, 6%) 44%, transparent 70%);
+      filter: blur(48px);
+    }
+
+    .l-hero__photo-rayon {
+      position: absolute;
+      left: 62%;
+      top: -16%;
+      width: min(30%, 330px);
+      height: 120%;
+      transform: translateX(-50%) rotate(14deg);
+      background: linear-gradient(180deg, teinte(glow, 13%) 0, transparent 72%);
+      filter: blur(36px);
+    }
+
+    .l-hero__photo-img {
+      display: block;
+      position: absolute;
+      left: 73%;
+      bottom: 0;
+      z-index: 1;
+      width: 100%;
+      max-width: 54%;
+      height: calc(100% - var(--nvH) - 44px);
+      transform: translateX(-50%);
+      object-fit: contain;
+      object-position: bottom;
+      filter: drop-shadow(0 26px 44px rgba(0, 0, 0, .45));
+      pointer-events: none;
+    }
+  }
+}
+
+// --- Variante « sansBG » : fond vert à halo, texte | carte de rappel -----------------
+.l-hero--sobre {
+  .l-hero__fond {
+    color: c(techBright);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(90% 120% at 90% -10%, teinte(tech, 32%), transparent 60%);
+    }
+  }
+
+  .l-hero__ondes { display: block; }
+
+  .l-hero__int {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+    gap: clamp(24px, 4vw, 40px);
+    align-items: center;
+    align-content: center;
+    padding: calc(var(--nvH) + clamp(30px, 7vw, 88px)) $gouttiere-page clamp(34px, 8vw, 96px);
+  }
+
+  .l-hero__texte {
+    display: block;
+    width: auto;
+    padding: 0;
+  }
+
+  .c-pastille--hero {
+    width: auto;
+    max-width: none;
+    height: auto;
+    padding: clamp(4px, .7vw, 8px) clamp(12px, 3.4vw, 16px);
+    font-size: clamp(11px, 1.1vw, 12.5px);
+
+    > span {
+      width: 6px;
+      height: 6px;
+    }
+  }
+
+  .l-hero__titre {
+    width: auto;
+    max-width: min(100%, 548px);
+    font-size: clamp(30px, 4.4vw, 60px); // échelle : exception (hero sans décor, maquette)
+    line-height: 1.06;
+    text-shadow: none;
+  }
+
+  .l-hero__chapeau {
+    margin-top: clamp(12px, 3.4vw, 16px);
+    max-width: 520px;
+    font-size: clamp(14px, 1.4vw, 17px);
+    font-weight: 400;
+    line-height: 1.55;
+    color: c(onDarkSoft);
+    text-shadow: none;
+  }
+
+  .c-chiffres {
+    flex-wrap: wrap;
+    gap: clamp(16px, 4.2vw, 24px);
+    margin-top: 40px;
+    text-shadow: none;
+  }
+
+  .c-chiffres__item + .c-chiffres__item {
+    padding-left: clamp(16px, 4.2vw, 24px);
+    border-left-color: color-mix(in oklab, #fff 18%, transparent);
+  }
+
+  .c-chiffres__valeur { font-size: rem(26); }
+  .c-chiffres__legende { margin-top: 0; }
+
+  .l-hero__carte {
+    display: block;
+    margin-top: 56px;
+    padding: clamp(16px, 4.2vw, 24px);
+    border-radius: 16px;
+    background: teinte(surface, 12%);
+    border: 1px solid color-mix(in oklab, #fff 22%, transparent);
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
+  }
+}
+
+// --- Téléphone : hero plein écran, décor portrait, carte de rappel (les quatre variantes) — VERROUILLÉ --------
 $accueil-pas-mobile: clamp(12px, 3.4vw, 16px);
 
 @include bp(mobile) {
   .l-hero--accueil {
+    // Décor portrait et mise en page communs : on défait la grille de sansBG
+    // et le masquage du décor de max-bandeau / sansBG.
+    .l-hero__decor--accueil { display: block; }
+
     .l-hero__int {
+      display: flex;
+      align-items: stretch;
       min-height: 100svh;
       max-width: none;
       padding: calc(#{$accueil-pas-mobile} * 2 + 70px + env(safe-area-inset-top, 0px)) $gouttiere-page clamp(16px, 4.2vw, 24px);
@@ -343,6 +660,7 @@ $accueil-pas-mobile: clamp(12px, 3.4vw, 16px);
     }
 
     .l-hero__texte {
+      display: flex;
       flex: none;
       width: 100%;
       padding: 0;
@@ -354,7 +672,9 @@ $accueil-pas-mobile: clamp(12px, 3.4vw, 16px);
     .c-pastille--hero,
     .l-hero__chapeau,
     .l-hero__actions,
-    .c-chiffres { display: none; }
+    .c-chiffres,
+    .l-hero__fond,
+    .l-hero__barre { display: none; }
 
     .l-hero__titre {
       width: auto;
@@ -393,39 +713,10 @@ $accueil-pas-mobile: clamp(12px, 3.4vw, 16px);
   }
 
   .l-hero__carte-tete {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: 14px; // échelle : exception (téléphone VERROUILLÉ)
   }
 
-  .l-hero__carte-titre {
-    font-family: var(--font-titre);
-    font-weight: 700;
-    font-size: rem(15.5);
-    color: #fff;
-  }
-
-  .l-hero__carte-delai {
-    font-size: rem(12.5);
-    font-weight: 600;
-    color: $vert-pale;
-  }
-
-  .l-hero__carte-rgpd {
-    margin-top: 8px;
-    font-size: rem(11);
-    line-height: 1.45;
-    text-align: center;
-    color: c(onDarkMuted);
-
-    a {
-      font-weight: 600;
-      color: c(onDarkSoft);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-  }
+  .l-hero__carte-rgpd { line-height: 1.45; }
 
   // Décor portrait : bg_mobile1 à 128 % de large, calé à 62 % (pas de cover).
   .l-hero__decor--accueil {

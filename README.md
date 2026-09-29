@@ -107,6 +107,11 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Permaliens des articles | `/actualites/%postname%/` (réglé par le script d'import) ; « Hello world! » passé en brouillon |
 | Typographie WordPress | `wptexturize` désactivé : apostrophes et espaces insécables restent ceux des maquettes |
 | Barres de l'échelle A→G et pastilles d'échéance des articles | Couleurs réglementaires du DPE (`$dpe-a` … `$dpe-g`) au lieu des teintes propres aux maquettes |
+| Hero de l'accueil `max-bandeau` et `sansBG` : hauteur | Celle des autres variantes (`100svh` − bandeau, 690 px au moins, comme le script de la nav transparente de la maquette) ; `max-bandeau` : photo ancrée au bas du hero, hauteur − `--nvH` − 44 px (pas de tête sous la nav) ; `sansBG` : contenu centré verticalement |
+| Hero `sansBG` en déplié | La maquette n'affiche pas le formulaire dans la carte (`formAucun` réservé au bureau) : formulaire affiché, sinon la carte est vide |
+| Espacements hors échelle des variantes du hero (28, 13, 50, 48 px, rayon 18 px, marge basse −22…−34 px de la barre) | 24, 12, 56, 40 px, rayon 16 px ; la barre de `terrils-barre` annule exactement le rembourrage bas (−24…−40 px) et reste collée au bas |
+| Halo `#eaffd8` de `max-bandeau` | Jeton `--glow` |
+| Téléphone, quatre variantes du hero | Rendu commun VERROUILLÉ (décor `bg_mobile1`, carte « Rappel gratuit ») ; au-delà de 640 px, `max-bandeau` et `sansBG` ne téléchargent pas ce décor (source vide dans le `<picture>`), ni la photo de Maxime sous 901 px |
 | Réglage `step_icons` (listé dans la page d'options par le README de passation) | Pas de champ : la maquette d'admin a retiré ce choix (NOTES : « socle vert en dur ») ; valeur par défaut, modifiable par le filtre `dih_option` |
 | Polices (`police_titre`, `police_texte`) | Attributs `data-police-titre` / `data-police-texte` sur `<html>` et non sur le `body` : la correction du texte (104 % Instrument Sans, 112 % Source Sans 3) passe par la taille racine, base de tous les `rem()`, comme le prévoit l'audit SCSS (« une valeur ») ; toutes les polices sont auto-hébergées (`assets/fonts`) |
 | Identifiants des formulaires | Sous-page « Formulaires », hors maquette : la page « Personnalisation » ne porte que l'apparence |
