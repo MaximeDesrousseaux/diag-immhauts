@@ -1,5 +1,9 @@
 # Diag Imm'Hauts — notes de projet
 
+**Règle de travail : ne jamais créer de nouvelle version, de lien de téléchargement ni de message pour Claude Code sans demande explicite.**
+
+**Versionnage : `1.x`** (plus de « vN » seul). Version courante : **1.12** (`checkpoints/v1.12 - livrables/`). Prochaine : **1.13**. Même numéro partout : dossier de sauvegarde `checkpoints/v1.x - …/`, libellé des liens de téléchargement, en-tête du message pour Claude Code (« Maquettes 1.x »), ligne `Version :` du README du paquet. Les corrections s'appliquent aux maquettes, au paquet et au dossier client ; le versionnage attend le feu vert.
+
 ## État
 Refonte appliquée sur l'accueil, `Nos diagnostics`, `Professionnels`, le `Simulateur` et les
 13 fiches. Les cards « accueil » (bordure 2px, illustration débordante, damier blanc / vert clair)
@@ -160,6 +164,9 @@ illustration avec `margin-bottom:42px` — c'est lui qui les remonte).
 `design_handoff_theme_wp/` (README + `PROMPT-CLAUDE-CODE.md` + 22 pages + admin + img/ + logos) pour la suite en Claude Code : thème classique PHP/SCSS + plugin `diag-immhauts-core` (CPT, blocs ACF, page d'options, simulateur). `dossier_client_en_ligne/` (`index.html` = dossier client) à héberger.
 
 **Stack probable (en attente de validation client)** : ACF Pro + Fluent Forms Pro + Brevo (≈ 110 €/an). Manquent toujours : n° de certification, assureur RC pro, médiateur.
+
+## Livrables — 1.12 (`checkpoints/v1.12 - livrables/`)
+Paquet `design_handoff_theme_wp/` + `dossier_client_en_ligne/` (Netlify). Contenu : illustration DPE `diag_dpe_v2.webp` (−14 %), nav transparente robuste au chargement (`ResizeObserver` sur le header). La sauvegarde ne contient que les pages, textes et `img/` — logos PNG, favicons PNG et vignettes admin sont dans les deux dossiers livrables.
 
 ## Empaquetage — plan validé
 Deux livrables : (1) `design_handoff_theme_wp/` pour Claude Code (README de spécification + 22 pages + admin + img/ + logos, sans captures) ; (2) `Dossier client - Refonte.dc.html`, présentation élégante de la refonte graphique et fonctionnelle, style des aperçus, **sans étapes de développement**.

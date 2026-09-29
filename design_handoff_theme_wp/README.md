@@ -1,10 +1,15 @@
 # Passation : thème WordPress Diag Imm'Hauts
 
+Version : **1.12** — les messages de mise à jour sont titrés « Maquettes 1.x ».
+
 ## Bloc « rappel » (avant le footer)
 Deux boutons : appel + formulaire. **Bureau et tablette** : le formulaire (demande de rappel / devis) est le bouton principal vert, placé en premier ; « Appeler le 06… » est le secondaire (contour blanc). **Téléphone** : l'ordre s'inverse, l'appel passe en premier avec le style principal. Boutons secondaires : 26 px de rembourrage horizontal minimum (l'icône qui apparaît au survol doit avoir de la place).
 
 ## Illustrations des diagnostics — jeu normalisé
 12 fichiers `img/diag_<clé>.webp` (dpe, audit, amiante, plomb, elec, gaz, termites, merule, erp, mesurage, assainissement, dtg) : toile **800 × 640 transparente**, objet détouré, centré, **orientation déjà appliquée** (tous tournés vers le bas-gauche, comme le DPE) et **poids visuel égalisé** (même surface apparente, référence : le DPE des cards « Souvent réalisés avec »). Conséquence : **aucun miroir CSS, aucun coefficient de taille par fichier** — une seule taille par contexte (cards : boîte carrée en `contain` ; heros des fiches : 370 px bureau / 326 px tablette / 100 % de la colonne sur téléphone). Les heros de DPE et d'Audit gardent leur illustration dédiée (`ill_dpe_v6`, `ill_audit_hero`).
+
+## Header — robustesse
+Le décalage du hero sous la nav fixe (`margin-top:-H`, `padding-top` + H) doit être **recalculé quand la hauteur du header change** (polices, logo, bascule burger), pas seulement au chargement : `ResizeObserver` sur le header. Si la hauteur vaut 0 au premier passage, réessayer à l'image suivante.
 
 ## Favicon
 `favicon.svg` (pastille vert forêt arrondie, chevron gauche blanc, chevron droit + cheminée en `--tech`), `favicon-32.png`, `apple-touch-icon.png` (180 px), à la racine du paquet. En WP : **Apparence › Personnaliser › Identité du site › Icône du site** avec le PNG 512 px à générer depuis le SVG, ou balises `<link rel="icon">` dans `header.php`.
@@ -102,9 +107,10 @@ Gouttières et marges : **4 · 8 · 12 · 16 · 24 · 40 · 56** px (+ 72 · 96 
   - crans de pavé tactile regroupés par fenêtres de 140 ms ;
   - transition CSS de 420 ms `cubic-bezier(.4,0,.2,1)`.
 - **Un seul état fait foi (`solid`)**, réconcilié à chaque image : si `scrollY <= 0`, la nav redevient transparente, car aucun événement `scroll` n'est garanti au retour en haut. Burger ouvert : nav forcée en blanc.
-- **Item de la page en cours :** gras (600), **même couleur que les autres items** : blanc sur nav transparente, vert foncé (couleur héritée de la nav) sur nav blanche — jamais `--tech`. Items de 1er niveau seulement ; dans les menus déroulants, rien ne change (sinon blanc sur blanc). **Pas de filet de survol** sur l'item de la page en cours (`[aria-current="page"]::after { display:none }`) — on y est déjà.
+- **Item de la page en cours :** gras (600), **même couleur que les autres items** : blanc sur nav transparente, vert foncé (couleur héritée de la nav) sur nav blanche — jamais `--tech`. Items de 1er niveau seulement. **Dans les menus déroulants et le burger**, la page en cours est signalée (`aria-current="page"`, pas de lien) : fond `--bg`, texte `--forest` en 700, filet vertical `--tech` de 3 px à gauche. **Petit filet vert `--tech` permanent** (28 × 2 px, aligné sur le début du texte, 6 px dessous) sous l'item de 1er niveau de la page ou de la rubrique en cours (`[data-cur]`) : sur une fiche, « Nos diagnostics » ; sur un article, « Actualités ».
 - **Carrousel des avis (accueil) :** défilement horizontal à aimantation, cards jusqu'aux bords du contenu (inchangé). En bureau et tablette, deux flèches **sous** le carrousel, alignées à droite : chevrons blancs de 22 px sans fond ni contour (zone cliquable 44 px), vert clair au survol. En début de liste la flèche gauche est grisée (opacité 0,3, désactivée), idem pour la droite en fin de liste. Un clic avance d'une card. Masquées sur téléphone.
 - **Survol sur nav blanche :** aucun changement de couleur, seul un filet vert clair glisse sous l'item. Idem sur le numéro de téléphone.
+- **Ordre du menu « Professionnels » :** « Syndics, agences & bailleurs » (= la page ouverte par le clic sur « Professionnels ») en premier, puis « DTG & DPE collectif ». Même ordre dans le burger.
 - **Menus déroulants :**
   - alignés à gauche sur l'item parent : `left: calc(-1 * clamp(16px,4.2vw,24px))`, items à `margin-left: -9px` ;
   - ouverture en volet de haut en bas (`dihUnfold`), items en cascade (`dihItemIn`) ;
