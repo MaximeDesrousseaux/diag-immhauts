@@ -166,12 +166,21 @@ return array(
 		'titre'    => "Ils m'ont fait confiance",
 		'note'     => '5,0',
 		'nombre'   => '12 avis Google vérifiés',
+		// Avis Google repris à l'identique du site actuel (diagimmhauts.fr), dans son ordre :
+		// [ texte, nom tel qu'affiché, commune (non indiquée sur le site) ].
 		'liste'    => array(
-			array( 'Intervention rapide et très professionnelle. Maxime a pris le temps de tout m’expliquer, rapport reçu le lendemain. Je recommande vivement.', 'Julie L.', 'Arras' ),
-			array( 'Parfait pour la vente de notre maison. Ponctuel, minutieux et de très bon conseil sur le DPE. Un vrai pro, accessible et humain.', 'Thomas D.', 'Lens' ),
-			array( 'Nous avons fait appel à lui pour notre copropriété. Sérieux, réactif et pédagogue avec le conseil syndical. Rien à redire.', 'Sophie M.', 'Béthune' ),
-			array( 'Rendez‑vous pris le matin, visite le surlendemain. Les rapports étaient limpides, avec des explications sur chaque point relevé.', 'Karim B.', 'Liévin' ),
-			array( 'J’ai fait faire le DPE et l’audit ensemble avant la mise en vente. Bon conseil sur l’ordre des travaux, prix très correct.', 'Émilie R.', 'Saint‑Pol‑sur‑Ternoise' ),
+			array( "Un excellent professionnel ; disponible à l'écoute et très compétent. Grâce à son accompagnement bienveillant et ses conseils clairs chaque étape s'est déroulé en toute confiance je recommande vivement !", "Gwennaelle Chamillard", '' ),
+			array( "J'avais un peu d appréhension , mais j'ai eu à faire à une personne sérieuse, consciencieuse et qui explique chaque étape de son diagnostic, ce qui est bien appréciable ! A noter aussi que les délais d'envoi des documents sont respectés. Un professionnel que je recommande vivement !", "CoCoNuT cAcTuS", '' ),
+			array( "Maxime est une personne très agréable, ponctuelle et soucieux du travail bien fait. Je recommande fortement", "Vincét Janko", '' ),
+			array( "Travail réalisé avec sérieux.", "Roland Goulois", '' ),
+			array( "travaille réaliser hier , personne très sérieux et professionnel , je recommande si vous voulez réaliser des diagnostiques", "jean luc et sylvie Dernoncourt", '' ),
+			array( "Maxime est très professionnel et minutieux dans son travail. Bonne continuation", "Clément GL Autos", '' ),
+			array( "Je recommande chaudement.Rendez-vous plus que rapide, diagnostic, sérieux et efficace.Les explications sont précises.Mr Dillies a su s’adapter pour réaliser les diagnostics supplémentaires demandés le jour J.", "David Sobczak", '' ),
+			array( "Merci pour le temps consacré à notre diagnostic. Très professionnel, à l'écoute et réactif. Excellent suivi. Mon conjoint et moi-même vous recommandons les yeux fermés.", "Emilie Fri", '' ),
+			array( "Une personne très professionnelle, disponible et au tarif correct. Je recommande ++++", "Vanessa Cuvelier", '' ),
+			array( "Ce professionnel prend le temps nécessaire pour expliquer les choses .Je le recommande vivement pour sa réactivité et son sérieux .", "Ludovic Couty", '' ),
+			array( "DPE réalisé dans les règles de l'art, personne très sympathique, à l'écoute et de bon conseil. Merci pour votre professionnalisme, je vous recommande !", "Alice Caron", '' ),
+			array( "Un vrai professionnel, ponctuel, clair dans ses explications. Rapports remis rapidement. Je le recommande en toute confiance.", "Christophe Outtier", '' ),
 		),
 	),
 

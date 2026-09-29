@@ -29,10 +29,10 @@ $dih_c = dih_contenu( 'accueil', 'avis' );
 		<ul class="l-avis__liste" id="avis-liste" tabindex="0" aria-label="Avis clients, défilement horizontal">
 			<?php foreach ( $dih_c['liste'] as $dih_a ) : ?>
 				<?php
-				$dih_initiales = '';
-				foreach ( preg_split( '/[\s.]+/u', $dih_a[1], -1, PREG_SPLIT_NO_EMPTY ) as $dih_mot ) {
-					$dih_initiales .= mb_substr( $dih_mot, 0, 1 );
-				}
+				// Initiales du premier et du dernier mot du nom, en majuscules (deux au plus :
+				// « jean luc et sylvie Dernoncourt » → « JD »).
+				$dih_mots      = preg_split( '/[\s.]+/u', $dih_a[1], -1, PREG_SPLIT_NO_EMPTY );
+				$dih_initiales = mb_strtoupper( mb_substr( $dih_mots[0], 0, 1 ) . ( count( $dih_mots ) > 1 ? mb_substr( end( $dih_mots ), 0, 1 ) : '' ) );
 				?>
 				<li class="c-card c-card--avis">
 					<div class="c-card__haut">
@@ -44,7 +44,9 @@ $dih_c = dih_contenu( 'accueil', 'avis' );
 						<span class="c-card__initiales" aria-hidden="true"><?php echo esc_html( $dih_initiales ); ?></span>
 						<span>
 							<span class="c-card__nom"><?php echo esc_html( $dih_a[1] ); ?></span>
-							<span class="c-card__lieu"><?php echo esc_html( $dih_a[2] ); ?></span>
+							<?php if ( '' !== (string) $dih_a[2] ) : ?>
+								<span class="c-card__lieu"><?php echo esc_html( $dih_a[2] ); ?></span>
+							<?php endif; ?>
 						</span>
 					</div>
 				</li>
