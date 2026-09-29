@@ -12,11 +12,7 @@ $dih_coche = '<circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.5 2.5 4.
 	<?php get_template_part( 'template-parts/hero/decor' ); ?>
 	<div class="l-hero__int">
 		<div class="l-hero__texte">
-			<nav class="c-ariane c-ariane--fiche c-ariane--espace" aria-label="Fil d'Ariane">
-				<a href="<?php echo esc_url( dih_url( 'accueil' ) ); ?>">Accueil</a>
-				<span class="c-ariane__sep" aria-hidden="true">/</span>
-				<span aria-current="page"><?php echo esc_html( $args['ariane'] ); ?></span>
-			</nav>
+			<?php dih_ariane( array( array( $args['ariane'] ) ), 'c-ariane--fiche c-ariane--espace' ); ?>
 			<h1 class="l-hero__titre"><?php echo esc_html( $args['titre_1'] ); ?><br class="l-br-mobile"> <?php echo esc_html( $args['titre_2'] ); ?><br class="l-br-mobile"> <span class="l-hero__accent"><?php echo esc_html( $args['accent'] ); ?></span></h1>
 			<p class="l-hero__chapeau"><?php echo esc_html( $args['chapeau'] ); ?></p>
 			<ul class="l-contact__promesses">

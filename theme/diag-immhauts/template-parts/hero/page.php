@@ -43,15 +43,11 @@ if ( $dih_args['variante'] ) {
 	<?php get_template_part( 'template-parts/hero/decor' ); ?>
 	<div class="l-hero__int">
 		<div class="l-hero__texte">
-			<nav class="c-ariane c-ariane--espace" aria-label="Fil d'Ariane">
-				<a href="<?php echo esc_url( dih_url( 'accueil' ) ); ?>">Accueil</a>
-				<span class="c-ariane__sep" aria-hidden="true">/</span>
-				<?php if ( $dih_args['parent'] ) : ?>
-					<a href="<?php echo esc_url( $dih_args['parent'][1] ); ?>"><?php echo esc_html( $dih_args['parent'][0] ); ?></a>
-					<span class="c-ariane__sep" aria-hidden="true">/</span>
-				<?php endif; ?>
-				<span aria-current="page"><?php echo esc_html( wp_strip_all_tags( $dih_args['ariane'] ? $dih_args['ariane'] : $dih_args['titre'] ) ); ?></span>
-			</nav>
+			<?php
+			$dih_niveaux   = $dih_args['parent'] ? array( $dih_args['parent'] ) : array();
+			$dih_niveaux[] = array( wp_strip_all_tags( $dih_args['ariane'] ? $dih_args['ariane'] : $dih_args['titre'] ) );
+			dih_ariane( $dih_niveaux, 'c-ariane--espace' );
+			?>
 			<?php if ( $dih_args['pastille'] || $dih_args['date'] ) : ?>
 				<div class="l-hero__meta">
 					<?php if ( $dih_args['pastille'] ) : ?>

@@ -21,6 +21,11 @@ $dih_args = wp_parse_args(
 		'variante'  => '',
 	)
 );
+
+// Questions transmises au JSON-LD FAQPage (inc/seo.php).
+if ( function_exists( 'dih_seo_faq' ) ) {
+	dih_seo_faq( $dih_args['questions'] );
+}
 ?>
 <?php
 $dih_classes_faq = 'c-faq';

@@ -192,3 +192,32 @@ function dih_illus_diagnostic( $cle ) {
 	);
 	return isset( $fichiers[ $cle ] ) ? $fichiers[ $cle ] . '.webp' : '';
 }
+
+/**
+ * Fil d'Ariane des heros : « Accueil / … / page en cours ». Ses niveaux sont
+ * aussi transmis au JSON-LD BreadcrumbList (inc/seo.php).
+ *
+ * @param array  $niveaux Niveaux après « Accueil » : [ libellé, url ] pour un
+ *                        lien, [ libellé ] pour la page en cours (le dernier).
+ * @param string $classes Modificateurs (c-ariane--fiche, c-ariane--espace…).
+ */
+function dih_ariane( $niveaux, $classes = '' ) {
+	array_unshift( $niveaux, array( 'Accueil', dih_url( 'accueil' ) ) );
+	if ( function_exists( 'dih_seo_ariane' ) ) {
+		dih_seo_ariane( $niveaux );
+	}
+
+	$morceaux = array();
+	foreach ( $niveaux as $dih_niveau ) {
+		$morceaux[] = isset( $dih_niveau[1] )
+			? sprintf( '<a href="%s">%s</a>', esc_url( $dih_niveau[1] ), esc_html( $dih_niveau[0] ) )
+			: sprintf( '<span aria-current="page">%s</span>', esc_html( $dih_niveau[0] ) );
+	}
+
+	printf(
+		'<nav class="%s" aria-label="%s">%s</nav>',
+		esc_attr( trim( 'c-ariane ' . $classes ) ),
+		esc_attr( "Fil d'Ariane" ),
+		implode( '<span class="c-ariane__sep" aria-hidden="true">/</span>', $morceaux ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- morceaux échappés ci-dessus
+	);
+}

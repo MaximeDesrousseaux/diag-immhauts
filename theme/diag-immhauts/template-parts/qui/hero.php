@@ -15,11 +15,7 @@ $dih_tel_lien = 'tel:' . dih_info( 'telephone_lien' );
 <section class="l-hero l-hero--qui">
 	<?php get_template_part( 'template-parts/hero/decor' ); ?>
 	<div class="l-hero__int">
-		<nav class="c-ariane c-ariane--fiche" aria-label="Fil d'Ariane">
-			<a href="<?php echo esc_url( dih_url( 'accueil' ) ); ?>">Accueil</a>
-			<span class="c-ariane__sep" aria-hidden="true">/</span>
-			<span aria-current="page"><?php echo esc_html( $args['ariane'] ); ?></span>
-		</nav>
+		<?php dih_ariane( array( array( $args['ariane'] ) ), 'c-ariane--fiche' ); ?>
 		<div class="l-qui__grille">
 			<div class="l-qui__texte">
 				<div class="c-pastille c-pastille--fiche c-pastille--qui"><span aria-hidden="true"></span><?php echo esc_html( $args['pastille'] ); ?></div>

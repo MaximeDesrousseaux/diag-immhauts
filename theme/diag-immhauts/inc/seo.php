@@ -1,8 +1,9 @@
 <?php
 /**
- * Balises SEO (README § SEO, Audit SEO.dc.html, chantiers S1 et S2) :
+ * Balises SEO (README § SEO, Audit SEO.dc.html, chantiers S1 à S3) :
  * titre, description, canonique, og:*, twitter:card, directive robots,
- * JSON-LD LocalBusiness sur l'accueil. Textes : inc/contenus/seo.php.
+ * JSON-LD LocalBusiness sur l'accueil (textes : inc/contenus/seo.php) ;
+ * JSON-LD BreadcrumbList et FAQPage tirés du fil d'Ariane et des FAQ affichés.
  *
  * Si une extension SEO est active (Yoast, Rank Math, SEOPress, AIOSEO),
  * le thème s'efface et la laisse faire.
@@ -184,3 +185,86 @@ function dih_seo_balises() {
 function dih_seo_jsonld( $donnees ) {
 	echo '<script type="application/ld+json">' . wp_json_encode( $donnees, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG ) . '</script>' . "\n";
 }
+
+/**
+ * Niveaux du fil d'Ariane affiché (transmis par dih_ariane()).
+ *
+ * @param array|null $niveaux [ libellé, url ] par niveau ; null pour lire.
+ * @return array
+ */
+function dih_seo_ariane( $niveaux = null ) {
+	static $memo = array();
+	if ( null !== $niveaux ) {
+		$memo = $niveaux;
+	}
+	return $memo;
+}
+
+/**
+ * Questions des FAQ affichées (transmises par le partial composants/faq).
+ *
+ * @param array|null $questions [ question, réponse, … ] ; null pour lire.
+ * @return array
+ */
+function dih_seo_faq( $questions = null ) {
+	static $memo = array();
+	if ( null !== $questions ) {
+		$memo = array_merge( $memo, $questions );
+	}
+	return $memo;
+}
+
+/**
+ * Fil d'Ariane et FAQ structurés (rapport SEO, chantier S3), en pied de page :
+ * c'est là que les gabarits ont fini de les afficher.
+ */
+add_action(
+	'wp_footer',
+	function () {
+		if ( dih_seo_extension_active() ) {
+			return;
+		}
+
+		$niveaux = dih_seo_ariane();
+		if ( count( $niveaux ) > 1 ) {
+			$elements = array();
+			foreach ( array_values( $niveaux ) as $i => $niveau ) {
+				$elements[] = array(
+					'@type'    => 'ListItem',
+					'position' => $i + 1,
+					'name'     => $niveau[0],
+					'item'     => isset( $niveau[1] ) ? $niveau[1] : dih_seo_canonique(),
+				);
+			}
+			dih_seo_jsonld(
+				array(
+					'@context'        => 'https://schema.org',
+					'@type'           => 'BreadcrumbList',
+					'itemListElement' => $elements,
+				)
+			);
+		}
+
+		$questions = dih_seo_faq();
+		if ( $questions ) {
+			$entites = array();
+			foreach ( $questions as $q ) {
+				$entites[] = array(
+					'@type'          => 'Question',
+					'name'           => $q[0],
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => $q[1],
+					),
+				);
+			}
+			dih_seo_jsonld(
+				array(
+					'@context'   => 'https://schema.org',
+					'@type'      => 'FAQPage',
+					'mainEntity' => $entites,
+				)
+			);
+		}
+	}
+);

@@ -18,11 +18,7 @@ $dih_illus   = $args['illustrations'][ $dih_illus_v ];
 	<?php get_template_part( 'template-parts/hero/decor' ); ?>
 	<div class="l-hero__int">
 		<div class="l-hero__texte">
-			<nav class="c-ariane c-ariane--fiche c-ariane--espace" aria-label="Fil d'Ariane">
-				<a href="<?php echo esc_url( dih_url( 'accueil' ) ); ?>">Accueil</a>
-				<span class="c-ariane__sep" aria-hidden="true">/</span>
-				<span aria-current="page">Nos diagnostics</span>
-			</nav>
+			<?php dih_ariane( array( array( 'Nos diagnostics' ) ), 'c-ariane--fiche c-ariane--espace' ); ?>
 			<h1 class="l-hero__titre">
 				<?php echo esc_html( $args['titre_1'] ); ?><br class="l-br-mobile"> <?php echo esc_html( $args['titre_2'] ); ?><br>
 				<span class="l-hero__accent"><?php echo esc_html( $args['accent_1'] ); ?><br class="l-br-deplie"> <?php echo esc_html( $args['accent_2'] ); ?></span>

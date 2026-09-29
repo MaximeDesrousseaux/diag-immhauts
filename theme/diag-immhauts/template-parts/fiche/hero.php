@@ -23,13 +23,7 @@ list( $dih_l_bureau, $dih_l_deplie, $dih_l_mobile ) = $dih_taille;
 <section class="l-hero l-hero--fiche">
 	<?php get_template_part( 'template-parts/hero/decor' ); ?>
 	<div class="l-hero__int">
-		<nav class="c-ariane c-ariane--fiche" aria-label="Fil d'Ariane">
-			<a href="<?php echo esc_url( dih_url( 'accueil' ) ); ?>">Accueil</a>
-			<span class="c-ariane__sep" aria-hidden="true">/</span>
-			<a href="<?php echo esc_url( dih_url( 'diagnostics' ) ); ?>">Nos diagnostics</a>
-			<span class="c-ariane__sep" aria-hidden="true">/</span>
-			<span aria-current="page"><?php echo esc_html( $dih_nom ); ?></span>
-		</nav>
+		<?php dih_ariane( array( array( 'Nos diagnostics', dih_url( 'diagnostics' ) ), array( $dih_nom ) ), 'c-ariane--fiche' ); ?>
 		<div class="l-hero__grille">
 			<div class="l-hero__texte">
 				<div class="c-pastille c-pastille--fiche"><span aria-hidden="true"></span><?php echo esc_html( $dih_h['pastille'] ); ?></div>

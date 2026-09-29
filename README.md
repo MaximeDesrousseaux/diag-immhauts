@@ -82,6 +82,9 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 - **Plan de migration** (plugin, `inc/redirections.php`) : les 8 anciennes adresses du README renvoient
   en 301 vers les nouvelles, sur une 404 seulement (jamais par-dessus une page existante), avant les
   suppositions de WordPress. Filtre `dih_redirections` pour en ajouter.
+- **Données structurées du rapport SEO (S3)** : JSON-LD `BreadcrumbList` tiré du fil d'Ariane affiché
+  (les heros l'impriment par `dih_ariane()`), et `FAQPage` tiré des FAQ affichées (partial
+  `composants/faq`), imprimés en pied de page.
 - **Plan du site** : celui de WordPress (`/wp-sitemap.xml`), à soumettre dans la Search Console.
 
 ## Arbitrages (écarts entre maquette et README de passation)
