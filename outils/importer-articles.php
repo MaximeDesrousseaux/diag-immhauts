@@ -64,6 +64,18 @@ $dih_articles = array(
 	),
 );
 
+// Auteur : le premier administrateur. Un article sans auteur (0) prend celui du premier
+// compte qui l'enregistre dans l'éditeur, et disparaîtrait avec ce compte.
+$dih_admins = get_users(
+	array(
+		'role'    => 'administrator',
+		'number'  => 1,
+		'orderby' => 'ID',
+		'fields'  => 'ID',
+	)
+);
+$dih_auteur = $dih_admins ? (int) $dih_admins[0] : 0;
+
 // 1er passage : catégories et articles (contenu provisoire).
 $dih_ids = array();
 foreach ( $dih_articles as $dih_a ) {
@@ -77,6 +89,7 @@ foreach ( $dih_articles as $dih_a ) {
 			'ID'            => $dih_existant ? $dih_existant->ID : 0,
 			'post_type'     => 'post',
 			'post_status'   => 'publish',
+			'post_author'   => $dih_auteur,
 			'post_name'     => $dih_a['slug'],
 			'post_title'    => $dih_a['titre'],
 			'post_date'     => $dih_a['date'],

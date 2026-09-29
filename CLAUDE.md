@@ -44,3 +44,7 @@ et des sessions cloud. Pour ne jamais avoir deux lignes de travail en parallèle
   sections mesurées dans le navigateur), et le signaler quand un écart dépasse ~18 px.
 - Demander confirmation avant toute action irréversible ou visible de l'extérieur (envoi réel de
   formulaire, suppression de données, suppression de branche).
+- **Compte de test sur la preprod** (vérifications dans l'admin) : enregistrer une page dans
+  l'éditeur en fait l'auteur. Le supprimer toujours avec réattribution
+  (`wp user delete <compte> --reassign=<id de l'administrateur>`), sinon ses pages partent à la
+  corbeille. Tout contenu créé en ligne de commande reçoit un auteur (`post_author`).
