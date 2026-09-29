@@ -98,6 +98,7 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 | Actualités | Articles WordPress standard (`home.php` / `single.php`) |
 | Espacements hors échelle dans la maquette (18, 20, 28, 30, 36 px…) | Arrondis au cran le plus proche de l'échelle 4·8·12·16·24·40·56 ; écart ≤ 18 px par section, mesuré en 1440 / 820 / 390 |
 | Réglages « VERROUILLÉS » (hero de l'accueil, Nos diagnostics en bureau et déplié) | Repris tels quels, marqués `// échelle : exception (…)` pour le vérificateur |
+| Écart entre les colonnes des heros de fiche (`clamp(28px, 4vw, 48px)`) | Conservé en exception (décision client) : arrondi à 24…40 px, il élargissait le titre de 4 px et changeait ses retours à la ligne (DPE : « performance » remontait sur la 1re ligne) |
 | Titre des heros de fiche | Formule de la maquette `clamp(30px, 3.1vw, 42px)` conservée (exception déclarée) |
 | Rayons 12 et 22 px de la maquette | Ramenés aux jetons 10 et 26 px (Audit SCSS) |
 | Fond de l'accueil `#E5F2D4` et couleurs du champ « Vérifier ma commune » | Jeton `$vert-brume` ; pastilles oui / limite prises dans la palette (`$pastille-jaune`, `$pastille-orange`) |
