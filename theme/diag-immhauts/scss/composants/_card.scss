@@ -797,3 +797,216 @@ a.c-card { @include survol-card; }
     color: c(muted);
   }
 }
+
+// --- Diagnostic du dossier (simulateur) : mosaïque et ligne ----------------------------------
+// Statut : pilule en mosaïque, simple mention en liste. Teintes dérivées de la
+// palette (--tech, --warm, --line), sans valeur hors palette.
+.c-card--resultat {
+  position: relative;
+  border: 2px solid c(forest);
+  border-radius: 16px;
+  background: c(surface);
+
+  .c-card__illus {
+    pointer-events: none;
+    background: center / contain no-repeat;
+    filter: drop-shadow(0 0 1px rgba(18, 48, 36, .5)) drop-shadow(0 2px 3px rgba(18, 48, 36, .22)) drop-shadow(0 12px 20px rgba(18, 48, 36, .22));
+
+    &[hidden] { display: none; }
+  }
+
+  .c-card__titre {
+    font-family: var(--font-titre);
+    font-weight: 800;
+    letter-spacing: -.015em;
+    color: c(forest);
+  }
+
+  .c-card__texte {
+    font-size: rem(14);
+    color: c(muted);
+  }
+
+  .c-card__statut {
+    font-family: var(--font-titre);
+    font-weight: 800;
+    font-size: rem(11);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .c-card__lien {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 700;
+    font-size: rem(14);
+    line-height: 1.3;
+    white-space: nowrap;
+    color: c(tech);
+    transition: color .18s ease;
+  }
+
+  &:hover .c-card__lien { color: c(techBright); }
+}
+
+// Mosaïque : illustration en débord au-dessus du coin droit
+.c-card--resultat:not(.c-card--resultat-ligne) {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px 20px 18px;
+
+  .c-card__illus {
+    position: absolute;
+    right: -14px;
+    top: 14px;
+    transform: translateY(-50%);
+    width: 119px;
+    height: 119px;
+  }
+
+  .c-card__validite {
+    position: relative;
+    font-family: var(--font-titre);
+    font-weight: 800;
+    font-size: rem(14);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: c(forest);
+  }
+
+  .c-card__titre {
+    position: relative;
+    max-width: 76%;
+    margin-top: 24px;
+    font-size: rem(19);
+    line-height: 1.18;
+  }
+
+  .c-card__texte {
+    position: relative;
+    margin: 12px 0 16px;
+    line-height: 1.58;
+    text-wrap: pretty;
+  }
+
+  .c-card__pied {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid c(line);
+  }
+
+  .c-card__statut {
+    padding: 5px 10px;
+    border-radius: $r-pilule;
+  }
+
+  &[data-statut="obligatoire"] .c-card__statut { background: c(tech); color: $ombre-verte; }
+  &[data-statut="situation"] .c-card__statut {
+    background: color-mix(in srgb, #{c(warm)} 32%, #fff);
+    color: color-mix(in srgb, #{c(warm)} 48%, #000);
+  }
+  &[data-statut="recommande"] .c-card__statut {
+    background: c(line);
+    color: color-mix(in srgb, #{c(forest)} 50%, #{c(muted)});
+  }
+}
+
+// Ligne : illustration | titre + statut, texte | validité, lien
+.c-card--resultat-ligne {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 22px 16px 18px;
+
+  .c-card__illus {
+    flex: none;
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 0 1px rgba(18, 48, 36, .5)) drop-shadow(0 2px 3px rgba(18, 48, 36, .22));
+  }
+
+  .c-card__corps {
+    flex: 1 1 300px;
+    min-width: 0;
+  }
+
+  .c-card__entete {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .c-card__titre { font-size: rem(17); }
+  .c-card__statut { color: c(forest); }
+
+  .c-card__texte {
+    display: block;
+    margin-top: 4px;
+    line-height: 1.55;
+  }
+
+  .c-card__droite {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: auto;
+  }
+
+  .c-card__validite {
+    display: block;
+    text-align: right;
+  }
+
+  .c-card__validite-libelle {
+    display: block;
+    font-size: rem(11);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: c(muted);
+  }
+
+  .c-card__validite-valeur {
+    display: block;
+    margin-top: 2px; // décalage de filet
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: rem(15.5);
+    white-space: nowrap;
+    color: c(forest);
+  }
+
+  // Téléphone : titre | validité, puis texte, puis lien ; sans illustration
+  @include bp(mobile) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2px 12px; // échelle : exception (décalage de filet entre les lignes)
+    padding: 14px 16px;
+
+    .c-card__illus,
+    .c-card__validite-libelle { display: none; }
+
+    .c-card__corps,
+    .c-card__droite { display: contents; }
+
+    .c-card__entete { grid-area: 1 / 1; }
+    .c-card__texte { grid-area: 2 / 1 / auto / -1; }
+    .c-card__validite { grid-area: 1 / 2; }
+
+    .c-card__lien {
+      grid-area: 3 / 1 / auto / -1;
+      justify-self: start;
+    }
+  }
+}

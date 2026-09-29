@@ -398,6 +398,24 @@
   .c-rappel__photo { margin-bottom: calc(-1 * clamp(16px, 4vw, 40px)); }
 }
 
+// Simulateur : rembourrage vertical jusqu'à 56 px ; en déplié, texte en 15,5 px
+// et photo agrandie (300 × 392).
+.c-rappel--ample {
+  .c-rappel__bloc { padding-block: clamp(22px, 5vw, 56px); }
+  .c-rappel__photo { margin-bottom: calc(-1 * clamp(22px, 5vw, 56px)); } // échelle : exception (annule le rembourrage bas du bloc)
+
+  .c-rappel__para {
+    @include bp(deplie) { font-size: rem(15.5); }
+  }
+
+  .c-rappel__photo img {
+    @include bp(deplie-seul) {
+      width: 300px;
+      height: 392px;
+    }
+  }
+}
+
 .c-rappel--photo-large .c-rappel__photo img {
   width: 100%;
   height: auto;

@@ -37,6 +37,9 @@ add_action(
 			$scripts['dih-commune'] = 'assets/js/commune.js'; // « Vérifier ma commune »
 			$scripts['dih-avis']    = 'assets/js/avis.js';    // flèches du carrousel des avis
 		}
+		if ( is_page_template( 'page-templates/simulateur.php' ) ) {
+			$scripts['dih-simulateur'] = 'assets/js/simulateur.js'; // règles et dossier du simulateur
+		}
 		foreach ( $scripts as $poignee => $fichier ) {
 			if ( ! file_exists( DIH_DIR . '/' . $fichier ) ) {
 				continue;

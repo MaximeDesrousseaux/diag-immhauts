@@ -149,3 +149,33 @@
   @include survol-btn-fantome;
   &:hover { background: transparent; }
 }
+
+// ==========================================================================
+// Damier des cards à illustration en débord (Nos diagnostics, résultats du
+// simulateur) : teintes blanche et vert clair, en alternance selon les colonnes.
+// ==========================================================================
+@mixin card-teintee {
+  background: color-mix(in oklab, #{c(tech)} 20%, #fff);
+
+  .c-card__texte { color: color-mix(in srgb, #{c(muted)} 80%, #{c(forest)}); }
+  .c-card__condition,
+  .c-card__pied { border-top-color: color-mix(in oklab, #{c(tech)} 42%, #fff); }
+
+  .c-card__bouton {
+    background: c(forest);
+    color: #fff;
+  }
+}
+
+@mixin card-blanche {
+  background: c(surface);
+
+  .c-card__texte { color: c(muted); }
+  .c-card__condition,
+  .c-card__pied { border-top-color: c(line); }
+
+  .c-card__bouton {
+    background: color-mix(in oklab, #{c(tech)} 24%, #fff);
+    color: c(forest);
+  }
+}

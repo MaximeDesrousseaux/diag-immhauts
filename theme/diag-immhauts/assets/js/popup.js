@@ -1,6 +1,7 @@
 /**
  * Popup « Demande de rappel ».
  * Tout lien [data-dih-rappel] l'ouvre ; sans JS, il mène au formulaire de Contact.
+ * [data-dih-rappel-intro] sur le lien remplace le texte d'introduction.
  * Fermeture : bouton ×, clic sur le voile, touche Échap. Le focus revient au lien.
  */
 (function () {
@@ -10,10 +11,14 @@
 	if (!popup) return;
 
 	var boite = popup.querySelector('[data-dih-popup-boite]');
+	var intro = popup.querySelector('.c-popup__intro');
+	var introDefaut = intro ? intro.textContent : '';
 	var declencheur = null;
 
 	function ouvrir(lien) {
 		declencheur = lien;
+		// Un lien peut porter sa propre intro (simulateur : « Votre dossier compte… »).
+		if (intro) intro.textContent = lien.getAttribute('data-dih-rappel-intro') || introDefaut;
 		popup.hidden = false;
 		document.documentElement.classList.add('is-popup-ouverte');
 		// Focus sur le 1er champ du formulaire, sinon sur la boîte elle-même.
