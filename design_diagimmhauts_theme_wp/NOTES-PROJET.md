@@ -1,8 +1,8 @@
 # Diag Imm'Hauts — notes de projet
 
-**Règle de travail : ne jamais créer de nouvelle version, de lien de téléchargement ni de message pour Claude Code sans demande explicite.**
+**Règle de travail : ne jamais créer de nouvelle version ni de message pour Claude Code sans demande explicite. Exception : dès qu'un envoi à Claude Code demande de copier un dossier dans le dépôt, fournir automatiquement le lien de téléchargement de ce dossier avec le message.**
 
-**Versionnage : `1.x`** (plus de « vN » seul). Version courante : **1.12** (`checkpoints/v1.12 - livrables/`). Prochaine : **1.13**. Même numéro partout : dossier de sauvegarde `checkpoints/v1.x - …/`, libellé des liens de téléchargement, en-tête du message pour Claude Code (« Maquettes 1.x »), ligne `Version :` du README du paquet. Les corrections s'appliquent aux maquettes, au paquet et au dossier client ; le versionnage attend le feu vert.
+**Versionnage : `1.x`** (plus de « vN » seul). Version courante : **1.14** (`checkpoints/v1.14 - livrables/`). Prochaine : **1.15**. Même numéro partout : dossier de sauvegarde `checkpoints/v1.x - …/`, libellé des liens de téléchargement, en-tête du message pour Claude Code (« Maquettes 1.x »), ligne `Version :` du README du paquet. Les corrections s'appliquent aux maquettes, au paquet et au dossier client ; le versionnage attend le feu vert.
 
 ## État
 Refonte appliquée sur l'accueil, `Nos diagnostics`, `Professionnels`, le `Simulateur` et les
@@ -35,6 +35,9 @@ porté, le hero (1re `section` après le header) reçoit `margin-top:-H` + `padd
 toitures en SVG en ligne (`dih-lg-a/b`) ; sous-titre ciblé par `.dih-hdr-tag` ; le CTA du header reste visible
 s'il n'y a pas de `a.dih-cta` dans le hero. Accueil mobile : barre du hero (déjà transparente → blanche).
 
+## E-mails des formulaires — 1.14
+`E-mails formulaires - propositions.dc.html` : **1a** retenue (client : pas de logo en tête, signature photo de Max + titre + téléphone, « Bonne journée, et à très vite », bandeau vert en pied avec logo complet blanc / vert clair cliquable et avis Google à droite — dynamiques, repli « Certifié Bureau Veritas » en vert clair ; aucun bouton d'appel), **1c** pour Max (une ligne par champ, diagnostics sur une ligne, « Page d'origine », boutons Appeler / Répondre en pilules **sous** les infos). Un gabarit par destinataire, bloc variable par formulaire (tweak `formulaire`). Paquet : `emails/` (2 HTML prêts à l'envoi, 2 PNG, `README-EMAILS.md`).
+
 ## Carrousel des avis (accueil)
 Flèches bureau/tablette **sous** le carrousel, alignées à droite, chevrons sans rond (`revPrev`/`revNext`, `__revSync` sur le `scroll`, seuil 24 px) : grisées à 0,3 et désactivées en début / fin ; masquées sur téléphone.
 
@@ -66,7 +69,7 @@ Pièges à ne pas réintroduire :
   verts de la charte avec elle (fondu 420 ms). Un `<img>` ne saurait pas changer de couleur.
 En WP c'est un **réglage global** de plus (comme `formeBoutons` et `etapesDispo`) : une valeur pour
 tout le site, lue par le partial du header.
-Cheminée soudée au chevron droit (tracé `M290 34 L290 14 L324 9 L324 66 Z`, sa base plonge dans le chevron). Favicon : `favicon.svg` / `favicon-32.png` / `apple-touch-icon.png`, pastille vert forêt.
+Cheminée soudée au chevron droit (tracé `M290 34 L290 14 L324 9 L324 66 Z`, sa base plonge dans le chevron). Favicon : `favicon.svg` / `favicon-32.png` / `apple-touch-icon.png`, pastille **vert vif `--tech`**, logo entier zoomé (+40 %, centré, pieds rognés), toit gauche `--forestDeep`, toit droit blanc — piste **4d** de `Favicon - propositions.dc.html` (1.13b).
 `Logo - 4 propositions.dc.html` = la page d'exploration (4 tours, 4b-charte retenue).
 
 ## Champ « Vérifier ma commune » (accueil, section `#zones`)
@@ -167,6 +170,9 @@ illustration avec `margin-bottom:42px` — c'est lui qui les remonte).
 
 ## Livrables — 1.12 (`checkpoints/v1.12 - livrables/`)
 Paquet `design_diagimmhauts_theme_wp/` + `dossier_client_en_ligne/` (Netlify). Contenu : illustration DPE `diag_dpe_v2.webp` (−14 %), nav transparente robuste au chargement (`ResizeObserver` sur le header). La sauvegarde ne contient que les pages, textes et `img/` — logos PNG, favicons PNG et vignettes admin sont dans les deux dossiers livrables.
+
+## Netlify (`dossier_client_en_ligne/`)
+Pages en noms courts sans espaces (`nos-diagnostics.dc.html`, `accueil.dc.html`…), liens et `P(label, base)` du dossier client alignés ; maquettes et paquet gardent les anciens noms. Option **Pretty URLs désactivée** côté Netlify (elle réécrivait le HTML et cassait des styles). Toute resynchro vers ce dossier doit refaire le renommage des noms et des liens.
 
 ## Empaquetage — plan validé
 Deux livrables : (1) `design_diagimmhauts_theme_wp/` pour Claude Code (README de spécification + 22 pages + admin + img/ + logos, sans captures) ; (2) `Dossier client - Refonte.dc.html`, présentation élégante de la refonte graphique et fonctionnelle, style des aperçus, **sans étapes de développement**.

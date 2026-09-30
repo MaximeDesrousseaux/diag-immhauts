@@ -1,6 +1,6 @@
 # Passation : thème WordPress Diag Imm'Hauts
 
-Version : **1.13b** — les messages de mise à jour sont titrés « Maquettes 1.x ».
+Version : **1.14** — les messages de mise à jour sont titrés « Maquettes 1.x ».
 
 ## Bloc « rappel » (avant le footer)
 Deux boutons : appel + formulaire. **Bureau et tablette** : le formulaire (demande de rappel / devis) est le bouton principal vert, placé en premier ; « Appeler le 06… » est le secondaire (contour blanc). **Téléphone** : l'ordre s'inverse, l'appel passe en premier avec le style principal. Boutons secondaires : 26 px de rembourrage horizontal minimum (l'icône qui apparaît au survol doit avoir de la place).
@@ -182,6 +182,9 @@ Jamais `scroll-behavior: smooth`, dont la durée n'est pas réglable. Utiliser u
 | `Qui suis-je` | `/maxime-dillies-diagnostiqueur/` | Hero avec portrait (halo vert), trust bar identique à l'accueil, citation (réglage de 5 choix) |
 | `Contact` | `/contact-devis/` | Formulaire Fluent Forms, horaires, zone |
 | `Mentions legales` | `/mentions-legales/` | `noindex, follow` |
+
+### E-mails des formulaires (1.14)
+Gabarits prêts à l'envoi dans `emails/` (accusé client + notification Max, un gabarit par destinataire, bloc variable par formulaire). Spécification : `emails/README-EMAILS.md`. Maquette : `E-mails formulaires - propositions.dc.html`.
 
 ### Fonctions à coder
 - **Demande de rappel** : popup ouverte depuis la nav, le hero et chaque fiche ; formulaire Fluent Forms court. Sur téléphone, le champ « message » est masqué dans le hero et reste dans la popup.

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<title>Votre demande est bien arrivée</title>
+<!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
+<style>
+@media (max-width:620px){.w{width:100% !important}.px{padding-left:20px !important;padding-right:20px !important}.k{width:110px !important}.st td{display:block !important;width:100% !important;text-align:left !important}.st .r{padding-top:12px !important}}
+</style>
+</head>
+<!--
+  Accusé de réception client — gabarit commun aux 3 formulaires (rappel, devis, simulateur).
+  Zones variables balisées <!-- VAR:... -\-> : objet, préheader, intro, lignes du récap, 3 étapes (voir README-EMAILS.md).
+  Smartcodes Fluent Forms : {inputs.*}. Smartcodes maison (plugin diag-immhauts-core) : {dih.avis_note}, {dih.avis_nombre}, {dih.avis_url}.
+  Images : remplacer https://diagimmhauts.fr/wp-content/themes/diag-immhauts/emails/ par l'URL réelle des fichiers.
+-->
+<body style="margin:0;padding:0;background:#f5f8ef;">
+<!-- VAR:preheader -->
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#f5f8ef;">Devis détaillé sous 24 h ouvrées. Récapitulatif de votre demande à l'intérieur.&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f8ef;">
+<tr><td align="center" style="padding:24px 12px;">
+
+<table role="presentation" class="w" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;background:#fefffc;border:1px solid #e6ebdd;border-radius:16px;">
+  <tr><td class="px" style="padding:32px 32px 8px;font-family:Arial,Helvetica,sans-serif;">
+    <div style="font-size:26px;line-height:32px;mso-line-height-rule:exactly;font-weight:bold;color:#123f24;">Bien reçu, {inputs.names.first_name}&nbsp;!</div>
+    <!-- VAR:intro -->
+    <div style="margin-top:12px;font-size:15.5px;line-height:24px;mso-line-height-rule:exactly;color:#17331f;">Votre demande de devis est bien arrivée. Je vous envoie un prix détaillé sous 24 heures ouvrées.</div>
+  </td></tr>
+
+  <tr><td class="px" style="padding:16px 32px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f8ef;border-radius:10px;">
+      <tr><td colspan="2" style="padding:16px 16px 8px;font-family:Arial,Helvetica,sans-serif;font-size:12.5px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;color:#1e5b34;">Votre demande</td></tr>
+      <!-- VAR:recap (une ligne <tr> par champ ; ligne omise si le champ est vide) -->
+      <tr><td class="k" width="150" valign="top" style="padding:6px 16px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#5e6d55;">Bien</td><td style="padding:6px 16px 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;font-weight:bold;color:#17331f;">{inputs.type_bien} · {inputs.surface} m² · {inputs.annee}</td></tr>
+      <tr><td class="k" width="150" valign="top" style="padding:6px 16px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#5e6d55;">Commune</td><td style="padding:6px 16px 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;font-weight:bold;color:#17331f;">{inputs.commune}</td></tr>
+      <tr><td class="k" width="150" valign="top" style="padding:6px 16px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#5e6d55;">Motif</td><td style="padding:6px 16px 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;font-weight:bold;color:#17331f;">{inputs.motif}</td></tr>
+      <tr><td class="k" width="150" valign="top" style="padding:6px 16px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#5e6d55;">Échéance</td><td style="padding:6px 16px 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;font-weight:bold;color:#17331f;">{inputs.echeance}</td></tr>
+      <tr><td class="k" width="150" valign="top" style="padding:6px 16px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;color:#5e6d55;">Diagnostics</td><td style="padding:6px 16px 6px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;font-weight:bold;color:#17331f;">{inputs.diagnostics}</td></tr>
+      <!-- /VAR:recap -->
+      <tr><td colspan="2" style="padding:8px 16px 16px;font-family:Arial,Helvetica,sans-serif;font-size:12.5px;line-height:18px;color:#5e6d55;">Une erreur&nbsp;? Répondez simplement à cet e-mail.</td></tr>
+    </table>
+  </td></tr>
+
+  <tr><td class="px" style="padding:16px 32px 8px;font-family:Arial,Helvetica,sans-serif;">
+    <div style="font-size:12.5px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase;color:#1e5b34;">La suite</div>
+    <!-- VAR:etapes (3 étapes) -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:12px;"><tr><td width="36" valign="top"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="26" height="26" align="center" style="background:#7bc62f;border-radius:13px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#123f24;">1</td></tr></table></td><td style="padding-top:3px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#17331f;">J'étudie votre demande et vérifie la liste des diagnostics obligatoires.</td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:12px;"><tr><td width="36" valign="top"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="26" height="26" align="center" style="background:#7bc62f;border-radius:13px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#123f24;">2</td></tr></table></td><td style="padding-top:3px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#17331f;">Vous recevez un devis détaillé sous 24 h ouvrées.</td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:12px;"><tr><td width="36" valign="top"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="26" height="26" align="center" style="background:#7bc62f;border-radius:13px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#123f24;">3</td></tr></table></td><td style="padding-top:3px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#17331f;">Une fois validé, rendez-vous sous 48 h et rapport sous 48 h.</td></tr></table>
+    <!-- /VAR:etapes -->
+  </td></tr>
+
+  <tr><td class="px" style="padding:24px 32px 8px;font-family:Arial,Helvetica,sans-serif;font-size:15.5px;line-height:24px;color:#17331f;">Bonne journée, et à très vite,</td></tr>
+  <tr><td class="px" style="padding:8px 32px 32px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td width="72" valign="middle"><img src="https://diagimmhauts.fr/wp-content/themes/diag-immhauts/emails/signature-maxime.png" width="60" height="60" alt="Maxime Dillies" style="display:block;width:60px;height:60px;border:0;"></td>
+      <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:21px;color:#17331f;"><b style="font-size:15.5px;">Maxime Dillies</b><br><span style="color:#5e6d55;">Diagnostiqueur certifié Bureau Veritas</span><br><a href="tel:+33635884300" style="color:#1e5b34;font-weight:bold;text-decoration:none;">06 35 88 43 00</a></td>
+    </tr></table>
+  </td></tr>
+
+  <tr><td class="px" style="padding:24px 32px;background:#1e5b34;border-radius:0 0 15px 15px;">
+    <table role="presentation" class="st" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td valign="middle">
+        <a href="https://diagimmhauts.fr" style="text-decoration:none;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+          <td valign="middle" style="padding-right:8px;"><img src="https://diagimmhauts.fr/wp-content/themes/diag-immhauts/emails/logo-email-blanc.png" width="56" height="16" alt="" style="display:block;width:56px;height:16px;border:0;"></td>
+          <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;"><div style="font-size:15.5px;line-height:17px;font-weight:bold;color:#ffffff;">Diag Imm'Hauts</div><div style="margin-top:3px;font-size:11px;line-height:13px;letter-spacing:.09em;text-transform:uppercase;color:#d6e6cf;">Diagnostics immobiliers</div></td>
+        </tr></table></a>
+      </td>
+      <td class="r" valign="middle" align="right" style="font-family:Arial,Helvetica,sans-serif;font-size:12.5px;line-height:19px;color:#d6e6cf;"><a href="{dih.avis_url}" style="color:#eaf3e6;text-decoration:none;"><span style="color:#a3e04a;font-weight:bold;">&#9733; {dih.avis_note}</span> sur Google<br>{dih.avis_nombre} avis clients</a></td>
+    </tr></table>
+  </td></tr>
+</table>
+
+<table role="presentation" class="w" width="520" cellpadding="0" cellspacing="0" border="0" style="width:520px;">
+  <tr><td align="center" style="padding:16px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:18px;color:#5e6d55;">Diag Imm'Hauts · SASU au capital de 5&nbsp;000&nbsp;€ · 19 route nationale, 62690 Berles-Monchel<br>Vous recevez ce message à la suite de votre demande sur <a href="https://diagimmhauts.fr" style="color:#1e5b34;">diagimmhauts.fr</a>.</td></tr>
+</table>
+
+</td></tr>
+</table>
+</body>
+</html>
