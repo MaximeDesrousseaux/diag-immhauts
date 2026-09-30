@@ -75,7 +75,8 @@ par le plugin (`inc/personnalisation.php`, ACF Pro) :
 
 Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage prend sa valeur par défaut.
 
-**Contenus modifiables** (plugin, `inc/contenus-modifiables.php`) : ils remplacent les textes du thème
+**Contenus modifiables** (plugin, `inc/contenus-modifiables.php`, `inc/textes-pages.php`,
+`inc/coordonnees.php`) : ils remplacent les textes du thème
 (`inc/contenus/*.php`) section par section, par le filtre `dih_contenu` ; un champ vide garde le texte du thème.
 
 - **Diag Imm'Hauts → Coordonnées** : téléphone (le lien d'appel en est déduit), adresse, e-mail de
@@ -89,13 +90,14 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
   page ; chiffre et légende des quatre repères (le picto reste celui de sa position) ;
 - **encart « Bloc 4 étapes »** des fiches, de Nos diagnostics et de Qui suis-je : titre et texte des
   étapes (numéros et étiquettes automatiques), liste « À préparer avant ma visite » des fiches ;
-- **encart « Haut de page »** des six pages uniques (accueil, Nos diagnostics, Professionnels, Qui suis-je,
-  Contact, simulateur) : textes du hero, titres gardant le découpage des maquettes, et ses listes
-  (chiffres de l'accueil, entrées de Nos diagnostics, promesses de Contact). Décrit page par page dans
-  `dih_core_heros()`. Sur l'accueil, un texte modifié vaut pour les quatre variantes du hero ;
-  un texte resté celui du thème (import) laisse à `max-bandeau` et `sansBG` leur 2e ligne et leur chapeau.
-- **encart « Textes de la page »** (un onglet par section, décrites page par page dans
-  `dih_core_textes()`, plugin `inc/textes-pages.php`) : le haut de page ci-dessus, et
+- **encart « Textes de la page »** des pages uniques (« Haut de page » pour celles qui n'ont que
+  lui), un onglet par section, décrites page par page dans `dih_core_textes()` (plugin,
+  `inc/textes-pages.php`) :
+  - **haut de page** des six pages uniques (accueil, Nos diagnostics, Professionnels, Qui suis-je,
+    Contact, simulateur) : textes du hero, titres gardant le découpage des maquettes, et ses listes
+    (chiffres de l'accueil, entrées de Nos diagnostics, promesses de Contact). Sur l'accueil, un texte
+    modifié vaut pour les quatre variantes du hero ; un texte resté celui du thème (import) laisse à
+    `max-bandeau` et `sansBG` leur 2e ligne et leur chapeau ;
   - **Accueil** : bandeau de confiance (titres et légendes des trois engagements), « À la une »
     (textes et panneau chiffré), prestations (titres et textes des quatre cartes), « Le détail »
     (titres et bouton), « Qui suis-je ? » (textes et quatre valeurs), zones desservies (textes et
