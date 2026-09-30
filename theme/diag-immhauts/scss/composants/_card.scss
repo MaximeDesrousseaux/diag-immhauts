@@ -881,14 +881,14 @@ a.c-card { @include survol-card; }
   .c-card__titre {
     position: relative;
     max-width: 76%;
-    margin-top: 24px;
+    margin-top: 30px; // échelle : exception (valeur de la maquette)
     font-size: rem(19);
     line-height: 1.18;
   }
 
   .c-card__texte {
     position: relative;
-    margin: 12px 0 16px;
+    margin: 12px 0 14px; // échelle : exception (valeur de la maquette)
     line-height: 1.58;
     text-wrap: pretty;
   }
