@@ -8,6 +8,8 @@ theme/diag-immhauts/           thème classique PHP + SCSS (Dart Sass), JS natif
 plugin/diag-immhauts-core/     CPT, blocs ACF, page d'options, intégration Fluent Forms
 design_diagimmhauts_theme_wp/  maquettes .dc.html (référence visuelle, non embarquées)
 outils/installer.ps1           liens vers le site LocalWP + compilation
+outils/installer.sh            mise en ligne (WP-CLI) : réglages, extensions, imports, contrôle
+outils/controler-installation.php  contrôle d'une installation (lecture seule)
 outils/image-partage.html      source de l'image de partage (og:image)
 outils/importer-*.php          imports WP-CLI : articles du journal, contenus modifiables, formulaires
 ```
@@ -22,6 +24,80 @@ Le script relie `theme\diag-immhauts` et `plugin\diag-immhauts-core` au site
 `C:\Users\Irfannn\Local Sites\diag-immhauts\app\public` (lien symbolique, ou jonction
 sans droits admin), puis lance `npm install` et `npm run build` dans le thème.
 Activer ensuite le thème « Diag Imm'Hauts » et le plugin « Diag Imm'Hauts — Cœur ».
+
+## Mise en ligne
+
+Sur le serveur, en SSH, avec [WP-CLI](https://wp-cli.org/fr/). Aucun secret n'est dans ce dépôt :
+les clés (Brevo, Turnstile) se saisissent dans l'admin.
+
+**Avant le script**
+
+1. WordPress installé à son adresse définitive (base et `wp-config.php` en place), PHP 7.4 ou plus.
+2. Le dépôt sur le serveur (clone ou copie) ; le thème et le plugin sont copiés dans `wp-content` par le
+   script avec `--copier`, ou par votre déploiement habituel. `style.css` est versionné : pas de Node sur
+   le serveur.
+3. Les pages : migrées depuis la préprod (base de données), ou créées une à une avec leur adresse et
+   leur gabarit — le contrôle final les liste :
+
+   | Adresse | Gabarit |
+   |---|---|
+   | page d'accueil (Réglages → Lecture) | par défaut |
+   | `/actualites/` (page des articles, Réglages → Lecture) | par défaut |
+   | `/diagnostics-immobiliers/` | Nos diagnostics |
+   | les 12 fiches (`/dpe/`, `/diagnostic-amiante/`… : `dih_chemins()`) | Fiche diagnostic |
+   | `/simulateur-diagnostics-obligatoires/` | Simulateur |
+   | `/professionnels-agences-notaires-syndics/` | Professionnels |
+   | `/maxime-dillies-diagnostiqueur/` | Qui suis-je |
+   | `/contact-devis/` | Contact |
+   | `/mentions-legales/` | Mentions légales |
+
+   Sans migration, les deux articles du journal s'importent avec `wp eval-file outils/importer-articles.php`.
+
+**Le script**
+
+```bash
+bash outils/installer.sh --path=/chemin/du/site --copier
+```
+
+Il s'arrête à la première erreur et peut être relancé autant de fois que nécessaire : chaque étape
+vérifie l'état avant d'agir, et les imports ne réécrivent rien de ce qui existe (formulaires créés,
+champs remplis dans l'admin). Dans l'ordre :
+
+1. vérifie WP-CLI et WordPress ;
+2. copie le thème et le plugin du dépôt (`--copier`), sinon vérifie qu'ils sont en place ;
+3. passe le site en français (`fr_FR`) ;
+4. fuseau horaire `Europe/Paris` ; permaliens `/actualites/%postname%/` (les pages restent en
+   `/<slug>/`, les articles en `/actualites/<slug>/`), règles réécrites dans `.htaccess` ;
+5. installe et active Secure Custom Fields (pas si ACF Pro est actif ; arrêt si la version gratuite
+   d'ACF l'est), Fluent Forms, FluentSMTP, puis le plugin du site ;
+6. active le thème ;
+7. télécharge les traductions françaises des extensions et des thèmes ;
+8. lance `outils/importer-formulaires.php` puis `outils/importer-contenus.php` ;
+9. affiche le contrôle (`outils/controler-installation.php`, lançable seul) : OK / À FAIRE / ERREUR
+   pour la langue, le fuseau, les permaliens, le thème et les extensions, les pages et leur gabarit,
+   les pages d'accueil et des articles, les formulaires, Turnstile, la visibilité aux moteurs et
+   FluentSMTP. Le script sort en erreur s'il en reste une.
+
+**Ensuite, à la main**
+
+1. **Envoi des e-mails** : FluentSMTP → connexion **Brevo** (clé API créée dans Brevo), expéditeur
+   `contact@diagimmhauts.fr`. Chez l'hébergeur du domaine, les enregistrements DNS donnés par Brevo :
+   **SPF**, **DKIM** et **DMARC** (sans eux, les e-mails partent en indésirables). Faire l'e-mail de test
+   de FluentSMTP.
+2. **Anti-spam** : Fluent Forms → Global Settings → Cloudflare **Turnstile** (clés créées dans le tableau
+   de bord Cloudflare), puis `wp eval-file outils/importer-formulaires.php forcer` pour l'ajouter aux
+   formulaires. « forcer » réécrit les trois formulaires : un réglage fait à la main dans Fluent Forms
+   est perdu.
+3. **Adresse de réception** : les notifications partent vers l'e-mail de contact au moment de l'import
+   des formulaires ; s'il change ensuite, le corriger dans Fluent Forms → formulaire → notifications.
+4. **Visibilité aux moteurs** : Réglages → Lecture, décocher « Demander aux moteurs de recherche de ne
+   pas indexer ce site » le jour de la mise en ligne.
+5. **Search Console** : ajouter le domaine, soumettre le plan du site `/wp-sitemap.xml`, vérifier les
+   8 redirections de l'ancien site (§ SEO).
+6. **Un envoi réel par formulaire** : popup « Rappel sous 24 h », carte ou barre du haut de l'accueil,
+   devis (Contact), compte partenaire (Professionnels) ; vérifier le message affiché, l'e-mail reçu par
+   Max et l'accusé de réception du client.
+7. Relancer le contrôle : `wp eval-file outils/controler-installation.php`.
 
 ## SCSS
 
@@ -166,10 +242,8 @@ Trois formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
   Note Google), statut de zone de la commune, balises `{dih.avis_note}`, `{dih.avis_nombre}`,
   `{dih.avis_url}`, `{dih.zone_statut}`, `{dih.prenom}`. Sur la préprod, Mailpit retient les e-mails
   (http://localhost:10000).
-- **À régler en ligne** : FluentSMTP (installé) avec une clé API Brevo pour l'envoi (expéditeur
-  `contact@diagimmhauts.fr`, SPF + DKIM + DMARC sur le domaine) ; les clés Cloudflare Turnstile dans Fluent
-  Forms → Global Settings, puis relancer l'import avec `forcer` pour ajouter le captcha ; fuseau horaire de
-  WordPress sur Paris (Réglages → Général ; heure du bandeau des e-mails de Max).
+- **À régler en ligne** (Brevo dans FluentSMTP, Turnstile, fuseau horaire) : § Mise en ligne ; le fuseau
+  est réglé par `outils/installer.sh`.
 
 ## SEO
 
