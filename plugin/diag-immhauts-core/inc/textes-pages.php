@@ -468,7 +468,7 @@ function dih_core_textes() {
 			'lieu'     => array( 'page_template', 'page-templates/fiche-diagnostic.php' ),
 			'fichiers' => array_values( preg_grep( '/^fiche-/', array_keys( dih_core_pages_faq() ) ) ),
 			'ordre'    => 30,
-			'sections' => array(
+			'sections' => dih_core_textes_fiches() + array(
 				'rappel' => array(
 					'titre'  => 'Bloc final',
 					'aide'   => 'Le bloc « Besoin d’un… ? » en bas de la fiche ; ses boutons restent ceux du thème.',
@@ -498,6 +498,150 @@ function dih_core_textes() {
 						'titre' => array( 'Titre', 'text' ),
 						'texte' => array( 'Texte', 'textarea' ),
 					),
+				),
+			),
+		),
+	);
+}
+
+/**
+ * Fiches : les sessions repérées par leur type (« sessions/@cadre »…), dans l'ordre
+ * propre à chaque fiche, puis les diagnostics liés. Un onglet ou un champ absent de
+ * la fiche éditée est masqué (DPE : étiquette et réforme ; Audit et DTG : texte des
+ * obligations ; DTG : pièces à réunir). Pictos, illustrations, teintes et pages liées
+ * restent ceux du thème.
+ *
+ * @return array
+ */
+function dih_core_textes_fiches() {
+	$html     = 'Gras en HTML simple : <code>&lt;strong&gt;</code> ; exposant : 1<code>&lt;sup&gt;er&lt;/sup&gt;</code>.';
+	// Cartes à teinte : [ repère ou pastille, teinte, titre, texte (, illustration) ].
+	$cartes = function ( $repere ) {
+		return array(
+			'repere' => array( 0, $repere ),
+			'titre'  => array( 2, 'Titre' ),
+			'texte'  => array( 3, 'Texte', 'textarea' ),
+		);
+	};
+
+	return array(
+		'cadre'       => array(
+			'titre'  => 'Le cadre',
+			'base'   => 'sessions/@cadre',
+			'aide'   => $html,
+			'champs' => array(
+				'surtitre'           => array( 'Surtitre', 'text' ),
+				'titre'              => array( 'Titre', 'text' ),
+				'texte'              => array( 'Texte', 'textarea' ),
+				'cartes'             => array( 'Les trois cartes (teinte fixe, par position)', 'liste', $cartes( 'Repère' ), 3 ),
+				'sur_place/surtitre' => array( 'Sur place : surtitre', 'text' ),
+				'sur_place/titre'    => array( 'Sur place : titre', 'text' ),
+				'sur_place/texte'    => array( 'Sur place : texte', 'textarea' ),
+				'sur_place/cartes'   => array(
+					'Sur place : les six points de contrôle (picto fixe, par position)',
+					'liste',
+					array(
+						'titre' => array( 1, 'Titre' ),
+						'texte' => array( 2, 'Texte', 'textarea' ),
+					),
+					6,
+				),
+			),
+		),
+		'etiquette'   => array(
+			'titre'  => 'L’étiquette',
+			'base'   => 'sessions/@etiquette',
+			'aide'   => $html,
+			'champs' => array(
+				'surtitre'         => array( 'Surtitre', 'text' ),
+				'titre'            => array( 'Titre', 'text' ),
+				'texte'            => array( 'Texte', 'textarea' ),
+				'image_alt'        => array( 'Description de l’étiquette (lecteurs d’écran)', 'text' ),
+				'releves/surtitre' => array( 'Sur place : surtitre', 'text' ),
+				'releves/titre'    => array( 'Sur place : titre', 'text' ),
+				'releves/texte'    => array( 'Sur place : texte', 'textarea' ),
+				'releves/cartes'   => array(
+					'Sur place : ce que je relève (illustration fixe, par position)',
+					'liste',
+					array(
+						'titre' => array( 2, 'Titre' ),
+						'texte' => array( 3, 'Texte', 'textarea' ),
+					),
+					6,
+				),
+			),
+		),
+		'reforme'     => array(
+			'titre'  => 'La réforme',
+			'base'   => 'sessions/@reforme',
+			'aide'   => $html,
+			'champs' => array(
+				'etiquette' => array( 'Pastille', 'text' ),
+				'source'    => array( 'Source', 'text' ),
+				'titre'     => array( 'Titre', 'textarea' ),
+				'texte'     => array( 'Texte', 'textarea' ),
+				'valeurs'   => array(
+					'Frise des coefficients (état passé, actuel ou futur fixe, par position)',
+					'liste',
+					array(
+						'valeur'  => array( 0, 'Coefficient' ),
+						'legende' => array( 1, 'Période' ),
+					),
+					4,
+				),
+				'notes'     => array(
+					'Notes',
+					'liste',
+					array(
+						'titre' => array( 0, 'En gras' ),
+						'texte' => array( 1, 'Suite', 'textarea' ),
+					),
+					0,
+				),
+				'cta'       => array( 'Bouton', 'text' ),
+				'lien/0'    => array( 'Lien vers l’audit', 'text' ),
+			),
+		),
+		'obligations' => array(
+			'titre'  => 'Obligations',
+			'base'   => 'sessions/@obligations',
+			'champs' => array(
+				'surtitre' => array( 'Surtitre', 'text' ),
+				'titre'    => array( 'Titre', 'text' ),
+				'texte'    => array( 'Texte', 'textarea' ),
+				'cartes'   => array( 'Les trois situations (teinte et illustration fixes, par position)', 'liste', $cartes( 'Pastille' ), 3 ),
+			),
+		),
+		'resultat'    => array(
+			'titre'  => 'Le résultat',
+			'base'   => 'sessions/@resultat',
+			'champs' => array(
+				'surtitre'          => array( 'Surtitre', 'text' ),
+				'titre'             => array( 'Titre', 'text' ),
+				'texte'             => array( 'Texte', 'textarea' ),
+				'cartes'            => array( 'Les trois cas (teinte fixe, par position)', 'liste', $cartes( 'Repère' ), 3 ),
+				'preparation/titre' => array( 'Pièces à réunir : titre', 'text' ),
+				'preparation/texte' => array( 'Pièces à réunir : texte', 'textarea' ),
+				'preparation/liste' => array(
+					'Pièces à réunir',
+					'liste',
+					array( 'element' => array( null, 'Pièce' ) ),
+					0,
+				),
+			),
+		),
+		'lies'        => array(
+			'titre'  => 'Diagnostics liés',
+			'champs' => array(
+				'titre'  => array( 'Titre', 'text' ),
+				'cartes' => array(
+					'Les quatre diagnostics (page liée fixe, par position)',
+					'liste',
+					array(
+						'titre' => array( 1, 'Titre' ),
+						'texte' => array( 2, 'Texte', 'textarea' ),
+					),
+					4,
 				),
 			),
 		),
