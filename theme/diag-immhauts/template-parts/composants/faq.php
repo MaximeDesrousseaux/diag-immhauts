@@ -1,7 +1,9 @@
 <?php
 /**
  * FAQ en accordéon (<details>) : la 1re question est ouverte, un lien suit
- * chaque réponse. Ouverture animée en CSS seul (composants/_faq.scss).
+ * chaque réponse. Une seule question ouverte à la fois, comme la maquette : les
+ * <details> d'une FAQ partagent un attribut name (accordéon exclusif natif).
+ * Ouverture animée en CSS seul (composants/_faq.scss).
  *
  * Arguments : surtitre, titre, questions [ question, réponse, lien, cible ], id,
  * variante ('' : accueil ; 'transparente' : fiche DPE ; 'blanche' : autres fiches ;
@@ -44,7 +46,7 @@ if ( $dih_args['variante'] ) {
 		</div>
 		<div class="c-faq__liste">
 			<?php foreach ( $dih_args['questions'] as $dih_i => $dih_q ) : ?>
-				<details class="c-faq__item"<?php echo 0 === $dih_i ? ' open' : ''; ?>>
+				<details class="c-faq__item" name="<?php echo esc_attr( $dih_args['id'] ); ?>-questions"<?php echo 0 === $dih_i ? ' open' : ''; ?>>
 					<summary class="c-faq__question">
 						<span><?php echo esc_html( $dih_q[0] ); ?></span>
 						<span class="c-faq__signe" aria-hidden="true"></span>
