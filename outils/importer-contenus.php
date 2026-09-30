@@ -203,41 +203,44 @@ foreach ( dih_core_pages() as $dih_fichier => $dih_cle ) {
 }
 
 // Textes des pages uniques (inc/textes-pages.php du plugin), section par section --------
-foreach ( dih_core_textes() as $dih_fichier => $dih_def ) {
-	$dih_pages = dih_core_pages();
-	$page_id   = isset( $dih_pages[ $dih_fichier ] ) ? $dih_page_id( $dih_pages[ $dih_fichier ] ) : 0;
-	if ( ! $page_id ) {
-		printf( "Textes %s : page introuvable, ignorée.\n", $dih_fichier );
-		continue;
-	}
-
-	$c       = dih_contenu( $dih_fichier );
-	$remplis = array();
-	$tout    = 0;
-	$ecrire  = function ( $cle, $nom, $valeur ) use ( $dih_forcer, $page_id, &$remplis ) {
-		$actuel = get_field( $nom, $page_id );
-		$plein  = is_array( $actuel ) ? count( $actuel ) > 0 : '' !== trim( (string) $actuel );
-		if ( $plein && ! $dih_forcer ) {
-			return;
+foreach ( dih_core_textes() as $dih_entree => $dih_def ) {
+	// Gabarit commun (fiches) : la même description pour chacun de ses fichiers.
+	foreach ( ! empty( $dih_def['fichiers'] ) ? $dih_def['fichiers'] : array( $dih_entree ) as $dih_fichier ) {
+		$dih_pages = dih_core_pages();
+		$page_id   = isset( $dih_pages[ $dih_fichier ] ) ? $dih_page_id( $dih_pages[ $dih_fichier ] ) : 0;
+		if ( ! $page_id ) {
+			printf( "Textes %s : page introuvable, ignorée.\n", $dih_fichier );
+			continue;
 		}
-		update_field( $cle, $valeur, $page_id );
-		$remplis[] = $nom;
-	};
 
-	foreach ( $dih_def['sections'] as $dih_sid => $dih_section ) {
-		$bloc = dih_core_chemin_lire( $c, dih_core_texte_base( $dih_sid, $dih_section ) );
-		foreach ( dih_core_texte_elements( $dih_section ) as $dih_element ) {
-			list( $chemin, $genre, $def ) = $dih_element;
-			list( $nom, $cle )            = dih_core_texte_champ( $dih_fichier, $dih_sid, $chemin );
-			$defaut                       = dih_core_chemin_lire( $bloc, $chemin );
-			$ecrire( $cle, $nom, 'champ' === $genre ? (string) $defaut : dih_core_texte_lignes( $defaut, $def[1] ) );
-			++$tout;
+		$c       = dih_contenu( $dih_fichier );
+		$remplis = array();
+		$tout    = 0;
+		$ecrire  = function ( $cle, $nom, $valeur ) use ( $dih_forcer, $page_id, &$remplis ) {
+			$actuel = get_field( $nom, $page_id );
+			$plein  = is_array( $actuel ) ? count( $actuel ) > 0 : '' !== trim( (string) $actuel );
+			if ( $plein && ! $dih_forcer ) {
+				return;
+			}
+			update_field( $cle, $valeur, $page_id );
+			$remplis[] = $nom;
+		};
+
+		foreach ( $dih_def['sections'] as $dih_sid => $dih_section ) {
+			$bloc = dih_core_chemin_lire( $c, dih_core_texte_base( $dih_sid, $dih_section ) );
+			foreach ( dih_core_texte_elements( $dih_section ) as $dih_element ) {
+				list( $chemin, $genre, $def ) = $dih_element;
+				list( $nom, $cle )            = dih_core_texte_champ( $dih_entree, $dih_sid, $chemin );
+				$defaut                       = dih_core_chemin_lire( $bloc, $chemin );
+				$ecrire( $cle, $nom, 'champ' === $genre ? (string) $defaut : dih_core_texte_lignes( $defaut, $def[1] ) );
+				++$tout;
+			}
 		}
-	}
 
-	if ( ! $remplis ) {
-		printf( "Textes %s : déjà remplis, inchangés.\n", $dih_fichier );
-	} else {
-		printf( "Textes %s : importés (page %d)%s.\n", $dih_fichier, $page_id, count( $remplis ) < $tout ? ' : ' . implode( ', ', $remplis ) : '' );
+		if ( ! $remplis ) {
+			printf( "Textes %s : déjà remplis, inchangés.\n", $dih_fichier );
+		} else {
+			printf( "Textes %s : importés (page %d)%s.\n", $dih_fichier, $page_id, count( $remplis ) < $tout ? ' : ' . implode( ', ', $remplis ) : '' );
+		}
 	}
 }

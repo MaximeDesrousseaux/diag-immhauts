@@ -27,6 +27,9 @@ defined( 'ABSPATH' ) || exit;
  *
  * Page (fichier de contenus du thème) => [
  *   'lieu'     => [ paramètre d'emplacement ACF, valeur ],
+ *   'fichiers' => fichiers de contenus qui partagent la description (gabarit commun,
+ *                 ex. les 12 fiches : entrée « fiche ») ; facultatif,
+ *   'ordre'    => position de l'encart parmi ceux de la page (défaut : -10, en tête),
  *   'sections' => [ identifiant => [
  *     'titre'  => onglet de l'encart,
  *     'base'   => chemin de la section dans les contenus (par défaut : l'identifiant),
@@ -596,6 +599,26 @@ function dih_core_textes_mentions() {
 }
 
 /**
+ * Description qui s'applique à un fichier de contenus : la sienne, ou celle d'un
+ * gabarit commun (entrée dont « fichiers » le contient).
+ *
+ * @param string $fichier Fichier de contenus du thème.
+ * @return array|null [ nom de l'entrée (préfixe des clés), description ]
+ */
+function dih_core_texte_entree( $fichier ) {
+	$textes = dih_core_textes();
+	if ( isset( $textes[ $fichier ] ) && empty( $textes[ $fichier ]['fichiers'] ) ) {
+		return array( $fichier, $textes[ $fichier ] );
+	}
+	foreach ( $textes as $nom => $def ) {
+		if ( ! empty( $def['fichiers'] ) && in_array( $fichier, $def['fichiers'], true ) ) {
+			return array( $nom, $def );
+		}
+	}
+	return null;
+}
+
+/**
  * Élément d'un tableau par son chemin (« a/0/b »), ou null.
  *
  * @param array  $donnees Tableau.
@@ -799,7 +822,7 @@ add_action(
 						),
 					),
 					'position'   => 'normal',
-					'menu_order' => -10,
+					'menu_order' => isset( $def['ordre'] ) ? $def['ordre'] : -10,
 				)
 			);
 		}
@@ -815,16 +838,17 @@ add_action(
  * @return array
  */
 function dih_core_contenus_textes( $donnees, $page ) {
-	$textes = dih_core_textes();
-	if ( ! isset( $textes[ $page ] ) || is_admin() || ! dih_core_acf_actif() || ! function_exists( 'get_field' ) ) {
+	$entree = dih_core_texte_entree( $page );
+	if ( ! $entree || is_admin() || ! dih_core_acf_actif() || ! function_exists( 'get_field' ) ) {
 		return $donnees;
 	}
 	$id = dih_core_id_si_affichee( $page );
 	if ( ! $id ) {
 		return $donnees;
 	}
+	list( $prefixe, $def_page ) = $entree;
 
-	foreach ( $textes[ $page ]['sections'] as $sid => $section ) {
+	foreach ( $def_page['sections'] as $sid => $section ) {
 		$base = dih_core_texte_base( $sid, $section );
 		$bloc = dih_core_chemin_lire( $donnees, $base );
 		if ( null === $bloc ) {
@@ -833,7 +857,7 @@ function dih_core_contenus_textes( $donnees, $page ) {
 
 		foreach ( dih_core_texte_elements( $section ) as $element ) {
 			list( $chemin, $genre, $def ) = $element;
-			list( $nom )                  = dih_core_texte_champ( $page, $sid, $chemin );
+			list( $nom )                  = dih_core_texte_champ( $prefixe, $sid, $chemin );
 
 			if ( 'champ' === $genre ) {
 				$valeur = get_field( $nom, $id );
