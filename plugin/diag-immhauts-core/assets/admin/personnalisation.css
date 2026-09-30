@@ -143,7 +143,7 @@
 	margin: 0 0 -1px;
 }
 
-.acf-settings-wrap .acf-tab-wrap .acf-tab-group li a {
+.acf-settings-wrap .acf-postbox.seamless > .acf-fields > .acf-tab-wrap .acf-tab-group li a {
 	display: block;
 	margin: 0;
 	padding: 9px 16px;
@@ -157,13 +157,20 @@
 	text-decoration: none;
 }
 
-.acf-settings-wrap .acf-tab-wrap .acf-tab-group li a:hover {
+.acf-settings-wrap .acf-postbox.seamless > .acf-fields > .acf-tab-wrap .acf-tab-group li a:hover {
 	color: #1d2327;
 	background: #fff;
 }
 
-/* Onglet actif blanc, ouvert sur la carte qu'il coiffe (panneau de l'onglet). */
-.acf-settings-wrap .acf-tab-wrap .acf-tab-group li.active a {
+/* Clearfix de .acf-hl : en flex, une case vide décalerait le premier onglet du bord de la carte. */
+.acf-settings-wrap .acf-tab-wrap .acf-tab-group::before,
+.acf-settings-wrap .acf-tab-wrap .acf-tab-group::after {
+	content: none;
+}
+
+/* Onglet actif blanc comme la carte qu'il coiffe (panneau de l'onglet). Sélecteur
+   aussi précis que celui d'ACF pour les pages « seamless », qui le remet en gris. */
+.acf-settings-wrap .acf-postbox.seamless > .acf-fields > .acf-tab-wrap .acf-tab-group li.active a {
 	color: #1d2327;
 	background: #fff;
 	border-bottom-color: #fff;
