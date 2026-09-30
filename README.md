@@ -174,8 +174,10 @@ Trois formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
 - **Balises** (thème, `inc/seo.php`) : titre, description, canonique, `og:*`, `twitter:card` et directive
   robots des 22 pages, repris à la lettre des blocs `<!-- seo -->` des maquettes dans
   `inc/contenus/seo.php` (clé de `dih_chemins()`, ou `article:<slug>` ; un article sans entrée reprend
-  son titre et son extrait). JSON-LD `LocalBusiness` sur l'accueil, avec l'adresse du site réel et les
-  coordonnées de `dih_info()`. Si Yoast, Rank Math, SEOPress ou AIOSEO est actif, le thème s'efface.
+  son titre et son extrait ; `{telephone}` dans une description : le numéro de `dih_info()`). JSON-LD
+  `LocalBusiness` sur l'accueil, avec l'adresse du site réel et les coordonnées de `dih_info()`. Seule
+  l'image de partage garde le numéro en dur (`assets/img/partage.jpg`, à recomposer depuis
+  `outils/image-partage.html` s'il change). Si Yoast, Rank Math, SEOPress ou AIOSEO est actif, le thème s'efface.
 - **Plan de migration** (plugin, `inc/redirections.php`) : les 8 anciennes adresses du README renvoient
   en 301 vers les nouvelles, sur une 404 seulement (jamais par-dessus une page existante), avant les
   suppositions de WordPress. Filtre `dih_redirections` pour en ajouter.

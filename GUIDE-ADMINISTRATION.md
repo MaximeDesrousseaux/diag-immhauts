@@ -33,13 +33,16 @@ de réglages), puis rechargez la page du site pour vérifier.
 À savoir :
 
 - le **téléphone** se saisit tel qu'il doit s'afficher (`06 35 88 43 00`) : le lien d'appel en est déduit ;
+- seule l'image d'aperçu des liens partagés (WhatsApp, Facebook…) garde le numéro d'origine : elle est
+  à refaire si le numéro change ;
 - l'**adresse** se saisit sur une ligne : `rue, code postal commune` ;
 - l'adresse qui **reçoit** les demandes des formulaires ne se règle pas ici, mais dans Fluent Forms
   (réglages du formulaire → notifications).
 
 ## Les textes des pages
 
-Ouvrez **Pages**, puis la page à modifier : les encarts de textes sont sous l'éditeur.
+Ouvrez **Pages**, puis la page à modifier : les encarts de textes sont sous l'éditeur (s'ils sont
+repliés, cliquez sur la barre en bas de l'éditeur pour les déplier ; WordPress s'en souvient ensuite).
 
 | Page | Encarts |
 |---|---|
