@@ -63,6 +63,13 @@ function dih_seo() {
 		);
 	}
 
+	// {telephone} des descriptions : le numéro du site (Coordonnées de l'admin comprises).
+	foreach ( array( 'description', 'og_description' ) as $balise ) {
+		if ( isset( $seo[ $balise ] ) ) {
+			$seo[ $balise ] = str_replace( '{telephone}', dih_info( 'telephone' ), $seo[ $balise ] );
+		}
+	}
+
 	/**
 	 * Permet d'ajuster les balises d'une page.
 	 *

@@ -6,6 +6,7 @@
  * Clés : celles de dih_chemins() ; articles : 'article:<slug>'.
  * Communs à toutes les pages (inc/seo.php) : canonique, og:url, og:locale,
  * og:site_name, twitter:card, directive robots.
+ * {telephone} dans une description : le numéro de dih_info() (maquettes : 06 35 88 43 00).
  *
  * @package DiagImmHauts
  */
@@ -15,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'accueil'                                      => array(
 		'titre'       => 'Diagnostics immobiliers Arras, Lens, Béthune — Diag Imm\'Hauts',
-		'description' => 'Diagnostiqueur certifié Bureau Veritas dans l\'Artois : DPE, amiante, plomb, électricité, gaz. Devis gratuit sous 24 h, rendez-vous sous 48 h. 06 35 88 43 00.',
+		'description' => 'Diagnostiqueur certifié Bureau Veritas dans l\'Artois : DPE, amiante, plomb, électricité, gaz. Devis gratuit sous 24 h, rendez-vous sous 48 h. {telephone}.',
 		'jsonld'      => array(
 			'@context'                  => 'https://schema.org',
 			'@type'                     => array(
@@ -199,7 +200,7 @@ return array(
 	),
 	'contact'                                      => array(
 		'titre'       => 'Contact et devis gratuit — Diag Imm\'Hauts, Arras et Pas-de-Calais',
-		'description' => 'Décrivez votre bien en quelques champs : je vous rappelle sous 24 h ouvrées avec un prix ferme, tout compris. 06 35 88 43 00, du lundi au samedi.',
+		'description' => 'Décrivez votre bien en quelques champs : je vous rappelle sous 24 h ouvrées avec un prix ferme, tout compris. {telephone}, du lundi au samedi.',
 	),
 	'mentions'                                     => array(
 		'titre'       => 'Mentions légales et confidentialité — Diag Imm\'Hauts',
