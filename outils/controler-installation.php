@@ -7,7 +7,8 @@
  *
  * Vérifie : langue, fuseau horaire, permaliens, thème et extensions actifs, les pages
  * du site (adresse et gabarit), la page d'accueil et la page des articles, les
- * formulaires Fluent Forms, la visibilité aux moteurs de recherche. Chaque ligne
+ * formulaires Fluent Forms, la visibilité aux moteurs de recherche, les informations
+ * « à compléter » des mentions légales, l'envoi des e-mails. Chaque ligne
  * est marquée OK, À FAIRE ou ERREUR ; le bilan compte les erreurs.
  *
  * @package DiagImmHauts

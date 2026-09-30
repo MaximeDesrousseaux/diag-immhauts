@@ -75,8 +75,8 @@ champs remplis dans l'admin). Dans l'ordre :
 8. lance `outils/importer-formulaires.php` puis `outils/importer-contenus.php` ;
 9. affiche le contrôle (`outils/controler-installation.php`, lançable seul) : OK / À FAIRE / ERREUR
    pour la langue, le fuseau, les permaliens, le thème et les extensions, les pages et leur gabarit,
-   les pages d'accueil et des articles, les formulaires, Turnstile, la visibilité aux moteurs et
-   FluentSMTP. Le script sort en erreur s'il en reste une.
+   les pages d'accueil et des articles, les formulaires, Turnstile, la visibilité aux moteurs, les
+   informations « à compléter » des mentions légales et FluentSMTP. Le script sort en erreur s'il en reste une.
 
 **Ensuite, à la main**
 
@@ -97,7 +97,9 @@ champs remplis dans l'admin). Dans l'ordre :
 6. **Un envoi réel par formulaire** : popup « Rappel sous 24 h », carte ou barre du haut de l'accueil,
    devis (Contact), compte partenaire (Professionnels) ; vérifier le message affiché, l'e-mail reçu par
    Max et l'accusé de réception du client.
-7. Relancer le contrôle : `wp eval-file outils/controler-installation.php`.
+7. **Mentions légales** : remplacer chaque `{a completer: …}` (n° de certification, assurance RC Pro,
+   médiateur, outils de mesure d'audience) dans Pages → Mentions légales ; le contrôle les compte.
+8. Relancer le contrôle : `wp eval-file outils/controler-installation.php`.
 
 ## SCSS
 
