@@ -14,7 +14,8 @@ $dih_c = dih_contenu( 'mentions' );
 
 /**
  * Valeur d'une rubrique : liens et gras autorisés ; {a completer: …} devient
- * une mention surlignée (information que le client doit encore fournir).
+ * une mention surlignée (information que le client doit encore fournir) ;
+ * {adresse}, {telephone} et {email} : coordonnées du site (dih_info).
  */
 $dih_valeur = function ( $html ) {
 	$html = wp_kses(
@@ -24,7 +25,15 @@ $dih_valeur = function ( $html ) {
 			'strong' => array(),
 		)
 	);
-	return preg_replace( '/\{a completer: ([^}]*)\}/u', '<mark class="c-mentions__a-completer">$1</mark>', $html );
+	$html = preg_replace( '/\{a completer: ([^}]*)\}/u', '<mark class="c-mentions__a-completer">$1</mark>', $html );
+	return strtr(
+		$html,
+		array(
+			'{adresse}'   => esc_html( dih_info( 'adresse' ) ),
+			'{telephone}' => '<a href="tel:' . esc_attr( dih_info( 'telephone_lien' ) ) . '">' . esc_html( dih_info( 'telephone' ) ) . '</a>',
+			'{email}'     => '<a href="mailto:' . esc_attr( dih_info( 'email_rgpd' ) ) . '">' . esc_html( dih_info( 'email_rgpd' ) ) . '</a>',
+		)
+	);
 };
 ?>
 <main id="contenu" class="l-main l-main--mentions">

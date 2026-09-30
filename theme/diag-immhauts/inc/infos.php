@@ -21,6 +21,7 @@ function dih_info( $cle ) {
 		'telephone_lien' => '+33635884300',
 		'adresse'        => '19 route nationale, 62690 Berles-Monchel',
 		'email'          => 'contact@diagimmhauts.fr',
+		'email_rgpd'     => 'bureau@diagimmhauts.fr', // mentions légales et RGPD (README, Arbitrages)
 		'avis_google'    => 'https://www.google.com/search?q=Diag+Imm%27Hauts+Avis',
 		// Note Google : bandeau de confiance et pied des e-mails (Avis clients les remplace).
 		'avis_note'      => '5,0',

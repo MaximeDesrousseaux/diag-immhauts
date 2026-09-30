@@ -6,14 +6,14 @@
  * Blocs : titre, surtitre, id (ancre), paragraphes, definitions [ terme, valeur ],
  * sous_titre (au-dessus des définitions), actions.
  * Dans les valeurs, {a completer: …} produit une mention surlignée (champ que
- * le client doit encore fournir) ; les liens sont en HTML simple.
+ * le client doit encore fournir) ; {adresse}, {telephone} et {email} reprennent
+ * les coordonnées du site (dih_info : adresse, téléphone, e-mail RGPD), liens
+ * compris ; les autres liens sont en HTML simple.
  *
  * @package DiagImmHauts
  */
 
 defined( 'ABSPATH' ) || exit;
-
-$dih_mail = 'bureau@diagimmhauts.fr';
 
 return array(
 	'hero'  => array(
@@ -29,9 +29,9 @@ return array(
 			'raison'       => 'DIAG IMM\'HAUTS',
 			'paragraphes'  => array( 'Société par actions simplifiée à associé unique (SASU) au capital de 5 000 €, spécialisée dans les diagnostics immobiliers — analyses, essais et inspections techniques.' ),
 			'definitions'  => array(
-				array( 'Adresse', '19 route nationale, 62690 Berles-Monchel' ),
-				array( 'Téléphone', '<a href="tel:+33635884300">06 35 88 43 00</a>' ),
-				array( 'E-mail', '<a href="mailto:' . $dih_mail . '">' . $dih_mail . '</a>' ),
+				array( 'Adresse', '{adresse}' ),
+				array( 'Téléphone', '{telephone}' ),
+				array( 'E-mail', '{email}' ),
 				array( 'SIRET', '949 529 929 00018' ),
 				array( 'RCS', '949 529 929 RCS Arras — société immatriculée le 6 mars 2023' ),
 				array( 'Capital social', '5 000 €' ),
@@ -68,7 +68,7 @@ return array(
 			),
 			'sous_titre'  => 'Vos données en clair',
 			'definitions' => array(
-				array( 'Responsable du traitement', 'DIAG IMM\'HAUTS — Maxime Dillies, 19 route nationale, 62690 Berles-Monchel' ),
+				array( 'Responsable du traitement', 'DIAG IMM\'HAUTS — Maxime Dillies, {adresse}' ),
 				array( 'Finalité', 'Répondre à votre demande, établir un devis, organiser l\'intervention et vous transmettre le rapport.' ),
 				array( 'Base légale', 'Votre consentement pour les demandes de rappel et de devis ; l\'exécution du contrat pour les prestations commandées.' ),
 				array( 'Durée de conservation', '3 ans après le dernier contact pour une demande sans suite ; 10 ans pour les dossiers facturés, conformément aux obligations comptables et à la durée de validité des rapports.' ),
@@ -76,7 +76,7 @@ return array(
 				array( 'Mesure d\'audience', '{a completer: outils utilisés à compléter}' ),
 			),
 			'actions'     => array(
-				array( 'Exercer mes droits par e-mail', 'mailto:' . $dih_mail ),
+				array( 'Exercer mes droits par e-mail', 'mailto:' . dih_info( 'email_rgpd' ) ),
 				array( 'Nous écrire', 'contact' ),
 			),
 		),

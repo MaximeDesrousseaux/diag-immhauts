@@ -153,6 +153,10 @@ function dih_core_textes() {
 				),
 			),
 		),
+		'mentions'        => array(
+			'lieu'     => array( 'page_template', 'page-templates/mentions.php' ),
+			'sections' => dih_core_textes_mentions(),
+		),
 		'simulateur'      => array(
 			'lieu'     => array( 'page_template', 'page-templates/simulateur.php' ),
 			'sections' => array(
@@ -169,6 +173,71 @@ function dih_core_textes() {
 			),
 		),
 	);
+}
+
+/**
+ * Mentions légales : haut de page, puis un onglet par rubrique (titre, paragraphes,
+ * définitions). L'ancre, le surtitre et les boutons des rubriques restent ceux du thème.
+ *
+ * @return array
+ */
+function dih_core_textes_mentions() {
+	$aide = 'Liens et gras en HTML simple : <code>&lt;a href="…"&gt;</code>, <code>&lt;strong&gt;</code>. '
+		. '<code>{a completer: …}</code> s’affiche surligné : remplacez-le par l’information. '
+		. '<code>{adresse}</code>, <code>{telephone}</code> et <code>{email}</code> reprennent les coordonnées '
+		. '(Diag Imm’Hauts → Coordonnées).';
+
+	$sections = array(
+		'hero' => array(
+			'titre'  => 'Haut de page',
+			'champs' => array(
+				'chapeau' => array( 'Chapeau', 'textarea' ),
+				'note'    => array( 'Date de mise à jour', 'text', 'Ex. « Dernière mise à jour : septembre 2026 ».' ),
+			),
+		),
+	);
+	$rubriques = array(
+		'editeur'        => 'Éditeur',
+		'hebergement'    => 'Hébergement',
+		'propriete'      => 'Propriété',
+		'certification'  => 'Certification',
+		'donnees'        => 'Données personnelles',
+		'responsabilite' => 'Responsabilité',
+		'mediation'      => 'Médiation',
+		'droit'          => 'Droit applicable',
+	);
+	$rang = 0;
+	foreach ( $rubriques as $id => $onglet ) {
+		$sections[ $id ] = array(
+			'titre'  => $onglet,
+			'base'   => 'blocs/' . $rang++,
+			'aide'   => $aide,
+			'champs' => array(
+				'titre' => array( 'Titre de la rubrique', 'text' ),
+			),
+			'listes' => array(
+				'paragraphes' => array(
+					'Paragraphes',
+					array( 'texte' => array( null, 'Paragraphe', 'textarea' ) ),
+					0,
+				),
+				'definitions' => array(
+					'Informations en liste (rubrique : contenu)',
+					array(
+						'terme'  => array( 0, 'Rubrique' ),
+						'valeur' => array( 1, 'Contenu', 'textarea' ),
+					),
+					0,
+				),
+			),
+		);
+	}
+	foreach ( array( 'hebergement', 'propriete', 'responsabilite', 'droit' ) as $id ) {
+		unset( $sections[ $id ]['listes']['definitions'] ); // rubriques sans informations en liste
+	}
+	$sections['editeur']['champs']['raison'] = array( 'Raison sociale', 'text' );
+	$sections['donnees']['champs']['sous_titre'] = array( 'Titre de l’encart des informations', 'text' );
+	return $sections;
 }
 
 /**

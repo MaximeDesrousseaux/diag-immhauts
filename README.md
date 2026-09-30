@@ -90,6 +90,11 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
   (chiffres de l'accueil, entrées de Nos diagnostics, promesses de Contact). Décrit page par page dans
   `dih_core_heros()`. Sur l'accueil, un texte modifié vaut pour les quatre variantes du hero ;
   un texte resté celui du thème (import) laisse à `max-bandeau` et `sansBG` leur 2e ligne et leur chapeau.
+- **encart « Textes de la page »** (un onglet par section, décrites page par page dans
+  `dih_core_textes()`, plugin `inc/textes-pages.php`) : le haut de page ci-dessus, et
+  - **Mentions légales** : chapeau et date de mise à jour, titre, paragraphes et informations en liste
+    de chaque rubrique ; `{a completer: …}` reste surligné, `{adresse}`, `{telephone}` et `{email}`
+    reprennent les coordonnées du site.
 
 Pour que l'admin montre les textes en place plutôt que des champs vides :
 `wp eval-file outils/importer-contenus.php` (ajouter `forcer` pour réécrire des champs déjà remplis).
