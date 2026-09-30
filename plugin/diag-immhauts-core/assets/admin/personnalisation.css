@@ -162,21 +162,24 @@
 	background: #fff;
 }
 
+/* Onglet actif blanc, ouvert sur la carte qu'il coiffe (panneau de l'onglet). */
 .acf-settings-wrap .acf-tab-wrap .acf-tab-group li.active a {
 	color: #1d2327;
-	background: #f0f0f1;
-	border-bottom-color: #f0f0f1;
+	background: #fff;
+	border-bottom-color: #fff;
 }
 
 /* « S'applique à : … » en tête de chaque onglet : dans la carte du premier réglage,
-   au-dessus de son titre (et non entre les onglets et les cartes, comme la maquette). */
+   au-dessus de son titre (et non entre les onglets et les cartes, comme la maquette).
+   Cette carte est collée aux onglets : le filet de la barre d'onglets lui sert de bord haut. */
 .acf-settings-wrap .acf-postbox.seamless > .acf-fields > .acf-field.dih-portee {
-	margin-top: 18px;
+	margin-top: 0;
 	padding: clamp(16px, 2.4vw, 26px) clamp(16px, 2.4vw, 26px) 0;
 	background: #fff;
 	border: 1px solid #c3c4c7;
+	border-top: 0;
 	border-bottom: 0;
-	border-radius: 4px 4px 0 0;
+	border-radius: 0;
 }
 
 .acf-settings-wrap .acf-fields > .dih-portee .acf-input {
