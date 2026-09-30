@@ -22,7 +22,7 @@ $dih_c = dih_contenu( 'accueil', 'une' );
 		</div>
 		<div class="c-card__corps">
 			<span class="c-pastille c-pastille--nouveau"><?php echo esc_html( $dih_c['etiquette'] ); ?></span>
-			<h2 class="c-card__titre"><?php echo wp_kses( $dih_c['titre'], array( 'span' => array( 'class' => true ) ) ); ?></h2>
+			<h2 class="c-card__titre"><?php echo dih_titre_insecable( $dih_c['titre'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 			<p class="c-card__texte"><?php echo esc_html( $dih_c['texte'] ); ?></p>
 			<div class="c-card__actions">
 				<?php echo dih_bouton( $dih_c['cta'], dih_attr_rappel() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>

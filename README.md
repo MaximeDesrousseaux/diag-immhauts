@@ -96,6 +96,10 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
   un texte resté celui du thème (import) laisse à `max-bandeau` et `sansBG` leur 2e ligne et leur chapeau.
 - **encart « Textes de la page »** (un onglet par section, décrites page par page dans
   `dih_core_textes()`, plugin `inc/textes-pages.php`) : le haut de page ci-dessus, et
+  - **Accueil** : bandeau de confiance (titres et légendes des trois engagements), « À la une »
+    (textes et panneau chiffré), prestations (titres et textes des quatre cartes), « Le détail »
+    (titres et bouton), « Qui suis-je ? » (textes et quatre valeurs), zones desservies (textes et
+    communes en pastilles), bloc final. Pictos, illustrations, teintes et pages liées restent ceux du thème ;
   - **Mentions légales** : chapeau et date de mise à jour, titre, paragraphes et informations en liste
     de chaque rubrique ; `{a completer: …}` reste surligné, `{adresse}`, `{telephone}` et `{email}`
     reprennent les coordonnées du site.

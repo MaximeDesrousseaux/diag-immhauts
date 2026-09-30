@@ -49,7 +49,7 @@ function dih_core_textes() {
 		'accueil'         => array(
 			'lieu'     => array( 'page_type', 'front_page' ),
 			'sections' => array(
-				'hero' => array(
+				'hero'        => array(
 					'titre'  => 'Haut de page',
 					'champs' => array(
 						'pastille'     => array( 'Pastille', 'text' ),
@@ -70,6 +70,111 @@ function dih_core_textes() {
 							),
 							3,
 						),
+					),
+				),
+				'confiance'   => array(
+					'titre'  => 'Bandeau de confiance',
+					'aide'   => 'La note Google et le nombre d’avis se règlent dans Diag Imm’Hauts → Avis clients.',
+					'listes' => array(
+						'' => array(
+							'Les trois engagements (picto fixe, par position)',
+							array(
+								'titre'   => array( 1, 'Titre' ),
+								'legende' => array( 2, 'Légende' ),
+							),
+							3,
+						),
+					),
+				),
+				'une'         => array(
+					'titre'  => 'À la une',
+					'champs' => array(
+						'surtitre'  => array( 'Surtitre', 'text' ),
+						'etiquette' => array( 'Pastille', 'text' ),
+						'titre'     => array( 'Titre', 'textarea' ),
+						'texte'     => array( 'Texte', 'textarea' ),
+						'cta'       => array( 'Bouton', 'text' ),
+						'lien'      => array( 'Lien vers l’article', 'text' ),
+						'legende'   => array( 'Panneau chiffré : légende', 'text' ),
+						'avant'     => array( 'Panneau chiffré : valeur barrée', 'text' ),
+						'apres'     => array( 'Panneau chiffré : nouvelle valeur', 'text' ),
+						'note'      => array( 'Panneau chiffré : note', 'textarea', 'Exposant en HTML : 1<code>&lt;sup&gt;er&lt;/sup&gt;</code>.' ),
+					),
+				),
+				'prestations' => array(
+					'titre'  => 'Prestations',
+					'champs' => array(
+						'surtitre' => array( 'Surtitre', 'text' ),
+						'titre'    => array( 'Titre', 'text' ),
+						'texte'    => array( 'Texte à droite du titre', 'textarea' ),
+					),
+					'listes' => array(
+						'cards' => array(
+							'Les quatre cartes (numéro, teinte, illustration et page liée fixes)',
+							array(
+								'tag'   => array( 'tag', 'Étiquette' ),
+								'titre' => array( 'titre', 'Titre' ),
+								'texte' => array( 'texte', 'Texte', 'textarea' ),
+							),
+							4,
+						),
+					),
+				),
+				'detail'      => array(
+					'titre'  => 'Le détail',
+					'aide'   => 'Les douze tuiles des diagnostics suivent les pages du site.',
+					'champs' => array(
+						'surtitre' => array( 'Surtitre', 'text' ),
+						'titre'    => array( 'Titre', 'text' ),
+						'cta'      => array( 'Bouton vers le simulateur', 'text' ),
+					),
+				),
+				'expert'      => array(
+					'titre'  => 'Qui suis-je ?',
+					'champs' => array(
+						'surtitre' => array( 'Surtitre', 'text' ),
+						'titre'    => array( 'Titre', 'text' ),
+						'texte'    => array( 'Texte', 'textarea' ),
+						'nom'      => array( 'Nom sous la photo', 'text' ),
+						'role'     => array( 'Rôle sous la photo', 'text' ),
+						'lien'     => array( 'Lien vers Qui suis-je', 'text' ),
+					),
+					'listes' => array(
+						'valeurs' => array(
+							'Les quatre valeurs (picto fixe, par position)',
+							array(
+								'titre' => array( 1, 'Titre' ),
+								'texte' => array( 2, 'Texte' ),
+							),
+							4,
+						),
+					),
+				),
+				'zones'       => array(
+					'titre'  => 'Zones desservies',
+					'aide'   => '« Vérifier ma commune » s’appuie sur la liste des codes postaux du plugin, pas sur les pastilles ci-dessous.',
+					'champs' => array(
+						'surtitre'       => array( 'Surtitre', 'text' ),
+						'titre'          => array( 'Titre', 'text' ),
+						'texte'          => array( 'Texte', 'textarea' ),
+						'cta'            => array( 'Bouton « Vérifier ma commune »', 'text' ),
+						'note'           => array( 'Note sous le champ de recherche', 'textarea' ),
+						'communes_titre' => array( 'Titre des pastilles', 'text' ),
+					),
+					'listes' => array(
+						'communes' => array(
+							'Communes en pastilles',
+							array( 'commune' => array( null, 'Commune' ) ),
+							0,
+						),
+					),
+				),
+				'rappel'      => array(
+					'titre'  => 'Bloc final',
+					'champs' => array(
+						'titre' => array( 'Titre', 'text' ),
+						'texte' => array( 'Texte', 'textarea' ),
+						'cta_2' => array( 'Bouton « Demande de rappel gratuit »', 'text' ),
 					),
 				),
 			),
@@ -487,7 +592,9 @@ function dih_core_contenus_textes( $donnees, $page ) {
 				foreach ( $liste[1] as $col => $colonne ) {
 					$element[ $colonne[0] ] = isset( $ligne[ $col ] ) ? (string) $ligne[ $col ] : '';
 				}
-				ksort( $element );
+				if ( ! array_filter( array_keys( $element ), 'is_string' ) ) {
+					ksort( $element ); // rangs : dans l'ordre ; clés nommées : ordre du thème
+				}
 				$elements[] = $element;
 			}
 			if ( $elements ) {

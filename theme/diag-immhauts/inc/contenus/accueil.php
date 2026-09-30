@@ -59,7 +59,7 @@ return array(
 		'apres'        => '1,9',
 		'note'         => 'Dans le calcul du DPE depuis le 1<sup>er</sup> janvier 2026. Il descendra à 1,7 en 2027.',
 		'etiquette'    => 'Nouveau · réforme du DPE 2026',
-		'titre'        => 'Votre logement chauffé à l\'électricité a <span class="l-insecable">peut-être</span> gagné une classe.',
+		'titre'        => 'Votre logement chauffé à l\'électricité a peut-être gagné une classe.', // « peut-être » insécable : dih_titre_insecable()
 		'texte'        => "Environ 850 000 logements sont sortis du statut de passoire thermique sans le moindre travaux. Si votre DPE date d'avant 2026, une attestation de nouvelle étiquette est gratuite : je vous dis en cinq minutes si votre bien est concerné et ce que ça change pour votre vente ou votre location.",
 		'cta'          => 'Vérifier mon étiquette',
 		'lien'         => 'Comprendre la réforme',
