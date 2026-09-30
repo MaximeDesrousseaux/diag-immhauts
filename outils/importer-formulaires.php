@@ -12,8 +12,11 @@
  *   présent) n'est pas touché : ses réglages faits dans Fluent Forms sont gardés.
  * - Les champs sont bâtis sur les éléments par défaut de Fluent Forms (même format
  *   que l'éditeur), messages d'erreur en français.
- * - Notification par e-mail à l'adresse du site (dih_info( 'email' )) ; sur la
- *   préprod LocalWP, les e-mails sont retenus par Mailpit.
+ * - Deux notifications par formulaire (maquettes 1.14, design_diagimmhauts_theme_wp/emails/) :
+ *   « dih_max » à l'adresse du site (répondre à : e-mail du client) et, si le
+ *   formulaire a un champ e-mail, « dih_client » (accusé de réception, envoyé seulement
+ *   quand l'e-mail est rempli). Objet et corps viennent des gabarits du thème
+ *   (inc/emails.php) ; sur la préprod LocalWP, les e-mails sont retenus par Mailpit.
  * - Cloudflare Turnstile est ajouté quand ses clés sont enregistrées dans
  *   Fluent Forms → Global Settings (relancer alors avec « forcer »).
  *
@@ -73,6 +76,17 @@ $dih_champ = function ( $c, $cle, $i ) use ( $dih_elements, $dih_messages ) {
 		'zone'   => 'textarea',
 		'rgpd'   => 'gdpr_agreement',
 	);
+
+	// Champ caché, rempli par le thème.
+	if ( 'cache' === $c['type'] ) {
+		$f                                  = $dih_elements['input_hidden'];
+		$f['index']                         = $i;
+		$f['uniqElKey']                     = 'el_dih_' . $cle . '_' . $c['nom'];
+		$f['attributes']['name']            = $c['nom'];
+		$f['attributes']['value']           = '';
+		$f['settings']['admin_field_label'] = $c['label'];
+		return $f;
+	}
 
 	// Séparateur : filet pleine largeur entre deux groupes de champs.
 	if ( 'separateur' === $c['type'] ) {
@@ -264,32 +278,60 @@ foreach ( dih_core_formulaires_definitions() as $dih_cle => $dih_def ) {
 		)
 	);
 
-	FormMeta::persist(
-		$form_id,
-		'notifications',
+	// Notifications : Max, puis l'accusé de réception du client si le formulaire a un
+	// champ e-mail. Objet et message ci-dessous : repli si le thème ne fournit pas ses
+	// gabarits (inc/emails.php les remplace, repérés par leur nom).
+	FormMeta::where( 'form_id', $form_id )->where( 'meta_key', 'notifications' )->delete();
+	$a_email       = in_array( 'email', wp_list_pluck( $dih_def['champs'], 'nom' ), true );
+	$notifications = array(
 		array(
-			'name'          => 'Notification Diag Imm’Hauts',
-			'sendTo'        => array(
+			'name'    => 'dih_max',
+			'sendTo'  => array(
 				'type'    => 'email',
 				'email'   => $dih_email,
 				'field'   => '',
 				'routing' => array(),
 			),
-			'fromName'      => 'Site Diag Imm’Hauts',
-			'fromEmail'     => '',
-			'replyTo'       => in_array( 'email', wp_list_pluck( $dih_def['champs'], 'nom' ), true ) ? '{inputs.email}' : '',
-			'bcc'           => '',
-			'subject'       => $dih_def['objet'],
-			'message'       => '<p>{all_data}</p><p>Envoyé depuis : {embed_post.permalink}</p>',
-			'conditionals'  => array(
-				'status'     => false,
-				'type'       => 'all',
-				'conditions' => array(),
-			),
-			'enabled'       => true,
-			'email_template' => '',
-		)
+			'replyTo' => $a_email ? '{inputs.email}' : '',
+			'subject' => $dih_def['objet'],
+		),
 	);
+	if ( $a_email ) {
+		$notifications[] = array(
+			'name'    => 'dih_client',
+			'sendTo'  => array(
+				'type'    => 'field',
+				'email'   => '',
+				'field'   => 'email',
+				'routing' => array(),
+			),
+			'replyTo' => $dih_email,
+			'subject' => 'Votre demande est bien arrivée — Diag Imm’Hauts',
+		);
+	}
+	foreach ( $notifications as $n ) {
+		FormMeta::insert(
+			array(
+				'form_id'  => $form_id,
+				'meta_key' => 'notifications', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+				'value'    => wp_json_encode(
+					$n + array(
+						'fromName'       => 'Diag Imm’Hauts',
+						'fromEmail'      => $dih_email,
+						'bcc'            => '',
+						'message'        => '<p>{all_data}</p><p>Envoyé depuis : {embed_post.permalink}</p>',
+						'conditionals'   => array(
+							'status'     => false,
+							'type'       => 'all',
+							'conditions' => array(),
+						),
+						'enabled'        => true,
+						'email_template' => '',
+					)
+				),
+			)
+		);
+	}
 	FormMeta::persist( $form_id, 'template_name', 'dih_' . $dih_cle );
 
 	update_field( 'field_dih_formulaire_' . $dih_cle, $form_id, 'option' );

@@ -11,6 +11,9 @@
  *   8 au plus (début du nom ou du code postal, puis nom qui contient la saisie),
  *   tirées des secteurs habituels (plugin, donnees/communes.json) ; un clic remplit
  *   « Commune (code) ». Sans suggestion, la saisie reste libre.
+ * - Champ caché « provenance » (e-mail de Max, maquettes 1.14) : sur Contact et le
+ *   simulateur, la page interne vue juste avant (dernier élément du fil d'Ariane,
+ *   gardé en sessionStorage, ou document.referrer du même site).
  */
 (function () {
 	'use strict';
@@ -56,6 +59,35 @@
 		ajuster();
 		surBascule(ajuster);
 	}
+	document.querySelectorAll('.c-form--sombre input[data-sombre]').forEach(function (champ) {
+		champ.placeholder = champ.getAttribute('data-sombre');
+	});
+
+	// --- Provenance : page interne vue juste avant --------------------------------------
+	(function () {
+		var CLE = 'dih-page-precedente';
+		var ariane = document.querySelector('.c-ariane [aria-current="page"]');
+		var ici = {
+			titre: ariane ? ariane.textContent.trim() : (document.body.classList.contains('home') ? 'Accueil' : document.title.split(' — ')[0]),
+			chemin: location.pathname
+		};
+		var avant = null;
+		try { avant = JSON.parse(sessionStorage.getItem(CLE) || 'null'); } catch (e) { avant = null; }
+		var ref = '';
+		try {
+			var url = new URL(document.referrer);
+			if (url.origin === location.origin) ref = url.pathname;
+		} catch (e) { ref = ''; }
+		if (ref && (!avant || avant.chemin !== ref)) avant = { titre: '', chemin: ref };
+
+		var arrivee = document.body.classList.contains('page-template-contact') || document.body.classList.contains('page-template-simulateur');
+		if (arrivee && avant && avant.chemin !== ici.chemin) {
+			document.querySelectorAll('input[name="provenance"]').forEach(function (champ) {
+				champ.value = avant.titre || avant.chemin;
+			});
+		}
+		try { sessionStorage.setItem(CLE, JSON.stringify(ici)); } catch (e) { /* navigation privée */ }
+	})();
 
 	// --- Suggestions de communes du devis ---------------------------------------------
 	var champs = document.querySelectorAll('input[data-dih-communes]');

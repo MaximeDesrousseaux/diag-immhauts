@@ -17,10 +17,10 @@ $dih_variante = ! empty( $args['variante'] ) ? ' c-confiance--' . $args['variant
 			<span class="c-confiance__logo" aria-hidden="true" style="background-image:url('<?php echo esc_url( dih_img( 'google.svg', 'logos' ) ); ?>')"></span>
 			<span class="c-confiance__note">
 				<span class="c-confiance__ligne">
-					<span class="c-confiance__chiffre">5,0</span>
+					<span class="c-confiance__chiffre"><?php echo esc_html( dih_info( 'avis_note' ) ); ?></span>
 					<span class="c-etoiles" aria-label="5 étoiles sur 5">★★★★★</span>
 				</span>
-				<span class="c-confiance__legende">Note Google · 12 avis clients</span>
+				<span class="c-confiance__legende">Note Google · <?php echo esc_html( dih_info( 'avis_nombre' ) ); ?> avis clients</span>
 			</span>
 		</div>
 		<?php foreach ( $dih_items as $dih_item ) : ?>

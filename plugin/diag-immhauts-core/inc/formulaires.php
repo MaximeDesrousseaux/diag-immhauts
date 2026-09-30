@@ -76,10 +76,12 @@ function dih_core_formulaire( $cle ) {
 /**
  * Description des formulaires, d'après les maquettes (textes à la lettre).
  *
- * Champ : type (texte, tel, email, nombre, liste, cases, zone, rgpd, separateur), nom,
- * label (HTML simple permis), placeholder, requis, options (liste, cases),
+ * Champ : type (texte, tel, email, nombre, liste, cases, zone, rgpd, separateur, cache),
+ * nom, label (HTML simple permis), placeholder, requis, options (liste, cases),
  * vide (option vide en tête de liste : son libellé), lignes (zone), aide.
- * Un séparateur (filet pleine largeur) ouvre un nouveau groupe de champs.
+ * Un séparateur (filet pleine largeur) ouvre un nouveau groupe de champs. Un champ
+ * caché est rempli par le thème (assets/js/formulaires.js, simulateur.js) ; son
+ * label sert aux e-mails.
  *
  * @return array
  */
@@ -89,6 +91,7 @@ function dih_core_formulaires_definitions() {
 	// Libellés, liste « Type de bien » et champ commune communs au formulaire court
 	// et au devis (formulaire détaillé).
 	$types_bien = array( 'Appartement', 'Maison individuelle', 'Immeuble en monopropriété', 'Local commercial', 'Terrain / autre' );
+	$provenance = array( 'type' => 'cache', 'nom' => 'provenance', 'label' => 'Arrivé depuis' );
 	$message    = array(
 		'type'        => 'zone',
 		'nom'         => 'message',
@@ -106,9 +109,18 @@ function dih_core_formulaires_definitions() {
 			'champs' => array(
 				array( 'type' => 'texte', 'nom' => 'nom', 'label' => 'Nom et prénom', 'placeholder' => 'Votre nom', 'requis' => true ),
 				array( 'type' => 'tel', 'nom' => 'telephone', 'label' => 'Téléphone', 'placeholder' => '06 12 34 56 78', 'requis' => true ),
+				// Facultatif : l'accusé de réception ne part que s'il est rempli (maquettes 1.14).
+				array( 'type' => 'email', 'nom' => 'email', 'label' => 'E-mail <span class="dih-facultatif">(facultatif)</span>', 'placeholder' => 'vous@exemple.fr' ),
 				array( 'type' => 'texte', 'nom' => 'commune', 'label' => 'Commune ou code postal', 'placeholder' => 'Arras ou 62000' ),
 				array( 'type' => 'liste', 'nom' => 'type_bien', 'label' => 'Type de bien', 'vide' => 'Type de bien', 'options' => $types_bien ),
 				$message,
+				// Réponses du simulateur, quand la demande part de sa page (variante « Simulateur » des e-mails).
+				array( 'type' => 'cache', 'nom' => 'sim_projet', 'label' => 'Projet' ),
+				array( 'type' => 'cache', 'nom' => 'sim_annee', 'label' => 'Année de construction' ),
+				array( 'type' => 'cache', 'nom' => 'sim_precisions', 'label' => 'Précisions' ),
+				array( 'type' => 'cache', 'nom' => 'sim_obligatoires', 'label' => 'Obligatoires' ),
+				array( 'type' => 'cache', 'nom' => 'sim_diagnostics', 'label' => 'Diagnostics calculés' ),
+				$provenance,
 			),
 		),
 		'devis'      => array(
@@ -137,6 +149,7 @@ function dih_core_formulaires_definitions() {
 				),
 				array( 'type' => 'zone', 'nom' => 'precisions', 'label' => 'Précisions', 'placeholder' => 'Étage, présence d\'un locataire, accès aux combles, date de signature prévue…', 'lignes' => 4 ),
 				array( 'type' => 'rgpd', 'nom' => 'rgpd', 'label' => 'J\'accepte que ces informations soient utilisées pour me recontacter au sujet de ma demande. Elles ne sont ni revendues ni utilisées à d\'autres fins.' ),
+				$provenance,
 			),
 		),
 		'partenaire' => array(
@@ -174,3 +187,15 @@ add_filter(
 	10,
 	2
 );
+
+/**
+ * Libellé d'un champ pour les e-mails : celui du formulaire, sans astérisque ni
+ * mention « (facultatif) ».
+ *
+ * @param array $champ Champ de dih_core_formulaires_definitions().
+ * @return string
+ */
+function dih_core_libelle_champ( $champ ) {
+	$libelle = wp_strip_all_tags( preg_replace( '/<span class="dih-facultatif">.*?<\/span>/', '', $champ['label'] ) );
+	return trim( str_replace( ' *', '', $libelle ) );
+}

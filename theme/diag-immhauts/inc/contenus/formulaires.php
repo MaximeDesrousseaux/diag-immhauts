@@ -48,4 +48,5 @@ return array(
 	// sur ordinateur, puis en déplié et sur téléphone.
 	'message_sombre' => 'Votre message (facultatif) — type de diagnostic, surface, délai souhaité…',
 	'message_court'  => 'Votre message (facultatif)',
+	'email_sombre'   => 'Votre e-mail (facultatif)',
 );

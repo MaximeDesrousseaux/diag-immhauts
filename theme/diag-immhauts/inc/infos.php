@@ -22,6 +22,9 @@ function dih_info( $cle ) {
 		'adresse'        => '19 route nationale, 62690 Berles-Monchel',
 		'email'          => 'contact@diagimmhauts.fr',
 		'avis_google'    => 'https://www.google.com/search?q=Diag+Imm%27Hauts+Avis',
+		// Note Google : bandeau de confiance et pied des e-mails (Avis clients les remplace).
+		'avis_note'      => '5,0',
+		'avis_nombre'    => '12',
 		'description'    => 'Diagnostics immobiliers pour la vente, la location, les copropriétés et les audits énergétiques dans le Pas-de-Calais et les Hauts-de-France.',
 		'communes'       => 'Arras · Lens · Liévin · Béthune · Saint-Pol-sur-Ternoise · Aubigny-en-Artois · Avesnes-le-Comte · Tincques · Savy-Berlette · Houdain · Douai · Cambrai · et alentours.',
 	);

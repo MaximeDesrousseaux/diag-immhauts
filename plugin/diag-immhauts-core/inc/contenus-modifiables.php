@@ -82,7 +82,7 @@ add_action(
 						'key'          => 'field_dih_avis_liste',
 						'name'         => 'avis_liste',
 						'label'        => 'Avis',
-						'instructions' => 'Avis Google recopiés à l’identique, dans l’ordre d’affichage. Liste vide : le site affiche les avis par défaut du thème. La note (5,0) et le nombre d’avis affichés à côté sont des chiffres arrêtés du thème.',
+						'instructions' => 'Avis Google recopiés à l’identique, dans l’ordre d’affichage. Liste vide : le site affiche les avis par défaut du thème. La note et le nombre d’avis se règlent dans l’encart « Note Google ».',
 						'type'         => 'repeater',
 						'layout'       => 'block',
 						'button_label' => 'Ajouter un avis',

@@ -95,6 +95,9 @@ $dih_attributs_champ = function ( $data, $form ) {
 		$data['attributes']['autocomplete']      = 'off'; // suggestions du thème
 		$data['attributes']['data-dih-communes'] = function_exists( 'dih_core_url_communes' ) ? dih_core_url_communes() : '';
 	}
+	if ( 'rappel' === $cle && 'email' === $nom ) {
+		$data['attributes']['data-sombre'] = dih_contenu( 'formulaires' )['email_sombre'];
+	}
 	if ( 'rappel' === $cle && 'message' === $nom ) {
 		$textes                            = dih_contenu( 'formulaires' );
 		$data['attributes']['data-sombre'] = $textes['message_sombre'];

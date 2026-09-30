@@ -5,6 +5,12 @@
  * règles de la maquette et recompose le dossier à chaque changement, en
  * mosaïque ou en liste. Les textes viennent du catalogue PHP
  * (inc/contenus/simulateur.php), passé en JSON dans la page.
+ *
+ * Les réponses et la liste calculée sont recopiées dans les champs cachés du
+ * formulaire de la popup (sim_projet, sim_annee, sim_precisions, sim_obligatoires,
+ * sim_diagnostics) : la demande part avec elles et les e-mails suivent la variante
+ * « Simulateur » (inc/emails.php). Le type de bien de la popup reprend celui du
+ * simulateur tant que le client ne l'a pas changé.
  */
 (function () {
 	'use strict';
@@ -61,6 +67,41 @@
 		return ids;
 	}
 
+	// Type de bien du simulateur → liste du formulaire court (celle du devis).
+	var typesDemande = {
+		'Appartement': 'Appartement',
+		'Maison': 'Maison individuelle',
+		'Immeuble': 'Immeuble en monopropriété',
+		'Local commercial': 'Local commercial'
+	};
+
+	function remplirDemande(e, ids) {
+		var demande = document.querySelector('.c-popup .c-form');
+		if (!demande) return;
+		var poser = function (nom, valeur) {
+			var champ = demande.querySelector('[name="' + nom + '"]');
+			if (champ) champ.value = valeur;
+		};
+		var titres = function (liste) {
+			return liste.map(function (id) { return donnees.catalogue[id].titre; }).join(', ');
+		};
+		var precisions = Object.keys(e.cases).filter(function (nom) { return e.cases[nom]; }).map(function (nom) {
+			var texte = form.elements[nom].closest('label').querySelector('.c-case__texte');
+			return texte ? texte.textContent.trim() : nom;
+		});
+		poser('sim_projet', e.motif);
+		poser('sim_annee', e.annee);
+		poser('sim_precisions', precisions.join(', '));
+		poser('sim_obligatoires', titres(ids.filter(function (id) { return donnees.catalogue[id].statut === 'obligatoire'; })));
+		poser('sim_diagnostics', titres(ids));
+
+		var type = demande.querySelector('select[name="type_bien"]');
+		if (type && (!type.value || type.value === type.getAttribute('data-sim'))) {
+			type.value = typesDemande[e.type] || '';
+			type.setAttribute('data-sim', type.value);
+		}
+	}
+
 	// Un texte peut dépendre du motif : { vente, location }.
 	function selon(valeur, motif) {
 		if (typeof valeur === 'string') return valeur;
@@ -104,6 +145,7 @@
 		compte.textContent = total;
 		resume.textContent = pluriel(obl, 'obligatoire') + ' · ' + [e.motif, e.type, e.annee].join(' · ').toLowerCase();
 		if (devis) devis.setAttribute('data-dih-rappel-intro', donnees.popup.replace('%s', total));
+		remplirDemande(e, ids);
 	}
 
 	form.addEventListener('change', rendre);

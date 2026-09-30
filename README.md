@@ -102,8 +102,8 @@ Trois formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
 
 | Clé | Où | Champs |
 |---|---|---|
-| `rappel` | formulaire court : popup « Rappel sous 24 h » (toutes les pages sauf Professionnels) et barre ou carte « Rappel gratuit » du haut de l'accueil | nom, téléphone, commune, type de bien, message ; sur fond vert, sans étiquettes, message masqué dans la barre et sur téléphone |
-| `devis` | page Contact | 13 champs en trois groupes, diagnostics en pastilles, consentement |
+| `rappel` | formulaire court : popup « Rappel sous 24 h » (toutes les pages sauf Professionnels, simulateur compris) et barre ou carte « Rappel gratuit » du haut de l'accueil | nom, téléphone, e-mail facultatif, commune, type de bien, message ; champs cachés du simulateur et provenance ; sur fond vert, sans étiquettes, message masqué dans la barre et sur téléphone, e-mail masqué dans la barre |
+| `devis` | page Contact | 13 champs en trois groupes, diagnostics en pastilles, consentement ; provenance |
 | `partenaire` | popup de Professionnels | structure, interlocuteur, téléphone, dossiers par mois, message |
 
 - **Présentation** (thème, `inc/formulaires.php`, `scss/composants/_form.scss`, `assets/js/formulaires.js`) :
@@ -113,8 +113,19 @@ Trois formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
   de l'accueil, le formulaire court n'est rendu qu'une fois et placé par le script dans la zone visible
   (barre ou carte) ; suggestions de communes (formulaire court et devis) tirées des secteurs de la maquette
   Contact (`donnees/communes.json`, `secteurs`), ouvertes vers le haut sur fond vert.
-- **Notification** : e-mail à `contact@diagimmhauts.fr` (réponse directe à l'adresse saisie pour le devis) ;
-  sur la préprod, Mailpit retient les e-mails (http://localhost:10000).
+- **E-mails** (maquettes 1.14, `design_diagimmhauts_theme_wp/emails/`) : deux notifications par formulaire,
+  créées par l'import. **Max** (`dih_max`, piste 1c) : à `contact@diagimmhauts.fr`, répondre-à = e-mail du
+  client, une ligne par champ, page d'origine et page d'où le client est arrivé (champ caché `provenance`,
+  rempli sur Contact et le simulateur), boutons Appeler / Répondre. **Client** (`dih_client`, piste 1a) :
+  accusé de réception, seulement si l'e-mail est rempli (rappel et devis). Variantes rappel, devis,
+  simulateur (formulaire court envoyé depuis le simulateur : ses réponses partent dans les champs cachés
+  `sim_*`), partenaire (Max seul). Gabarits du thème `template-parts/emails/client.php` et `max.php`,
+  textes `inc/contenus/emails.php`, images `assets/emails/` ; objet et corps posés par `inc/emails.php`
+  (filtres `fluentform/email_subject` et `fluentform/email_body`). Plugin `inc/emails.php` : note Google
+  (même source que le bandeau de confiance : `dih_info()`, remplacée par Diag Imm'Hauts → Avis clients →
+  Note Google), statut de zone de la commune, balises `{dih.avis_note}`, `{dih.avis_nombre}`,
+  `{dih.avis_url}`, `{dih.zone_statut}`, `{dih.prenom}`. Sur la préprod, Mailpit retient les e-mails
+  (http://localhost:10000).
 - **À régler en ligne** : FluentSMTP (installé) avec une clé API Brevo pour l'envoi, et les clés Cloudflare
   Turnstile dans Fluent Forms → Global Settings, puis relancer l'import avec `forcer` pour ajouter le captcha.
 
@@ -155,6 +166,10 @@ Trois formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
 | Formulaires | Emplacement balisé tant que Fluent Forms n'est pas installé ou que les formulaires ne sont pas créés |
 | Rappel : popup et haut de l'accueil | Un seul formulaire court (demande de l'utilisateur), aligné sur le devis : « Nom et prénom », « Téléphone » (06 12 34 56 78), « Commune ou code postal » (Arras ou 62000, avec suggestions), liste « Type de bien » du devis précédée de « Type de bien » ; les maquettes donnaient à la popup et à l'accueil des libellés et des listes différents |
 | Erreurs de saisie des formulaires | Pas de rouge dans la palette : brun des alertes (`--warm` assombri), comme « hors zone » ; messages en français |
+| Formulaire court et e-mails (1.14) | Champ « E-mail (facultatif) » ajouté (demande de l'utilisateur) : l'accusé de réception ne part que s'il est rempli ; masqué dans la barre de l'accueil (une seule ligne), placeholder « Votre e-mail (facultatif) » sur fond vert |
+| Variante « Simulateur » des e-mails | Les réponses du simulateur partent avec la demande (champs cachés) ; pas de question « chauffage » dans le simulateur : la ligne « Chauffage » de la maquette devient « Précisions » (cases cochées) |
+| « Arrivé depuis » (e-mail de Max) | Nom de la page précédente pris dans le dernier élément de son fil d'Ariane (« Amiante », « Nos diagnostics »), « Accueil » pour l'accueil |
+| Libellés du détail de Max | Ceux de la maquette (« Surface », « Commune », « Échéance », « Diagnostics ») plutôt que ceux du formulaire |
 | Groupes du devis | Une seule grille (colonnes de 220 px au moins) pour les trois groupes ; la maquette passe à 250 px pour le deuxième, ce qui ne change la disposition qu'entre 900 et 1150 px de large |
 | Liens `#rappel` (FAQ, CTA de section) | Ouvrent la popup de rappel, comme le script des maquettes ; sans JS, ils descendent au bloc « rappel » |
 | Illustrations des résultats du simulateur | La maquette les retourne en miroir (`scaleX(-1)`) : supprimé, conformément au README v10 (aucun miroir CSS) |

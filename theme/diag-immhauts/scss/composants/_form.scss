@@ -126,6 +126,7 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
     gap: 16px;
   }
 
+  .dih-champ--email,
   .dih-champ--message,
   .c-form__pied { grid-column: 1 / -1; }
 
@@ -278,6 +279,9 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
   .ff-el-input--content { flex: 1 1 auto; }
   .dih-champ--type_bien { flex-basis: min(100%, 140px); }
   .dih-champ--commune { flex-basis: min(100%, 130px); }
+
+  // Une seule ligne : ni message ni e-mail (facultatifs, présents partout ailleurs).
+  .dih-champ--email,
   .dih-champ--message { display: none; }
 
   .fluentform .ff-el-form-control {
