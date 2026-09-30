@@ -56,8 +56,11 @@ les clés (Brevo, Turnstile) se saisissent dans l'admin.
 **Le script**
 
 ```bash
-bash outils/installer.sh --path=/chemin/du/site --copier
-```
+bash outils/installer.sh --path=/chemin/du/site --copier
+```
+
+À lancer avec l'utilisateur système du site (celui de PHP), pas en `root` : sinon les fichiers copiés et
+les traductions téléchargées lui échappent. Autre commande WP-CLI que `wp` : variable `WP_CLI_BIN`.
 
 Il s'arrête à la première erreur et peut être relancé autant de fois que nécessaire : chaque étape
 vérifie l'état avant d'agir, et les imports ne réécrivent rien de ce qui existe (formulaires créés,
@@ -67,11 +70,14 @@ champs remplis dans l'admin). Dans l'ordre :
 2. copie le thème et le plugin du dépôt (`--copier`), sinon vérifie qu'ils sont en place ;
 3. passe le site en français (`fr_FR`) ;
 4. fuseau horaire `Europe/Paris` ; permaliens `/actualites/%postname%/` (les pages restent en
-   `/<slug>/`, les articles en `/actualites/<slug>/`), règles réécrites dans `.htaccess` ;
+   `/<slug>/`, les articles en `/actualites/<slug>/`) ; vérifie que `.htaccess` porte les règles de
+   WordPress (sinon, sur Apache : Réglages → Permaliens → Enregistrer ; rien à faire sur nginx) ;
 5. installe et active Secure Custom Fields (pas si ACF Pro est actif ; arrêt si la version gratuite
    d'ACF l'est), Fluent Forms, FluentSMTP, puis le plugin du site ;
 6. active le thème ;
-7. télécharge les traductions françaises des extensions et des thèmes ;
+7. télécharge les traductions françaises des extensions et des thèmes (Fluent Forms, FluentSMTP et les
+   thèmes par défaut ; le thème et le plugin du site sont déjà en français, Secure Custom Fields n'a pas
+   de traduction : son admin reste en anglais) ;
 8. lance `outils/importer-formulaires.php` puis `outils/importer-contenus.php` ;
 9. affiche le contrôle (`outils/controler-installation.php`, lançable seul) : OK / À FAIRE / ERREUR
    pour la langue, le fuseau, les permaliens, le thème et les extensions, les pages et leur gabarit,

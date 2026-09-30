@@ -100,7 +100,15 @@ wp option update timezone_string Europe/Paris
 if [ "$(wp option get permalink_structure)" != "/actualites/%postname%/" ]; then
 	wp rewrite structure '/actualites/%postname%/'
 fi
-wp rewrite flush --hard || avertir "règles non écrites dans .htaccess : Réglages → Permaliens → Enregistrer."
+# WP-CLI n'écrit pas .htaccess (« --hard » demande apache_modules dans wp-cli.yml) : on
+# vérifie seulement qu'il porte les règles de WordPress.
+wp rewrite flush
+HTACCESS="$(wp eval 'echo ABSPATH;').htaccess"
+if [ -f "$HTACCESS" ] && grep -q "BEGIN WordPress" "$HTACCESS"; then
+	info ".htaccess : règles de WordPress présentes"
+else
+	avertir "aucune règle de WordPress dans .htaccess. Serveur Apache : Réglages → Permaliens → Enregistrer (WordPress l'écrit). Serveur nginx : rien à faire, les règles sont dans sa configuration."
+fi
 
 # ---------------------------------------------------------------------------------
 etape "5/9 Extensions"
