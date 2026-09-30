@@ -421,7 +421,7 @@ function dih_core_textes() {
 				),
 				'une'        => array(
 					'titre'  => 'Articles',
-					'aide'   => 'Les articles eux-mêmes se rédigent dans Articles ; l’article « à la une » est l’article épinglé. <code>%s</code> est remplacé par la durée de lecture de l’article.',
+					'aide'   => 'Les articles eux-mêmes se rédigent dans Articles ; l’article « à la une » est l’article épinglé. <code>%s</code> est remplacé par la durée de lecture de l’article (une seule fois).',
 					'champs' => array(
 						'etiquette' => array( 'Article à la une : pastille', 'text' ),
 						'lecture'   => array( 'Article à la une : durée de lecture', 'text' ),
@@ -514,7 +514,6 @@ function dih_core_textes() {
  * @return array
  */
 function dih_core_textes_fiches() {
-	$html     = 'Gras en HTML simple : <code>&lt;strong&gt;</code> ; exposant : 1<code>&lt;sup&gt;er&lt;/sup&gt;</code>.';
 	// Cartes à teinte : [ repère ou pastille, teinte, titre, texte (, illustration) ].
 	$cartes = function ( $repere ) {
 		return array(
@@ -528,7 +527,6 @@ function dih_core_textes_fiches() {
 		'cadre'       => array(
 			'titre'  => 'Le cadre',
 			'base'   => 'sessions/@cadre',
-			'aide'   => $html,
 			'champs' => array(
 				'surtitre'           => array( 'Surtitre', 'text' ),
 				'titre'              => array( 'Titre', 'text' ),
@@ -551,7 +549,7 @@ function dih_core_textes_fiches() {
 		'etiquette'   => array(
 			'titre'  => 'L’étiquette',
 			'base'   => 'sessions/@etiquette',
-			'aide'   => $html,
+			'aide'   => 'Gras dans le texte, en HTML simple : <code>&lt;strong&gt;A&lt;/strong&gt;</code>.',
 			'champs' => array(
 				'surtitre'         => array( 'Surtitre', 'text' ),
 				'titre'            => array( 'Titre', 'text' ),
@@ -574,7 +572,7 @@ function dih_core_textes_fiches() {
 		'reforme'     => array(
 			'titre'  => 'La réforme',
 			'base'   => 'sessions/@reforme',
-			'aide'   => $html,
+			'aide'   => 'Exposant dans la pastille, le texte et les périodes, en HTML : 1<code>&lt;sup&gt;er&lt;/sup&gt;</code>.',
 			'champs' => array(
 				'etiquette' => array( 'Pastille', 'text' ),
 				'source'    => array( 'Source', 'text' ),
@@ -1139,6 +1137,24 @@ add_action(
 );
 
 /**
+ * Format pour sprintf() à un seul argument, sans erreur possible : le premier %s est
+ * gardé, tout autre % devient un signe % (« 100 % », un second %s…).
+ *
+ * @param string $format Texte saisi.
+ * @return string
+ */
+function dih_core_format_sur( $format ) {
+	$morceaux = explode( '%s', (string) $format, 2 );
+	$morceaux = array_map(
+		function ( $morceau ) {
+			return str_replace( '%', '%%', $morceau );
+		},
+		$morceaux
+	);
+	return implode( '%s', $morceaux );
+}
+
+/**
  * Textes et listes des pages uniques saisis dans l'admin. Chaque champ vide garde
  * le texte du thème.
  *
@@ -1215,9 +1231,15 @@ function dih_core_contenus_textes( $donnees, $page ) {
 		dih_core_chemin_ecrire( $donnees, $base, $bloc );
 	}
 
-	// Actualités : la suite du titre suit le mot en vert, après une espace.
+	// Actualités : la suite du titre suit le mot en vert, après une espace ; les durées
+	// de lecture passent par sprintf() : formats rendus sûrs.
 	if ( 'actualites' === $page && isset( $donnees['hero']['titre'] ) ) {
 		$donnees['hero']['titre'] = ' ' . ltrim( $donnees['hero']['titre'] );
+		foreach ( array( 'une', 'liste' ) as $bloc ) {
+			if ( isset( $donnees[ $bloc ]['lecture'] ) ) {
+				$donnees[ $bloc ]['lecture'] = dih_core_format_sur( $donnees[ $bloc ]['lecture'] );
+			}
+		}
 	}
 
 	// Simulateur : le mot en vert est collé aux deux morceaux, espaces compris.
