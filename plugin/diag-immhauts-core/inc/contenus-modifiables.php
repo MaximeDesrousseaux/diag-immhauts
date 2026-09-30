@@ -744,11 +744,12 @@ function dih_core_contenus_heros( $donnees, $page ) {
 
 	foreach ( array_keys( $heros[ $page ]['champs'] ) as $cle ) {
 		$valeur = get_field( 'hero_' . $cle, $id );
-		if ( ! is_string( $valeur ) || '' === trim( $valeur ) ) {
+		// Vide, ou resté le texte du thème (import) : chaque variante garde le sien.
+		if ( ! is_string( $valeur ) || '' === trim( $valeur ) || ( isset( $donnees['hero'][ $cle ] ) && $valeur === $donnees['hero'][ $cle ] ) ) {
 			continue;
 		}
 		$donnees['hero'][ $cle ] = $valeur;
-		// Accueil : un texte saisi vaut pour toutes les variantes du hero.
+		// Accueil : un texte modifié vaut pour toutes les variantes du hero.
 		if ( isset( $donnees['hero']['variantes'] ) ) {
 			foreach ( array_keys( $donnees['hero']['variantes'] ) as $variante ) {
 				unset( $donnees['hero']['variantes'][ $variante ][ $cle ] );

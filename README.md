@@ -87,7 +87,8 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 - **encart « Haut de page »** des six pages uniques (accueil, Nos diagnostics, Professionnels, Qui suis-je,
   Contact, simulateur) : textes du hero, titres gardant le découpage des maquettes, et ses listes
   (chiffres de l'accueil, entrées de Nos diagnostics, promesses de Contact). Décrit page par page dans
-  `dih_core_heros()`. Sur l'accueil, un texte saisi vaut pour les quatre variantes du hero.
+  `dih_core_heros()`. Sur l'accueil, un texte modifié vaut pour les quatre variantes du hero ;
+  un texte resté celui du thème (import) laisse à `max-bandeau` et `sansBG` leur 2e ligne et leur chapeau.
 
 Pour que l'admin montre les textes en place plutôt que des champs vides :
 `wp eval-file outils/importer-contenus.php` (ajouter `forcer` pour réécrire des champs déjà remplis).
