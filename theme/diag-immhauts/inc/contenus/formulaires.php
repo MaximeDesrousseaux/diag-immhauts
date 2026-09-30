@@ -24,13 +24,13 @@ return array(
 		'accueil'    => array(
 			'titre'  => 'Demande envoyée',
 			'texte'  => 'Je vous rappelle sous 24 heures ouvrées.',
-			'urgent' => 'Si c\'est urgent, appelez directement le 06 35 88 43 00.',
+			'urgent' => 'Si c\'est urgent, appelez directement le ' . dih_info( 'telephone' ) . '.',
 			'bouton' => 'Appeler maintenant',
 		),
 		// Page Contact
 		'devis'      => array(
 			'titre'  => 'Demande envoyée, merci !',
-			'texte'  => 'Je reviens vers vous sous 24 heures ouvrées avec un devis détaillé. Si votre projet est urgent, appelez-moi directement au 06 35 88 43 00.',
+			'texte'  => 'Je reviens vers vous sous 24 heures ouvrées avec un devis détaillé. Si votre projet est urgent, appelez-moi directement au ' . dih_info( 'telephone' ) . '.',
 			'bouton' => 'Envoyer une autre demande',
 		),
 		// Popup « Compte partenaire » de Professionnels

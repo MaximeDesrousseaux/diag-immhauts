@@ -78,6 +78,10 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 **Contenus modifiables** (plugin, `inc/contenus-modifiables.php`) : ils remplacent les textes du thème
 (`inc/contenus/*.php`) section par section, par le filtre `dih_contenu` ; un champ vide garde le texte du thème.
 
+- **Diag Imm'Hauts → Coordonnées** : téléphone (le lien d'appel en est déduit), adresse, e-mail de
+  contact, e-mail des mentions légales et du RGPD, lus partout par `dih_info()` (en-tête, pied de page,
+  boutons d'appel, Contact, mentions, messages des formulaires, e-mails, données lues par Google).
+  L'adresse qui reçoit les formulaires reste celle des notifications de Fluent Forms ;
 - **Diag Imm'Hauts → Avis clients** : les avis du carrousel de l'accueil ;
 - **encart « Questions fréquentes (FAQ) »** des 15 pages qui en ont une (accueil, Nos diagnostics,
   Professionnels, 12 fiches) : question, réponse, lien facultatif ;

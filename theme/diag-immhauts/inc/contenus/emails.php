@@ -31,7 +31,7 @@ return array(
 		'certifie'  => 'Certifié',
 		'organisme' => 'Bureau Veritas',
 		'cofrac'    => 'organisme accrédité Cofrac',
-		'legal'     => 'Diag Imm\'Hauts · SASU au capital de 5' . $dih_nb . '000' . $dih_nb . '€ · 19 route nationale, 62690 Berles-Monchel',
+		'legal'     => 'Diag Imm\'Hauts · SASU au capital de 5' . $dih_nb . '000' . $dih_nb . '€ · ' . dih_info( 'adresse' ),
 		'motif'     => 'Vous recevez ce message à la suite de votre demande sur',
 	),
 

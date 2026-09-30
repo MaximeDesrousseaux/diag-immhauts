@@ -51,7 +51,7 @@ return array(
 		'titre'  => 'Mes coordonnées',
 		'lignes' => array(
 			'Diag Imm\'Hauts — Maxime Dillies',
-			'19 route nationale, 62690 Berles-Monchel',
+			dih_info( 'adresse' ),
 			'Pas de réception du public : je me déplace chez vous',
 			'Certifié Bureau Veritas (organisme accrédité par le Cofrac)',
 			'RC professionnelle diagnostic immobilier',

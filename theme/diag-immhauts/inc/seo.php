@@ -179,6 +179,12 @@ function dih_seo_balises() {
 		if ( isset( $donnees['email'] ) ) {
 			$donnees['email'] = dih_info( 'email' );
 		}
+		// Adresse « rue, code postal commune » (Coordonnées) ; sinon celle des contenus.
+		if ( isset( $donnees['address'] ) && preg_match( '/^(.+),\s*(\d{5})\s+(.+)$/u', dih_info( 'adresse' ), $dih_adr ) ) {
+			$donnees['address']['streetAddress']   = trim( $dih_adr[1] );
+			$donnees['address']['postalCode']      = $dih_adr[2];
+			$donnees['address']['addressLocality'] = trim( $dih_adr[3] );
+		}
 		dih_seo_jsonld( $donnees );
 	}
 }

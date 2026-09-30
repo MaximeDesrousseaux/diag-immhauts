@@ -2,10 +2,10 @@
 /**
  * Remplit les contenus modifiables de l'admin avec les textes actuels du thème
  * (inc/contenus/*.php), pour que l'admin montre les textes en place au lieu de
- * champs vides : avis de l'accueil, FAQ des 15 pages, haut de page et repères des
- * 12 fiches, bloc « 4 étapes » des fiches, de Nos diagnostics et de Qui suis-je, haut
- * de page des six pages uniques et textes des pages décrites dans dih_core_textes()
- * (plugin, inc/textes-pages.php).
+ * champs vides : coordonnées du site, avis de l'accueil, FAQ des 15 pages, haut de
+ * page et repères des 12 fiches, bloc « 4 étapes » des fiches, de Nos diagnostics et
+ * de Qui suis-je, textes des pages décrites dans dih_core_textes() (plugin,
+ * inc/textes-pages.php).
  *
  * Usage : wp eval-file outils/importer-contenus.php
  *         wp eval-file outils/importer-contenus.php forcer   (réécrit aussi les champs déjà remplis)
@@ -73,6 +73,20 @@ if ( ! $dih_forcer && get_field( 'avis_liste', 'option' ) ) {
 	}
 	update_field( 'field_dih_avis_liste', $lignes, 'option' );
 	printf( "Avis : %d importés.\n", count( $lignes ) );
+}
+
+// Coordonnées (page d'options) -------------------------------------------------------
+if ( function_exists( 'dih_core_coordonnees' ) ) {
+	$lignes = array();
+	foreach ( array_keys( dih_core_coordonnees() ) as $cle ) {
+		$actuel = get_field( 'coord_' . $cle, 'option' );
+		if ( ! $dih_forcer && is_string( $actuel ) && '' !== trim( $actuel ) ) {
+			continue;
+		}
+		update_field( 'field_dih_coord_' . $cle, dih_core_coordonnee_theme( $cle ), 'option' );
+		$lignes[] = $cle;
+	}
+	echo $lignes ? 'Coordonnées : importées (' . implode( ', ', $lignes ) . ").\n" : "Coordonnées : déjà remplies, inchangées.\n";
 }
 
 // FAQ des pages ----------------------------------------------------------------------

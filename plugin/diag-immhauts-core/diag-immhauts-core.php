@@ -26,5 +26,6 @@ require DIH_CORE_DIR . 'inc/acf.php';         // point d'accroche des champs, bl
 require DIH_CORE_DIR . 'inc/personnalisation.php'; // page d'options « Personnalisation », formulaires, réglages de page
 require DIH_CORE_DIR . 'inc/contenus-modifiables.php'; // avis et FAQ modifiables dans l'admin
 require DIH_CORE_DIR . 'inc/textes-pages.php'; // textes des pages uniques, section par section
+require DIH_CORE_DIR . 'inc/coordonnees.php'; // téléphone, adresse et e-mails modifiables
 require DIH_CORE_DIR . 'inc/communes.php';    // table des codes postaux de « Vérifier ma commune »
 require DIH_CORE_DIR . 'inc/redirections.php'; // plan de migration : anciennes adresses en 301
