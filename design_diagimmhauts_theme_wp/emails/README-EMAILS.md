@@ -1,10 +1,11 @@
 # E-mails des formulaires
 
-Version : **1.14**. Maquette de référence : `E-mails formulaires - propositions.dc.html` (piste **1a** retenue pour le client, **1c** pour Max ; 1b non retenue). Réglage `formulaire` de la maquette = aperçu des 3 contenus.
+Version : **1.14c**. Maquette de référence : `E-mails formulaires - propositions.dc.html` (piste **1a** retenue pour le client, **1c** pour Max ; 1b non retenue). Réglage `formulaire` de la maquette = aperçu des 3 contenus.
 
 ## Fichiers
 - `email-client.html` : accusé de réception client, prêt à l'envoi (tableaux, styles en ligne, 600 px, Arial). Exemple rempli = formulaire devis.
 - `email-max.html` : notification interne, même technique. Exemple rempli = formulaire devis.
+- `email-client-apercu.html`, `email-max-apercu.html` : **aperçus** (valeurs d'exemple, images locales) pour contrôler le rendu — ne pas utiliser pour l'envoi.
 - `signature-maxime.png` (180 px, affichée à 60), `logo-email-blanc.png` (168 × 48, affiché à 56 × 16) : à servir en **https** depuis le thème. Pas de SVG ni de WebP dans les e-mails (Gmail / Outlook).
 
 ## Principe : un gabarit, un bloc variable
@@ -15,8 +16,10 @@ Chaque formulaire Fluent Forms a ses 2 notifications (client + Max). Le HTML est
 |---|---|---|---|
 | Objet | Je vous rappelle très vite — Diag Imm'Hauts | Votre demande de devis est bien arrivée | Votre liste de diagnostics et la suite |
 | Préheader | Votre demande de rappel est bien arrivée. Je vous appelle sous 24 h ouvrées. | Devis détaillé sous 24 h ouvrées. Récapitulatif de votre demande à l'intérieur. | La liste calculée par le simulateur, et votre devis ferme sous 24 h ouvrées. |
-| Intro | … Je vous appelle sous 24 heures ouvrées, souvent le jour même, entre deux interventions. | … Je vous envoie un prix détaillé sous 24 heures ouvrées. | Merci d'avoir utilisé le simulateur. Je vérifie la liste ci-dessous et vous envoie un devis ferme sous 24 heures ouvrées. |
-| Récap | Nom, Téléphone, Message | Bien (type · surface · année), Commune, Motif, Échéance, Diagnostics | Projet, Bien (type · année · commune), Chauffage, Obligatoires |
+| Titre | Votre demande est bien arrivée (identique pour les 3) | idem | idem |
+| Salutation | Bonjour {Prénom Nom}, (identique pour les 3) | idem | idem |
+| Intro | Merci pour votre demande de rappel. Je vous appelle sous 24 heures ouvrées, souvent le jour même, entre deux interventions. | Merci pour votre demande de devis. Je vous envoie un prix détaillé sous 24 heures ouvrées. | Merci d'avoir utilisé le simulateur. Je vérifie la liste ci-dessous et vous envoie un devis ferme sous 24 heures ouvrées. |
+| Récap | Nom, Téléphone, Message | Bien (type · surface · année), Commune, Motif, Échéance, Diagnostics | Projet, Bien (type · année · commune), Installations (cases cochées : copropriété, électricité / gaz de plus de 15 ans, zones termites / mérule), Obligatoires |
 | 3 étapes | appel sous 24 h · point sur le bien · devis ferme puis RDV sous 48 h | étude · devis sous 24 h · RDV 48 h + rapport 48 h | vérification · devis ferme sous 24 h · RDV 48 h + rapport 48 h |
 
 Textes exacts : dans la logique de la maquette (`renderVals`). Une ligne de récap dont le champ est vide est **omise**.

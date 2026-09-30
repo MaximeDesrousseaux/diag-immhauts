@@ -26,8 +26,9 @@
       <table style="width:600px;border-collapse:collapse;background:#f5f8ef;margin-top:-12px;"><tbody><tr><td style="padding:24px 0;">
         <table style="width:560px;margin:0 auto;border-collapse:collapse;background:#fefffc;border:1px solid #e6ebdd;border-radius:16px;"><tbody>
           <tr><td style="padding:32px 32px 8px;">
-            <div style="font-size:26px;line-height:1.25;font-weight:700;color:#123f24;">Bien reçu, Claire&nbsp;!</div>
-            <div style="margin-top:12px;font-size:15.5px;line-height:1.6;color:#17331f;">{{ introClient }}</div>
+            <div style="font-size:26px;line-height:1.25;font-weight:700;color:#123f24;">Votre demande est bien arrivée</div>
+            <div style="margin-top:16px;font-size:15.5px;line-height:1.6;color:#17331f;">Bonjour Claire Vasseur,</div>
+            <div style="margin-top:8px;font-size:15.5px;line-height:1.6;color:#17331f;">{{ introClient }}</div>
           </td></tr>
           <tr><td style="padding:16px 32px;">
             <table style="width:100%;border-collapse:collapse;background:#f5f8ef;border-radius:10px;"><tbody>
@@ -43,7 +44,7 @@
           <tr><td style="padding:24px 32px 8px;font-size:15.5px;line-height:1.6;color:#17331f;">Bonne journée, et à très vite,</td></tr>
           <tr><td style="padding:8px 32px 32px;">
             <table style="border-collapse:collapse;"><tbody><tr>
-              <td style="width:72px;vertical-align:middle;"><img src="img/maxime_tel.webp" alt="Maxime Dillies" width="60" height="60" style="display:block;width:60px;height:60px;border-radius:999px;object-fit:cover;object-position:50% 20%;background:#e6ebdd;"></td>
+              <td style="width:72px;vertical-align:middle;"><img src="emails/signature-maxime.png" alt="Maxime Dillies" width="60" height="60" style="display:block;width:60px;height:60px;"></td>
               <td style="vertical-align:middle;font-size:14px;line-height:1.5;color:#17331f;"><b style="font-size:15.5px;">Maxime Dillies</b><br><span style="color:#5e6d55;">Diagnostiqueur certifié Bureau Veritas</span><br><a href="tel:+33635884300" style="color:#1e5b34;font-weight:700;text-decoration:none;">06 35 88 43 00</a></td>
             </tr></tbody></table>
           </td></tr>
@@ -69,8 +70,9 @@
       <table style="width:600px;border-collapse:collapse;background:#f5f8ef;margin-top:-12px;"><tbody><tr><td style="padding:24px 0;">
         <table style="width:560px;margin:0 auto;border-collapse:collapse;background:#fefffc;border:1px solid #e6ebdd;border-radius:16px;"><tbody>
           <tr><td style="padding:32px 32px 8px;">
-            <div style="font-size:26px;line-height:1.25;font-weight:700;color:#123f24;">Bien reçu, Claire&nbsp;!</div>
-            <div style="margin-top:12px;font-size:15.5px;line-height:1.6;color:#17331f;">{{ introClient }}</div>
+            <div style="font-size:26px;line-height:1.25;font-weight:700;color:#123f24;">Votre demande est bien arrivée</div>
+            <div style="margin-top:16px;font-size:15.5px;line-height:1.6;color:#17331f;">Bonjour Claire Vasseur,</div>
+            <div style="margin-top:8px;font-size:15.5px;line-height:1.6;color:#17331f;">{{ introClient }}</div>
           </td></tr>
           <tr><td style="padding:16px 32px;">
             <table style="width:100%;border-collapse:collapse;background:#f5f8ef;border-radius:10px;"><tbody>
@@ -142,7 +144,7 @@ class Component extends DCLogic {
         label: 'demande de rappel',
         subject: "Je vous rappelle très vite — Diag Imm'Hauts",
         pre: "Votre demande de rappel est bien arrivée. Je vous appelle sous 24 h ouvrées.",
-        intro: "Votre demande de rappel est bien arrivée. Je vous appelle sous 24 heures ouvrées, souvent le jour même, entre deux interventions.",
+        intro: "Merci pour votre demande de rappel. Je vous appelle sous 24 heures ouvrées, souvent le jour même, entre deux interventions.",
         recap: [['Nom','Claire Vasseur'],['Téléphone','06 12 34 56 78'],['Message','Vente d\u2019une maison à Arras, quels diagnostics ?']],
         steps: ["Je vous appelle sous 24 h ouvrées.","On fait le point ensemble sur votre bien et les diagnostics utiles.","Je vous envoie un devis ferme, puis on cale un rendez-vous sous 48 h."],
         tag: 'Rappel demandé', line: 'Rappel demandé depuis la fiche DPE', src: 'la popup « Demande de rappel »',
@@ -152,7 +154,7 @@ class Component extends DCLogic {
         label: 'demande de devis (Contact)',
         subject: "Votre demande de devis est bien arrivée",
         pre: "Devis détaillé sous 24 h ouvrées. Récapitulatif de votre demande à l\u2019intérieur.",
-        intro: "Votre demande de devis est bien arrivée. Je vous envoie un prix détaillé sous 24 heures ouvrées.",
+        intro: "Merci pour votre demande de devis. Je vous envoie un prix détaillé sous 24 heures ouvrées.",
         recap: [['Bien','Maison · 95 m² · 1968'],['Commune','Arras (62000)'],['Motif','Vente'],['Échéance','Sous 1 mois'],['Diagnostics','DPE, amiante, plomb, électricité']],
         steps: ["J\u2019étudie votre demande et vérifie la liste des diagnostics obligatoires.","Vous recevez un devis détaillé sous 24 h ouvrées.","Une fois validé, rendez-vous sous 48 h et rapport sous 48 h."],
         tag: 'Demande de devis', line: 'Particulier · Maison 95 m² · Arras (62000)', src: 'le formulaire Contact',
@@ -163,10 +165,10 @@ class Component extends DCLogic {
         subject: "Votre liste de diagnostics et la suite",
         pre: "La liste calculée par le simulateur, et votre devis ferme sous 24 h ouvrées.",
         intro: "Merci d\u2019avoir utilisé le simulateur. Je vérifie la liste ci-dessous et vous envoie un devis ferme sous 24 heures ouvrées.",
-        recap: [['Projet','Vente'],['Bien','Maison · 1968 · Arras (62000)'],['Chauffage','Gaz'],['Obligatoires','DPE, amiante, plomb, électricité, gaz, ERP']],
+        recap: [['Projet','Vente'],['Bien','Maison · 1968 · Arras (62000)'],['Installations','Électricité et gaz de plus de 15 ans'],['Obligatoires','DPE, amiante, plomb, électricité, gaz, ERP']],
         steps: ["Je vérifie la liste calculée par le simulateur.","Vous recevez un devis ferme sous 24 h ouvrées.","Une fois validé, rendez-vous sous 48 h et rapport sous 48 h."],
         tag: 'Simulateur', line: 'Vente · Maison 1968 · Arras (62000)', src: 'le simulateur',
-        max: [['Téléphone','06 12 34 56 78'],['E-mail','claire.vasseur@exemple.fr'],['Projet','Vente'],['Type de bien','Maison'],['Année de construction','1968'],['Commune','Arras (62000) · en zone'],['Chauffage','Gaz'],['Diagnostics calculés','DPE, amiante, plomb, électricité, gaz, ERP'],['Page d’origine','Simulateur · arrivé depuis Nos diagnostics']], m: ''
+        max: [['Téléphone','06 12 34 56 78'],['E-mail','claire.vasseur@exemple.fr'],['Projet','Vente'],['Type de bien','Maison'],['Année de construction','1968'],['Commune','Arras (62000) · en zone'],['Installations','Électricité et gaz de plus de 15 ans'],['Diagnostics calculés','DPE, amiante, plomb, électricité, gaz, ERP'],['Page d’origine','Simulateur · arrivé depuis Nos diagnostics']], m: ''
       }
     }[f] || null;
     const d = D;

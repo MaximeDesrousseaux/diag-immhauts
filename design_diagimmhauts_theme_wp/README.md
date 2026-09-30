@@ -1,6 +1,6 @@
 # Passation : thème WordPress Diag Imm'Hauts
 
-Version : **1.14** — les messages de mise à jour sont titrés « Maquettes 1.x ».
+Version : **1.14c** — les messages de mise à jour sont titrés « Maquettes 1.x ».
 
 ## Bloc « rappel » (avant le footer)
 Deux boutons : appel + formulaire. **Bureau et tablette** : le formulaire (demande de rappel / devis) est le bouton principal vert, placé en premier ; « Appeler le 06… » est le secondaire (contour blanc). **Téléphone** : l'ordre s'inverse, l'appel passe en premier avec le style principal. Boutons secondaires : 26 px de rembourrage horizontal minimum (l'icône qui apparaît au survol doit avoir de la place).

@@ -2,7 +2,7 @@
 
 **Règle de travail : ne jamais créer de nouvelle version ni de message pour Claude Code sans demande explicite. Exception : dès qu'un envoi à Claude Code demande de copier un dossier dans le dépôt, fournir automatiquement le lien de téléchargement de ce dossier avec le message.**
 
-**Versionnage : `1.x`** (plus de « vN » seul). Version courante : **1.14** (`checkpoints/v1.14 - livrables/`). Prochaine : **1.15**. Même numéro partout : dossier de sauvegarde `checkpoints/v1.x - …/`, libellé des liens de téléchargement, en-tête du message pour Claude Code (« Maquettes 1.x »), ligne `Version :` du README du paquet. Les corrections s'appliquent aux maquettes, au paquet et au dossier client ; le versionnage attend le feu vert.
+**Versionnage : `1.x`** (plus de « vN » seul). Version courante : **1.14c** (`checkpoints/v1.14c - livrables/`). Prochaine : **1.15**. Même numéro partout : dossier de sauvegarde `checkpoints/v1.x - …/`, libellé des liens de téléchargement, en-tête du message pour Claude Code (« Maquettes 1.x »), ligne `Version :` du README du paquet. Les corrections s'appliquent aux maquettes, au paquet et au dossier client ; le versionnage attend le feu vert.
 
 ## État
 Refonte appliquée sur l'accueil, `Nos diagnostics`, `Professionnels`, le `Simulateur` et les
@@ -36,7 +36,7 @@ toitures en SVG en ligne (`dih-lg-a/b`) ; sous-titre ciblé par `.dih-hdr-tag` ;
 s'il n'y a pas de `a.dih-cta` dans le hero. Accueil mobile : barre du hero (déjà transparente → blanche).
 
 ## E-mails des formulaires — 1.14
-`E-mails formulaires - propositions.dc.html` : **1a** retenue (client : pas de logo en tête, signature photo de Max + titre + téléphone, « Bonne journée, et à très vite », bandeau vert en pied avec logo complet blanc / vert clair cliquable et avis Google à droite — dynamiques, repli « Certifié Bureau Veritas » en vert clair ; aucun bouton d'appel), **1c** pour Max (une ligne par champ, diagnostics sur une ligne, « Page d'origine », boutons Appeler / Répondre en pilules **sous** les infos). Un gabarit par destinataire, bloc variable par formulaire (tweak `formulaire`). Paquet : `emails/` (2 HTML prêts à l'envoi, 2 PNG, `README-EMAILS.md`).
+`E-mails formulaires - propositions.dc.html` : **1a** retenue (client : titre neutre « Votre demande est bien arrivée » puis « Bonjour Prénom Nom, » — pas de prénom seul, trop familier —, pas de logo en tête, signature photo de Max + titre + téléphone, « Bonne journée, et à très vite », bandeau vert en pied avec logo complet blanc / vert clair cliquable et avis Google à droite — dynamiques, repli « Certifié Bureau Veritas » en vert clair ; aucun bouton d'appel), **1c** pour Max (une ligne par champ, diagnostics sur une ligne, « Page d'origine », boutons Appeler / Répondre en pilules **sous** les infos). Un gabarit par destinataire, bloc variable par formulaire (tweak `formulaire`). Paquet : `emails/` (2 HTML prêts à l'envoi, 2 PNG, `README-EMAILS.md`). 1.14b : + `email-client-apercu.html` / `email-max-apercu.html` (valeurs d'exemple, images locales, contrôle visuel seulement). 1.14c : titre neutre + « Bonjour Prénom Nom, », passage en pile sous 460 px (et non 620), récap simulateur « Installations » (cases cochées — le simulateur ne demande pas le chauffage) ; e-mails affichés dans le dossier client (section 03).
 
 ## Carrousel des avis (accueil)
 Flèches bureau/tablette **sous** le carrousel, alignées à droite, chevrons sans rond (`revPrev`/`revNext`, `__revSync` sur le `scroll`, seuil 24 px) : grisées à 0,3 et désactivées en début / fin ; masquées sur téléphone.
