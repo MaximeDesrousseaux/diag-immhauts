@@ -216,7 +216,6 @@ Trois formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
 | Variante « Simulateur » des e-mails | Les réponses du simulateur partent avec la demande (champs cachés) ; ligne « Installations » : les libellés des cases cochées, tels que le simulateur les affiche (la maquette les résume : « Électricité et gaz de plus de 15 ans ») |
 | « Arrivé depuis » (e-mail de Max) | Nom de la page précédente pris dans le dernier élément de son fil d'Ariane (« Amiante », « Nos diagnostics »), « Accueil » pour l'accueil |
 | Libellés du détail de Max | Ceux de la maquette (« Surface », « Commune », « Échéance », « Diagnostics ») plutôt que ceux du formulaire |
-| Groupes du devis | Une seule grille (colonnes de 220 px au moins) pour les trois groupes ; la maquette passe à 250 px pour le deuxième, ce qui ne change la disposition qu'entre 900 et 1150 px de large |
 | Liens `#rappel` (FAQ, CTA de section) | Ouvrent la popup de rappel, comme le script des maquettes ; sans JS, ils descendent au bloc « rappel » |
 | Illustrations des résultats du simulateur | La maquette les retourne en miroir (`scaleX(-1)`) : supprimé, conformément au README v10 (aucun miroir CSS) |
 | Note « Cette liste est indicative » du simulateur | Placée dans le panneau vert du dossier, comme la maquette |

@@ -349,11 +349,31 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
 }
 
 // --- Devis (page Contact) ------------------------------------------------------------
+// Groupes du devis (maquette Contact) : coordonnées et reste en colonnes de 220 px au
+// moins, le bien (2e groupe) en colonnes de 250 px au moins. Fluent Forms rend tous
+// les champs dans une seule grille : là où les deux règles donnent un nombre de
+// colonnes différent, trame commune où chaque champ couvre la largeur de sa règle
+// (n colonnes de 220 et m de 250 → n × m pistes). Seuils : largeur du formulaire
+// W où (W + 16) / 236 et (W + 16) / 266 changent de valeur entière.
+$devis-bien: '.dih-champ--type_bien, .dih-champ--surface, .dih-champ--annee, .dih-champ--commune, .dih-champ--motif, .dih-champ--echeance';
+$devis-coordonnees: '.dih-champ--nom, .dih-champ--telephone, .dih-champ--email, .dih-champ--qualite';
+
 .c-form--devis .fluentform {
+  container: devis / inline-size;
+
   fieldset {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
     gap: 16px;
+  }
+
+  // [ largeur min, largeur max exclue, colonnes de 220, colonnes de 250 ]
+  @each $min, $max, $n, $m in (456px, 516px, 2, 1), (692px, 782px, 3, 2), (928px, 1048px, 4, 3) {
+    @container devis (width >= #{$min}) and (width < #{$max}) {
+      fieldset { grid-template-columns: repeat($n * $m, minmax(0, 1fr)); }
+      #{$devis-coordonnees} { grid-column: span $m; }
+      #{$devis-bien} { grid-column: span $n; }
+    }
   }
 
   .dih-champ--separateur,
