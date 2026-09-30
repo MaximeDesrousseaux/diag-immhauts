@@ -113,6 +113,8 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
   - **Actualités** (page des articles) : haut de page, libellés des articles (pastille, durée de
     lecture, boutons), articles « à paraître », encart final. Les articles eux-mêmes restent dans
     Articles ;
+  - **12 fiches** (encart « Bloc final », commun au gabarit, textes propres à chaque fiche) et
+    **simulateur** : titre et texte du bloc de rappel en bas de page ;
   - **Mentions légales** : chapeau et date de mise à jour, titre, paragraphes et informations en liste
     de chaque rubrique ; `{a completer: …}` reste surligné, `{adresse}`, `{telephone}` et `{email}`
     reprennent les coordonnées du site.

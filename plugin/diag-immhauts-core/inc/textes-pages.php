@@ -463,6 +463,22 @@ function dih_core_textes() {
 				),
 			),
 		),
+		// Les 12 fiches : un seul encart sur leur gabarit commun, des textes propres à chacune.
+		'fiche'           => array(
+			'lieu'     => array( 'page_template', 'page-templates/fiche-diagnostic.php' ),
+			'fichiers' => array_values( preg_grep( '/^fiche-/', array_keys( dih_core_pages_faq() ) ) ),
+			'ordre'    => 30,
+			'sections' => array(
+				'rappel' => array(
+					'titre'  => 'Bloc final',
+					'aide'   => 'Le bloc « Besoin d’un… ? » en bas de la fiche ; ses boutons restent ceux du thème.',
+					'champs' => array(
+						'titre' => array( 'Titre', 'text' ),
+						'texte' => array( 'Texte', 'textarea' ),
+					),
+				),
+			),
+		),
 		'simulateur'      => array(
 			'lieu'     => array( 'page_template', 'page-templates/simulateur.php' ),
 			'sections' => array(
@@ -474,6 +490,13 @@ function dih_core_textes() {
 						'titre_2' => array( 'Titre, après le mot en vert', 'text' ),
 						'chapeau' => array( 'Chapeau', 'textarea' ),
 						'cta'     => array( 'Bouton principal', 'text' ),
+					),
+				),
+				'rappel' => array(
+					'titre'  => 'Bloc final',
+					'champs' => array(
+						'titre' => array( 'Titre', 'text' ),
+						'texte' => array( 'Texte', 'textarea' ),
 					),
 				),
 			),
