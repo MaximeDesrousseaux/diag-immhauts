@@ -1,8 +1,9 @@
 <?php
 /**
  * Notification interne de Max — design_diagimmhauts_theme_wp/emails/email-max.html
- * (piste 1c), remplie par inc/emails.php : une ligne par champ du formulaire, page
- * d'origine, message, boutons Appeler / Répondre sous les infos.
+ * (piste 1c, 1.14c), remplie par inc/emails.php : une ligne par champ du formulaire,
+ * page d'origine, message, boutons Appeler / Répondre sous les infos (côte à côte
+ * au-dessus de 460 px).
  *
  * @package DiagImmHauts
  */
@@ -33,7 +34,8 @@ if ( $dih_m['email'] ) {
 <meta name="supported-color-schemes" content="light dark">
 <title><?php echo esc_html( $dih_m['v']['tag'] ); ?></title>
 <style>
-@media (max-width:620px){.w{width:100% !important}.px{padding-left:16px !important;padding-right:16px !important}.k{width:120px !important}.bt td{display:block !important;width:100% !important}.bt .sp{height:12px !important}}
+@media (max-width:620px){.w{width:100% !important}}
+@media (max-width:460px){.px{padding-left:16px !important;padding-right:16px !important}.k{width:120px !important}.bt td{display:block !important;width:100% !important}.bt .sp{height:12px !important}}
 </style>
 </head>
 <body style="margin:0;padding:0;background:#f5f8ef;">

@@ -1,7 +1,8 @@
 <?php
 /**
  * Accusé de réception du client — design_diagimmhauts_theme_wp/emails/email-client.html
- * (piste 1a), rempli par inc/emails.php. Tableaux et styles en ligne, 560 px, Arial.
+ * (piste 1a, 1.14c), rempli par inc/emails.php. Tableaux et styles en ligne, 560 px,
+ * Arial ; disposition empilée sous 460 px seulement.
  *
  * @package DiagImmHauts
  */
@@ -22,10 +23,11 @@ $dih_police = 'font-family:Arial,Helvetica,sans-serif;';
 <meta name="x-apple-disable-message-reformatting">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
-<title><?php echo esc_html( isset( $dih_v['objet'] ) ? $dih_v['objet'] : '' ); ?></title>
+<title><?php echo esc_html( $dih_t['titre_mail'] ); ?></title>
 <!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
 <style>
-@media (max-width:620px){.w{width:100% !important}.px{padding-left:20px !important;padding-right:20px !important}.k{width:110px !important}.st td{display:block !important;width:100% !important;text-align:left !important}.st .r{padding-top:12px !important}}
+@media (max-width:620px){.w{width:100% !important}}
+@media (max-width:460px){.px{padding-left:20px !important;padding-right:20px !important}.k{width:110px !important}.st td{display:block !important;width:100% !important;text-align:left !important}.st .r{padding-top:12px !important}}
 </style>
 </head>
 <body style="margin:0;padding:0;background:#f5f8ef;">
@@ -35,8 +37,9 @@ $dih_police = 'font-family:Arial,Helvetica,sans-serif;';
 
 <table role="presentation" class="w" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;background:#fefffc;border:1px solid #e6ebdd;border-radius:16px;">
 	<tr><td class="px" style="padding:32px 32px 8px;<?php echo $dih_police; // phpcs:ignore ?>">
-		<div style="font-size:26px;line-height:32px;mso-line-height-rule:exactly;font-weight:bold;color:#123f24;"><?php echo esc_html( sprintf( $dih_t['salut'], $dih_m['prenom'] ) ); ?></div>
-		<div style="margin-top:12px;font-size:15.5px;line-height:24px;mso-line-height-rule:exactly;color:#17331f;"><?php echo esc_html( isset( $dih_v['intro'] ) ? $dih_v['intro'] : '' ); ?></div>
+		<div style="font-size:26px;line-height:32px;mso-line-height-rule:exactly;font-weight:bold;color:#123f24;"><?php echo esc_html( $dih_t['titre_mail'] ); ?></div>
+		<div style="margin-top:16px;font-size:15.5px;line-height:24px;mso-line-height-rule:exactly;color:#17331f;"><?php echo esc_html( sprintf( $dih_t['salut'], $dih_m['nom'] ) ); ?></div>
+		<div style="margin-top:8px;font-size:15.5px;line-height:24px;mso-line-height-rule:exactly;color:#17331f;"><?php echo esc_html( isset( $dih_v['intro'] ) ? $dih_v['intro'] : '' ); ?></div>
 	</td></tr>
 
 	<?php if ( $dih_m['recap'] ) : ?>

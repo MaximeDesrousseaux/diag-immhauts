@@ -2,7 +2,7 @@
 /**
  * Textes des e-mails des formulaires, relevés sur la maquette « E-mails formulaires -
  * propositions » (renderVals) et sur les gabarits de design_diagimmhauts_theme_wp/emails/
- * (maquettes 1.14). Piste 1a pour le client, 1c pour Max.
+ * (maquettes 1.14c). Piste 1a pour le client, 1c pour Max.
  *
  * Trois variantes par destinataire : rappel (formulaire court), devis (Contact),
  * simulateur (formulaire court envoyé depuis le simulateur) ; le compte partenaire
@@ -18,7 +18,8 @@ $dih_nb = "\u{00A0}";
 return array(
 	// Accusé de réception du client (email-client.html)
 	'client'     => array(
-		'salut'     => 'Bien reçu, %s' . $dih_nb . '!',
+		'titre_mail' => 'Votre demande est bien arrivée',
+		'salut'     => 'Bonjour %s,',
 		'recap'     => 'Votre demande',
 		'erreur'    => 'Une erreur' . $dih_nb . '? Répondez simplement à cet e-mail.',
 		'suite'     => 'La suite',
@@ -53,7 +54,7 @@ return array(
 		'rappel'     => array(
 			'objet'  => 'Je vous rappelle très vite — Diag Imm’Hauts',
 			'pre'    => 'Votre demande de rappel est bien arrivée. Je vous appelle sous 24 h ouvrées.',
-			'intro'  => 'Votre demande de rappel est bien arrivée. Je vous appelle sous 24 heures ouvrées, souvent le jour même, entre deux interventions.',
+			'intro'  => 'Merci pour votre demande de rappel. Je vous appelle sous 24 heures ouvrées, souvent le jour même, entre deux interventions.',
 			'etapes' => array(
 				'Je vous appelle sous 24 h ouvrées.',
 				'On fait le point ensemble sur votre bien et les diagnostics utiles.',
@@ -64,7 +65,7 @@ return array(
 		'devis'      => array(
 			'objet'  => 'Votre demande de devis est bien arrivée',
 			'pre'    => 'Devis détaillé sous 24 h ouvrées. Récapitulatif de votre demande à l’intérieur.',
-			'intro'  => 'Votre demande de devis est bien arrivée. Je vous envoie un prix détaillé sous 24 heures ouvrées.',
+			'intro'  => 'Merci pour votre demande de devis. Je vous envoie un prix détaillé sous 24 heures ouvrées.',
 			'etapes' => array(
 				'J’étudie votre demande et vérifie la liste des diagnostics obligatoires.',
 				'Vous recevez un devis détaillé sous 24 h ouvrées.',
@@ -105,7 +106,7 @@ return array(
 		'simulateur' => array(
 			'Projet'       => array( 'sim_projet' ),
 			'Bien'         => array( 'type_bien', 'sim_annee', 'commune' ),
-			'Précisions'   => array( 'sim_precisions' ),
+			'Installations' => array( 'sim_precisions' ),
 			'Obligatoires' => array( 'sim_obligatoires' ),
 		),
 	),
@@ -117,6 +118,7 @@ return array(
 		'echeance'    => 'Échéance',
 		'diagnostics' => 'Diagnostics',
 		'dossiers'    => 'Dossiers par mois',
+		'sim_precisions' => 'Installations',
 	),
 
 	// Détail de Max : champs dans l'ordre (vide : ordre du formulaire).

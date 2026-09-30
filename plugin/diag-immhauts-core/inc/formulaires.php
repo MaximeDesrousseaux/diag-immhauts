@@ -117,7 +117,7 @@ function dih_core_formulaires_definitions() {
 				// Réponses du simulateur, quand la demande part de sa page (variante « Simulateur » des e-mails).
 				array( 'type' => 'cache', 'nom' => 'sim_projet', 'label' => 'Projet' ),
 				array( 'type' => 'cache', 'nom' => 'sim_annee', 'label' => 'Année de construction' ),
-				array( 'type' => 'cache', 'nom' => 'sim_precisions', 'label' => 'Précisions' ),
+				array( 'type' => 'cache', 'nom' => 'sim_precisions', 'label' => 'Installations' ),
 				array( 'type' => 'cache', 'nom' => 'sim_obligatoires', 'label' => 'Obligatoires' ),
 				array( 'type' => 'cache', 'nom' => 'sim_diagnostics', 'label' => 'Diagnostics calculés' ),
 				$provenance,
