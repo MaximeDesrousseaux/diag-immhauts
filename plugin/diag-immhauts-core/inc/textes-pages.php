@@ -408,6 +408,61 @@ function dih_core_textes() {
 			'lieu'     => array( 'page_template', 'page-templates/mentions.php' ),
 			'sections' => dih_core_textes_mentions(),
 		),
+		'actualites'      => array(
+			'lieu'     => array( 'page_type', 'posts_page' ),
+			'sections' => array(
+				'hero'       => array(
+					'titre'  => 'Haut de page',
+					'champs' => array(
+						'accent'  => array( 'Titre, mot en vert', 'text' ),
+						'titre'   => array( 'Titre, suite', 'text' ),
+						'chapeau' => array( 'Chapeau', 'textarea' ),
+					),
+				),
+				'une'        => array(
+					'titre'  => 'Articles',
+					'aide'   => 'Les articles eux-mêmes se rédigent dans Articles ; l’article « à la une » est l’article épinglé. <code>%s</code> est remplacé par la durée de lecture de l’article.',
+					'champs' => array(
+						'etiquette' => array( 'Article à la une : pastille', 'text' ),
+						'lecture'   => array( 'Article à la une : durée de lecture', 'text' ),
+						'cta'       => array( 'Article à la une : bouton', 'text' ),
+					),
+				),
+				'liste'      => array(
+					'titre'  => 'Autres articles',
+					'champs' => array(
+						'lecture' => array( 'Durée de lecture', 'text', '<code>%s</code> : nombre de minutes.' ),
+						'cta'     => array( 'Lien vers l’article', 'text' ),
+					),
+				),
+				'a_paraitre' => array(
+					'titre'  => 'À paraître',
+					'champs' => array(
+						'titre' => array( 'Titre', 'text' ),
+						'texte' => array( 'Sous-titre', 'text' ),
+					),
+					'listes' => array(
+						'cartes' => array(
+							'Articles à paraître (illustration fixe, par position)',
+							array(
+								'quand' => array( 0, 'Date' ),
+								'titre' => array( 2, 'Titre' ),
+								'texte' => array( 3, 'Texte', 'textarea' ),
+							),
+							2,
+						),
+					),
+				),
+				'appel'      => array(
+					'titre'  => 'Encart final',
+					'champs' => array(
+						'titre' => array( 'Titre', 'text' ),
+						'texte' => array( 'Texte', 'textarea' ),
+						'cta'   => array( 'Bouton', 'text' ),
+					),
+				),
+			),
+		),
 		'simulateur'      => array(
 			'lieu'     => array( 'page_template', 'page-templates/simulateur.php' ),
 			'sections' => array(
@@ -904,6 +959,11 @@ function dih_core_contenus_textes( $donnees, $page ) {
 		}
 
 		dih_core_chemin_ecrire( $donnees, $base, $bloc );
+	}
+
+	// Actualités : la suite du titre suit le mot en vert, après une espace.
+	if ( 'actualites' === $page && isset( $donnees['hero']['titre'] ) ) {
+		$donnees['hero']['titre'] = ' ' . ltrim( $donnees['hero']['titre'] );
 	}
 
 	// Simulateur : le mot en vert est collé aux deux morceaux, espaces compris.

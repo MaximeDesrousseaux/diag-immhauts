@@ -110,6 +110,9 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
   - **Qui suis-je** : bandeau de confiance, parcours (paragraphes, frise des années, textes des cinq
     citations — celle affichée se choisit dans l'encart « Qui suis-je »), engagements, certifications
     (garanties et domaines), bloc final ;
+  - **Actualités** (page des articles) : haut de page, libellés des articles (pastille, durée de
+    lecture, boutons), articles « à paraître », encart final. Les articles eux-mêmes restent dans
+    Articles ;
   - **Mentions légales** : chapeau et date de mise à jour, titre, paragraphes et informations en liste
     de chaque rubrique ; `{a completer: …}` reste surligné, `{adresse}`, `{telephone}` et `{email}`
     reprennent les coordonnées du site.

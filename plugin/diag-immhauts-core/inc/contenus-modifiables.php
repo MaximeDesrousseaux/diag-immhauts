@@ -43,7 +43,8 @@ function dih_core_pages_faq() {
 
 /**
  * Toutes les pages à contenus modifiables : pages à FAQ, plus Qui suis-je, Contact,
- * le simulateur et les mentions légales (textes de la page, étapes de Qui suis-je).
+ * le simulateur, les mentions légales et les actualités (textes de la page, étapes de
+ * Qui suis-je).
  *
  * @return array<string, string> Fichier de contenus du thème => clé de page.
  */
@@ -53,6 +54,7 @@ function dih_core_pages() {
 		'contact'    => 'contact',
 		'simulateur' => 'simulateur',
 		'mentions'   => 'mentions',
+		'actualites' => 'actualites',
 	);
 }
 

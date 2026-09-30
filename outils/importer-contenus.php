@@ -102,6 +102,9 @@ $dih_page_id = function ( $cle ) use ( $dih_chemins ) {
 	if ( 'accueil' === $cle ) {
 		return (int) get_option( 'page_on_front' );
 	}
+	if ( 'actualites' === $cle && get_option( 'page_for_posts' ) ) {
+		return (int) get_option( 'page_for_posts' ); // page des articles
+	}
 	$page = get_page_by_path( trim( $dih_chemins[ $cle ], '/' ) );
 	return $page ? (int) $page->ID : 0;
 };
