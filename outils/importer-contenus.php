@@ -226,14 +226,11 @@ foreach ( dih_core_textes() as $dih_fichier => $dih_def ) {
 
 	foreach ( $dih_def['sections'] as $dih_sid => $dih_section ) {
 		$bloc = dih_core_chemin_lire( $c, dih_core_texte_base( $dih_sid, $dih_section ) );
-		foreach ( isset( $dih_section['champs'] ) ? $dih_section['champs'] : array() as $chemin => $champ ) {
-			list( $nom, $cle ) = dih_core_texte_champ( $dih_fichier, $dih_sid, $chemin );
-			$ecrire( $cle, $nom, (string) dih_core_chemin_lire( $bloc, $chemin ) );
-			++$tout;
-		}
-		foreach ( isset( $dih_section['listes'] ) ? $dih_section['listes'] : array() as $chemin => $liste ) {
-			list( $nom, $cle ) = dih_core_texte_champ( $dih_fichier, $dih_sid, $chemin );
-			$ecrire( $cle, $nom, dih_core_texte_lignes( dih_core_chemin_lire( $bloc, $chemin ), $liste[1] ) );
+		foreach ( dih_core_texte_elements( $dih_section ) as $dih_element ) {
+			list( $chemin, $genre, $def ) = $dih_element;
+			list( $nom, $cle )            = dih_core_texte_champ( $dih_fichier, $dih_sid, $chemin );
+			$defaut                       = dih_core_chemin_lire( $bloc, $chemin );
+			$ecrire( $cle, $nom, 'champ' === $genre ? (string) $defaut : dih_core_texte_lignes( $defaut, $def[1] ) );
 			++$tout;
 		}
 	}

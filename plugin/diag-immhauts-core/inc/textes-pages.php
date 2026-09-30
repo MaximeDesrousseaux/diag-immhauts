@@ -33,6 +33,8 @@ defined( 'ABSPATH' ) || exit;
  *     'aide'   => message en tête d'onglet (facultatif),
  *     'champs' => [ chemin => [ libellé, type (text, textarea), aide facultative ] ],
  *     'listes' => [ chemin => [ libellé, colonnes, max (0 : sans limite), aide facultative ] ],
+ *     (une liste peut aussi prendre place parmi les champs, sous le titre de sa carte :
+ *     [ libellé, 'liste', colonnes, max, aide ] dans 'champs')
  *   ] ],
  * ]
  *
@@ -504,6 +506,29 @@ function dih_core_texte_base( $id, $section ) {
 }
 
 /**
+ * Éléments d'une section dans l'ordre d'affichage de l'admin : ses champs, puis ses
+ * listes. Un champ de type « liste » ( [ libellé, 'liste', colonnes, max, aide ] )
+ * prend sa place parmi les champs (liste propre à une carte, sous son titre).
+ *
+ * @param array $section Description de la section.
+ * @return array[] [ chemin, 'champ' | 'liste', [ libellé, type | colonnes, max, aide ] ]
+ */
+function dih_core_texte_elements( $section ) {
+	$elements = array();
+	foreach ( isset( $section['champs'] ) ? $section['champs'] : array() as $chemin => $def ) {
+		if ( 'liste' === $def[1] ) {
+			$elements[] = array( (string) $chemin, 'liste', array( $def[0], $def[2], $def[3], isset( $def[4] ) ? $def[4] : null ) );
+		} else {
+			$elements[] = array( (string) $chemin, 'champ', $def );
+		}
+	}
+	foreach ( isset( $section['listes'] ) ? $section['listes'] : array() as $chemin => $def ) {
+		$elements[] = array( (string) $chemin, 'liste', $def );
+	}
+	return $elements;
+}
+
+/**
  * Lignes d'une liste telles que l'admin les enregistre, depuis les éléments du thème
  * (import des textes en place).
  *
@@ -547,30 +572,32 @@ add_action(
 					);
 				}
 
-				foreach ( isset( $section['champs'] ) ? $section['champs'] : array() as $chemin => $champ ) {
-					list( $nom, $cle ) = dih_core_texte_champ( $page, $id, $chemin );
-					$acf               = array(
-						'key'          => $cle,
-						'name'         => $nom,
-						'label'        => $champ[0],
-						'instructions' => ( isset( $champ[2] ) ? $champ[2] . ' ' : '' ) . 'Vide : texte actuel du thème.',
-						'type'         => $champ[1],
-					);
-					if ( 'textarea' === $champ[1] ) {
-						$acf['rows']      = 3;
-						$acf['new_lines'] = '';
-					}
-					$champs[] = $acf;
-				}
+				foreach ( dih_core_texte_elements( $section ) as $element ) {
+					list( $chemin, $genre, $el ) = $element;
+					list( $nom, $cle )           = dih_core_texte_champ( $page, $id, $chemin );
 
-				foreach ( isset( $section['listes'] ) ? $section['listes'] : array() as $chemin => $liste ) {
-					list( $nom, $cle ) = dih_core_texte_champ( $page, $id, $chemin );
-					$sous              = array();
-					$largeurs          = array();
-					foreach ( $liste[1] as $col => $colonne ) {
+					if ( 'champ' === $genre ) {
+						$acf = array(
+							'key'          => $cle,
+							'name'         => $nom,
+							'label'        => $el[0],
+							'instructions' => ( isset( $el[2] ) ? $el[2] . ' ' : '' ) . 'Vide : texte actuel du thème.',
+							'type'         => $el[1],
+						);
+						if ( 'textarea' === $el[1] ) {
+							$acf['rows']      = 3;
+							$acf['new_lines'] = '';
+						}
+						$champs[] = $acf;
+						continue;
+					}
+
+					$sous     = array();
+					$largeurs = array();
+					foreach ( $el[1] as $col => $colonne ) {
 						$largeurs[ $col ] = ( isset( $colonne[2] ) && 'textarea' === $colonne[2] ) ? 2 : 1;
 					}
-					foreach ( $liste[1] as $col => $colonne ) {
+					foreach ( $el[1] as $col => $colonne ) {
 						$type   = isset( $colonne[2] ) ? $colonne[2] : 'text';
 						$sous[] = array_merge(
 							array(
@@ -590,11 +617,11 @@ add_action(
 					$champs[] = array(
 						'key'          => $cle,
 						'name'         => $nom,
-						'label'        => $liste[0],
-						'instructions' => ( isset( $liste[3] ) ? $liste[3] . ' ' : '' ) . 'Dans l’ordre d’affichage. Liste vide : liste actuelle du thème.',
+						'label'        => $el[0],
+						'instructions' => ( isset( $el[3] ) ? $el[3] . ' ' : '' ) . 'Dans l’ordre d’affichage. Liste vide : liste actuelle du thème.',
 						'type'         => 'repeater',
 						'layout'       => 'table',
-						'max'          => $liste[2],
+						'max'          => $el[2],
 						'button_label' => 'Ajouter une ligne',
 						'sub_fields'   => $sous,
 					);
@@ -648,29 +675,31 @@ function dih_core_contenus_textes( $donnees, $page ) {
 			continue;
 		}
 
-		foreach ( isset( $section['champs'] ) ? $section['champs'] : array() as $chemin => $champ ) {
-			list( $nom ) = dih_core_texte_champ( $page, $sid, $chemin );
-			$valeur      = get_field( $nom, $id );
-			$defaut      = dih_core_chemin_lire( $bloc, $chemin );
-			// Vide, ou resté le texte du thème (import) : chaque variante garde le sien.
-			if ( ! is_string( $valeur ) || '' === trim( $valeur ) || $valeur === $defaut ) {
+		foreach ( dih_core_texte_elements( $section ) as $element ) {
+			list( $chemin, $genre, $def ) = $element;
+			list( $nom )                  = dih_core_texte_champ( $page, $sid, $chemin );
+
+			if ( 'champ' === $genre ) {
+				$valeur = get_field( $nom, $id );
+				$defaut = dih_core_chemin_lire( $bloc, $chemin );
+				// Vide, ou resté le texte du thème (import) : chaque variante garde le sien.
+				if ( ! is_string( $valeur ) || '' === trim( $valeur ) || $valeur === $defaut ) {
+					continue;
+				}
+				dih_core_chemin_ecrire( $bloc, $chemin, $valeur );
+				// Accueil : un texte modifié du haut de page vaut pour toutes les variantes.
+				if ( 'hero' === $base && isset( $bloc['variantes'] ) && false === strpos( $chemin, '/' ) ) {
+					foreach ( array_keys( $bloc['variantes'] ) as $variante ) {
+						unset( $bloc['variantes'][ $variante ][ $chemin ] );
+					}
+				}
 				continue;
 			}
-			dih_core_chemin_ecrire( $bloc, $chemin, $valeur );
-			// Accueil : un texte modifié du haut de page vaut pour toutes les variantes.
-			if ( 'hero' === $base && isset( $bloc['variantes'] ) && false === strpos( $chemin, '/' ) ) {
-				foreach ( array_keys( $bloc['variantes'] ) as $variante ) {
-					unset( $bloc['variantes'][ $variante ][ $chemin ] );
-				}
-			}
-		}
 
-		foreach ( isset( $section['listes'] ) ? $section['listes'] : array() as $chemin => $liste ) {
-			list( $nom ) = dih_core_texte_champ( $page, $sid, $chemin );
-			$defauts     = array_values( (array) dih_core_chemin_lire( $bloc, $chemin ) );
-			$premier     = array_key_first( $liste[1] );
-			$fixes       = null !== $liste[1][ $premier ][0];
-			$elements    = array();
+			$defauts  = array_values( (array) dih_core_chemin_lire( $bloc, $chemin ) );
+			$premier  = array_key_first( $def[1] );
+			$fixes    = null !== $def[1][ $premier ][0];
+			$elements = array();
 			foreach ( (array) get_field( $nom, $id ) as $ligne ) {
 				if ( ! is_array( $ligne ) || ! isset( $ligne[ $premier ] ) || '' === trim( (string) $ligne[ $premier ] ) ) {
 					continue;
@@ -679,15 +708,15 @@ function dih_core_contenus_textes( $donnees, $page ) {
 					$elements[] = (string) $ligne[ $premier ]; // liste de textes
 					continue;
 				}
-				$rang    = count( $elements );
-				$element = ( isset( $defauts[ $rang ] ) && is_array( $defauts[ $rang ] ) ) ? $defauts[ $rang ] : array();
-				foreach ( $liste[1] as $col => $colonne ) {
-					$element[ $colonne[0] ] = isset( $ligne[ $col ] ) ? (string) $ligne[ $col ] : '';
+				$rang   = count( $elements );
+				$ligne2 = ( isset( $defauts[ $rang ] ) && is_array( $defauts[ $rang ] ) ) ? $defauts[ $rang ] : array();
+				foreach ( $def[1] as $col => $colonne ) {
+					$ligne2[ $colonne[0] ] = isset( $ligne[ $col ] ) ? (string) $ligne[ $col ] : '';
 				}
-				if ( ! array_filter( array_keys( $element ), 'is_string' ) ) {
-					ksort( $element ); // rangs : dans l'ordre ; clés nommées : ordre du thème
+				if ( ! array_filter( array_keys( $ligne2 ), 'is_string' ) ) {
+					ksort( $ligne2 ); // rangs : dans l'ordre ; clés nommées : ordre du thème
 				}
-				$elements[] = $element;
+				$elements[] = $ligne2;
 			}
 			if ( $elements ) {
 				dih_core_chemin_ecrire( $bloc, $chemin, $elements );
