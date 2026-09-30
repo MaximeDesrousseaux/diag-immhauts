@@ -361,12 +361,12 @@
         <div style="position:absolute;inset:0;">{{ heroArt }}</div>
         <sc-if value="{{ mHalo }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 120% at 90% -10%,color-mix(in oklab,var(--tech,#7bc62f) 32%,transparent),transparent 60%);"></div></sc-if>
         <div style="position:relative;max-width:1200px;margin:0 auto;padding:clamp(30px,7vw,88px) clamp(16px,4vw,40px) clamp(34px,8vw,96px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:clamp(24px,4vw,48px);align-items:center;">
-          <div>
-            <div style="display:inline-flex;align-items:center;gap:8px;padding:clamp(4px,0.7vw,8px) clamp(12px,3.4vw,16px);border-radius:999px;background:color-mix(in oklab,#fff 9%,transparent);border:1px solid color-mix(in oklab,var(--techBright,#a3e04a) 45%,transparent);font-size:clamp(11px,1.1vw,12.5px);font-weight:600;color:var(--onDark,#eaf3e6);margin-bottom:clamp(16px,4.2vw,24px);">
+          <div style="position:relative;">
+            <div style="position:absolute;left:0;bottom:100%;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;padding:clamp(4px,0.7vw,8px) clamp(12px,3.4vw,16px);border-radius:999px;background:color-mix(in oklab,#fff 9%,transparent);border:1px solid color-mix(in oklab,var(--techBright,#a3e04a) 45%,transparent);font-size:clamp(11px,1.1vw,12.5px);font-weight:600;color:var(--onDark,#eaf3e6);margin-bottom:clamp(16px,4.2vw,24px);">
               <span style="width:6px;height:6px;border-radius:50%;background:var(--techBright,#a3e04a);"></span>Diagnostiqueur indépendant certifié
             </div>
             <h1 style="font-size:clamp(30px,4.4vw,60px); font-weight: 800; line-height: 1.06; max-width: min(100%,548px);">Des diagnostics fiables,<br><span style="color:var(--techBright,#a3e04a);">un interlocuteur unique.</span></h1>
-            <p style="margin-top:clamp(12px,3.4vw,16px);font-size:clamp(14px,1.4vw,17px);line-height:1.55;color:var(--onDarkSoft,#d6e6cf);max-width:520px;">Vente, location, copropriétés ou audit énergétique&nbsp;: Maxime Dillies vous accompagne partout dans l'Artois et les Hauts-de-France, avec rigueur, réactivité et pédagogie.</p>
+            <p style="margin-top:clamp(12px,3.4vw,16px);font-size:17px;line-height:1.55;color:var(--onDarkSoft,#d6e6cf);max-width:520px;">Vente, location, copropriétés ou audit énergétique&nbsp;: Maxime&nbsp;Dillies vous accompagne partout dans l'Artois et les Hauts-de-France, avec rigueur, réactivité et pédagogie.</p>
             
             <div style="margin-top:40px;display:flex;gap:clamp(16px,4.2vw,24px);flex-wrap:wrap;">
               <div><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:26px;color:#fff;">8&nbsp;ans</div><div style="font-size:12.5px;color:var(--onDarkMuted,#a9c2a1);">d'expérience terrain</div></div>
@@ -374,9 +374,9 @@
               <div style="padding-left:clamp(16px,4.2vw,24px);border-left:1px solid color-mix(in oklab,#fff 18%,transparent);"><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:26px;color:#fff;">100&nbsp;%</div><div style="font-size:12.5px;color:var(--onDarkMuted,#a9c2a1);">certifié &amp; assuré</div></div>
             </div>
           </div>
-          <div style="position:relative;">
+          <div data-nv-skip="1" style="position:relative;">
             
-          <div style="background: color-mix(in oklab,var(--surface,#ffffff) 12%,transparent); border: 1px solid color-mix(in oklab,#fff 22%,transparent); border-radius:16px; padding:clamp(16px,4.2vw,24px); box-shadow: 0 30px 60px -30px rgba(0,0,0,.6); margin-top: 50px">
+          <div style="background: color-mix(in oklab,var(--surface,#ffffff) 12%,transparent); border: 1px solid color-mix(in oklab,#fff 22%,transparent); border-radius:16px; padding:clamp(16px,4.2vw,24px); box-shadow: 0 30px 60px -30px rgba(0,0,0,.6);">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(12px,3.4vw,16px);">
               <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:15.5px;color:#fff;">Rappel gratuit</span>
               <span style="font-size:12.5px;color:#d8ff9f;font-weight:600;">Réponse sous 24&nbsp;h</span>
@@ -1105,7 +1105,7 @@ class Component extends DCLogic {
       const cta = hdr.querySelector('a.dih-cta');
       const wrap = hdr.parentElement;
       let inner = hero ? hero.firstElementChild : null;
-      const deco = hero ? [...hero.querySelectorAll('*')].find((e) => /url\(/.test(getComputedStyle(e).backgroundImage)) : null;
+      const deco = hero ? [...hero.querySelectorAll('*')].find((e) => !/^(INPUT|SELECT|TEXTAREA|BUTTON)$/.test(e.tagName) && !e.closest('[data-nv-skip]') && /url\(/.test(getComputedStyle(e).backgroundImage)) : null;
       const host = deco && (deco.offsetParent || deco.parentElement);
       if (host && hero && hero.contains(host)) inner = host;
       if (!on) {
@@ -1361,6 +1361,7 @@ class Component extends DCLogic {
       ctaPhotoW: this.__isNarrow() && !this.__isPhone() ? '128%' : '100%',
       ctaPhotoShift: this.__isNarrow() && !this.__isPhone() ? '-18%' : '0',
       ctaPhotoCol: !this.__isPhone(),
+      ctaCallFirst: this.__isPhone(), ctaFormFirst: !this.__isPhone(),
       ctaWatermark: this.__isPhone(),
       trustDisplay: this.__isNarrow() ? 'grid' : 'flex',
       trustCols: this.__isPhone() ? 'repeat(auto-fit,minmax(min(100%,220px),1fr))' : (this.__isNarrow() ? 'repeat(2,minmax(0,1fr))' : 'none'),
@@ -1479,7 +1480,6 @@ class Component extends DCLogic {
     const faqs = faqData.map((f,i)=>{
       const open = this.state.open === i;
       return {
-      ctaCallFirst: this.__isPhone(), ctaFormFirst: !this.__isPhone(),
         q:f.q, a:f.a, open, link:f.link, href:f.href,
         sign: open ? '\u2212' : '+', rows: open ? '1fr' : '0fr', aOpacity: open ? 1 : 0, aShift: open ? '0px' : '-6px', iconRot: open ? '180deg' : '0deg',
         iconBg: open ? (p.tech||'var(--tech,#7bc62f)') : (p.bg||'#f6f8f3'),
@@ -1553,12 +1553,12 @@ class Component extends DCLogic {
       heroTitleLH: _large ? '1.14' : '1.08',
       heroParaGap: _depl ? '26px' : (this.__navTransp() ? 'clamp(21px,2.3vw,31px)' : (_large ? 'clamp(14px,1.5vw,20px)' : 'clamp(16px,2vw,22px)')),
       heroStatsGap: _depl ? '38px' : (this.__navTransp() ? 'clamp(28px,3.3vw,44px)' : (_large ? 'clamp(14px,1.8vw,24px)' : 'clamp(10px,3vw,20px)')),
-      heroParaSize: _large ? 'clamp(14px,1.12vw,16px)' : 'clamp(15px,1.5vw,17px)',
+      heroParaSize: _depl ? 'clamp(14px,1.12vw,16px)' : (_tel ? 'clamp(15px,1.5vw,17px)' : '17px'),
       heroTitleA: _terrils ? 'Des diagnostics fiables,' : 'Des diagnostics fiables,',
       heroTitleB: _terrils ? "partout dans l'Artois." : 'un interlocuteur unique.',
       heroPara: _terrils
-        ? "Vente, location, copropriétés ou audit énergétique : Maxime Dillies réalise lui-même les douze diagnostics. Un seul interlocuteur, avec rigueur, réactivité et pédagogie."
-        : "Vente, location, copropriétés ou audit énergétique : Maxime Dillies vous accompagne partout dans l'Artois, avec rigueur, réactivité et pédagogie.",
+        ? "Vente, location, copropriétés ou audit énergétique : Maxime\u00a0Dillies réalise lui-même les diagnostics. Un seul interlocuteur, avec rigueur, réactivité et pédagogie."
+        : "Vente, location, copropriétés ou audit énergétique : Maxime\u00a0Dillies vous accompagne partout dans l'Artois, avec rigueur, réactivité et pédagogie.",
       heroTerrilsBarre: _barre,
       heroBoutons: _boutons && !this.__isPhone(),
       terrilsHero: _terrils,
@@ -1739,7 +1739,7 @@ class Component extends DCLogic {
       mAlign: ((_visuel === 'max-telephone' || _mb) && this.__isNarrow()) ? 'flex-start' : 'center',
       mSubMax: (this.__isNarrow() && !this.__isPhone()) ? '100%' : (_mb ? '60%' : '330px'),
       mSubText: _mb
-        ? "Vente, location, copropriétés ou audit énergétique : Maxime Dillies vous accompagne partout dans l'Artois, avec rigueur, réactivité et pédagogie."
+        ? "Vente, location, copropriétés ou audit énergétique : Maxime\u00a0Dillies vous accompagne partout dans l'Artois, avec rigueur, réactivité et pédagogie."
         : 'Dites-moi en quelques mots votre projet : je vous rappelle sous 24 heures avec un prix ferme.',
       mText: ((_visuel === 'max-telephone' || _mb) && this.__isNarrow()) ? 'left' : 'center',
       mBg: (_visuel === 'conseil-filigrane' || _visuel === 'max-telephone' || _mb) ? 'var(--forestDeep,#123f24)' : 'transparent',

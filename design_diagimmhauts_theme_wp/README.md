@@ -1,6 +1,9 @@
 # Passation : thème WordPress Diag Imm'Hauts
 
-Version : **1.14c** — les messages de mise à jour sont titrés « Maquettes 1.x ».
+Version : **1.14d** — les messages de mise à jour sont titrés « Maquettes 1.x ».
+
+## Hero de l'accueil — sous-titre (1.14d)
+Bureau : sous-titre à **17 px**, 3 lignes, « Maxime Dillies » insécable (espace insécable, sur toutes les variantes). Le mot « douze » est retiré (« réalise lui-même les diagnostics »). Variante `sansBG` : formulaire centré verticalement sur le bloc texte (titre → chiffres), la pastille au-dessus du titre est hors calcul (positionnée en absolu). Le bloc « rappel » affiche bien ses 2 boutons (ordre selon le format).
 
 ## Bloc « rappel » (avant le footer)
 Deux boutons : appel + formulaire. **Bureau et tablette** : le formulaire (demande de rappel / devis) est le bouton principal vert, placé en premier ; « Appeler le 06… » est le secondaire (contour blanc). **Téléphone** : l'ordre s'inverse, l'appel passe en premier avec le style principal. Boutons secondaires : 26 px de rembourrage horizontal minimum (l'icône qui apparaît au survol doit avoir de la place).
