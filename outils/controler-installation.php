@@ -98,7 +98,7 @@ if ( ! function_exists( 'dih_chemins' ) ) {
 	if ( 'page' !== get_option( 'show_on_front' ) || ! $dih_accueil || 'publish' !== get_post_status( $dih_accueil ) ) {
 		$dih_ligne( 'erreur', 'Page d’accueil', 'Réglages → Lecture : « Une page statique », page d’accueil à choisir' );
 	} else {
-		$dih_ligne( 'ok', 'Page d’accueil', get_the_title( $dih_accueil ) . ' (page ' . $dih_accueil . ')' );
+		$dih_ligne( 'ok', 'Page d’accueil', get_post_field( 'post_title', $dih_accueil ) . ' (page ' . $dih_accueil . ')' );
 	}
 
 	foreach ( dih_chemins() as $dih_cle => $dih_chemin ) {
@@ -116,7 +116,7 @@ if ( ! function_exists( 'dih_chemins' ) ) {
 		}
 		$dih_gabarit = (string) get_page_template_slug( $dih_page->ID );
 		$dih_attendu = $dih_gabarits[ $dih_cle ];
-		$dih_ligne( $dih_gabarit === $dih_attendu ? 'ok' : 'erreur', $dih_chemin, $dih_gabarit === $dih_attendu ? get_the_title( $dih_page ) : 'gabarit « ' . ( '' !== $dih_gabarit ? $dih_gabarit : 'par défaut' ) . ' », attendu « ' . $dih_attendu . ' »' );
+		$dih_ligne( $dih_gabarit === $dih_attendu ? 'ok' : 'erreur', $dih_chemin, $dih_gabarit === $dih_attendu ? $dih_page->post_title : 'gabarit « ' . ( '' !== $dih_gabarit ? $dih_gabarit : 'par défaut' ) . ' », attendu « ' . $dih_attendu . ' »' );
 	}
 }
 
