@@ -102,6 +102,8 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
     (textes et panneau chiffré), prestations (titres et textes des quatre cartes), « Le détail »
     (titres et bouton), « Qui suis-je ? » (textes et quatre valeurs), zones desservies (textes et
     communes en pastilles), bloc final. Pictos, illustrations, teintes et pages liées restent ceux du thème ;
+  - **Nos diagnostics** : vente & location (textes et douze cartes : validité, titre, texte,
+    condition), copropriétés (textes et quatre cartes), audits énergétiques, bloc final ;
   - **Professionnels** : profils (titre, texte et points de chaque carte), six engagements, packs
     (pastille, titre, texte, diagnostics compris et note de chaque pack), déroulé et son encadré,
     bloc final, popup « Compte partenaire » ;

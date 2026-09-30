@@ -184,7 +184,7 @@ function dih_core_textes() {
 		'nos-diagnostics' => array(
 			'lieu'     => array( 'page_template', 'page-templates/nos-diagnostics.php' ),
 			'sections' => array(
-				'hero' => array(
+				'hero'   => array(
 					'titre'  => 'Haut de page',
 					'champs' => array(
 						'titre_1'  => array( 'Titre, 1er morceau', 'text' ),
@@ -202,6 +202,66 @@ function dih_core_textes() {
 							),
 							3,
 						),
+					),
+				),
+				'vente'  => array(
+					'titre'  => 'Vente & location',
+					'champs' => array(
+						'surtitre' => array( 'Surtitre', 'text' ),
+						'titre'    => array( 'Titre', 'text' ),
+						'texte'    => array( 'Texte', 'textarea' ),
+						'cta'      => array( 'Bouton vers le simulateur', 'text' ),
+					),
+					'listes' => array(
+						'cartes' => array(
+							'Les douze cartes (page liée et illustration fixes, par position)',
+							array(
+								'validite'  => array( 1, 'Validité' ),
+								'titre'     => array( 2, 'Titre' ),
+								'texte'     => array( 3, 'Texte', 'textarea' ),
+								'condition' => array( 4, 'Condition', 'textarea' ),
+							),
+							12,
+						),
+					),
+				),
+				'copro'  => array(
+					'titre'  => 'Copropriétés',
+					'champs' => array(
+						'surtitre'  => array( 'Surtitre', 'text' ),
+						'titre'     => array( 'Titre', 'text' ),
+						'texte'     => array( 'Texte', 'textarea' ),
+						'cta'       => array( 'Bouton', 'text' ),
+						'image_alt' => array( 'Description de l’illustration (lecteurs d’écran)', 'text' ),
+					),
+					'listes' => array(
+						'cartes' => array(
+							'Les quatre cartes (illustration fixe, par position)',
+							array(
+								'titre' => array( 1, 'Titre' ),
+								'texte' => array( 2, 'Texte', 'textarea' ),
+							),
+							4,
+						),
+					),
+				),
+				'audit'  => array(
+					'titre'  => 'Audits énergétiques',
+					'champs' => array(
+						'surtitre'  => array( 'Surtitre', 'text' ),
+						'titre'     => array( 'Titre', 'text' ),
+						'texte'     => array( 'Texte', 'textarea', 'Exposant en HTML : 1<code>&lt;sup&gt;er&lt;/sup&gt;</code>.' ),
+						'cta'       => array( 'Bouton', 'text' ),
+						'legende'   => array( 'Légende de l’étiquette', 'textarea' ),
+						'image_alt' => array( 'Description de l’étiquette (lecteurs d’écran)', 'text' ),
+					),
+				),
+				'rappel' => array(
+					'titre'  => 'Bloc final',
+					'champs' => array(
+						'titre'        => array( 'Titre', 'text' ),
+						'texte'        => array( 'Texte', 'textarea' ),
+						'formulaire/0' => array( 'Bouton du formulaire', 'text' ),
 					),
 				),
 			),
