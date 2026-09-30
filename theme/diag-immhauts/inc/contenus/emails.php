@@ -94,6 +94,8 @@ return array(
 		'rappel'     => array(
 			'Nom'       => array( 'nom' ),
 			'Téléphone' => array( 'telephone' ),
+			'Bien'      => array( 'type_bien' ), // ajout : champs du formulaire court unifié
+			'Commune'   => array( 'commune' ),
 			'Message'   => array( 'message' ),
 		),
 		'devis'      => array(
