@@ -2,10 +2,10 @@
 /**
  * Remplit les contenus modifiables de l'admin avec les textes actuels du thème
  * (inc/contenus/*.php), pour que l'admin montre les textes en place au lieu de
- * champs vides : coordonnées du site, avis de l'accueil, FAQ des 15 pages, haut de
- * page et repères des 12 fiches, bloc « 4 étapes » des fiches, de Nos diagnostics et
- * de Qui suis-je, textes des pages décrites dans dih_core_textes() (plugin,
- * inc/textes-pages.php).
+ * champs vides : coordonnées du site, messages des formulaires, avis de l'accueil,
+ * FAQ des 15 pages, haut de page et repères des 12 fiches, bloc « 4 étapes » des
+ * fiches, de Nos diagnostics et de Qui suis-je, textes des pages décrites dans
+ * dih_core_textes() (plugin, inc/textes-pages.php).
  *
  * Usage : wp eval-file outils/importer-contenus.php
  *         wp eval-file outils/importer-contenus.php forcer   (réécrit aussi les champs déjà remplis)
@@ -87,6 +87,26 @@ if ( function_exists( 'dih_core_coordonnees' ) ) {
 		$lignes[] = $cle;
 	}
 	echo $lignes ? 'Coordonnées : importées (' . implode( ', ', $lignes ) . ").\n" : "Coordonnées : déjà remplies, inchangées.\n";
+}
+
+// Messages des formulaires (page d'options Formulaires) -------------------------------
+if ( function_exists( 'dih_core_messages_formulaires' ) ) {
+	remove_filter( 'dih_contenu', 'dih_core_contenus_messages', 10 );
+	$dih_msg = dih_contenu( 'formulaires' );
+	$lignes  = array();
+	foreach ( dih_core_messages_formulaires() as $messages ) {
+		foreach ( array_keys( $messages ) as $chemin ) {
+			$nom    = dih_core_message_nom( $chemin );
+			$actuel = get_field( $nom, 'option' );
+			if ( ! $dih_forcer && is_string( $actuel ) && '' !== trim( $actuel ) ) {
+				continue;
+			}
+			// Le numéro devient {telephone} : il suivra les coordonnées du site.
+			update_field( 'field_dih_' . $nom, str_replace( dih_info( 'telephone' ), '{telephone}', (string) dih_core_chemin_lire( $dih_msg, $chemin ) ), 'option' );
+			$lignes[] = $nom;
+		}
+	}
+	printf( "Messages des formulaires : %s.\n", $lignes ? count( $lignes ) . ' importés' : 'déjà remplis, inchangés' );
 }
 
 // FAQ des pages ----------------------------------------------------------------------
