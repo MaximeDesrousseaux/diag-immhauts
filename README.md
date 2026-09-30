@@ -100,6 +100,9 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
     (textes et panneau chiffré), prestations (titres et textes des quatre cartes), « Le détail »
     (titres et bouton), « Qui suis-je ? » (textes et quatre valeurs), zones desservies (textes et
     communes en pastilles), bloc final. Pictos, illustrations, teintes et pages liées restent ceux du thème ;
+  - **Qui suis-je** : bandeau de confiance, parcours (paragraphes, frise des années, textes des cinq
+    citations — celle affichée se choisit dans l'encart « Qui suis-je »), engagements, certifications
+    (garanties et domaines), bloc final ;
   - **Mentions légales** : chapeau et date de mise à jour, titre, paragraphes et informations en liste
     de chaque rubrique ; `{a completer: …}` reste surligné, `{adresse}`, `{telephone}` et `{email}`
     reprennent les coordonnées du site.

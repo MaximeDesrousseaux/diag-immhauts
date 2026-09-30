@@ -222,7 +222,7 @@ function dih_core_textes() {
 		'qui'             => array(
 			'lieu'     => array( 'page_template', 'page-templates/qui.php' ),
 			'sections' => array(
-				'hero' => array(
+				'hero'           => array(
 					'titre'  => 'Haut de page',
 					'champs' => array(
 						'pastille'      => array( 'Pastille', 'text' ),
@@ -233,6 +233,98 @@ function dih_core_textes() {
 						'chapeau_court' => array( 'Chapeau court (téléphone)', 'textarea' ),
 						'cta'           => array( 'Bouton principal', 'text' ),
 						'cta_parcours'  => array( 'Bouton « Découvrir mon parcours »', 'text' ),
+					),
+				),
+				'confiance'      => array(
+					'titre'  => 'Bandeau de confiance',
+					'aide'   => 'La note Google et le nombre d’avis se règlent dans Diag Imm’Hauts → Avis clients.',
+					'listes' => array(
+						'' => array(
+							'Les deux engagements (picto fixe, par position)',
+							array(
+								'titre'   => array( 1, 'Titre' ),
+								'legende' => array( 2, 'Légende' ),
+							),
+							2,
+						),
+					),
+				),
+				'parcours'       => array(
+					'titre'  => 'Mon parcours',
+					'aide'   => 'La citation affichée se choisit dans l’encart « Qui suis-je » de la page ; ses cinq textes se modifient ici.',
+					'champs' => array(
+						'surtitre'                => array( 'Surtitre', 'text' ),
+						'titre'                   => array( 'Titre', 'text' ),
+						'citations/comprendre'    => array( 'Citation « Comprendre »', 'textarea' ),
+						'citations/mesurer'       => array( 'Citation « Mesurer »', 'textarea' ),
+						'citations/terrain'       => array( 'Citation « Terrain »', 'textarea' ),
+						'citations/interlocuteur' => array( 'Citation « Interlocuteur »', 'textarea' ),
+						'citations/preparation'   => array( 'Citation « Préparation »', 'textarea' ),
+						'signature'               => array( 'Signature de la citation', 'text' ),
+					),
+					'listes' => array(
+						'paragraphes' => array(
+							'Paragraphes',
+							array( 'texte' => array( null, 'Paragraphe', 'textarea' ) ),
+							0,
+						),
+						'frise'       => array(
+							'Frise des années',
+							array(
+								'annee' => array( 0, 'Année' ),
+								'titre' => array( 1, 'Titre' ),
+								'texte' => array( 2, 'Texte', 'textarea' ),
+							),
+							0,
+						),
+					),
+				),
+				'engagements'    => array(
+					'titre'  => 'Mes engagements',
+					'champs' => array(
+						'surtitre' => array( 'Surtitre', 'text' ),
+						'titre'    => array( 'Titre', 'text' ),
+					),
+					'listes' => array(
+						'cartes' => array(
+							'Les quatre cartes (picto fixe, par position)',
+							array(
+								'titre' => array( 1, 'Titre' ),
+								'texte' => array( 2, 'Texte', 'textarea' ),
+							),
+							4,
+						),
+					),
+				),
+				'certifications' => array(
+					'titre'  => 'Certifications',
+					'champs' => array(
+						'surtitre' => array( 'Surtitre', 'text' ),
+						'titre'    => array( 'Titre', 'text' ),
+						'texte'    => array( 'Texte', 'textarea' ),
+					),
+					'listes' => array(
+						'garanties' => array(
+							'Garanties cochées',
+							array( 'texte' => array( null, 'Garantie', 'textarea' ) ),
+							0,
+						),
+						'domaines'  => array(
+							'Les six domaines (picto fixe, par position)',
+							array(
+								'titre' => array( 1, 'Domaine' ),
+								'texte' => array( 2, 'Précision' ),
+							),
+							6,
+						),
+					),
+				),
+				'rappel'         => array(
+					'titre'  => 'Bloc final',
+					'champs' => array(
+						'titre'        => array( 'Titre', 'text' ),
+						'texte'        => array( 'Texte', 'textarea' ),
+						'formulaire/0' => array( 'Bouton du formulaire', 'text' ),
 					),
 				),
 			),
