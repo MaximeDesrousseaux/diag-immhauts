@@ -32,13 +32,11 @@ add_action(
 			'dih-nav'   => 'assets/js/nav.js',   // header épinglé, nav transparente, burger, menus
 			'dih-popup' => 'assets/js/popup.js', // popup « Demande de rappel »
 			'dih-glide' => 'assets/js/glide.js', // défilement d'ancre 1,2 s
+			'dih-formulaires' => 'assets/js/formulaires.js', // formulaire du hero, communes des formulaires
 		);
 		if ( is_front_page() ) {
 			$scripts['dih-commune'] = 'assets/js/commune.js'; // « Vérifier ma commune »
 			$scripts['dih-avis']    = 'assets/js/avis.js';    // flèches du carrousel des avis
-		}
-		if ( is_front_page() || is_page_template( 'page-templates/contact.php' ) ) {
-			$scripts['dih-formulaires'] = 'assets/js/formulaires.js'; // formulaire du hero, communes du devis
 		}
 		if ( is_page_template( 'page-templates/simulateur.php' ) ) {
 			$scripts['dih-simulateur'] = 'assets/js/simulateur.js'; // règles et dossier du simulateur

@@ -1,7 +1,7 @@
 <?php
 /**
- * Formulaires Fluent Forms : rappel (popup), rappel du haut de l'accueil, devis
- * (page Contact), compte partenaire (popup de Professionnels).
+ * Formulaires Fluent Forms : rappel (formulaire court de la popup et du haut de
+ * l'accueil), devis (page Contact), compte partenaire (popup de Professionnels).
  *
  * - dih_core_formulaires_definitions() décrit chaque formulaire d'après les
  *   maquettes (champs, libellés, textes d'aide, bouton) ;
@@ -23,8 +23,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function dih_core_formulaires_liste() {
 	return array(
-		'rappel'     => array( 'Demande de rappel', 'Popup « Rappel sous 24 h », ouverte par les boutons de rappel des pages.' ),
-		'hero'       => array( 'Rappel du haut de l’accueil', 'Barre et carte « Rappel gratuit » du haut de la page d’accueil.' ),
+		'rappel'     => array( 'Demande de rappel', 'Formulaire court : popup « Rappel sous 24 h » et haut de la page d’accueil (barre ou carte « Rappel gratuit »).' ),
 		'devis'      => array( 'Demande de devis', 'Page Contact, bloc « devis ».' ),
 		'partenaire' => array( 'Compte partenaire', 'Popup de la page Professionnels.' ),
 	);
@@ -85,9 +84,12 @@ function dih_core_formulaire( $cle ) {
  * @return array
  */
 function dih_core_formulaires_definitions() {
-	$nb        = "\u{00A0}";
-	$types_pop = array( 'Appartement', 'Maison individuelle', 'Immeuble en monopropriété', 'Local commercial' );
-	$message   = array(
+	$nb = "\u{00A0}";
+
+	// Libellés, liste « Type de bien » et champ commune communs au formulaire court
+	// et au devis (formulaire détaillé).
+	$types_bien = array( 'Appartement', 'Maison individuelle', 'Immeuble en monopropriété', 'Local commercial', 'Terrain / autre' );
+	$message    = array(
 		'type'        => 'zone',
 		'nom'         => 'message',
 		'label'       => 'Votre message <span class="dih-facultatif">(facultatif)</span>',
@@ -96,6 +98,7 @@ function dih_core_formulaires_definitions() {
 	);
 
 	return array(
+		// Formulaire court : popup et haut de l'accueil (étiquettes masquées sur fond vert).
 		'rappel'     => array(
 			'titre'  => 'Demande de rappel',
 			'objet'  => 'Demande de rappel — {inputs.nom}',
@@ -103,27 +106,9 @@ function dih_core_formulaires_definitions() {
 			'champs' => array(
 				array( 'type' => 'texte', 'nom' => 'nom', 'label' => 'Nom et prénom', 'placeholder' => 'Votre nom', 'requis' => true ),
 				array( 'type' => 'tel', 'nom' => 'telephone', 'label' => 'Téléphone', 'placeholder' => '06 12 34 56 78', 'requis' => true ),
-				array( 'type' => 'texte', 'nom' => 'commune', 'label' => 'Commune du bien', 'placeholder' => 'Arras' ),
-				array( 'type' => 'liste', 'nom' => 'type_bien', 'label' => 'Type de bien', 'options' => $types_pop ),
+				array( 'type' => 'texte', 'nom' => 'commune', 'label' => 'Commune ou code postal', 'placeholder' => 'Arras ou 62000' ),
+				array( 'type' => 'liste', 'nom' => 'type_bien', 'label' => 'Type de bien', 'vide' => 'Type de bien', 'options' => $types_bien ),
 				$message,
-			),
-		),
-		'hero'       => array(
-			'titre'  => 'Rappel du haut de l’accueil',
-			'objet'  => 'Demande de rappel — {inputs.nom}',
-			'bouton' => 'Être rappelé gratuitement',
-			'champs' => array(
-				array( 'type' => 'texte', 'nom' => 'nom', 'label' => 'Nom', 'placeholder' => 'Votre nom', 'requis' => true ),
-				array( 'type' => 'tel', 'nom' => 'telephone', 'label' => 'Téléphone', 'placeholder' => 'Votre téléphone', 'requis' => true ),
-				array( 'type' => 'liste', 'nom' => 'type_bien', 'label' => 'Type de bien', 'vide' => 'Type de bien', 'options' => array( 'Maison', 'Appartement', 'Immeuble / copropriété', 'Local professionnel' ) ),
-				array( 'type' => 'texte', 'nom' => 'commune', 'label' => 'Commune', 'placeholder' => 'Commune' ),
-				array(
-					'type'        => 'zone',
-					'nom'         => 'message',
-					'label'       => 'Message',
-					'placeholder' => 'Votre message (facultatif) — type de diagnostic, surface, délai souhaité…',
-					'lignes'      => 3,
-				),
 			),
 		),
 		'devis'      => array(
@@ -136,7 +121,7 @@ function dih_core_formulaires_definitions() {
 				array( 'type' => 'email', 'nom' => 'email', 'label' => 'E-mail *', 'placeholder' => 'vous@exemple.fr', 'requis' => true ),
 				array( 'type' => 'liste', 'nom' => 'qualite', 'label' => 'Vous êtes', 'options' => array( 'Particulier propriétaire', 'Locataire', 'Agence immobilière', 'Notaire', 'Syndic / copropriété', 'Collectivité ou bailleur' ) ),
 				array( 'type' => 'separateur', 'nom' => 'bien' ),
-				array( 'type' => 'liste', 'nom' => 'type_bien', 'label' => 'Type de bien *', 'requis' => true, 'options' => array( 'Appartement', 'Maison individuelle', 'Immeuble en monopropriété', 'Local commercial', 'Terrain / autre' ) ),
+				array( 'type' => 'liste', 'nom' => 'type_bien', 'label' => 'Type de bien *', 'requis' => true, 'options' => $types_bien ),
 				array( 'type' => 'nombre', 'nom' => 'surface', 'label' => 'Surface (m²) *', 'placeholder' => '95', 'requis' => true ),
 				array( 'type' => 'nombre', 'nom' => 'annee', 'label' => 'Année de construction', 'placeholder' => '1968' ),
 				array( 'type' => 'texte', 'nom' => 'commune', 'label' => 'Commune ou code postal *', 'placeholder' => 'Arras ou 62000', 'requis' => true, 'aide' => 'Les suggestions sont mes secteurs habituels.' ),

@@ -69,8 +69,8 @@ par le plugin (`inc/personnalisation.php`, ACF Pro) :
 - **Diag Imm'Hauts → Personnalisation** : la page d'options de la maquette `Admin WP - Personnalisation`
   (onglets Identité du site · Accueil · Pages intérieures, choix à vignettes ; mise en forme
   `assets/admin/personnalisation.css`, vignettes WebP dans `assets/admin/`) ;
-- **Diag Imm'Hauts → Formulaires** : identifiants Fluent Forms (rappel, rappel du haut de l'accueil, devis,
-  compte partenaire), renseignés par `outils/importer-formulaires.php` ;
+- **Diag Imm'Hauts → Formulaires** : identifiants Fluent Forms (rappel, devis, compte partenaire),
+  renseignés par `outils/importer-formulaires.php` ;
 - **Qui suis-je** et **Nos diagnostics** (encart latéral de la page) : citation du parcours, illustration du haut de page.
 
 Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage prend sa valeur par défaut.
@@ -96,22 +96,23 @@ Pour que l'admin montre les textes en place plutôt que des champs vides :
 
 ## Formulaires
 
-Quatre formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
+Trois formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
 (`dih_core_formulaires_definitions()`, `inc/formulaires.php`) et créés par
 `wp eval-file outils/importer-formulaires.php` (ajouter `forcer` pour les réécrire) :
 
 | Clé | Où | Champs |
 |---|---|---|
-| `rappel` | popup « Rappel sous 24 h » (toutes les pages sauf Professionnels) | nom, téléphone, commune, type de bien, message |
-| `hero` | barre ou carte « Rappel gratuit » du haut de l'accueil | les mêmes, sans étiquettes ; message masqué dans la barre et sur téléphone |
+| `rappel` | formulaire court : popup « Rappel sous 24 h » (toutes les pages sauf Professionnels) et barre ou carte « Rappel gratuit » du haut de l'accueil | nom, téléphone, commune, type de bien, message ; sur fond vert, sans étiquettes, message masqué dans la barre et sur téléphone |
 | `devis` | page Contact | 13 champs en trois groupes, diagnostics en pastilles, consentement |
 | `partenaire` | popup de Professionnels | structure, interlocuteur, téléphone, dossiers par mois, message |
 
 - **Présentation** (thème, `inc/formulaires.php`, `scss/composants/_form.scss`, `assets/js/formulaires.js`) :
   seule la feuille de structure de Fluent Forms est chargée ; bouton d'envoi au gabarit `.c-btn` ; message
-  de confirmation des maquettes (`inc/contenus/formulaires.php`, shortcode `[dih_confirmation]`) ; un seul
-  formulaire du haut de l'accueil par page, placé par le script dans la zone visible (barre ou carte) ;
-  suggestions de communes du devis tirées des secteurs de la maquette (`donnees/communes.json`, `secteurs`).
+  de confirmation des maquettes (`inc/contenus/formulaires.php`, shortcode `[dih_confirmation]` ; le
+  formulaire court porte celui de la popup et celui du haut de l'accueil, le CSS affiche le bon) ; en haut
+  de l'accueil, le formulaire court n'est rendu qu'une fois et placé par le script dans la zone visible
+  (barre ou carte) ; suggestions de communes (formulaire court et devis) tirées des secteurs de la maquette
+  Contact (`donnees/communes.json`, `secteurs`), ouvertes vers le haut sur fond vert.
 - **Notification** : e-mail à `contact@diagimmhauts.fr` (réponse directe à l'adresse saisie pour le devis) ;
   sur la préprod, Mailpit retient les e-mails (http://localhost:10000).
 - **À régler en ligne** : FluentSMTP (installé) avec une clé API Brevo pour l'envoi, et les clés Cloudflare
@@ -152,7 +153,7 @@ Quatre formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
 | Bloc rappel de la fiche DPE | Garde ses boutons propres (« obligations ») ; les autres fiches suivent la règle v10 formulaire / appel |
 | Avis clients de l'accueil | Modifiables dans Diag Imm'Hauts → Avis clients ; textes par défaut à remplacer par les vrais avis du site actuel. La note (5,0) et le nombre d'avis restent des chiffres arrêtés |
 | Formulaires | Emplacement balisé tant que Fluent Forms n'est pas installé ou que les formulaires ne sont pas créés |
-| Rappel : popup et haut de l'accueil | Deux formulaires Fluent Forms (`rappel`, `hero`) : les maquettes leur donnent des libellés, des placeholders et des listes « Type de bien » différents (popup : Appartement, Maison individuelle… ; accueil : Maison, Appartement…) |
+| Rappel : popup et haut de l'accueil | Un seul formulaire court (demande de l'utilisateur), aligné sur le devis : « Nom et prénom », « Téléphone » (06 12 34 56 78), « Commune ou code postal » (Arras ou 62000, avec suggestions), liste « Type de bien » du devis précédée de « Type de bien » ; les maquettes donnaient à la popup et à l'accueil des libellés et des listes différents |
 | Erreurs de saisie des formulaires | Pas de rouge dans la palette : brun des alertes (`--warm` assombri), comme « hors zone » ; messages en français |
 | Groupes du devis | Une seule grille (colonnes de 220 px au moins) pour les trois groupes ; la maquette passe à 250 px pour le deuxième, ce qui ne change la disposition qu'entre 900 et 1150 px de large |
 | Liens `#rappel` (FAQ, CTA de section) | Ouvrent la popup de rappel, comme le script des maquettes ; sans JS, ils descendent au bloc « rappel » |

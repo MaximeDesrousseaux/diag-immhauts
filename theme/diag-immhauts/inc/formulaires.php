@@ -19,8 +19,10 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Affiche le formulaire demandé ou son emplacement balisé.
  *
- * @param string $cle      'rappel' | 'hero' | 'devis' | 'partenaire'.
+ * @param string $cle      'rappel' | 'devis' | 'partenaire'.
  * @param string $variante '' ou 'sombre' (sur fond vert : haut de l'accueil).
+ *                         Le formulaire court « rappel » sert à la popup et au haut
+ *                         de l'accueil ; la variante règle sa présentation.
  */
 function dih_formulaire( $cle, $variante = '' ) {
 	$html = function_exists( 'dih_core_formulaire' ) ? dih_core_formulaire( $cle ) : '';
@@ -37,7 +39,6 @@ function dih_formulaire( $cle, $variante = '' ) {
 
 	$noms = array(
 		'rappel'     => 'Demande de rappel',
-		'hero'       => 'Demande de rappel',
 		'devis'      => 'Demande de devis',
 		'partenaire' => 'Compte partenaire',
 	);
@@ -67,8 +68,9 @@ function dih_formulaire_cle( $form ) {
 add_filter( 'fluentform/load_default_public', '__return_false' );
 
 /**
- * Attributs des champs : saisie automatique, clavier téléphone, message court
- * (haut de l'accueil, sur téléphone et en déplié : assets/js/formulaires.js).
+ * Attributs des champs : saisie automatique, clavier téléphone, suggestions de
+ * communes (formulaire court et devis), placeholders du message sur fond vert
+ * (haut de l'accueil : assets/js/formulaires.js).
  */
 $dih_attributs_champ = function ( $data, $form ) {
 	$cle = dih_formulaire_cle( $form );
@@ -89,12 +91,14 @@ $dih_attributs_champ = function ( $data, $form ) {
 	if ( 'telephone' === $nom ) {
 		$data['attributes']['type'] = 'tel';
 	}
-	if ( 'devis' === $cle && 'commune' === $nom ) {
+	if ( 'commune' === $nom ) {
 		$data['attributes']['autocomplete']      = 'off'; // suggestions du thème
 		$data['attributes']['data-dih-communes'] = function_exists( 'dih_core_url_communes' ) ? dih_core_url_communes() : '';
 	}
-	if ( 'hero' === $cle && 'message' === $nom ) {
-		$data['attributes']['data-court'] = dih_contenu( 'formulaires' )['message_court'];
+	if ( 'rappel' === $cle && 'message' === $nom ) {
+		$textes                            = dih_contenu( 'formulaires' );
+		$data['attributes']['data-sombre'] = $textes['message_sombre'];
+		$data['attributes']['data-court']  = $textes['message_court'];
 	}
 	return $data;
 };
@@ -103,8 +107,9 @@ add_filter( 'fluentform/rendering_field_data_input_email', $dih_attributs_champ,
 add_filter( 'fluentform/rendering_field_data_textarea', $dih_attributs_champ, 10, 2 );
 
 /**
- * Bouton d'envoi au gabarit .c-btn du thème (libellé qui glisse, icône au survol
- * pour le haut de l'accueil) ; mention « Réponse sous 24 h… » à côté de celui du devis.
+ * Bouton d'envoi au gabarit .c-btn du thème : libellé qui glisse et icône téléphone
+ * au survol pour le formulaire court (sans effet dans la popup, comme la maquette :
+ * composants/_form.scss) ; mention « Réponse sous 24 h… » à côté de celui du devis.
  */
 add_filter(
 	'fluentform/rendering_field_html_button',
@@ -116,9 +121,9 @@ add_filter(
 		$texte  = isset( $data['settings']['button_ui']['text'] ) ? $data['settings']['button_ui']['text'] : '';
 		$bouton = sprintf(
 			'<button type="submit" class="ff-btn ff-btn-submit c-btn c-btn--vert c-form__envoi%s"%s>%s</button>',
-			'hero' === $cle ? '' : ' c-btn--sans-icone',
+			'rappel' === $cle ? '' : ' c-btn--sans-icone',
 			isset( $data['attributes']['tabindex'] ) ? ' tabindex="' . esc_attr( $data['attributes']['tabindex'] ) . '"' : '',
-			'hero' === $cle
+			'rappel' === $cle
 				? '<span class="c-btn__texte">' . esc_html( $texte ) . '</span><span class="c-btn__icone">' . dih_icone( 'telephone', 17 ) . '</span>'
 				: '<span class="c-btn__texte">' . esc_html( $texte ) . '</span>'
 		);
@@ -147,37 +152,49 @@ add_filter(
 	3
 );
 
+/**
+ * Un message de confirmation (inc/contenus/formulaires.php, section confirmations).
+ *
+ * @param string $cle Message : 'rappel' (popup), 'accueil' (haut de l'accueil), 'devis', 'partenaire'.
+ * @return string
+ */
+function dih_formulaire_merci( $cle ) {
+	$c = dih_contenu( 'formulaires', 'confirmations' );
+	if ( empty( $c[ $cle ] ) ) {
+		return '';
+	}
+	$c   = $c[ $cle ];
+	$tel = 'tel:' . dih_info( 'telephone_lien' );
+
+	ob_start();
+	?>
+	<div class="c-form__merci c-form__merci--<?php echo esc_attr( $cle ); ?>">
+		<?php if ( 'devis' === $cle ) : ?>
+			<span class="c-form__merci-picto"><?php echo dih_svg( '<circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.5 2.5 4.5-5"></path>', 26 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+		<?php endif; ?>
+		<?php if ( $c['titre'] ) : ?>
+			<?php $dih_balise = 'devis' === $cle ? 'h2' : 'p'; // le devis remplace le titre de son bloc ?>
+			<<?php echo $dih_balise; ?> class="c-form__merci-titre"><?php echo esc_html( $c['titre'] ); ?></<?php echo $dih_balise; ?>>
+		<?php endif; ?>
+		<p class="c-form__merci-texte"><?php echo esc_html( $c['texte'] ); ?><?php echo ! empty( $c['urgent'] ) ? ' <span class="c-form__merci-urgent">' . esc_html( $c['urgent'] ) . '</span>' : ''; ?></p>
+		<?php if ( 'accueil' === $cle ) : ?>
+			<?php echo dih_bouton( esc_html( $c['bouton'] ), 'href="' . esc_attr( $tel ) . '"', 'telephone', 'c-btn--vert c-form__appel' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php elseif ( 'devis' === $cle ) : ?>
+			<a class="c-form__autre" href="<?php echo esc_url( dih_url( 'contact', 'devis' ) ); ?>"><?php echo esc_html( $c['bouton'] ); ?></a>
+		<?php else : ?>
+			<button type="button" class="c-form__fermer" data-dih-popup-fermer><?php echo esc_html( $c['bouton'] ); ?></button>
+		<?php endif; ?>
+	</div>
+	<?php
+	return trim( ob_get_clean() );
+}
+
+// Le formulaire court porte les deux messages : celui de la popup et celui du haut
+// de l'accueil ; le CSS n'affiche que celui de l'endroit où il a été envoyé.
 add_shortcode(
 	'dih_confirmation',
 	function ( $atts ) {
 		$cle = isset( $atts['cle'] ) ? sanitize_key( $atts['cle'] ) : '';
-		$c   = dih_contenu( 'formulaires', 'confirmations' );
-		if ( empty( $c[ $cle ] ) ) {
-			return '';
-		}
-		$c   = $c[ $cle ];
-		$tel = 'tel:' . dih_info( 'telephone_lien' );
-
-		ob_start();
-		?>
-		<div class="c-form__merci c-form__merci--<?php echo esc_attr( $cle ); ?>">
-			<?php if ( 'devis' === $cle ) : ?>
-				<span class="c-form__merci-picto"><?php echo dih_svg( '<circle cx="12" cy="12" r="9"></circle><path d="m8.5 12 2.5 2.5 4.5-5"></path>', 26 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-			<?php endif; ?>
-			<?php if ( $c['titre'] ) : ?>
-				<?php $dih_balise = 'devis' === $cle ? 'h2' : 'p'; // le devis remplace le titre de son bloc ?>
-				<<?php echo $dih_balise; ?> class="c-form__merci-titre"><?php echo esc_html( $c['titre'] ); ?></<?php echo $dih_balise; ?>>
-			<?php endif; ?>
-			<p class="c-form__merci-texte"><?php echo esc_html( $c['texte'] ); ?><?php echo ! empty( $c['urgent'] ) ? ' <span class="c-form__merci-urgent">' . esc_html( $c['urgent'] ) . '</span>' : ''; ?></p>
-			<?php if ( 'hero' === $cle ) : ?>
-				<?php echo dih_bouton( esc_html( $c['bouton'] ), 'href="' . esc_attr( $tel ) . '"', 'telephone', 'c-btn--vert c-form__appel' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-			<?php elseif ( 'devis' === $cle ) : ?>
-				<a class="c-form__autre" href="<?php echo esc_url( dih_url( 'contact', 'devis' ) ); ?>"><?php echo esc_html( $c['bouton'] ); ?></a>
-			<?php else : ?>
-				<button type="button" class="c-form__fermer" data-dih-popup-fermer><?php echo esc_html( $c['bouton'] ); ?></button>
-			<?php endif; ?>
-		</div>
-		<?php
-		return trim( ob_get_clean() );
+		return 'rappel' === $cle ? dih_formulaire_merci( 'rappel' ) . dih_formulaire_merci( 'accueil' ) : dih_formulaire_merci( $cle );
 	}
 );

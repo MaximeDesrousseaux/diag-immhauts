@@ -123,8 +123,8 @@ $dih_modif   = array(
 						<a class="l-hero__barre-lien" href="<?php echo esc_url( dih_url( 'contact', 'devis' ) ); ?>"><?php echo esc_html( $dih_c['barre_lien'] ); ?><span class="c-fleche"><?php echo dih_icone( 'fleche', 17, array( 'epaisseur' => 2.6 ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></a>
 					<?php endif; ?>
 				</div>
-				<div class="l-hero__barre-form" data-dih-form-place="hero">
-					<?php dih_formulaire( 'hero', 'sombre' ); ?>
+				<div class="l-hero__barre-form" data-dih-form-place="rappel">
+					<?php dih_formulaire( 'rappel', 'sombre' ); ?>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -134,12 +134,12 @@ $dih_modif   = array(
 				<span class="l-hero__carte-titre"><?php echo esc_html( $dih_c['carte_titre'] ); ?></span>
 				<span class="l-hero__carte-delai"><?php echo esc_html( $dih_c['carte_delai'] ); ?></span>
 			</div>
-			<div class="l-hero__carte-form" data-dih-form-place="hero">
+			<div class="l-hero__carte-form" data-dih-form-place="rappel">
 				<?php
 				// Un seul formulaire par page : avec la barre, il y est rendu, et
 				// assets/js/formulaires.js le déplace ici quand la carte s'affiche.
 				if ( ! $dih_barre ) {
-					dih_formulaire( 'hero', 'sombre' );
+					dih_formulaire( 'rappel', 'sombre' );
 				}
 				?>
 			</div>

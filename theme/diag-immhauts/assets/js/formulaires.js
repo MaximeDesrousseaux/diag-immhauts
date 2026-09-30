@@ -1,11 +1,13 @@
 /**
  * Formulaires Fluent Forms (inc/formulaires.php) — comportements des maquettes.
  *
- * - Haut de l'accueil : un seul formulaire par page, placé dans la zone visible
- *   ([data-dih-form-place]) : barre de rappel sur ordinateur, carte sur téléphone.
- * - Haut de l'accueil : message au texte court (« Votre message (facultatif) ») et
- *   sur deux lignes en déplié et sur téléphone (maquette : heroMsgPlaceholder).
- * - Devis : suggestions du champ « Commune ou code postal » dès 2 caractères,
+ * - Haut de l'accueil : le formulaire court n'y est rendu qu'une fois, puis placé
+ *   dans la zone visible ([data-dih-form-place]) : barre sur ordinateur, carte sur
+ *   téléphone.
+ * - Formulaire court sur fond vert (.c-form--sombre, sans étiquettes) : placeholder
+ *   du message qui dit « (facultatif) », plus court et sur deux lignes en déplié et
+ *   sur téléphone (maquette : heroMsgPlaceholder) ; la popup garde le sien.
+ * - Formulaire court et devis : suggestions du champ commune dès 2 caractères,
  *   8 au plus (début du nom ou du code postal, puis nom qui contient la saisie),
  *   tirées des secteurs habituels (plugin, donnees/communes.json) ; un clic remplit
  *   « Commune (code) ». Sans suggestion, la saisie reste libre.
@@ -27,8 +29,7 @@
 	var places = document.querySelectorAll('[data-dih-form-place]');
 	if (places.length > 1) {
 		var placer = function () {
-			var cle = places[0].getAttribute('data-dih-form-place');
-			var form = document.querySelector('.c-form[data-dih-form="' + cle + '"]');
+			var form = document.querySelector('[data-dih-form-place] > .c-form');
 			if (!form) return;
 			for (var i = 0; i < places.length; i++) {
 				// Zone visible : ses ancêtres ne sont pas en display: none.
@@ -43,13 +44,12 @@
 	}
 
 	// --- Message court du haut de l'accueil ------------------------------------------
-	var messages = document.querySelectorAll('textarea[data-court]');
+	var messages = document.querySelectorAll('.c-form--sombre textarea[data-sombre]');
 	if (messages.length) {
 		var ajuster = function () {
 			for (var i = 0; i < messages.length; i++) {
 				var t = messages[i];
-				if (!t.hasAttribute('data-long')) t.setAttribute('data-long', t.placeholder);
-				t.placeholder = deplie.matches ? t.getAttribute('data-court') : t.getAttribute('data-long');
+				t.placeholder = t.getAttribute(deplie.matches ? 'data-court' : 'data-sombre');
 				t.rows = deplie.matches ? 2 : 3;
 			}
 		};

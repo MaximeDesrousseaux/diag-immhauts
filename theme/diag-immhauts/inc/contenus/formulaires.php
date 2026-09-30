@@ -19,8 +19,9 @@ return array(
 			'texte'  => 'Demande bien reçue : je vous rappelle sous 24 heures ouvrées au numéro indiqué. À très vite.',
 			'bouton' => 'Fermer',
 		),
-		// Haut de l'accueil : la barre ne garde que la première phrase.
-		'hero'       => array(
+		// Même formulaire, envoyé depuis le haut de l'accueil : la barre ne garde que
+		// la première phrase.
+		'accueil'    => array(
 			'titre'  => 'Demande envoyée',
 			'texte'  => 'Je vous rappelle sous 24 heures ouvrées.',
 			'urgent' => 'Si c\'est urgent, appelez directement le 06 35 88 43 00.',
@@ -43,6 +44,8 @@ return array(
 	// À côté du bouton « Envoyer ma demande » (page Contact)
 	'note_devis'    => 'Réponse sous 24 h ouvrées · sans engagement',
 
-	// Message du haut de l'accueil, sur téléphone et en déplié (maquette : heroMsgPlaceholder)
-	'message_court' => 'Votre message (facultatif)',
+	// Message du formulaire court sur fond vert, sans étiquette (maquette : heroMsgPlaceholder) :
+	// sur ordinateur, puis en déplié et sur téléphone.
+	'message_sombre' => 'Votre message (facultatif) — type de diagnostic, surface, délai souhaité…',
+	'message_court'  => 'Votre message (facultatif)',
 );

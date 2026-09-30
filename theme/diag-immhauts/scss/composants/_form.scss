@@ -1,9 +1,11 @@
 // ==========================================================================
 // Formulaires Fluent Forms (.c-form, inc/formulaires.php) : habillage des
 // maquettes sur la seule feuille de structure de Fluent Forms.
-//   rappel, partenaire : popups (grille de deux colonnes, étiquettes visibles)
-//   hero               : haut de l'accueil, sur fond vert (barre ou carte)
-//   devis              : page Contact (trois groupes séparés par un filet)
+//   rappel     : formulaire court — dans la popup (grille de deux colonnes,
+//                étiquettes visibles) et en haut de l'accueil (--sombre : fond vert,
+//                barre ou carte, sans étiquettes)
+//   partenaire : popup de Professionnels
+//   devis      : page Contact (trois groupes séparés par un filet)
 // Les règles passent par .c-form .fluentform : aussi précises que celles de
 // Fluent Forms, chargées après elles.
 // ==========================================================================
@@ -116,9 +118,8 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
 .c-btn--sans-icone .c-btn__texte { padding: 0; }
 .c-btn--sans-icone:hover .c-btn__texte { transform: none; }
 
-// --- Popups : rappel et compte partenaire ---------------------------------------------
-.c-form--rappel,
-.c-form--partenaire {
+// --- Popups : formulaire court et compte partenaire -----------------------------------
+.c-popup .c-form {
   .fluentform fieldset {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
@@ -142,7 +143,18 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
 // Maquette Professionnels : champs à 10 px, quelle que soit la forme des boutons.
 .c-form--partenaire .fluentform .ff-el-form-control { border-radius: 10px; }
 
+// Dans la popup, le bouton n'a ni icône ni glissement (maquette).
+.c-popup .c-form__envoi {
+  .c-btn__icone { display: none; }
+  .c-btn__texte { padding: 0; }
+  &:hover .c-btn__texte { transform: none; }
+}
+
 // Après l'envoi : un texte et « Fermer » à la place du formulaire, de l'intro et du pied.
+// Le formulaire court porte aussi le message du haut de l'accueil : un seul s'affiche.
+.c-form--sombre .c-form__merci--rappel,
+.c-form:not(.c-form--sombre) .c-form__merci--accueil { display: none; }
+
 .c-popup__boite:has(.ff-message-success) :is(.c-popup__intro, .c-popup__rgpd, .c-popup__pied) { display: none; }
 
 .c-form__merci--rappel,
@@ -208,7 +220,7 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
   .text-danger { color: c(warm); }
 }
 
-.c-form--hero .c-form__envoi {
+.c-form--sombre .c-form__envoi {
   font-size: rem(15.5);
   box-shadow: $ombre-cta;
 }
@@ -287,7 +299,7 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
 }
 
 // Après l'envoi (maquette : heroSent)
-.c-form__merci--hero {
+.c-form__merci--accueil {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -314,7 +326,7 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
   }
 }
 
-.l-hero__barre .c-form__merci--hero {
+.l-hero__barre .c-form__merci--accueil {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
@@ -490,6 +502,16 @@ $ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
   box-shadow: 0 22px 44px -22px rgba(9, 26, 15, .4);
 
   &[hidden] { display: none; }
+}
+
+// Haut de l'accueil : le hero masque ce qui dépasse et le formulaire est à son bas,
+// la liste s'ouvre vers le haut.
+.c-form--sombre .c-form__suggestions {
+  top: auto;
+  right: auto;
+  bottom: 100%;
+  width: max(100%, 240px); // champ étroit de la barre : noms sur une ligne
+  margin: 0 0 8px;
 }
 
 .c-form__suggestion {
