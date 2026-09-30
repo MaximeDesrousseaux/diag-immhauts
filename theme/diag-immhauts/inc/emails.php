@@ -110,7 +110,8 @@ function dih_email_modele( $cle, $donnees, $form ) {
 			$synthese = implode( ' · ', array_filter( array( $v( 'qualite' ), trim( $v( 'type_bien' ) . ' ' . $v( 'surface' ) ), $v( 'commune' ) ) ) );
 			break;
 		case 'simulateur':
-			$synthese = implode( ' · ', array_filter( array( $v( 'sim_projet' ), trim( $v( 'type_bien' ) . ' ' . $v( 'sim_annee' ) ), $v( 'commune' ) ) ) );
+			// « Avant 1949 », « 1949 – 1996 » : l'année se lit mal collée au type (maquette : « Maison 1968 »).
+			$synthese = implode( ' · ', array_filter( array( $v( 'sim_projet' ), $v( 'type_bien' ), $v( 'sim_annee' ), $v( 'commune' ) ) ) );
 			break;
 		case 'partenaire':
 			$synthese = implode( ' · ', array_filter( array( $v( 'structure' ), $v( 'dossiers' ) ? $v( 'dossiers' ) . ' dossiers par mois' : '' ) ) );
