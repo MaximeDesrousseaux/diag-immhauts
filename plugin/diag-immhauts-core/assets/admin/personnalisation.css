@@ -257,6 +257,12 @@
 	padding: 0;
 }
 
+/* Clearfix de .acf-hl (::before/::after) : en grille, ce seraient des cases vides. */
+.dih-reglage .acf-radio-list::before,
+.dih-reglage .acf-radio-list::after {
+	content: none;
+}
+
 .dih-reglage .acf-radio-list li {
 	float: none;
 	margin: 0;
