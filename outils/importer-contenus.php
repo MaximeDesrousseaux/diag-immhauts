@@ -4,8 +4,8 @@
  * (inc/contenus/*.php), pour que l'admin montre les textes en place au lieu de
  * champs vides : avis de l'accueil, FAQ des 15 pages, haut de page et repères des
  * 12 fiches, bloc « 4 étapes » des fiches, de Nos diagnostics et de Qui suis-je, haut
- * de page des six pages uniques (accueil, Nos diagnostics, Professionnels, Qui suis-je,
- * Contact, simulateur).
+ * de page des six pages uniques et textes des pages décrites dans dih_core_textes()
+ * (plugin, inc/textes-pages.php).
  *
  * Usage : wp eval-file outils/importer-contenus.php
  *         wp eval-file outils/importer-contenus.php forcer   (réécrit aussi les champs déjà remplis)
@@ -34,7 +34,7 @@ $dih_forcer = isset( $args ) && in_array( 'forcer', (array) $args, true );
 // Les textes par défaut du thème, sans ce que l'admin contient déjà.
 remove_filter( 'dih_contenu', 'dih_core_contenus_modifiables', 10 );
 remove_filter( 'dih_contenu', 'dih_core_contenus_fiches', 10 );
-remove_filter( 'dih_contenu', 'dih_core_contenus_heros', 10 );
+remove_filter( 'dih_contenu', 'dih_core_contenus_textes', 10 );
 
 /**
  * Lien d'une question : [ libellé, cible ] du thème → champ « lien » d'ACF.
@@ -188,17 +188,18 @@ foreach ( dih_core_pages() as $dih_fichier => $dih_cle ) {
 	printf( "Fiche / étapes %s : importées (page %d)%s.\n", $dih_cle, $page_id, count( $remplis ) < $tout ? ' : ' . implode( ', ', $remplis ) : '' );
 }
 
-// Haut de page des six pages uniques -------------------------------------------------
-foreach ( dih_core_heros() as $dih_fichier => $dih_hero ) {
+// Textes des pages uniques (inc/textes-pages.php du plugin), section par section --------
+foreach ( dih_core_textes() as $dih_fichier => $dih_def ) {
 	$dih_pages = dih_core_pages();
-	$page_id   = $dih_page_id( $dih_pages[ $dih_fichier ] );
+	$page_id   = isset( $dih_pages[ $dih_fichier ] ) ? $dih_page_id( $dih_pages[ $dih_fichier ] ) : 0;
 	if ( ! $page_id ) {
-		printf( "Haut de page %s : page introuvable, ignorée.\n", $dih_fichier );
+		printf( "Textes %s : page introuvable, ignorée.\n", $dih_fichier );
 		continue;
 	}
 
-	$hero    = dih_contenu( $dih_fichier, 'hero' );
+	$c       = dih_contenu( $dih_fichier );
 	$remplis = array();
+	$tout    = 0;
 	$ecrire  = function ( $cle, $nom, $valeur ) use ( $dih_forcer, $page_id, &$remplis ) {
 		$actuel = get_field( $nom, $page_id );
 		$plein  = is_array( $actuel ) ? count( $actuel ) > 0 : '' !== trim( (string) $actuel );
@@ -209,25 +210,23 @@ foreach ( dih_core_heros() as $dih_fichier => $dih_hero ) {
 		$remplis[] = $nom;
 	};
 
-	foreach ( array_keys( $dih_hero['champs'] ) as $cle ) {
-		$ecrire( 'field_dih_hero_' . $dih_fichier . '_' . $cle, 'hero_' . $cle, $hero[ $cle ] );
-	}
-	foreach ( isset( $dih_hero['listes'] ) ? $dih_hero['listes'] : array() as $cle => $liste ) {
-		$lignes = array();
-		foreach ( $hero[ $cle ] as $element ) {
-			$ligne = array();
-			foreach ( $liste[1] as $nom => $colonne ) {
-				$ligne[ $nom ] = null === $colonne[0] ? $element : $element[ $colonne[0] ];
-			}
-			$lignes[] = $ligne;
+	foreach ( $dih_def['sections'] as $dih_sid => $dih_section ) {
+		$bloc = dih_core_chemin_lire( $c, dih_core_texte_base( $dih_sid, $dih_section ) );
+		foreach ( isset( $dih_section['champs'] ) ? $dih_section['champs'] : array() as $chemin => $champ ) {
+			list( $nom, $cle ) = dih_core_texte_champ( $dih_fichier, $dih_sid, $chemin );
+			$ecrire( $cle, $nom, (string) dih_core_chemin_lire( $bloc, $chemin ) );
+			++$tout;
 		}
-		$ecrire( 'field_dih_hero_' . $dih_fichier . '_' . $cle, 'hero_' . $cle, $lignes );
+		foreach ( isset( $dih_section['listes'] ) ? $dih_section['listes'] : array() as $chemin => $liste ) {
+			list( $nom, $cle ) = dih_core_texte_champ( $dih_fichier, $dih_sid, $chemin );
+			$ecrire( $cle, $nom, dih_core_texte_lignes( dih_core_chemin_lire( $bloc, $chemin ), $liste[1] ) );
+			++$tout;
+		}
 	}
 
-	$tout = count( $dih_hero['champs'] ) + ( isset( $dih_hero['listes'] ) ? count( $dih_hero['listes'] ) : 0 );
 	if ( ! $remplis ) {
-		printf( "Haut de page %s : déjà rempli, inchangé.\n", $dih_fichier );
+		printf( "Textes %s : déjà remplis, inchangés.\n", $dih_fichier );
 	} else {
-		printf( "Haut de page %s : importé (page %d)%s.\n", $dih_fichier, $page_id, count( $remplis ) < $tout ? ' : ' . implode( ', ', $remplis ) : '' );
+		printf( "Textes %s : importés (page %d)%s.\n", $dih_fichier, $page_id, count( $remplis ) < $tout ? ' : ' . implode( ', ', $remplis ) : '' );
 	}
 }
