@@ -9,7 +9,7 @@ plugin/diag-immhauts-core/     CPT, blocs ACF, page d'options, intégration Flue
 design_diagimmhauts_theme_wp/  maquettes .dc.html (référence visuelle, non embarquées)
 outils/installer.ps1           liens vers le site LocalWP + compilation
 outils/image-partage.html      source de l'image de partage (og:image)
-outils/importer-*.php          imports WP-CLI : articles du journal, contenus modifiables
+outils/importer-*.php          imports WP-CLI : articles du journal, contenus modifiables, formulaires
 ```
 
 ## Installation locale (Windows, LocalWP)
@@ -38,7 +38,7 @@ Architecture : celle de `Audit code SCSS.dc.html` (7-1 allégée), sans échelle
 | `scss/abstracts/` | `_tokens` (couleurs, texte, espaces, rayons, 3 élévations), `_functions` (`rem()`, `teinte()`, `c()`), `_mixins` (`bp()`, focus, 6 survols) |
 | `scss/base/` | `_reset` (+ custom properties `:root`), `_typographie` (polices, titres, surtitre), `_utilitaires` |
 | `scss/layout/` | `_entete`, `_pied`, `_hero` |
-| `scss/composants/` | `_bouton`, `_card`, `_pastille`, `_chiffre`, `_etapes`, `_faq`, `_formulaire`, `_etiquette`, `_frise`, `_article` |
+| `scss/composants/` | `_bouton`, `_card`, `_pastille`, `_chiffre`, `_etapes`, `_faq`, `_formulaire`, `_form` (Fluent Forms), `_etiquette`, `_frise`, `_article` |
 | `scss/pages/` | `_accueil`, `_fiche`, `_nos-diagnostics`, `_simulateur` |
 
 - **Nommage** : `c-` pour les composants, `l-` pour les mises en page, en BEM
@@ -69,7 +69,8 @@ par le plugin (`inc/personnalisation.php`, ACF Pro) :
 - **Diag Imm'Hauts → Personnalisation** : la page d'options de la maquette `Admin WP - Personnalisation`
   (onglets Identité du site · Accueil · Pages intérieures, choix à vignettes ; mise en forme
   `assets/admin/personnalisation.css`, vignettes WebP dans `assets/admin/`) ;
-- **Diag Imm'Hauts → Formulaires** : identifiants Fluent Forms (rappel, devis, contact, compte partenaire) ;
+- **Diag Imm'Hauts → Formulaires** : identifiants Fluent Forms (rappel, rappel du haut de l'accueil, devis,
+  compte partenaire), renseignés par `outils/importer-formulaires.php` ;
 - **Qui suis-je** et **Nos diagnostics** (encart latéral de la page) : citation du parcours, illustration du haut de page.
 
 Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage prend sa valeur par défaut.
@@ -92,6 +93,29 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
 
 Pour que l'admin montre les textes en place plutôt que des champs vides :
 `wp eval-file outils/importer-contenus.php` (ajouter `forcer` pour réécrire des champs déjà remplis).
+
+## Formulaires
+
+Quatre formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
+(`dih_core_formulaires_definitions()`, `inc/formulaires.php`) et créés par
+`wp eval-file outils/importer-formulaires.php` (ajouter `forcer` pour les réécrire) :
+
+| Clé | Où | Champs |
+|---|---|---|
+| `rappel` | popup « Rappel sous 24 h » (toutes les pages sauf Professionnels) | nom, téléphone, commune, type de bien, message |
+| `hero` | barre ou carte « Rappel gratuit » du haut de l'accueil | les mêmes, sans étiquettes ; message masqué dans la barre et sur téléphone |
+| `devis` | page Contact | 13 champs en trois groupes, diagnostics en pastilles, consentement |
+| `partenaire` | popup de Professionnels | structure, interlocuteur, téléphone, dossiers par mois, message |
+
+- **Présentation** (thème, `inc/formulaires.php`, `scss/composants/_form.scss`, `assets/js/formulaires.js`) :
+  seule la feuille de structure de Fluent Forms est chargée ; bouton d'envoi au gabarit `.c-btn` ; message
+  de confirmation des maquettes (`inc/contenus/formulaires.php`, shortcode `[dih_confirmation]`) ; un seul
+  formulaire du haut de l'accueil par page, placé par le script dans la zone visible (barre ou carte) ;
+  suggestions de communes du devis tirées des secteurs de la maquette (`donnees/communes.json`, `secteurs`).
+- **Notification** : e-mail à `contact@diagimmhauts.fr` (réponse directe à l'adresse saisie pour le devis) ;
+  sur la préprod, Mailpit retient les e-mails (http://localhost:10000).
+- **À régler en ligne** : FluentSMTP (installé) avec une clé API Brevo pour l'envoi, et les clés Cloudflare
+  Turnstile dans Fluent Forms → Global Settings, puis relancer l'import avec `forcer` pour ajouter le captcha.
 
 ## SEO
 
@@ -127,7 +151,10 @@ Pour que l'admin montre les textes en place plutôt que des champs vides :
 | Fond de l'accueil `#E5F2D4` et couleurs du champ « Vérifier ma commune » | Jeton `$vert-brume` ; pastilles oui / limite prises dans la palette (`$pastille-jaune`, `$pastille-orange`) |
 | Bloc rappel de la fiche DPE | Garde ses boutons propres (« obligations ») ; les autres fiches suivent la règle v10 formulaire / appel |
 | Avis clients de l'accueil | Modifiables dans Diag Imm'Hauts → Avis clients ; textes par défaut à remplacer par les vrais avis du site actuel. La note (5,0) et le nombre d'avis restent des chiffres arrêtés |
-| Formulaires | Emplacement balisé tant que Fluent Forms n'est pas installé |
+| Formulaires | Emplacement balisé tant que Fluent Forms n'est pas installé ou que les formulaires ne sont pas créés |
+| Rappel : popup et haut de l'accueil | Deux formulaires Fluent Forms (`rappel`, `hero`) : les maquettes leur donnent des libellés, des placeholders et des listes « Type de bien » différents (popup : Appartement, Maison individuelle… ; accueil : Maison, Appartement…) |
+| Erreurs de saisie des formulaires | Pas de rouge dans la palette : brun des alertes (`--warm` assombri), comme « hors zone » ; messages en français |
+| Groupes du devis | Une seule grille (colonnes de 220 px au moins) pour les trois groupes ; la maquette passe à 250 px pour le deuxième, ce qui ne change la disposition qu'entre 900 et 1150 px de large |
 | Liens `#rappel` (FAQ, CTA de section) | Ouvrent la popup de rappel, comme le script des maquettes ; sans JS, ils descendent au bloc « rappel » |
 | Illustrations des résultats du simulateur | La maquette les retourne en miroir (`scaleX(-1)`) : supprimé, conformément au README v10 (aucun miroir CSS) |
 | Note « Cette liste est indicative » du simulateur | Placée dans le panneau vert du dossier, comme la maquette |
@@ -165,7 +192,8 @@ Pour que l'admin montre les textes en place plutôt que des champs vides :
 
 - **ACF Pro** ou **Secure Custom Fields** (reprise gratuite d'ACF par WordPress.org, avec les fonctions Pro) :
   contenus modifiables et pages « Personnalisation », « Formulaires », « Avis clients ». Le même code sert aux deux.
-- **Fluent Forms Pro** : formulaires (rappel, devis, contact) + Cloudflare Turnstile ; envoi via Brevo.
+- **Fluent Forms** (la version gratuite suffit, Turnstile compris) : formulaires de rappel, de devis et de
+  compte partenaire ; **FluentSMTP** pour l'envoi des e-mails via Brevo.
 
 Sans elles, rien ne plante : un message d'administration signale ce qui manque et les formulaires
 laissent un emplacement balisé.

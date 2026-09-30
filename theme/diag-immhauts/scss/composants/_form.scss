@@ -1,0 +1,569 @@
+// ==========================================================================
+// Formulaires Fluent Forms (.c-form, inc/formulaires.php) : habillage des
+// maquettes sur la seule feuille de structure de Fluent Forms.
+//   rappel, partenaire : popups (grille de deux colonnes, étiquettes visibles)
+//   hero               : haut de l'accueil, sur fond vert (barre ou carte)
+//   devis              : page Contact (trois groupes séparés par un filet)
+// Les règles passent par .c-form .fluentform : aussi précises que celles de
+// Fluent Forms, chargées après elles.
+// ==========================================================================
+@use '../abstracts' as *;
+
+// Erreurs : pas de rouge dans la palette, le brun des alertes (comme « hors zone »).
+$erreur: color-mix(in srgb, #{c(warm)} 55%, #000);
+
+// Chevrons des listes (maquettes : .dih select, .dih-sel-d)
+$chevron-clair: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%231e5b34' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");
+$chevron-sombre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23a9c2a1' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.6 6 6.4l5-4.8'/%3E%3C/svg%3E");
+
+$ombre-cta: 0 10px 22px -12px rgba(0, 0, 0, .6);
+
+// --- Commun ------------------------------------------------------------------------
+.c-form .fluentform {
+  .ff-el-group { margin: 0; }
+
+  // Clearfix de Fluent Forms : en flex ou en grille, ce seraient des cases vides.
+  .ff-el-group::before,
+  .ff-el-group::after { content: none; }
+
+  .ff-el-input--label {
+    display: block;
+    margin: 0 0 6px; // échelle : exception (maquettes des popups : 6 px sous l'étiquette)
+    line-height: 1.2;
+
+    label {
+      display: block;
+      font-size: rem(12.5);
+      font-weight: 600;
+      color: c(forest);
+    }
+  }
+
+  .dih-facultatif {
+    font-weight: 500;
+    color: c(muted);
+  }
+
+  .ff-el-form-control {
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid c(line);
+    border-radius: var(--r-champ);
+    outline: none;
+    background-color: c(surface);
+    box-shadow: none;
+    font-family: var(--font-texte);
+    font-size: rem(14);
+    color: c(ink);
+    transition: border-color .2s ease, box-shadow .2s ease;
+
+    &::placeholder {
+      color: c(subtle);
+      opacity: 1;
+    }
+
+    &:focus {
+      border-color: c(tech);
+      box-shadow: 0 0 0 3px teinte(tech, 18%);
+    }
+  }
+
+  textarea.ff-el-form-control {
+    border-radius: var(--r-zone);
+    line-height: 1.55;
+    resize: vertical;
+  }
+
+  select.ff-el-form-control {
+    appearance: none;
+    padding-right: 34px;
+    background-image: $chevron-clair;
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+
+  .ff-el-help-message {
+    margin: 8px 0 0;
+    font-size: rem(11);
+    font-style: normal;
+    line-height: 1.45;
+    color: c(subtle);
+  }
+
+  .ff-el-is-error .ff-el-form-control { border-color: $erreur; }
+
+  .text-danger {
+    margin-top: 4px;
+    font-size: rem(12.5);
+    color: $erreur;
+  }
+
+  .ff-message-success {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .ff-errors-in-stack { margin-top: 8px; }
+}
+
+// Bouton d'envoi : gabarit .c-btn (inc/formulaires.php)
+.c-form__envoi { width: 100%; }
+
+// Sans icône (popups, devis) : ni retrait du libellé, ni glissement au survol.
+.c-btn--sans-icone .c-btn__texte { padding: 0; }
+.c-btn--sans-icone:hover .c-btn__texte { transform: none; }
+
+// --- Popups : rappel et compte partenaire ---------------------------------------------
+.c-form--rappel,
+.c-form--partenaire {
+  .fluentform fieldset {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 16px;
+  }
+
+  .dih-champ--message,
+  .c-form__pied { grid-column: 1 / -1; }
+
+  // 20 px de marge + 4 px sous le textarea en ligne de la maquette
+  .fluentform .c-form__pied { margin-top: 8px; }
+
+  .c-form__envoi {
+    padding: 15px;
+    font-family: inherit;
+    font-size: rem(15.5);
+    font-weight: 700;
+  }
+}
+
+// Maquette Professionnels : champs à 10 px, quelle que soit la forme des boutons.
+.c-form--partenaire .fluentform .ff-el-form-control { border-radius: 10px; }
+
+// Après l'envoi : un texte et « Fermer » à la place du formulaire, de l'intro et du pied.
+.c-popup__boite:has(.ff-message-success) :is(.c-popup__intro, .c-popup__rgpd, .c-popup__pied) { display: none; }
+
+.c-form__merci--rappel,
+.c-form__merci--partenaire {
+  padding: 12px 0 4px;
+
+  .c-form__merci-texte {
+    margin-top: 16px;
+    font-size: rem(15.5);
+    line-height: 1.7;
+    color: c(muted);
+  }
+}
+
+.c-form__fermer {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  border: 0;
+  border-radius: 10px;
+  background: c(forest);
+  color: #fff;
+  font-size: rem(15.5);
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  @include focus-visible;
+}
+
+// --- Haut de l'accueil, sur fond vert ----------------------------------------------------
+.c-form--sombre .fluentform {
+  // Étiquettes pour les lecteurs d'écran : la maquette n'a que des placeholders.
+  .ff-el-input--label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .ff-el-form-control {
+    padding: 12px 14px;
+    border-color: color-mix(in oklab, #fff 16%, transparent);
+    background-color: color-mix(in oklab, #fff 10%, transparent);
+    color: #fff;
+
+    &::placeholder { color: c(onDarkMuted); }
+  }
+
+  textarea.ff-el-form-control { line-height: 1.5; }
+
+  select.ff-el-form-control {
+    background-image: $chevron-sombre;
+
+    option {
+      background: c(forestDeep);
+      color: #fff;
+    }
+  }
+
+  .text-danger { color: c(warm); }
+}
+
+.c-form--hero .c-form__envoi {
+  font-size: rem(15.5);
+  box-shadow: $ombre-cta;
+}
+
+// Carte « Rappel gratuit » (sansBG sur ordinateur, les quatre variantes sur téléphone)
+.l-hero__carte .c-form {
+  .fluentform fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .ff-el-group { flex: 1 1 100%; }
+  .dih-champ--type_bien,
+  .dih-champ--commune { flex: 1 1 130px; }
+
+  .c-form__pied { margin-top: 4px; }
+  .c-form__envoi { padding: 15px; }
+}
+
+// L'envoi fait disparaître la mention RGPD (maquette : état heroSent).
+.l-hero__carte:has(.ff-message-success) .l-hero__carte-rgpd { display: none; }
+
+@include bp(mobile) {
+  .l-hero__carte .c-form {
+    .dih-champ--nom,
+    .dih-champ--telephone { flex: 1 1 150px; }
+
+    // Téléphone : le message reste dans la popup (README § Demande de rappel).
+    .dih-champ--message { display: none; }
+
+    .fluentform .ff-el-form-control { padding: 10px 13px; }
+    .c-form__pied { margin-top: 2px; }
+    .c-form__envoi { padding: 14px; }
+  }
+}
+
+// Barre de rappel (terrils-barre, max-bandeau) : les champs en ligne, sans message.
+.l-hero__barre .c-form {
+  .fluentform fieldset {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  // Champs étirés à la hauteur de leur ligne (celle du bouton), comme la maquette.
+  .ff-el-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 min(100%, 150px);
+    min-width: 0;
+  }
+
+  .ff-el-input--content { flex: 1 1 auto; }
+  .dih-champ--type_bien { flex-basis: min(100%, 140px); }
+  .dih-champ--commune { flex-basis: min(100%, 130px); }
+  .dih-champ--message { display: none; }
+
+  .fluentform .ff-el-form-control {
+    height: 100%;
+    padding: 12px 13px;
+    border-color: color-mix(in oklab, #fff 26%, transparent);
+    background-color: color-mix(in oklab, #{c(forestDeep)} 34%, transparent);
+    font-size: rem(12.5);
+  }
+
+  .c-form__pied { flex: 0 0 auto; }
+
+  .c-form__envoi {
+    width: auto;
+    height: 100%;
+    padding: 12px 22px;
+    font-size: rem(14);
+  }
+}
+
+// Après l'envoi (maquette : heroSent)
+.c-form__merci--hero {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 0 4px;
+
+  .c-form__merci-titre {
+    font-family: var(--font-titre);
+    font-size: rem(19);
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .c-form__merci-texte {
+    font-size: rem(14);
+    line-height: 1.65;
+    color: c(onDarkSoft);
+  }
+
+  .c-form__appel {
+    width: 100%;
+    padding: 15px;
+    font-size: rem(15.5);
+    box-shadow: $ombre-cta;
+  }
+}
+
+.l-hero__barre .c-form__merci--hero {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+
+  .c-form__merci-titre { font-size: rem(17); }
+  .c-form__merci-texte { flex: 1 1 0; min-width: 0; line-height: 1.6; }
+  .c-form__merci-urgent { display: none; }
+
+  .c-form__appel {
+    width: auto;
+    padding: 12px 22px;
+    font-size: rem(14);
+  }
+}
+
+// --- Devis (page Contact) ------------------------------------------------------------
+.c-form--devis .fluentform {
+  fieldset {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 16px;
+  }
+
+  .dih-champ--separateur,
+  .dih-champ--diagnostics,
+  .dih-champ--precisions,
+  .dih-champ--rgpd,
+  .c-form__pied { grid-column: 1 / -1; }
+
+  // Filet entre les groupes : 24 px de part et d'autre, comme la maquette.
+  .dih-separateur {
+    height: 1px;
+    margin: 8px 0;
+    background: c(line);
+  }
+
+  .dih-champ--precisions,
+  .dih-champ--rgpd,
+  .c-form__pied { margin-top: 8px; }
+
+  .ff-el-input--label { margin-bottom: 8px; } // maquette : 7 px
+
+  .ff-el-form-control {
+    padding: 13px 14px;
+    border-radius: 10px;
+  }
+
+  select.ff-el-form-control { padding-right: 38px; }
+  textarea.ff-el-form-control { line-height: normal; } // maquette : interligne du navigateur
+
+  // Diagnostics souhaités : cases en pastilles
+  .dih-champ--diagnostics {
+    .ff-el-input--content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ff-el-help-message {
+      order: -1;
+      flex-basis: 100%;
+      margin: -4px 0 4px;
+      font-size: rem(12.5);
+      line-height: 1.5;
+      color: c(muted);
+    }
+
+    .ff-el-form-check { margin: 0; }
+
+    .ff-el-form-check-label {
+      position: relative;
+      display: inline-flex;
+      padding: 9px 15px;
+      border: 1px solid c(line);
+      border-radius: 999px;
+      background: c(bg);
+      color: c(muted);
+      font-size: rem(14);
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      transition: background .2s ease, border-color .2s ease, color .2s ease;
+
+      &:has(:checked) {
+        border-color: c(tech);
+        background: color-mix(in oklab, #{c(tech)} 16%, #fff);
+        color: c(forest);
+      }
+
+      &:has(:focus-visible) {
+        outline: 2px solid c(tech);
+        outline-offset: 2px;
+      }
+    }
+
+    .ff-el-form-check-input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  // Consentement
+  .ff-el-tc label.ff_tc_label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: rem(12.5);
+    font-weight: 400;
+    line-height: 1.6;
+    color: c(muted);
+    cursor: pointer;
+
+    > span,
+    > div { display: block; }
+
+    > span {
+      width: auto;
+      padding-top: 0 !important; // Fluent Forms l'impose en !important
+    }
+
+    input {
+      width: 17px;
+      height: 17px;
+      margin: 1px 3px 0 4px; // échelle : exception (maquette : marges du navigateur, haut à 1 px)
+      accent-color: c(tech);
+    }
+  }
+
+  .c-form__pied {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .c-form__envoi {
+    width: auto;
+    padding: 16px 26px;
+    font-family: inherit;
+    font-size: rem(15.5);
+    font-weight: 700;
+  }
+}
+
+.c-form__note {
+  font-size: rem(12.5);
+  color: c(muted);
+}
+
+// Suggestions de communes (assets/js/formulaires.js)
+.c-form__communes { position: relative; }
+
+.c-form__suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 236px;
+  margin-top: 8px;
+  padding: 6px;
+  overflow-y: auto;
+  border: 1px solid c(line);
+  border-radius: 10px;
+  background: c(surface);
+  box-shadow: 0 22px 44px -22px rgba(9, 26, 15, .4);
+
+  &[hidden] { display: none; }
+}
+
+.c-form__suggestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  font-size: rem(14);
+  color: c(ink);
+  cursor: pointer;
+
+  &:hover,
+  &.is-actif { background: c(bg); }
+}
+
+.c-form__suggestion-cp {
+  font-size: rem(12.5);
+  color: c(subtle);
+}
+
+.c-form__suggestion-vide {
+  padding: 10px 10px 11px;
+  font-size: rem(12.5);
+  line-height: 1.5;
+  color: c(subtle);
+}
+
+// Après l'envoi : le message remplace aussi le titre et l'intro du bloc.
+.l-devis__form:has(.ff-message-success) {
+  .l-devis__titre,
+  .l-devis__intro { display: none; }
+
+  .l-devis__champs { margin-top: 0; }
+}
+
+.c-form__merci--devis {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 0;
+
+  .c-form__merci-titre {
+    font-size: rem(26);
+    font-weight: 800;
+    color: c(forest);
+  }
+
+  .c-form__merci-texte {
+    max-width: 460px;
+    font-size: rem(15.5);
+    line-height: 1.7;
+    color: c(muted);
+  }
+}
+
+.c-form__merci-picto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: color-mix(in oklab, #{c(tech)} 18%, #{c(surface)});
+  color: c(forest);
+}
+
+.c-form__autre {
+  margin-top: 8px;
+  font-size: rem(14);
+  font-weight: 700;
+  color: c(tech);
+
+  &:hover { color: c(forest); }
+}
