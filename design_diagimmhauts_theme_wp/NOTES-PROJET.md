@@ -2,7 +2,7 @@
 
 **Règle de travail : ne jamais créer de nouvelle version ni de message pour Claude Code sans demande explicite. Exception : dès qu'un envoi à Claude Code demande de copier un dossier dans le dépôt, fournir automatiquement le lien de téléchargement de ce dossier avec le message.**
 
-**Versionnage : `1.x`** (plus de « vN » seul). Version courante : **1.14d** (`checkpoints/v1.14d - livrables/`). Prochaine : **1.15**. Même numéro partout : dossier de sauvegarde `checkpoints/v1.x - …/`, libellé des liens de téléchargement, en-tête du message pour Claude Code (« Maquettes 1.x »), ligne `Version :` du README du paquet. Les corrections s'appliquent aux maquettes, au paquet et au dossier client ; le versionnage attend le feu vert.
+**Versionnage : `1.x`** (plus de « vN » seul). Version courante : **1.14e** (`checkpoints/v1.14e - livrables/`). Prochaine : **1.15**. Même numéro partout : dossier de sauvegarde `checkpoints/v1.x - …/`, libellé des liens de téléchargement, en-tête du message pour Claude Code (« Maquettes 1.x »), ligne `Version :` du README du paquet. Les corrections s'appliquent aux maquettes, au paquet et au dossier client ; le versionnage attend le feu vert.
 
 ## État
 Refonte appliquée sur l'accueil, `Nos diagnostics`, `Professionnels`, le `Simulateur` et les
@@ -40,6 +40,9 @@ s'il n'y a pas de `a.dih-cta` dans le hero. Accueil mobile : barre du hero (déj
 
 ## Hero de l'accueil — 1.14d
 Sous-titre bureau à 17 px, 3 lignes, « Maxime\u00a0Dillies » insécable, « douze » retiré. `sansBG` : pastille en absolu au-dessus du titre, formulaire centré sur le bloc texte ; le formulaire porte `data-nv-skip` (sinon `__navWire` le prenait pour le hero à cause d'une `url()` dans un champ). Bloc `#rappel` : `ctaCallFirst` / `ctaFormFirst` remis à la racine de `renderVals` (ils étaient dans le `map` de la FAQ → 2 boutons absents).
+
+## Qui suis-je — photo du hero — 1.14e
+Halo supprimé (plus de tweak) : voile vert foncé derrière la tête, calque soft-light masqué par la photo (lumière vert clair haut-droite + bas assombri), ombre portée douce bas-gauche. Bureau + déplié seulement. Les captures (html-to-image) ne rendent pas le `mask` : rectangle sombre visible en capture, pas dans le navigateur.
 
 ## Carrousel des avis (accueil)
 Flèches bureau/tablette **sous** le carrousel, alignées à droite, chevrons sans rond (`revPrev`/`revNext`, `__revSync` sur le `scroll`, seuil 24 px) : grisées à 0,3 et désactivées en début / fin ; masquées sur téléphone.

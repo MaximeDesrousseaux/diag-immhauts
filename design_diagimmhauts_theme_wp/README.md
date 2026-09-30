@@ -1,6 +1,9 @@
 # Passation : thème WordPress Diag Imm'Hauts
 
-Version : **1.14d** — les messages de mise à jour sont titrés « Maquettes 1.x ».
+Version : **1.14e** — les messages de mise à jour sont titrés « Maquettes 1.x ».
+
+## Qui suis-je — photo du hero (1.14e)
+Bureau + déplié : le halo vert pâle (4 disques flous) est supprimé, remplacé par : voile vert foncé radial derrière la tête et les épaules (`--forestDeep` 62 % → 0) ; étalonnage limité à la silhouette (calque masqué par le PNG lui-même, `mix-blend-mode:soft-light`, lumière `--techBright` en haut à droite + assombrissement bas) ; `filter: saturate(.94) contrast(1.03) drop-shadow(-20px 14px 30px rgba(6,33,15,.42))` sur la photo. Mobile inchangé. Aucun réglage.
 
 ## Hero de l'accueil — sous-titre (1.14d)
 Bureau : sous-titre à **17 px**, 3 lignes, « Maxime Dillies » insécable (espace insécable, sur toutes les variantes). Le mot « douze » est retiré (« réalise lui-même les diagnostics »). Variante `sansBG` : formulaire centré verticalement sur le bloc texte (titre → chiffres), la pastille au-dessus du titre est hors calcul (positionnée en absolu). Le bloc « rappel » affiche bien ses 2 boutons (ordre selon le format).

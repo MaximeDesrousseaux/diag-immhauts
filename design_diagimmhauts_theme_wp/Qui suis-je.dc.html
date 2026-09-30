@@ -272,11 +272,11 @@
           </div>
         </div>
         <div style="position:relative;display:flex;justify-content:center;align-items:flex-end;min-height:clamp(340px,38vw,430px);min-width:0;">
-          <div style="position:absolute;left:50%;bottom:-4%;transform:translateX(-50%);width:104%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 48% 44%,color-mix(in oklab,var(--techBright) 34%,transparent) 0,color-mix(in oklab,var(--techBright) 10%,transparent) 54%,transparent 76%);filter:blur(18px);"></div>
-          <div style="position:absolute;left:50%;bottom:2%;transform:translateX(-50%);width:74%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,color-mix(in oklab,#fff 22%,transparent) 0,transparent 68%);"></div>
-          <div style="position:absolute;left:52%;bottom:14%;transform:translateX(-50%);width:74%;aspect-ratio:1.15;border-radius:50%;background:radial-gradient(circle at 44% 40%,color-mix(in oklab,var(--glow,#f4ffe8) 20%,transparent) 0,transparent 66%);filter:blur(30px);"></div>
-          <div style="position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:88%;height:26%;border-radius:50%;background:radial-gradient(ellipse at 50% 100%,color-mix(in oklab,var(--techBright) 26%,transparent) 0,transparent 72%);filter:blur(22px);"></div>
-          <img src="img/Maxime_Dillies_pp.webp" alt="Maxime Dillies, diagnostiqueur immobilier" style="position:relative;display:block;width:{{ qsPhotoW }};max-width:{{ qsPhotoMax }};height:auto;">
+          <div aria-hidden="true" style="position:absolute;left:50%;top:-8%;transform:translateX(-50%);width:120%;aspect-ratio:1.2;border-radius:50%;background:radial-gradient(closest-side,color-mix(in oklab,var(--forestDeep,#123f24) 62%,transparent) 0,color-mix(in oklab,var(--forestDeep,#123f24) 30%,transparent) 55%,transparent 100%);pointer-events:none;"></div>
+          <div style="position:relative;width:{{ qsPhotoW }};max-width:{{ qsPhotoMax }};">
+            <img src="img/Maxime_Dillies_pp.webp" alt="Maxime Dillies, diagnostiqueur immobilier" style="position:relative;display:block;width:100%;height:auto;filter:saturate(.94) contrast(1.03) drop-shadow(-20px 14px 30px rgba(6,33,15,.42));">
+            <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;mask:url('img/Maxime_Dillies_pp.webp') center / 100% 100% no-repeat;-webkit-mask:url('img/Maxime_Dillies_pp.webp') center / 100% 100% no-repeat;background:linear-gradient(215deg,color-mix(in oklab,var(--techBright,#a3e04a) 42%,transparent) 0,transparent 42%),linear-gradient(0deg,color-mix(in oklab,var(--forestDeep,#123f24) 75%,transparent) 0,transparent 40%);mix-blend-mode:soft-light;"></div>
+          </div>
         </div>
       </div>
       <sc-if value="{{ qsStatsDark }}" hint-placeholder-val="{{ true }}">
