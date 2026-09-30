@@ -74,7 +74,7 @@
 .l-grille-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(40px, 3.6vw, 56px) 24px;
+  gap: clamp(48px, 3.6vw, 56px) 24px; // échelle : exception (maquette : 48 px au moins entre les rangées, pour le débord des illustrations)
   align-items: stretch;
   padding-top: 50px; // place du débord des illustrations
 

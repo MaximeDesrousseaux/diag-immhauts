@@ -251,7 +251,7 @@
 
   @include bp(mobile) {
     grid-area: 2 / 1;
-    font-size: rem(22);
+    font-size: 1.5rem; // échelle : exception (maquette : 24 px, hors des pas de rem() ; titre sur 3 lignes à côté de l'illustration)
   }
 }
 
