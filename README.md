@@ -159,6 +159,7 @@ Pour que l'admin montre les textes en place plutôt que des champs vides :
 | Polices (`police_titre`, `police_texte`) | Attributs `data-police-titre` / `data-police-texte` sur `<html>` et non sur le `body` : la correction du texte (104 % Instrument Sans, 112 % Source Sans 3) passe par la taille racine, base de tous les `rem()`, comme le prévoit l'audit SCSS (« une valeur ») ; toutes les polices sont auto-hébergées (`assets/fonts`) |
 | Identifiants des formulaires | Sous-page « Formulaires », hors maquette : la page « Personnalisation » ne porte que l'apparence |
 | Statuts « Selon situation » et « Recommandé » | Teintes dérivées de la palette (`--warm`, `--line`, `--forest`) au lieu de `#f6e6b4` / `#6b4d11` / `#3f5c46` |
+| « S'applique à : … » de la page Personnalisation | Dans la carte du premier réglage de l'onglet, au-dessus de son titre (demande de l'utilisateur), et non entre les onglets et les cartes comme la maquette |
 
 ## Dépendances
 

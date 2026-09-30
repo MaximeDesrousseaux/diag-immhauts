@@ -168,9 +168,21 @@
 	border-bottom-color: #f0f0f1;
 }
 
-/* « S'applique à : … » en tête de chaque onglet. */
+/* « S'applique à : … » en tête de chaque onglet : dans la carte du premier réglage,
+   au-dessus de son titre (et non entre les onglets et les cartes, comme la maquette). */
+.acf-settings-wrap .acf-postbox.seamless > .acf-fields > .acf-field.dih-portee {
+	margin-top: 18px;
+	padding: clamp(16px, 2.4vw, 26px) clamp(16px, 2.4vw, 26px) 0;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-bottom: 0;
+	border-radius: 4px 4px 0 0;
+}
+
 .acf-settings-wrap .acf-fields > .dih-portee .acf-input {
-	margin: 18px 0 14px;
+	margin: 0;
+	padding-bottom: 14px;
+	border-bottom: 1px solid #f0f0f1;
 	font-size: 13px;
 	color: #646970;
 }
@@ -187,6 +199,9 @@
 
 .acf-settings-wrap .acf-postbox.seamless > .acf-fields > .dih-portee + .acf-field.dih-reglage {
 	margin-top: 0;
+	padding-top: 18px;
+	border-top: 0;
+	border-radius: 0 0 4px 4px;
 }
 
 .acf-settings-wrap .acf-postbox.seamless > .acf-fields > .acf-field.dih-reglage--tete {
