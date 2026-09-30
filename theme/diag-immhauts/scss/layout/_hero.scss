@@ -247,7 +247,7 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
   .l-hero__chapeau {
     margin-top: clamp(21px, 2.3vw, 31px); // échelle : exception (réglage à l'œil du hero)
     max-width: min(100%, 462px);
-    font-size: clamp(14px, 1.12vw, 16px); // échelle : exception (réglage à l'œil du hero)
+    font-size: rem(17); // bureau (1.14d) : 3 lignes, coupure après les deux-points
     font-weight: 600;
     line-height: 1.82;
     color: c(onDark);
@@ -256,6 +256,7 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
     @include bp(deplie-seul) {
       margin-top: 26px; // échelle : exception (déplié VERROUILLÉ : heroParaGap)
       max-width: min(100%, 392px);
+      font-size: clamp(14px, 1.12vw, 16px); // échelle : exception (déplié VERROUILLÉ : heroParaSize)
     }
   }
 
@@ -487,6 +488,11 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
       linear-gradient(160deg, transparent 0, teinte(forestDeep, 42%) 100%);
   }
 
+  // Déplié (1.14d, nav de la maquette corrigée) : la marge du bas se retrouve en haut.
+  .l-hero__int {
+    @include bp(deplie-seul) { padding-top: calc(var(--nvH) + clamp(24px, 3.4vw, 40px)); }
+  }
+
   .l-hero__texte { width: min(100%, 500px); }
 
   .l-hero__titre {
@@ -500,9 +506,12 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
 
   .l-hero__chapeau {
     max-width: min(100%, 500px);
-    font-size: clamp(15px, 1.5vw, 17px); // échelle : exception (réglage à l'œil du hero)
+    font-size: rem(17);
 
-    @include bp(deplie-seul) { max-width: min(100%, 392px); }
+    @include bp(deplie-seul) {
+      max-width: min(100%, 392px);
+      font-size: clamp(14px, 1.12vw, 16px); // échelle : exception (heroParaSize du déplié, 1.14d)
+    }
   }
 
   .l-hero__barre {
@@ -596,14 +605,9 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
     align-content: center;
     padding: calc(var(--nvH) + clamp(30px, 7vw, 88px)) $gouttiere-page clamp(34px, 8vw, 96px);
 
-    // Bureau, comme la maquette : la hauteur minimale du hero (100svh − bandeau,
-    // 690 px au moins) est celle de la rangée, entre les marges de 88 et 96 px, et
-    // la nav ne décale que la carte ; le texte est centré dans la rangée.
-    @include bp(bureau) {
-      min-height: 0;
-      grid-auto-rows: minmax(max(690px, 100svh - #{$accueil-bandeau}), auto);
-      padding-top: clamp(30px, 7vw, 88px);
-    }
+    // Bureau (1.14d) : rangée en haut du hero, sous la nav et la marge de 88 px ;
+    // texte et carte centrés l'un sur l'autre dans la rangée.
+    @include bp(bureau) { align-content: start; }
   }
 
   .l-hero__texte {
@@ -612,7 +616,13 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
     padding: 0;
   }
 
+  // Au-dessus du titre, hors du flux : la carte se centre sur le titre → chiffres.
   .c-pastille--hero {
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    margin-bottom: 24px;
+    white-space: nowrap;
     width: auto;
     max-width: none;
     height: auto;
@@ -638,6 +648,8 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
     max-width: 520px;
     font-size: clamp(14px, 1.4vw, 17px);
     font-weight: 400;
+
+    @include bp(bureau) { font-size: rem(17); }
     line-height: 1.55;
     color: c(onDarkSoft);
     text-shadow: none;
@@ -660,18 +672,11 @@ $accueil-bandeau: 98px;   // hauteur du bandeau de confiance, visible sous le he
 
   .l-hero__carte {
     display: block;
-    margin-top: 56px;
     padding: clamp(16px, 4.2vw, 24px);
     border-radius: 16px;
     background: teinte(surface, 12%);
     border: 1px solid color-mix(in oklab, #fff 22%, transparent);
     box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
-
-    // Bureau : en haut de sa colonne, sous la nav (maquette : nav + 50 px).
-    @include bp(bureau) {
-      align-self: start;
-      margin-top: calc(var(--nvH) + 56px);
-    }
   }
 }
 

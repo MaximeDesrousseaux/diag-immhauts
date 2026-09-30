@@ -16,7 +16,7 @@ return array(
 		'titre'          => 'Des diagnostics fiables,',
 		'titre_accent'   => "partout dans l'Artois.",
 		'titre_mobile'   => 'un interlocuteur unique.', // 2e ligne du titre sur téléphone
-		'chapeau'        => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies réalise lui-même les douze diagnostics. Un seul interlocuteur, avec rigueur, réactivité et pédagogie.',
+		'chapeau'        => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies réalise lui-même les diagnostics. Un seul interlocuteur, avec rigueur, réactivité et pédagogie.',
 		'cta'            => 'Demande de rappel',
 		'cta_2'          => 'Découvrir mes prestations',
 		'cta_2_court'    => 'Mes prestations', // déplié (VERROUILLÉ)
@@ -36,11 +36,11 @@ return array(
 		'variantes'      => array(
 			'max-bandeau' => array(
 				'titre_accent' => 'un interlocuteur unique.',
-				'chapeau'      => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies vous accompagne partout dans l\'Artois, avec rigueur, réactivité et pédagogie.',
+				'chapeau'      => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies vous accompagne partout dans l\'Artois, avec rigueur, réactivité et pédagogie.',
 			),
 			'sansBG'      => array(
 				'titre_accent' => 'un interlocuteur unique.',
-				'chapeau'      => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies vous accompagne partout dans l\'Artois et les Hauts-de-France, avec rigueur, réactivité et pédagogie.',
+				'chapeau'      => 'Vente, location, copropriétés ou audit énergétique : Maxime Dillies vous accompagne partout dans l\'Artois et les Hauts-de-France, avec rigueur, réactivité et pédagogie.',
 			),
 		),
 	),
