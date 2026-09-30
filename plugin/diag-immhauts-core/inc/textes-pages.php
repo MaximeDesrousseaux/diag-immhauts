@@ -208,18 +208,7 @@ function dih_core_textes() {
 		),
 		'professionnels'  => array(
 			'lieu'     => array( 'page_template', 'page-templates/professionnels.php' ),
-			'sections' => array(
-				'hero' => array(
-					'titre'  => 'Haut de page',
-					'champs' => array(
-						'pastille' => array( 'Pastille', 'text' ),
-						'titre'    => array( 'Titre, 1re ligne', 'text' ),
-						'accent'   => array( 'Titre, 2e ligne (en vert)', 'text' ),
-						'chapeau'  => array( 'Chapeau', 'textarea' ),
-						'cta'      => array( 'Bouton principal', 'text' ),
-					),
-				),
-			),
+			'sections' => dih_core_textes_professionnels(),
 		),
 		'qui'             => array(
 			'lieu'     => array( 'page_template', 'page-templates/qui.php' ),
@@ -372,6 +361,113 @@ function dih_core_textes() {
 			),
 		),
 	);
+}
+
+/**
+ * Professionnels : haut de page, profils, engagements, packs, déroulé, bloc final et
+ * popup « Compte partenaire ». Chaque profil et chaque pack a ses champs, sa liste
+ * (points, diagnostics) juste dessous ; illustrations, pictos et teintes restent fixes.
+ *
+ * @return array
+ */
+function dih_core_textes_professionnels() {
+	$sections = array(
+		'hero'        => array(
+			'titre'  => 'Haut de page',
+			'champs' => array(
+				'pastille' => array( 'Pastille', 'text' ),
+				'titre'    => array( 'Titre, 1re ligne', 'text' ),
+				'accent'   => array( 'Titre, 2e ligne (en vert)', 'text' ),
+				'chapeau'  => array( 'Chapeau', 'textarea' ),
+				'cta'      => array( 'Bouton principal', 'text' ),
+			),
+		),
+		'profils'     => array(
+			'titre'  => 'Votre métier',
+			'champs' => array(
+				'surtitre' => array( 'Surtitre', 'text' ),
+				'titre'    => array( 'Titre', 'text' ),
+			),
+		),
+		'engagements' => array(
+			'titre'  => 'Engagements',
+			'champs' => array(
+				'surtitre' => array( 'Surtitre', 'text' ),
+				'titre'    => array( 'Titre', 'text' ),
+			),
+			'listes' => array(
+				'cartes' => array(
+					'Les six engagements (picto fixe, par position)',
+					array(
+						'titre' => array( 1, 'Titre' ),
+						'texte' => array( 2, 'Texte', 'textarea' ),
+					),
+					6,
+				),
+			),
+		),
+		'packs'       => array(
+			'titre'  => 'Packs',
+			'champs' => array(
+				'surtitre' => array( 'Surtitre', 'text' ),
+				'titre'    => array( 'Titre', 'text' ),
+				'lien'     => array( 'Lien vers le simulateur', 'text' ),
+			),
+		),
+		'process'     => array(
+			'titre'  => 'Déroulé',
+			'champs' => array(
+				'surtitre'    => array( 'Surtitre', 'text' ),
+				'titre'       => array( 'Titre', 'text' ),
+				'texte'       => array( 'Texte', 'textarea' ),
+				'ligne_titre' => array( 'Encadré : titre', 'text' ),
+				'ligne_texte' => array( 'Encadré : texte', 'textarea' ),
+				'ligne_cta'   => array( 'Encadré : bouton', 'text' ),
+			),
+			'listes' => array(
+				'etapes' => array(
+					'Les quatre étapes (numéro fixe)',
+					array(
+						'titre' => array( 1, 'Titre' ),
+						'texte' => array( 2, 'Texte', 'textarea' ),
+					),
+					4,
+				),
+			),
+		),
+		'rappel'      => array(
+			'titre'  => 'Bloc final',
+			'champs' => array(
+				'titre'        => array( 'Titre', 'text' ),
+				'texte'        => array( 'Texte', 'textarea' ),
+				'formulaire/0' => array( 'Bouton « Écrire un message »', 'text' ),
+			),
+		),
+		'popup'       => array(
+			'titre'  => 'Popup partenaire',
+			'aide'   => 'La fenêtre « Compte partenaire » ouverte par les boutons de rappel de la page ; les champs du formulaire se règlent dans Fluent Forms.',
+			'champs' => array(
+				'surtitre' => array( 'Surtitre', 'text' ),
+				'titre'    => array( 'Titre', 'text' ),
+				'intro'    => array( 'Introduction', 'textarea' ),
+			),
+		),
+	);
+
+	$rangs = array( '1re', '2e', '3e' );
+	foreach ( $rangs as $i => $rang ) {
+		$sections['profils']['champs'][ "cartes/$i/0" ] = array( "$rang carte : titre", 'text' );
+		$sections['profils']['champs'][ "cartes/$i/3" ] = array( "$rang carte : texte", 'textarea' );
+		$sections['profils']['champs'][ "cartes/$i/4" ] = array( "$rang carte : points cochés", 'liste', array( 'texte' => array( null, 'Point' ) ), 0 );
+	}
+	foreach ( $rangs as $i => $rang ) {
+		$sections['packs']['champs'][ "cartes/$i/0" ] = array( "$rang pack : pastille", 'text' );
+		$sections['packs']['champs'][ "cartes/$i/2" ] = array( "$rang pack : titre", 'text' );
+		$sections['packs']['champs'][ "cartes/$i/3" ] = array( "$rang pack : texte", 'textarea' );
+		$sections['packs']['champs'][ "cartes/$i/4" ] = array( "$rang pack : diagnostics compris", 'liste', array( 'diagnostic' => array( null, 'Diagnostic' ) ), 0 );
+		$sections['packs']['champs'][ "cartes/$i/5" ] = array( "$rang pack : note", 'textarea' );
+	}
+	return $sections;
 }
 
 /**
