@@ -3,6 +3,10 @@
 Ce guide explique comment modifier les textes du site depuis l'administration WordPress.
 Il s'adresse à la personne qui tient le site ; les détails techniques sont dans le `README.md`.
 
+> **Ce fichier fait foi pour le contenu.** Sa version illustrée, aux couleurs de la charte, est mise en
+> forme par Claude Design et rangée dans le dossier client en ligne (`dossier_client_en_ligne/`, hors
+> de ce dépôt). Toute modification de l'admin se reporte d'abord ici, puis dans la version illustrée.
+
 ## Le principe en trois règles
 
 1. **Un champ vide garde le texte d'origine.** Vous ne pouvez rien « casser » en vidant un champ :
