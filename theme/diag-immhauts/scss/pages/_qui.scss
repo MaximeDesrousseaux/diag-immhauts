@@ -159,7 +159,9 @@
   .l-qui__parcours:hover .l-qui__descendre { animation: none; }
 }
 
-// Portrait sur quatre halos (bureau et déplié), un seul sur téléphone
+// Portrait (maquettes 1.14e). Bureau et déplié : voile vert foncé derrière la tête et
+// les épaules, photo étalonnée (filtre + calque soft-light découpé par la photo), ombre
+// portée. Téléphone inchangé : un halo vert clair, photo brute.
 .l-qui__photo {
   position: relative;
   min-width: 0;
@@ -168,84 +170,86 @@
   justify-content: center;
   align-items: flex-end;
 
-  img {
-    position: relative;
-    display: block;
-    width: 100%;
-    max-width: 376px;
-    height: auto;
-
-    @include bp(deplie-seul) {
-      width: 98%;
-      max-width: none;
-    }
-  }
-
   @include bp(mobile) {
     min-height: 0;
     height: 250px;
     margin-top: 16px;
+  }
+}
+
+.l-qui__cadre {
+  position: relative;
+  width: 100%;
+  max-width: 376px;
+
+  @include bp(deplie-seul) {
+    width: 98%;
+    max-width: none;
+  }
+
+  img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(.94) contrast(1.03) drop-shadow(-20px 14px 30px rgba(6, 33, 15, .42));
+  }
+
+  @include bp(mobile) {
+    width: auto;
+    max-width: none;
+    height: 100%;
 
     img {
       width: auto;
-      max-width: none;
       height: 100%;
+      filter: none;
     }
   }
 }
 
-.l-qui__halo {
+.l-qui__etalonnage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(215deg, teinte(techBright, 42%) 0, transparent 42%),
+    linear-gradient(0deg, teinte(forestDeep, 75%) 0, transparent 40%);
+  -webkit-mask: var(--photo) center / 100% 100% no-repeat;
+  mask: var(--photo) center / 100% 100% no-repeat;
+  mix-blend-mode: soft-light;
+
+  @include bp(mobile) { display: none; }
+}
+
+.l-qui__voile {
   position: absolute;
   left: 50%;
+  top: -8%;
   transform: translateX(-50%);
+  width: 120%;
+  aspect-ratio: 1.2;
   border-radius: 50%;
   pointer-events: none;
+  background: radial-gradient(closest-side, teinte(forestDeep, 62%) 0, teinte(forestDeep, 30%) 55%, transparent 100%);
 
-  &--1 {
-    bottom: -4%;
-    width: 104%;
-    aspect-ratio: 1;
-    background: radial-gradient(circle at 48% 44%, teinte(techBright, 34%) 0, teinte(techBright, 10%) 54%, transparent 76%);
-    filter: blur(18px);
-  }
+  @include bp(mobile) { display: none; }
+}
 
-  &--2 {
-    bottom: 2%;
-    width: 74%;
-    aspect-ratio: 1;
-    background: radial-gradient(circle, color-mix(in oklab, #fff 22%, transparent) 0, transparent 68%);
-  }
+.l-qui__halo {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 96%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 55%, teinte(techBright, 32%) 0, transparent 66%);
+  filter: blur(20px);
 
-  &--3 {
-    left: 52%;
-    bottom: 14%;
-    width: 74%;
-    aspect-ratio: 1.15;
-    background: radial-gradient(circle at 44% 40%, teinte(glow, 20%) 0, transparent 66%);
-    filter: blur(30px);
-  }
-
-  &--4 {
-    bottom: 0;
-    width: 88%;
-    height: 26%;
-    background: radial-gradient(ellipse at 50% 100%, teinte(techBright, 26%) 0, transparent 72%);
-    filter: blur(22px);
-  }
-
-  &--mobile {
-    display: none;
-    bottom: 0;
-    width: 96%;
-    aspect-ratio: 1;
-    background: radial-gradient(circle at 50% 55%, teinte(techBright, 32%) 0, transparent 66%);
-    filter: blur(20px);
-  }
-
-  @include bp(mobile) {
-    &--1, &--2, &--3, &--4 { display: none; }
-    &--mobile { display: block; }
-  }
+  @include bp(mobile) { display: block; }
 }
 
 // Téléphone : bouton d'appel posé sur le portrait

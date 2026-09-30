@@ -2,7 +2,8 @@
 /**
  * Hero portrait de Qui suis-je.
  *
- * Bureau et déplié : texte | portrait sur halos, alignés en bas. Boutons :
+ * Bureau et déplié : texte | portrait sur un voile vert foncé, étalonné (maquettes
+ * 1.14e), alignés en bas. Boutons :
  * devis + « Découvrir mon parcours » en bureau, devis + appel en déplié.
  * Téléphone : pastille, titre, chapeau court, portrait de 250 px et bouton
  * d'appel posé sur le portrait (maquette : « propal 1b »).
@@ -33,12 +34,13 @@ $dih_tel_lien = 'tel:' . dih_info( 'telephone_lien' );
 				</div>
 			</div>
 			<div class="l-qui__photo">
-				<span class="l-qui__halo l-qui__halo--1" aria-hidden="true"></span>
-				<span class="l-qui__halo l-qui__halo--2" aria-hidden="true"></span>
-				<span class="l-qui__halo l-qui__halo--3" aria-hidden="true"></span>
-				<span class="l-qui__halo l-qui__halo--4" aria-hidden="true"></span>
-				<span class="l-qui__halo l-qui__halo--mobile" aria-hidden="true"></span>
-				<img src="<?php echo esc_url( dih_img( $args['photo'] ) ); ?>" alt="<?php echo esc_attr( $args['photo_alt'] ); ?>" fetchpriority="high" decoding="async">
+				<span class="l-qui__voile" aria-hidden="true"></span>
+				<span class="l-qui__halo" aria-hidden="true"></span>
+				<div class="l-qui__cadre">
+					<img src="<?php echo esc_url( dih_img( $args['photo'] ) ); ?>" alt="<?php echo esc_attr( $args['photo_alt'] ); ?>" fetchpriority="high" decoding="async">
+					<?php // Étalonnage limité à la silhouette : calque découpé par la photo elle-même. ?>
+					<span class="l-qui__etalonnage" aria-hidden="true" style="--photo:url('<?php echo esc_url( dih_img( $args['photo'] ) ); ?>')"></span>
+				</div>
 				<a class="l-qui__appel" href="<?php echo esc_attr( $dih_tel_lien ); ?>"><?php echo dih_icone( 'telephone', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php echo esc_html( dih_info( 'telephone' ) ); ?></a>
 			</div>
 		</div>
