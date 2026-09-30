@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Vérifie que le SCSS du thème respecte les échelles de l'audit SCSS
- * (design_handoff_theme_wp/Audit code SCSS.dc.html, « Les échelles appliquées ») :
+ * (design_diagimmhauts_theme_wp/Audit code SCSS.dc.html, « Les échelles appliquées ») :
  *
  *   texte      11 · 12,5 · 14 · 15,5 · 17 · 19 · 22 · 26 px (fixe, via rem())
  *              bornes de clamp() : les 8 pas + 31 · 34 · 36 · 44, ou toute borne ≥ 48 px

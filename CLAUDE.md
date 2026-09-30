@@ -1,8 +1,8 @@
 # Consignes pour Claude (sessions desktop et cloud)
 
 Projet : thème WordPress et plugin de Diag Imm'Hauts, construits d'après les maquettes de
-`design_handoff_theme_wp/`. Présentation, installation et arbitrages : `README.md` à la racine ;
-spécification des maquettes : `design_handoff_theme_wp/README.md` et `NOTES-PROJET.md`.
+`design_diagimmhauts_theme_wp/`. Présentation, installation et arbitrages : `README.md` à la racine ;
+spécification des maquettes : `design_diagimmhauts_theme_wp/README.md` et `NOTES-PROJET.md`.
 On échange en français.
 
 ## Branches et sessions : `main` fait foi
@@ -24,7 +24,7 @@ et des sessions cloud. Pour ne jamais avoir deux lignes de travail en parallèle
   Professionnels », « Liens #rappel : ouverture de la popup, comme les maquettes »).
 - Une nouvelle version des maquettes (« Maquettes 1.x ») se commite **seule**, avant
   l'alignement du thème, lui-même commité à part (« Alignement maquettes 1.x »).
-- Ne pas commiter le dossier `design_handoff_theme_wp/` en cours de modification par Claude Design
+- Ne pas commiter le dossier `design_diagimmhauts_theme_wp/` en cours de modification par Claude Design
   sans le feu vert de l'utilisateur.
 
 ## Règles de travail

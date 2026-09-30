@@ -1,15 +1,15 @@
 # Diag Imm'Hauts — site WordPress
 
 Thème sur mesure et plugin maison du site de Diag Imm'Hauts (diagnostiqueur immobilier, Pas-de-Calais),
-construits à partir des maquettes de `design_handoff_theme_wp/` (spécification : `README.md` de ce dossier).
+construits à partir des maquettes de `design_diagimmhauts_theme_wp/` (spécification : `README.md` de ce dossier).
 
 ```
-theme/diag-immhauts/        thème classique PHP + SCSS (Dart Sass), JS natif
-plugin/diag-immhauts-core/  CPT, blocs ACF, page d'options, intégration Fluent Forms
-design_handoff_theme_wp/    maquettes .dc.html (référence visuelle, non embarquées)
-outils/installer.ps1        liens vers le site LocalWP + compilation
-outils/image-partage.html   source de l'image de partage (og:image)
-outils/importer-*.php       imports WP-CLI : articles du journal, contenus modifiables
+theme/diag-immhauts/           thème classique PHP + SCSS (Dart Sass), JS natif
+plugin/diag-immhauts-core/     CPT, blocs ACF, page d'options, intégration Fluent Forms
+design_diagimmhauts_theme_wp/  maquettes .dc.html (référence visuelle, non embarquées)
+outils/installer.ps1           liens vers le site LocalWP + compilation
+outils/image-partage.html      source de l'image de partage (og:image)
+outils/importer-*.php          imports WP-CLI : articles du journal, contenus modifiables
 ```
 
 ## Installation locale (Windows, LocalWP)
