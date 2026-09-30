@@ -27,7 +27,7 @@ $socle: clamp(76px, 8vw, 96px);
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 30px; // échelle : exception (valeur des maquettes ; Nos diagnostics VERROUILLÉE)
 }
 
 .c-etapes__titre {
