@@ -126,8 +126,10 @@ Trois formulaires Fluent Forms, décrits d'après les maquettes dans le plugin
   Note Google), statut de zone de la commune, balises `{dih.avis_note}`, `{dih.avis_nombre}`,
   `{dih.avis_url}`, `{dih.zone_statut}`, `{dih.prenom}`. Sur la préprod, Mailpit retient les e-mails
   (http://localhost:10000).
-- **À régler en ligne** : FluentSMTP (installé) avec une clé API Brevo pour l'envoi, et les clés Cloudflare
-  Turnstile dans Fluent Forms → Global Settings, puis relancer l'import avec `forcer` pour ajouter le captcha.
+- **À régler en ligne** : FluentSMTP (installé) avec une clé API Brevo pour l'envoi (expéditeur
+  `contact@diagimmhauts.fr`, SPF + DKIM + DMARC sur le domaine) ; les clés Cloudflare Turnstile dans Fluent
+  Forms → Global Settings, puis relancer l'import avec `forcer` pour ajouter le captcha ; fuseau horaire de
+  WordPress sur Paris (Réglages → Général ; heure du bandeau des e-mails de Max).
 
 ## SEO
 
