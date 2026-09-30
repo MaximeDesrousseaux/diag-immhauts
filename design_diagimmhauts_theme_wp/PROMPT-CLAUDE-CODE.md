@@ -1,10 +1,10 @@
 # Prompt de démarrage — Claude Code
 
-À coller tel quel dans Claude Code, à la racine d'un dépôt vide, avec ce dossier `design_handoff_theme_wp/` copié dedans.
+À coller tel quel dans Claude Code, à la racine d'un dépôt vide, avec ce dossier `design_diagimmhauts_theme_wp/` copié dedans.
 
 ---
 
-Tu construis le site WordPress de Diag Imm'Hauts (diagnostiqueur immobilier, Pas-de-Calais) à partir des maquettes HTML de `design_handoff_theme_wp/`. Lis d'abord `README.md` (spécification complète) puis `NOTES-PROJET.md` (historique des décisions). Les fichiers `*.dc.html` sont la **référence visuelle** : ne les embarque pas, reproduis-les au pixel près en PHP/SCSS.
+Tu construis le site WordPress de Diag Imm'Hauts (diagnostiqueur immobilier, Pas-de-Calais) à partir des maquettes HTML de `design_diagimmhauts_theme_wp/`. Lis d'abord `README.md` (spécification complète) puis `NOTES-PROJET.md` (historique des décisions). Les fichiers `*.dc.html` sont la **référence visuelle** : ne les embarque pas, reproduis-les au pixel près en PHP/SCSS.
 
 ## Livrables
 

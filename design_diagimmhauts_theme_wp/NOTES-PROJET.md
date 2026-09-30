@@ -161,15 +161,15 @@ illustration avec `margin-bottom:42px` — c'est lui qui les remonte).
 - Fiches (Amiante, Plomb, Électricité, Gaz, Termites, ERP, Mesurage, Assainissement, Mérule) : les deux sessions « cadre du contrôle » / « sur place » sont empilées (plus de 2 colonnes), cards 3 par ligne (`minmax(max(200px,calc((100% - 24px)/3)),1fr)`) — incluses dans la sauvegarde v1.6.
 
 ## Livrables — v1.7 (`checkpoints/v1.07 - livrables/`)
-`design_handoff_theme_wp/` (README + `PROMPT-CLAUDE-CODE.md` + 22 pages + admin + img/ + logos) pour la suite en Claude Code : thème classique PHP/SCSS + plugin `diag-immhauts-core` (CPT, blocs ACF, page d'options, simulateur). `dossier_client_en_ligne/` (`index.html` = dossier client) à héberger.
+`design_diagimmhauts_theme_wp/` (README + `PROMPT-CLAUDE-CODE.md` + 22 pages + admin + img/ + logos) pour la suite en Claude Code : thème classique PHP/SCSS + plugin `diag-immhauts-core` (CPT, blocs ACF, page d'options, simulateur). `dossier_client_en_ligne/` (`index.html` = dossier client) à héberger.
 
 **Stack probable (en attente de validation client)** : ACF Pro + Fluent Forms Pro + Brevo (≈ 110 €/an). Manquent toujours : n° de certification, assureur RC pro, médiateur.
 
 ## Livrables — 1.12 (`checkpoints/v1.12 - livrables/`)
-Paquet `design_handoff_theme_wp/` + `dossier_client_en_ligne/` (Netlify). Contenu : illustration DPE `diag_dpe_v2.webp` (−14 %), nav transparente robuste au chargement (`ResizeObserver` sur le header). La sauvegarde ne contient que les pages, textes et `img/` — logos PNG, favicons PNG et vignettes admin sont dans les deux dossiers livrables.
+Paquet `design_diagimmhauts_theme_wp/` + `dossier_client_en_ligne/` (Netlify). Contenu : illustration DPE `diag_dpe_v2.webp` (−14 %), nav transparente robuste au chargement (`ResizeObserver` sur le header). La sauvegarde ne contient que les pages, textes et `img/` — logos PNG, favicons PNG et vignettes admin sont dans les deux dossiers livrables.
 
 ## Empaquetage — plan validé
-Deux livrables : (1) `design_handoff_theme_wp/` pour Claude Code (README de spécification + 22 pages + admin + img/ + logos, sans captures) ; (2) `Dossier client - Refonte.dc.html`, présentation élégante de la refonte graphique et fonctionnelle, style des aperçus, **sans étapes de développement**.
+Deux livrables : (1) `design_diagimmhauts_theme_wp/` pour Claude Code (README de spécification + 22 pages + admin + img/ + logos, sans captures) ; (2) `Dossier client - Refonte.dc.html`, présentation élégante de la refonte graphique et fonctionnelle, style des aperçus, **sans étapes de développement**.
 
 ## Décor des heros — terrils (réglage global `decorHero`)
 19 pages intérieures (toutes sauf Accueil et Qui suis-je) : fond `uploads/hero_bg_sans_maison_large.png` en
