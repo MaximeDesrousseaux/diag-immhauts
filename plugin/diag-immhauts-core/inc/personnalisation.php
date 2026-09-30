@@ -331,17 +331,12 @@ add_action(
 		);
 
 		$formulaires = array();
-		foreach ( array(
-			'rappel'     => array( 'Demande de rappel', 'Popup de rappel et bloc « rappel » en bas des pages.' ),
-			'devis'      => array( 'Demande de devis', 'Page Contact, bloc « devis ».' ),
-			'contact'    => array( 'Contact', 'Message libre (Professionnels, « Écrire un message »).' ),
-			'partenaire' => array( 'Compte partenaire', 'Popup de la page Professionnels.' ),
-		) as $cle => $c ) {
+		foreach ( dih_core_formulaires_liste() as $cle => $c ) {
 			$formulaires[] = array(
 				'key'          => 'field_dih_formulaire_' . $cle,
 				'name'         => 'formulaire_' . $cle,
 				'label'        => $c[0],
-				'instructions' => $c[1] . ' Identifiant Fluent Forms (colonne ID de la liste des formulaires) ; vide : emplacement balisé.',
+				'instructions' => $c[1] . ' Identifiant Fluent Forms (colonne ID de la liste des formulaires), renseigné par outils/importer-formulaires.php ; vide : emplacement balisé.',
 				'type'         => 'number',
 				'min'          => 1,
 				'step'         => 1,
