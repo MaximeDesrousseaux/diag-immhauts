@@ -127,6 +127,8 @@ Sans ACF Pro, ou tant qu'un réglage n'est pas enregistré, chaque réglage pren
     de chaque rubrique ; `{a completer: …}` reste surligné, `{adresse}`, `{telephone}` et `{email}`
     reprennent les coordonnées du site.
 
+Mode d'emploi pour la personne qui tient le site : `GUIDE-ADMINISTRATION.md`.
+
 Pour que l'admin montre les textes en place plutôt que des champs vides :
 `wp eval-file outils/importer-contenus.php` (ajouter `forcer` pour réécrire des champs déjà remplis).
 
