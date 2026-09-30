@@ -706,7 +706,7 @@ a.c-card { @include survol-card; }
   .c-card__titre {
     position: relative;
     max-width: 86%;
-    margin-top: 56px;
+    margin-top: 54px; // échelle : exception (Nos diagnostics VERROUILLÉE : valeur de la maquette)
     font-size: rem(19);
     font-weight: 800;
     letter-spacing: -.015em;
@@ -718,7 +718,7 @@ a.c-card { @include survol-card; }
 
   .c-card__texte {
     position: relative;
-    margin: 8px 0 16px;
+    margin: 9px 0 14px; // échelle : exception (Nos diagnostics VERROUILLÉE : valeur de la maquette)
     font-size: rem(14);
     line-height: 1.58;
     text-wrap: pretty;
@@ -743,7 +743,7 @@ a.c-card { @include survol-card; }
     align-self: flex-start;
     align-items: center;
     gap: 4px;
-    margin-top: 16px;
+    margin-top: 14px; // échelle : exception (Nos diagnostics VERROUILLÉE : valeur de la maquette)
     padding: 10px 16px 10px 15px;
     border-radius: $r-pilule;
     font-family: var(--font-titre);

@@ -276,7 +276,7 @@
 }
 
 .l-vente__intro {
-  margin-top: 16px;
+  margin-top: 14px; // échelle : exception (page VERROUILLÉE : valeur de la maquette)
   font-size: rem(15.5);
   line-height: 1.7;
   color: c(muted);
