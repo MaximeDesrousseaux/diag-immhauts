@@ -143,6 +143,21 @@ echo "\n== Mise en ligne\n";
 $dih_public = (int) get_option( 'blog_public' );
 $dih_ligne( $dih_public ? 'ok' : 'a_faire', 'Visibilité aux moteurs de recherche', $dih_public ? 'visible' : 'masquée (Réglages → Lecture) : à ouvrir le jour de la mise en ligne' );
 
+// Mentions légales : informations encore marquées {a completer: …} (surlignées sur le site).
+if ( function_exists( 'dih_chemins' ) && function_exists( 'dih_contenu' ) ) {
+	global $wpdb;
+	$dih_mentions = get_page_by_path( trim( dih_chemins()['mentions'], '/' ) );
+	$dih_trous    = 0;
+	if ( $dih_mentions ) {
+		// Textes importés dans l'admin (encart « Textes de la page »), sinon ceux du thème.
+		$dih_importes = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key = 'editeur_titre' AND meta_value <> ''", $dih_mentions->ID ) );
+		$dih_trous    = $dih_importes
+			? (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key NOT LIKE '\\_%%' AND meta_value LIKE %s", $dih_mentions->ID, '%{a completer%' ) )
+			: substr_count( wp_json_encode( dih_contenu( 'mentions' ) ), '{a completer' );
+	}
+	$dih_ligne( $dih_trous ? 'a_faire' : 'ok', 'Mentions légales', $dih_trous ? $dih_trous . ' information(s) « à compléter » (n° de certification, assurance, médiateur…) : Pages → Mentions légales' : 'complètes' );
+}
+
 $dih_smtp = get_option( 'fluentmail-settings' ); // réglages de FluentSMTP
 $dih_ligne( ! empty( $dih_smtp['connections'] ) ? 'ok' : 'a_faire', 'Envoi des e-mails (FluentSMTP)', ! empty( $dih_smtp['connections'] ) ? 'connexion configurée' : 'connexion Brevo à configurer (README § Mise en ligne)' );
 
