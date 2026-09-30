@@ -697,7 +697,30 @@ function dih_core_texte_entree( $fichier ) {
 }
 
 /**
- * Élément d'un tableau par son chemin (« a/0/b »), ou null.
+ * Clé réelle d'un segment de chemin : « @type » désigne le premier élément dont la
+ * clé « type » vaut type (sessions des fiches, dans un ordre propre à chacune).
+ *
+ * @param mixed  $donnees Tableau.
+ * @param string $cle     Segment.
+ * @return string|int|null
+ */
+function dih_core_chemin_cle( $donnees, $cle ) {
+	if ( ! is_array( $donnees ) ) {
+		return null;
+	}
+	if ( 0 === strpos( $cle, '@' ) ) {
+		foreach ( $donnees as $k => $element ) {
+			if ( is_array( $element ) && isset( $element['type'] ) && substr( $cle, 1 ) === $element['type'] ) {
+				return $k;
+			}
+		}
+		return null;
+	}
+	return array_key_exists( $cle, $donnees ) ? $cle : null;
+}
+
+/**
+ * Élément d'un tableau par son chemin (« a/0/b », « sessions/@cadre »), ou null.
  *
  * @param array  $donnees Tableau.
  * @param string $chemin  Chemin ; '' : le tableau lui-même.
@@ -708,7 +731,8 @@ function dih_core_chemin_lire( $donnees, $chemin ) {
 		return $donnees;
 	}
 	foreach ( explode( '/', $chemin ) as $cle ) {
-		if ( ! is_array( $donnees ) || ! array_key_exists( $cle, $donnees ) ) {
+		$cle = dih_core_chemin_cle( $donnees, $cle );
+		if ( null === $cle ) {
 			return null;
 		}
 		$donnees = $donnees[ $cle ];
@@ -730,7 +754,8 @@ function dih_core_chemin_ecrire( &$donnees, $chemin, $valeur ) {
 	}
 	$ici = &$donnees;
 	foreach ( explode( '/', $chemin ) as $cle ) {
-		if ( ! is_array( $ici ) || ! array_key_exists( $cle, $ici ) ) {
+		$cle = dih_core_chemin_cle( $ici, $cle );
+		if ( null === $cle ) {
 			return;
 		}
 		$ici = &$ici[ $cle ];
@@ -805,6 +830,53 @@ function dih_core_texte_lignes( $elements, $colonnes ) {
 	return $lignes;
 }
 
+/**
+ * Champs d'une description commune (fiches) et ce qu'ils remplacent : clé ACF =>
+ * [ chemin de la section, chemin dans la section ].
+ *
+ * @param string|null $cle     Clé ACF à enregistrer ; null pour lire le registre.
+ * @param string      $base    Chemin de la section.
+ * @param string      $chemin  Chemin dans la section.
+ * @return array
+ */
+function dih_core_textes_condition( $cle = null, $base = '', $chemin = '' ) {
+	static $registre = array();
+	if ( null !== $cle ) {
+		$registre[ $cle ] = array( $base, $chemin );
+	}
+	return $registre;
+}
+
+/**
+ * Fiches : un champ, un onglet ou une aide est masqué quand ce qu'il remplace
+ * n'existe pas dans la fiche éditée (onglet « Réforme » hors DPE, badge hors
+ * Audit et DTG…). Un champ masqué n'est pas enregistré : sa valeur reste en l'état.
+ */
+add_filter(
+	'acf/prepare_field',
+	function ( $field ) {
+		static $contenus = array();
+		$registre = dih_core_textes_condition();
+		if ( ! is_array( $field ) || empty( $field['key'] ) || ! isset( $registre[ $field['key'] ] ) || ! function_exists( 'dih_contenu' ) ) {
+			return $field;
+		}
+		$post_id = function_exists( 'acf_get_form_data' ) ? (int) acf_get_form_data( 'post_id' ) : 0;
+		if ( ! $post_id ) {
+			$post_id = (int) get_the_ID();
+		}
+		if ( ! isset( $contenus[ $post_id ] ) ) {
+			$fichier              = dih_core_fichier_de_page( $post_id );
+			$contenus[ $post_id ] = '' === $fichier ? null : dih_contenu( $fichier );
+		}
+		if ( null === $contenus[ $post_id ] ) {
+			return $field;
+		}
+		list( $base, $chemin ) = $registre[ $field['key'] ];
+		$bloc                  = dih_core_chemin_lire( $contenus[ $post_id ], $base );
+		return ( null === $bloc || null === dih_core_chemin_lire( $bloc, $chemin ) ) ? false : $field;
+	}
+);
+
 add_action(
 	'dih_core_acf_init',
 	function () {
@@ -812,6 +884,7 @@ add_action(
 			$champs  = array();
 			$onglets = count( $def['sections'] ) > 1;
 			foreach ( $def['sections'] as $id => $section ) {
+				$debut = count( $champs );
 				if ( $onglets ) {
 					$champs[] = array(
 						'key'       => 'field_dih_onglet_' . $id . '_' . $page,
@@ -846,6 +919,9 @@ add_action(
 							$acf['new_lines'] = '';
 						}
 						$champs[] = $acf;
+						if ( ! empty( $def['fichiers'] ) ) {
+							dih_core_textes_condition( $cle, dih_core_texte_base( $id, $section ), $chemin );
+						}
 						continue;
 					}
 
@@ -882,6 +958,17 @@ add_action(
 						'button_label' => 'Ajouter une ligne',
 						'sub_fields'   => $sous,
 					);
+					if ( ! empty( $def['fichiers'] ) ) {
+						dih_core_textes_condition( $cle, dih_core_texte_base( $id, $section ), $chemin );
+					}
+				}
+				// Gabarit commun : onglet et aide masqués là où la section n'existe pas.
+				if ( ! empty( $def['fichiers'] ) ) {
+					for ( $i = $debut; $i < count( $champs ); $i++ ) {
+						if ( in_array( $champs[ $i ]['type'], array( 'tab', 'message' ), true ) ) {
+							dih_core_textes_condition( $champs[ $i ]['key'], dih_core_texte_base( $id, $section ), '' );
+						}
+					}
 				}
 			}
 

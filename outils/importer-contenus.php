@@ -251,10 +251,16 @@ foreach ( dih_core_textes() as $dih_entree => $dih_def ) {
 
 		foreach ( $dih_def['sections'] as $dih_sid => $dih_section ) {
 			$bloc = dih_core_chemin_lire( $c, dih_core_texte_base( $dih_sid, $dih_section ) );
+			if ( null === $bloc ) {
+				continue; // section absente de cette page (fiches : sessions propres à chacune)
+			}
 			foreach ( dih_core_texte_elements( $dih_section ) as $dih_element ) {
 				list( $chemin, $genre, $def ) = $dih_element;
 				list( $nom, $cle )            = dih_core_texte_champ( $dih_entree, $dih_sid, $chemin );
 				$defaut                       = dih_core_chemin_lire( $bloc, $chemin );
+				if ( null === $defaut ) {
+					continue;
+				}
 				$ecrire( $cle, $nom, 'champ' === $genre ? (string) $defaut : dih_core_texte_lignes( $defaut, $def[1] ) );
 				++$tout;
 			}
